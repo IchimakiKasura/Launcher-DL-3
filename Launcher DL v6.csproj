@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Launcher_DL_v6</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
+    <Nullable>disable</Nullable>
+    <ProduceReferenceAssemblies>false</ProduceReferenceAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="Images\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Config.kasu">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Icon.ico" />
+    <Resource Include="Images\akira.png" />
+    <Resource Include="Images\asutorufo.jpeg" />
+    <Resource Include="Images\venti.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\ProgressBar.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+! Only change the values inside the quotes.
+
+! change the background.
+BackgroundName: "background.png"
+
+! change the outer glow color.
+! NOTE: the first two letters are Alpha if you are using a HEX format.
+GlowColor: "#FFFF8282"
+
+! Default output folder
+DefaultOutput: "output"
+
+! Default File Type/ Download Type on Start up.
+! 
+! 0 = Custom
+! 1 = Video
+! 2 = Audio
+DefaultFileTypeOnStartUp: "0"
+
+! When Audio is selected the MP3 check box is automatically checked.
+AlwayDownloadInMP3: "true"
+
+! Shows the "[SYSTEM]" outputs on the Log.
+ShowSystemOutput: "true"
+
+! When downloading a playlist video.
+! If false it will no longer ask "Download the Playlist?"
+EnablePlaylist: "false"
