@@ -17,9 +17,11 @@ public partial class MainWindow
     LauncherDefaultConfig Config = new();
     private async void LoadConfig()
     {
+        // should've used JSON but damn,I don't want to add System.Text.Json or Newtonsoft.Json
         string Data = await File.ReadAllTextAsync("Config.kasu");
 
-        
+        try
+        {
             foreach(Match match in LauncherDL_Regex.KasuExtension.Matches(Data))
 		    {
                 if (match.Groups["BackgroundName"].Success) Config.BackgroundName = match.Groups["BackgroundName"].Value.Trim();
@@ -33,7 +35,15 @@ public partial class MainWindow
 
             Window_BackgroundName.ImageSource = new BitmapImage(new Uri($"Images/{Config.BackgroundName}", UriKind.Relative));
             Window_DropShadow.Color = (Color)ColorConverter.ConvertFromString(Config.GlowColor);
+            Input_Type.SelectedIndex = Config.DefaultFileTypeOnStartUp;
+            Input_MpThreeFormat.IsChecked = Config.AlwayDownloadInMP3;
 
-
+            if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkGreen%14>SUCCESS <gray%14>\"Config.kasu\" loaded!");
+        }
+        catch
+        {
+            if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkRed%14>FAILED <gray%14>to load \"Config.kasu\"");
+            return;
+        }
     }
 }

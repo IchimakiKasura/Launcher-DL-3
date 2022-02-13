@@ -1,0 +1,6 @@
+Download the ffmpeg on:
+https://github.com/BtbN/FFmpeg-Builds/releases
+
+only copy the bin folder inside the ffmpeg folder.
+
+to use the command [ --ffmpeg-location "bin" ] when using "160+249" or "bestvideo+bestaudio" commands.

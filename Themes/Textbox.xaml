@@ -54,7 +54,7 @@
 									 CaretBrush="#FFFF9C9C"
 									 x:Name="PlaceHolder"
 									 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-							
+
 							<TextBlock IsHitTestVisible="False"
                                        Text="{Binding Uid,RelativeSource={RelativeSource TemplatedParent}}"
                                        VerticalAlignment="Center"
@@ -79,5 +79,11 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsEnabled" Value="false">
+				<Setter Property="Foreground" Value="Red"/>
+				<Setter Property="Text" Value="Unavailable"/>
+			</Trigger>
+		</Style.Triggers>
 	</Style>
 </ResourceDictionary>

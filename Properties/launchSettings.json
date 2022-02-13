@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Launcher DL v6": {
+      "commandName": "Project",
+      "commandLineArgs": "-high"
+    }
+  }
+}

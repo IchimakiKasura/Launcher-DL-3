@@ -1,8 +1,33 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	
-	<!-- Top Buttons -->
-	
+	<!--#region Body Buttons Animations -->
+	<Storyboard x:Key="MouseEnter">
+		<DoubleAnimation Storyboard.TargetName="BorderBG"
+						Storyboard.TargetProperty="(Brush.Opacity)"
+						To="0.85"
+						Duration="00:00:00.2"
+						Timeline.DesiredFrameRate="60"/>
+		<RectAnimation Storyboard.TargetName="BorderBG"
+						Storyboard.TargetProperty="(ImageBrush.Viewport)"
+						To="0,0,1,1.6"
+						Duration="00:00:00.2"
+						Timeline.DesiredFrameRate="60"/>
+	</Storyboard>
+	<Storyboard x:Key="MouseLeave">
+		<DoubleAnimation Storyboard.TargetName="BorderBG"
+						Storyboard.TargetProperty="(Brush.Opacity)"
+						To="0"
+						Duration="00:00:00.2"
+						Timeline.DesiredFrameRate="60"/>
+		<RectAnimation Storyboard.TargetName="BorderBG"
+						Storyboard.TargetProperty="(ImageBrush.Viewport)"
+						To="0,0,1,3"
+						Duration="00:00:00.2"
+						Timeline.DesiredFrameRate="60"/>
+	</Storyboard>
+	<!--#endregion-->
+
+	<!--#region Top Buttons -->
 	<Style x:Key="TopButtonTheme" TargetType="Button">
 		<Setter Property="Cursor" Value="Hand"/>
 		<Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -105,9 +130,9 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	<!--#endregion-->
 
-	<!-- Body Buttons -->
-	
+	<!--#region Body Buttons -->	
 	<Style x:Key="BodyButtonTemp" TargetType="Button">
 		<Setter Property="FontSize" Value="20"/>
 		<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -157,6 +182,9 @@
 					</Storyboard>
 				</BeginStoryboard>
 			</EventTrigger>
+			<Trigger Property="IsEnabled" Value="false">
+				<Setter Property="Foreground" Value="Red"/>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
 
@@ -166,7 +194,6 @@
 				<DropShadowEffect Color="Blue"
 								  ShadowDepth="0"
 								  Opacity="0"
-								  RenderingBias="Quality"
 								  BlurRadius="30"/>
 			</Setter.Value>
 		</Setter>
@@ -177,17 +204,17 @@
 							CornerRadius="10"
 							Cursor="Hand">
 							<Border CornerRadius="10">
-							<ContentPresenter x:Name="Button"
-											Content="{TemplateBinding Content}"
-											HorizontalAlignment="Center" 
-											VerticalAlignment="Center">
-								<ContentPresenter.Effect>
-									<DropShadowEffect Color="red"
-													  Direction="0"
-													  ShadowDepth="0"
-													  BlurRadius="5" />
-								</ContentPresenter.Effect>
-							</ContentPresenter>
+								<ContentPresenter x:Name="Button"
+												Content="{TemplateBinding Content}"
+												HorizontalAlignment="Center" 
+												VerticalAlignment="Center">
+									<ContentPresenter.Effect>
+										<DropShadowEffect Color="red"
+														Direction="0"
+														ShadowDepth="0"
+														BlurRadius="5" />
+									</ContentPresenter.Effect>
+								</ContentPresenter>
 								<Border.Background>
 									<ImageBrush x:Name="BorderBG"
 												ImageSource="/Images/akira.png"
@@ -197,34 +224,12 @@
 								</Border.Background>
 								<Border.Triggers>
 									<EventTrigger RoutedEvent="MouseEnter">
-										<BeginStoryboard>
-											<Storyboard>
-												<DoubleAnimation Storyboard.TargetName="BorderBG"
-																 Storyboard.TargetProperty="(Brush.Opacity)"
-																 To="0.85"
-																 Duration="00:00:00.2"/>
-												<RectAnimation Storyboard.TargetName="BorderBG"
-															   Storyboard.TargetProperty="(ImageBrush.Viewport)"
-															   To="0,0,1,1.6"
-															   Duration="00:00:00.2"/>
-											</Storyboard>
-										</BeginStoryboard>
+										<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
 									</EventTrigger>
-								<EventTrigger RoutedEvent="MouseLeave">
-									<BeginStoryboard>
-										<Storyboard>
-											<DoubleAnimation Storyboard.TargetName="BorderBG"
-																 Storyboard.TargetProperty="(Brush.Opacity)"
-																 To="0"
-																 Duration="00:00:00.2"/>
-											<RectAnimation Storyboard.TargetName="BorderBG"
-															   Storyboard.TargetProperty="(ImageBrush.Viewport)"
-															   To="0,0,1,3"
-															   Duration="00:00:00.2"/>
-										</Storyboard>
-									</BeginStoryboard>
-								</EventTrigger>
-							</Border.Triggers>
+									<EventTrigger RoutedEvent="MouseLeave">
+										<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
+									</EventTrigger>
+								</Border.Triggers>
 							</Border>
 					</Border>
 				</ControlTemplate>
@@ -238,7 +243,6 @@
 				<DropShadowEffect Color="Pink"
 								  ShadowDepth="0"
 								  Opacity="0"
-								  RenderingBias="Quality"
 								  BlurRadius="30"/>
 			</Setter.Value>
 		</Setter>
@@ -269,32 +273,10 @@
 							</ContentPresenter>
 							<Border.Triggers>
 								<EventTrigger RoutedEvent="MouseEnter">
-									<BeginStoryboard>
-										<Storyboard>
-											<DoubleAnimation Storyboard.TargetName="BorderBG"
-															Storyboard.TargetProperty="(Brush.Opacity)"
-															To="0.85"
-															Duration="00:00:00.2"/>
-											<RectAnimation Storyboard.TargetName="BorderBG"
-															Storyboard.TargetProperty="(ImageBrush.Viewport)"
-															To="0,-0.6,1,2.5"
-															Duration="00:00:00.2"/>
-										</Storyboard>
-									</BeginStoryboard>
+									<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
 								</EventTrigger>
 								<EventTrigger RoutedEvent="MouseLeave">
-									<BeginStoryboard>
-										<Storyboard>
-											<DoubleAnimation Storyboard.TargetName="BorderBG"
-																 Storyboard.TargetProperty="(Brush.Opacity)"
-																 To="0"
-																 Duration="00:00:00.2"/>
-											<RectAnimation Storyboard.TargetName="BorderBG"
-															   Storyboard.TargetProperty="(ImageBrush.Viewport)"
-															   To="0,0,1,2.5"
-															   Duration="00:00:00.2"/>
-										</Storyboard>
-									</BeginStoryboard>
+									<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
 								</EventTrigger>
 							</Border.Triggers>
 						</Border>
@@ -310,7 +292,6 @@
 				<DropShadowEffect Color="Aqua"
 								  ShadowDepth="0"
 								  Opacity="0"
-								  RenderingBias="Quality"
 								  BlurRadius="30"/>
 			</Setter.Value>
 		</Setter>
@@ -342,32 +323,10 @@
 						</Border>
 						<Border.Triggers>
 							<EventTrigger RoutedEvent="MouseEnter">
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="BorderBG"
-																 Storyboard.TargetProperty="(Brush.Opacity)"
-																 To="0.85"
-																 Duration="00:00:00.2"/>
-										<RectAnimation Storyboard.TargetName="BorderBG"
-															   Storyboard.TargetProperty="(ImageBrush.Viewport)"
-															   To="0,0,1,2"
-															   Duration="00:00:00.2"/>
-									</Storyboard>
-								</BeginStoryboard>
+								<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
 							</EventTrigger>
 							<EventTrigger RoutedEvent="MouseLeave">
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="BorderBG"
-																 Storyboard.TargetProperty="(Brush.Opacity)"
-																 To="0"
-																 Duration="00:00:00.2"/>
-										<RectAnimation Storyboard.TargetName="BorderBG"
-															   Storyboard.TargetProperty="(ImageBrush.Viewport)"
-															   To="0,0,1,4"
-															   Duration="00:00:00.2"/>
-									</Storyboard>
-								</BeginStoryboard>
+								<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
 							</EventTrigger>
 						</Border.Triggers>
 					</Border>
@@ -375,5 +334,6 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	<!--#endregion-->
 
 </ResourceDictionary>

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:dropShadow="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         xmlns:local="clr-namespace:Launcher_DL_v6"
         mc:Ignorable="d"
 		ResizeMode="CanMinimize"
@@ -26,7 +27,7 @@
 	</Window.Resources>
 
 	<Window.Effect>
-		<DropShadowEffect x:Name="Window_DropShadow" Opacity="0" ShadowDepth="0" RenderingBias="Quality" BlurRadius="10" Direction="0" Color="#FFFF8282"/>
+		<DropShadowEffect x:Name="Window_DropShadow" Opacity="0" ShadowDepth="0" BlurRadius="10" Direction="0" Color="#FFFF8282"/>
 	</Window.Effect>
 	<!--#endregion-->
 
@@ -36,7 +37,7 @@
 				<ImageBrush x:Name="Window_BackgroundName" ImageSource="pack://siteoforigin:,,,/Images/background.png" Opacity="0.55"/>
 			</Border.Background>
 			<Grid>
-				<!-- Top | Head -->
+				<!--#region Top | Head -->
 				<Border Background="#A31F0000"
 					CornerRadius="10,10,0,0"
 					Height="35"
@@ -54,8 +55,9 @@
 						<Button x:Name="Minimize" Content="—" Style="{StaticResource MinimizeButtonAlt}" Margin="812,0,50,0" ToolTip="Minimize"/>
 					</Grid>
 				</Border>
+				<!--#endregion-->
 
-				<!-- Body -->
+				<!--#region Body -->
 				<RichTextBox x:Name="Output_text"
 						 Margin="0,45,10,51"
 						 Padding="10"
@@ -123,8 +125,7 @@
 
 						<ComboBox x:Name="Input_Format" Style="{StaticResource CB}"
 						 HorizontalContentAlignment="Left" Margin="0,54,228,-40"
-						 IsEditable="True"
-						 Text="Best"/>
+						 Text="Best" IsEditable="True"/>
 						<TextBox x:Name="Input_Name" Style="{StaticResource TB}"
 						 HorizontalContentAlignment="Left" Margin="228,54,0,-40"
 						 Uid="Optional"/>
@@ -144,11 +145,90 @@
 						Style="{StaticResource Venti}"
 						Background="#CCFBC2C2"/>
 
+				<CheckBox x:Name="Input_MpThreeFormat" Content="Force MP3 format."
+						  Foreground="White" Margin="336,87,456,423" Cursor="Hand" Visibility="Hidden"/>
+
 				<ProgressBar x:Name="Window_ProgressBar"
 							 Margin="488,482,10,28"
 							 Opacity="0"/>
 
-				<!-- footer -->
+				<Button x:Name="Open_Folder"
+						Margin="800,502,11,4"
+						Content="Open Folder"
+						BorderBrush="#FF900000"
+						Background="#74000000"
+						Foreground="White"
+						Cursor="Hand"
+						Visibility="Hidden">
+					<Button.ContextMenu>
+						<ContextMenu StaysOpen="true">
+							<MenuItem
+						Header="Open Video"
+						x:Name="OpenDir_Video" />
+							<MenuItem
+						Header="Open Audio"
+						x:Name="OpenDir_Audio" />
+							<MenuItem
+						Header="Formatted">
+								<MenuItem
+							Header="m4a"
+							x:Name="OpenDir_mFourA" />
+								<MenuItem
+							Header="mp3"
+							x:Name="OpenDir_mpThree" />
+								<MenuItem
+							Header="mp4"
+							x:Name="OpenDir_mpFour" />
+								<MenuItem
+							Header="webm"
+							x:Name="OpenDir_webm" />
+							</MenuItem>
+						</ContextMenu>
+					</Button.ContextMenu>
+					<Button.Resources>
+						<Style TargetType="Button">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="Button">
+										<Border Background="{TemplateBinding Background}"
+												BorderBrush="{TemplateBinding BorderBrush}"
+												BorderThickness="1"
+												CornerRadius="5">
+											<ContentPresenter x:Name="Button"
+															  Content="{TemplateBinding Content}"
+															  HorizontalAlignment="Center"
+															  VerticalAlignment="Center"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<EventTrigger RoutedEvent="MouseEnter">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+															To="#FF900000"
+															Duration="00:00:00.1"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+								<EventTrigger RoutedEvent="MouseLeave">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+															To="#74000000"
+															Duration="00:00:00.1"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Resources>
+				</Button>
+				<!--#endregion-->
+
+
+				<!--#region footer -->
 				<Grid Margin="0,485,0,0"
 					  VerticalAlignment="Bottom">
 					<TextBlock x:Name="Window_Hidden"
@@ -167,6 +247,7 @@
 							   FontSize="8"
 							   Margin="0,-4,0,4"/>
 				</Grid>
+				<!--#endregion-->
 
 			</Grid>
 		</Border>

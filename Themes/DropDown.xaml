@@ -125,12 +125,12 @@
 						</Popup>
 					</Grid>
 					<ControlTemplate.Triggers>
-						
 						<Trigger Property="HasItems" Value="false">
-						<Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+							<Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
 						</Trigger>
 						<Trigger Property="IsEnabled" Value="false">
 							<Setter Property="Foreground" Value="Red"/>
+							<Setter TargetName="PART_EditableTextBox" Property="Foreground" Value="Red"/>
 						</Trigger>
 						<Trigger Property="IsGrouping" Value="true">
 							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
@@ -148,8 +148,6 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-		<Style.Triggers>
-		</Style.Triggers>
 	</Style>
 
 	<!-- Middle -->
@@ -191,11 +189,11 @@
 					<ContentPresenter/>
 				</Border>
 				<ControlTemplate.Triggers>
-					<Trigger Property="IsHighlighted" Value="true">
-						<Setter TargetName="Border" Property="BorderBrush" Value="#FFE89595"/>
-						<Setter TargetName="Border" Property="BorderThickness" Value=".5"/>
-					</Trigger>
-				</ControlTemplate.Triggers>
+						<Trigger Property="IsHighlighted" Value="true">
+							<Setter TargetName="Border" Property="BorderBrush" Value="#FFE89595"/>
+							<Setter TargetName="Border" Property="BorderThickness" Value=".5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
 			</ControlTemplate>
 		</Setter.Value>
 	</Setter>

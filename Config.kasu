@@ -25,4 +25,5 @@ ShowSystemOutput: "true"
 
 ! When downloading a playlist video.
 ! If false it will no longer ask "Download the Playlist?"
+! NOTE: This is only blocks Youtube playlist!
 EnablePlaylist: "false"

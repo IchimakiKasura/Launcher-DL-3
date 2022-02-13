@@ -1,7 +1,7 @@
 # Launcher DL version 6.0
 This project is just a GUI for the Youtube-DL or "ydlp" (I use ydlp since the ydl is no longer updating)
 
-Download link: [Launcher DL v6](https://github.com/IchimakiKasura/LauncherDL-2 'Project is still W.I.P')
+Download link: [Launcher DL v6](https://github.com/IchimakiKasura/Launcher-DL-3 'Project is still W.I.P')
 
 (NOTE: other versions are no longer maintained hence the Expressions are only for the ydl not ydlp)<br>
 check other versions:<br>
@@ -17,3 +17,10 @@ it is entirely made in html:<br>
 <br>
 <br>
 I made this because it enhance my coding ability.
+
+| Name | Picture Preview |
+|------|:-----------------:|
+|Launcher DL v3|<img src="https://user-images.githubusercontent.com/80595346/153750204-f498239c-dabb-4917-8dd2-f2e2f38fadc7.png" alt="v3" height="450"/>|
+|Launcher DL v4|<img src="https://user-images.githubusercontent.com/80595346/153750283-b566d955-fff5-4383-95d0-e16a453cedd5.png" alt="v3" height="450"/>|
+|Launcher DL v5|<img src="https://user-images.githubusercontent.com/80595346/153750314-d0404fea-f662-461d-a323-e03eeb7fc371.png" alt="v3" height="450"/>|
+|Launcher DL v6|<img src="https://user-images.githubusercontent.com/80595346/153750369-42ce3d99-17ad-40ff-93ff-e9e0f4a4625a.png" alt="v3" height="350"/>|
