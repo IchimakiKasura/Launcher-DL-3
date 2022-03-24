@@ -19,10 +19,16 @@ public partial class MainWindow : Window
 
         WindowStyle = WindowStyle.SingleBorderWindow;
         Window_VersionLabel.Text = Version;
+
         Window_Hidden.MouseDown += delegate
         {
             Window_Components(false);
-            MessageBox.Show("LauncherDL buildver6.0\n\nOMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\nNew GUI/Layout, Animations!?!\n\nThe OLD Button Hover Animation from ver3 is even back!??\n\n\nCreated by Kasura.", "huzuaah!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            MessageBox.Show(HiddenButtonText, "huzuaah!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+        };
+
+        Input_MpThreeFormat.Click += delegate
+        {
+            Config.AlwayDownloadInMP3 = Input_MpThreeFormat.IsChecked.Value;
         };
 
         InitializeTopButtons();

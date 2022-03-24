@@ -1,4 +1,4 @@
-global using System;
+﻿global using System;
 global using System.IO;
 global using System.Linq;
 global using System.Text;
@@ -27,12 +27,26 @@ public partial class MainWindow
 {
 	readonly static string YDL_link = $"{Directory.GetCurrentDirectory()}\\uVad_Data\\ydl.bin";
 
-    string Version = "Build Version:\nDevelopment Build";
+    readonly string Version = "Build Version:\nDevelopment Build";
+
+    readonly string HiddenButtonText = "LauncherDL buildver6.0\n\nOMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\nNew GUI/Layout, Animations!?!\n\nThe OLD Button Hover Animation from ver3 is even back!??\n\n\nCreated by Kasura.";
 
     public static MainWindow MW;
 
-    bool IsDownloading = false;
-    DoubleAnimation Opac;
-    ColorAnimation Anim;
-    MemoryStream DocumentTemp;
+    private bool IsDownloading = false;
+    private DoubleAnimation Opac;
+    private ColorAnimation Anim;
+    private MemoryStream DocumentTemp;
+    private Process Proc;
+    public LauncherDefaultConfig Config = new();
+
+    // Temporary variables
+    private string TemporaryEncodedName = string.Empty;
+    private List<string> TemporaryFormatNames = new();
+    public string TemporarySelectedFileFormat = string.Empty;
+    public List<string> TemporaryFormatList = new();
+
+    private static string temp = string.Empty;
+
 }
+//https://www.youtube.com/playlist?list=PLbQl2vL-gF3-ijF3Se5qneu8ryV4pI2hx

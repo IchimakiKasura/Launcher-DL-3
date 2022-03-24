@@ -30,6 +30,10 @@ public static class LauncherDL_RichTextBoxHandler
     /// </summary>
     /// <param name="Input">Input Text</param>
     /// <param name="DontAddNewline">Don't Automatically line?<br/>Default: <see langword="false"/></param>
+    /// <exception cref="ForegroundPropertyException"/>
+    /// <exception cref="FontSizePropertyException"/>
+    /// <exception cref="FontWeightPropertyException"/>
+
     public static void AddFormattedText(this RichTextBox rt, string Input, bool DontAddNewline = false)
     {
         if(!DontAddNewline) Input = Input + "\r";
@@ -55,9 +59,9 @@ public static class LauncherDL_RichTextBoxHandler
             text = text.Replace("$gt$", ">");
 
             range.Text = text;
-            range.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color));
-            range.ApplyPropertyValue(Control.FontSizeProperty, size);
-            range.ApplyPropertyValue(Control.FontWeightProperty, weight);
+            try { range.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color)); } catch { throw new ForegroundPropertyException("The Entered Color or Hex are Invalid."); };
+            try { range.ApplyPropertyValue(Control.FontSizeProperty, size); } catch { throw new FontSizePropertyException("The Entered font size are Invalid."); };
+            try { range.ApplyPropertyValue(Control.FontWeightProperty, weight); } catch { throw new FontWeightPropertyException("The Entered font weight are Invalid."); };
         }
         rt.ScrollToEnd();
     }
@@ -108,4 +112,28 @@ public static class LauncherDL_RichTextBoxHandler
         //tr.ApplyPropertyValue(Control.FontSizeProperty, size);
         rt.ScrollToEnd();
     }
+}
+
+[Serializable]
+public class ForegroundPropertyException : Exception
+{
+    public ForegroundPropertyException() { }
+    public ForegroundPropertyException(string message)
+        : base(message) { }
+}
+
+[Serializable]
+public class FontSizePropertyException : Exception
+{
+    public FontSizePropertyException() { }
+    public FontSizePropertyException(string message)
+        : base(message) { }
+}
+
+[Serializable]
+public class FontWeightPropertyException : Exception
+{
+    public FontWeightPropertyException() { }
+    public FontWeightPropertyException(string message)
+        : base(message) { }
 }

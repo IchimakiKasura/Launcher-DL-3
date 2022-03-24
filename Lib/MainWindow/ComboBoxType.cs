@@ -15,8 +15,17 @@ public partial class MainWindow
             Input_Format.IsEnabled = true;
         }
 
-        if (Input_Type.SelectedIndex == 2) Input_MpThreeFormat.Visibility = Visibility.Visible;
-            else Input_MpThreeFormat.Visibility = Visibility.Hidden;
+        if (Input_Type.SelectedIndex == 2)
+        {
+            Input_MpThreeFormat.IsChecked = Config.AlwayDownloadInMP3;
+            Input_MpThreeFormat.Visibility = Visibility.Visible;
+        }
+        else
+		{
+            Input_MpThreeFormat.IsChecked = false;
+            Input_MpThreeFormat.Visibility = Visibility.Hidden;
+		}
+
 
 		if(Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content.ToString()}\"");
     }

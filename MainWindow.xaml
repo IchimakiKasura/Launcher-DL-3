@@ -135,15 +135,15 @@
 				<Button x:Name="Button_Format" Content="ファイルフォーマット"
 						Margin="10,264,456,180"
 						Style="{StaticResource Akira}"
-						Background="#CCFBC2C2"/>
+						Background="#CCFBC2C2" ToolTip="Fetch File formats"/>
 				<Button x:Name="Button_Download" Content="ダウンロード"
 						Margin="10,336,456,108"
 						Style="{StaticResource Astolfo}"
-						Background="#CCFBC2C2"/>
+						Background="#CCFBC2C2" ToolTip="Download"/>
 				<Button x:Name="Button_Update" Content="アップデート"
 						Margin="10,408,456,36"
 						Style="{StaticResource Venti}"
-						Background="#CCFBC2C2"/>
+						Background="#CCFBC2C2" ToolTip="Update"/>
 
 				<CheckBox x:Name="Input_MpThreeFormat" Content="Force MP3 format."
 						  Foreground="White" Margin="336,87,456,423" Cursor="Hand" Visibility="Hidden"/>

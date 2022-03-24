@@ -1,6 +1,6 @@
 namespace Launcher_DL_v6;
 
-class LauncherDefaultConfig
+public class LauncherDefaultConfig
 {
     public string BackgroundName { get; set; } = "background.png";
     public string BackgroundColor { get; set; } = "#A31F0000";
@@ -14,7 +14,6 @@ class LauncherDefaultConfig
 
 public partial class MainWindow
 {
-    LauncherDefaultConfig Config = new();
     private async void LoadConfig()
     {
         // should've used JSON but damn,I don't want to add System.Text.Json or Newtonsoft.Json
