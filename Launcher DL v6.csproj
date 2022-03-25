@@ -3,12 +3,31 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <Version>6.0.0</Version>
     <RootNamespace>Launcher_DL_v6</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
     <Nullable>disable</Nullable>
-    <ProduceReferenceAssemblies>false</ProduceReferenceAssemblies>
+    <ProduceReferenceAssemblies>False</ProduceReferenceAssemblies>
+    <Platforms>AnyCPU;x64</Platforms>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Description>Downloads any audio or video</Description>
+    <DebugType>embedded</DebugType>
+    <Product>LauncherDL</Product>
+    <PackageId>LauncherDL</PackageId>
+    <Authors>Ichimaki Kasura</Authors>
+    <Company>Ichimaki Kasura</Company>
+    <Copyright>Copyright © 2022</Copyright>
+    <AssemblyName>uVad</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,46 +37,88 @@
     <None Update="Config.kasu">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\avcodec-58.dll">
+    <None Update="Images\Samples\Andromeda.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\avdevice-58.dll">
+    <None Update="Images\Samples\Genshin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\avfilter-7.dll">
+    <None Update="Images\Samples\ILLEGAL.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\avformat-58.dll">
+    <None Update="Images\Samples\Senku.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\avutil-56.dll">
+    <None Update="Images\Samples\Tenki no ko 2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\ffmpeg.exe">
+    <None Update="Images\Samples\Tenki no ko.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\ffmpeg.txt">
+    <None Update="Images\Samples\Yato.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\ffplay.exe">
+    <None Update="LauncherDL_Data\avcodec-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\ffprobe.exe">
+    <None Update="LauncherDL_Data\avcodec-59.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\postproc-55.dll">
+    <None Update="LauncherDL_Data\avdevice-58.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\swresample-3.dll">
+    <None Update="LauncherDL_Data\avdevice-59.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\swscale-5.dll">
+    <None Update="LauncherDL_Data\avfilter-7.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\ydl.bin">
+    <None Update="LauncherDL_Data\avfilter-8.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="uVad_Data\ydl.bin.old">
+    <None Update="LauncherDL_Data\avformat-58.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\avformat-59.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\avutil-56.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\avutil-57.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\ffmpeg.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\ffplay.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\ffprobe.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\postproc-55.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\postproc-56.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\swresample-3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\swresample-4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\swscale-5.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\swscale-6.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\ydl.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

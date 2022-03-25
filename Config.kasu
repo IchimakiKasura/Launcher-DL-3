@@ -1,5 +1,14 @@
 ! Only change the values inside the quotes.
 
+! Here are some few samples for backgrounds for you :>
+! "Samples/Genshin.png"
+! "Samples/Andromeda.png"
+! "Samples/Yato.png"
+! "Samples/Tenki no ko.png"
+! "Samples/Tenki no ko 2.png"
+! "Samples/Senku.png"
+! "Samples/ILLEGAL.png"
+
 ! change the background.
 BackgroundName: "background.png"
 
@@ -8,6 +17,7 @@ BackgroundName: "background.png"
 GlowColor: "#FFFF8282"
 
 ! Default output folder
+! default is "output"
 DefaultOutput: "output"
 
 ! Default File Type/ Download Type on Start up.

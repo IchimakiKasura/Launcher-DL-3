@@ -25,9 +25,11 @@ global using System.Windows.Media.Animation;
 namespace Launcher_DL_v6;
 public partial class MainWindow
 {
-	readonly static string YDL_link = $"{Directory.GetCurrentDirectory()}\\uVad_Data\\ydl.bin";
+	readonly static string YDL_link = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin";
+    private static string Ffmpeg = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data";
+    private List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a" };
 
-    readonly string Version = "Build Version:\nDevelopment Build";
+    readonly string Version = "Build Version:\nBeta Build v6";
 
     readonly string HiddenButtonText = "LauncherDL buildver6.0\n\nOMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\nNew GUI/Layout, Animations!?!\n\nThe OLD Button Hover Animation from ver3 is even back!??\n\n\nCreated by Kasura.";
 

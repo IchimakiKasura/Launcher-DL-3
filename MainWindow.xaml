@@ -227,7 +227,6 @@
 				</Button>
 				<!--#endregion-->
 
-
 				<!--#region footer -->
 				<Grid Margin="0,485,0,0"
 					  VerticalAlignment="Bottom">

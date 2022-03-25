@@ -4,7 +4,8 @@ public class OutputComments : MainWindow
 {
 	public static void DownloadOutputComments()
 	{
-		string Name = string.Empty;
+		MW.Input_Name.Text = MW.Input_Name.Text.Trim();
+		string Name = MW.Input_Name.Text;
 		string FileFormatName;
 
 		// Check the ComboBox if any changes made to the File Format Text
@@ -23,7 +24,7 @@ public class OutputComments : MainWindow
 		}
 
 
-		if (MW.Input_Name.Text == "Unavailable") Name = "N/A";
+		if (MW.Input_Name.Text == "Unavailable" && MW.Input_Name.Text == string.Empty) Name = "N/A";
 
 		MW.Output_text.Break("gray");
 		MW.Output_text.AddFormattedText($"<gray%12>[] Download Type:	 {MW.Input_Type.Text}");
@@ -31,7 +32,7 @@ public class OutputComments : MainWindow
 		MW.Output_text.AddFormattedText($"<gray%12>[] Format:		 {FileFormatName}");
 		MW.Output_text.AddFormattedText($"<gray%12>[] Link:			 {MW.Input_Link.Text}");
 		MW.Output_text.AddFormattedText($"<gray%12>[] Force MP3:		 {MW.Input_MpThreeFormat.IsChecked}");
-		MW.Output_text.AddFormattedText($"<gray%12>[] Playlist?:		 {MW.Config.EnablePlaylist}<>");
+		MW.Output_text.AddFormattedText($"<gray%12>[] Playlist?:		 {MW.Config.EnablePlaylist}");
 		MW.Output_text.Break("gray");
 		MW.Output_text.AddFormattedText("<Yellow>[INFO] <>Downloading...");
 	}
