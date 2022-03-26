@@ -31,10 +31,10 @@
 	</Window.Effect>
 	<!--#endregion-->
 
-	<Border x:Name="WindowBG" Background="Black" Margin="10,10,10,10">
+	<Border x:Name="WindowBG" Background="Transparent" Margin="10,10,10,10">
 		<Border CornerRadius="10">
 			<Border.Background>
-				<ImageBrush x:Name="Window_BackgroundName" ImageSource="pack://siteoforigin:,,,/Images/background.png" Opacity="0.55"/>
+				<ImageBrush x:Name="Window_BackgroundName" ImageSource="pack://siteoforigin:,,,/Images/background.png" Opacity="0.5"/>
 			</Border.Background>
 			<Grid>
 				<!--#region Top | Head -->
@@ -71,7 +71,7 @@
 						 Style="{StaticResource RTB}" Width="414"/>
 
 				<StackPanel Margin="10,45,456,51">
-					<Label Content="Download Type:"
+					<Label x:Name="Text_DownloadType" Content="Download Type:"
 					   HorizontalContentAlignment="Center"
 					   Foreground="White"
 					   FontWeight="SemiBold"
@@ -98,7 +98,7 @@
 						ToolTip="Download the Audio's &quot;best&quot; format."/>
 					</ComboBox>
 
-					<Label Content="Link:"
+					<Label x:Name="Text_Link" Content="Link:"
 					   HorizontalContentAlignment="Center"
 					   Foreground="White"
 					   FontWeight="SemiBold"
@@ -110,25 +110,31 @@
 						 Uid="Valid Link"/>
 
 					<Grid Margin="0,-15,0,0">
-						<Label Content="Format:"
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="263*"/>
+							<ColumnDefinition Width="183*"/>
+						</Grid.ColumnDefinitions>
+						<Label x:Name="Text_Format" Content="Format:"
 					   HorizontalContentAlignment="Center"
 					   Foreground="White"
 					   FontWeight="SemiBold"
 					   FontSize="20"
-					   Padding="0,20,0,0" Margin="0,0,228,0"/>
-						<Label Content="Name:"
+					   Padding="0,20,0,0" Margin="0,0,45,0"
+					   IsHitTestVisible="False"/>
+						<Label x:Name="Text_Name" Content="Name:"
 					   HorizontalContentAlignment="Center"
 					   Foreground="White"
 					   FontWeight="SemiBold"
 					   FontSize="20"
-					   Padding="0,20,0,0" Margin="223,0,0,0"/>
+					   Padding="0,20,0,0" Margin="223,0,0,0" Grid.ColumnSpan="2"
+					   IsHitTestVisible="False"/>
 
 						<ComboBox x:Name="Input_Format" Style="{StaticResource CB}"
-						 HorizontalContentAlignment="Left" Margin="0,54,228,-40"
+						 HorizontalContentAlignment="Left" Margin="0,54,45,-40"
 						 Text="Best" IsEditable="True"/>
 						<TextBox x:Name="Input_Name" Style="{StaticResource TB}"
 						 HorizontalContentAlignment="Left" Margin="228,54,0,-40"
-						 Uid="Optional"/>
+						 Uid="Optional" Grid.ColumnSpan="2"/>
 					</Grid>
 				</StackPanel>
 
@@ -146,7 +152,7 @@
 						Background="#CCFBC2C2" ToolTip="Update"/>
 
 				<CheckBox x:Name="Input_MpThreeFormat" Content="Force MP3 format."
-						  Foreground="White" Margin="336,87,456,423" Cursor="Hand" Visibility="Hidden"/>
+						  Foreground="White" Margin="336,87,429,423" Cursor="Hand" Visibility="Hidden"/>
 
 				<ProgressBar x:Name="Window_ProgressBar"
 							 Margin="488,482,10,28"
@@ -169,7 +175,8 @@
 						Header="Open Audio"
 						x:Name="OpenDir_Audio" />
 							<MenuItem
-						Header="Formatted">
+						Header="Formatted"
+								x:Name="OpenDir_Formatted">
 								<MenuItem
 							Header="m4a"
 							x:Name="OpenDir_mFourA" />

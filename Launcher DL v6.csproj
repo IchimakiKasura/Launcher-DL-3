@@ -3,13 +3,13 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <Version>6.0.0</Version>
+    <Version>6.0.5</Version>
     <RootNamespace>Launcher_DL_v6</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
     <Nullable>disable</Nullable>
-    <ProduceReferenceAssemblies>False</ProduceReferenceAssemblies>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <Platforms>AnyCPU;x64</Platforms>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <Description>Downloads any audio or video</Description>
@@ -29,6 +29,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Optimize>True</Optimize>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\NotoSansJP-Regular.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\NotoSansJP-Regular.otf" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="Images\background.png">

@@ -14,7 +14,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-
         MW = this;
 
         WindowStyle = WindowStyle.SingleBorderWindow;
@@ -33,6 +32,5 @@ public partial class MainWindow : Window
 
         InitializeTopButtons();
         Initialize();
-        LoadConfig();
     }
 }

@@ -1,7 +1,7 @@
 # Launcher DL version 6.0
 This project is just a GUI for the Youtube-DL or "ydlp" (I use ydlp since the ydl is no longer updating)
 
-Download link: [Launcher DL v6](https://github.com/IchimakiKasura/Launcher-DL-3 'Project is still W.I.P')
+Download link: [Launcher DL v6](https://github.com/IchimakiKasura/Launcher-DL-3/releases)
 
 (NOTE: other versions are no longer maintained hence the Expressions are only for the ydl not ydlp)<br>
 check other versions:<br>

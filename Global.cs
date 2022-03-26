@@ -29,10 +29,19 @@ public partial class MainWindow
     private static string Ffmpeg = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data";
     private List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a" };
 
-    readonly string Version = "Build Version:\nBeta Build v6";
+    readonly string Version = "Build Version:\nDevelopment Build";
 
-    readonly string HiddenButtonText = "LauncherDL buildver6.0\n\nOMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\nNew GUI/Layout, Animations!?!\n\nThe OLD Button Hover Animation from ver3 is even back!??\n\n\nCreated by Kasura.";
+    readonly string HiddenButtonText = "LauncherDL buildver6.0\n\n" +
+        "OMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\n" +
+        "New GUI/Layout, Animations!?!\n\n" +
+        "The OLD Button Hover Animation from ver3 is even back!??\n\n\n" +
+        "Hotfix Update v6.0.5:\n" +
+        "Added Few Languages\n" +
+        "Added Customizable Background color\n" +
+        "Fixed font family\n\n" +
+        "Created by Kasura.";
 
+    public LauncherDefaultConfig Config = new();
     public static MainWindow MW;
 
     private bool IsDownloading = false;
@@ -40,7 +49,6 @@ public partial class MainWindow
     private ColorAnimation Anim;
     private MemoryStream DocumentTemp;
     private Process Proc;
-    public LauncherDefaultConfig Config = new();
 
     // Temporary variables
     private string TemporaryEncodedName = string.Empty;

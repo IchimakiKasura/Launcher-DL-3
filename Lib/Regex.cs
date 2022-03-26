@@ -17,6 +17,6 @@ public static class LauncherDL_Regex
     readonly public static Regex SelectedRes = new(@"\[.*\].*(?<name>(?:\D+.*p|audio only)).*-(?<size>.*?);", RegexOptions.Compiled);
 
     // kasu Extension
-    readonly public static Regex KasuExtension = new("BackgroundName:*.\"(?<BackgroundName>.*)\"|BackgroundColor:*.\"(?<BackgroundColor>.*)\"|GlowColor:*.\"(?<GlowColor>.*)\"|DefaultFileTypeOnStartUp:*.\"(?<DefaultFileTypeOnStartUp>.*)\"|AlwayDownloadInMP3:*.\"(?<AlwayDownloadInMP3>.*)\"|ShowSystemOutput:*.\"(?<ShowSystemOutput>.*)\"|EnablePlaylist:*.\"(?<EnablePlaylist>.*)\"", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+    readonly public static Regex KasuExtension = new("BackgroundName:*.\"(?<BackgroundName>.*)\"|GlowColor:*.\"(?<GlowColor>.*)\"|DefaultFileTypeOnStartUp:*.\"(?<DefaultFileTypeOnStartUp>.*)\"|AlwayDownloadInMP3:*.\"(?<AlwayDownloadInMP3>.*)\"|ShowSystemOutput:*.\"(?<ShowSystemOutput>.*)\"|EnablePlaylist:*.\"(?<EnablePlaylist>.*)\"|Language:*.\"(?<Language>.*)\"|DefaultOutput:*.\"(?<DefaultOutput>.*)\"|BackgroundColor:*.\"(?<BackgroundColor>.*)\"", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
 }

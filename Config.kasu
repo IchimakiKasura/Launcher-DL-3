@@ -12,6 +12,10 @@
 ! change the background.
 BackgroundName: "background.png"
 
+! change the background.
+! NOTE: the first two letters are Alpha if you are using a HEX format.
+BackgroundColor: "#FF713131"
+
 ! change the outer glow color.
 ! NOTE: the first two letters are Alpha if you are using a HEX format.
 GlowColor: "#FFFF8282"
@@ -37,3 +41,12 @@ ShowSystemOutput: "true"
 ! If false it will no longer ask "Download the Playlist?"
 ! NOTE: This is only blocks Youtube playlist!
 EnablePlaylist: "false"
+
+! Change System Language
+! Default: "default"
+! Available Languages:
+! "Tagalog"
+! "English"
+! "Japanese" - idfk if its accurate
+! "Bruh"
+Language: "Japanese"

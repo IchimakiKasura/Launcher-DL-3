@@ -34,6 +34,7 @@ public partial class MainWindow
 
     private void ProcessEnds(bool IsDownload)
     {
+        IsDownloading = false;
         Window_Components(false);
         ProgressBarHide();
         Window_ProgressBar.Value = 0;
@@ -94,6 +95,7 @@ public partial class MainWindow
         string format = options.format;
 
         // ye I kinda hate when its not aligned.
+        // EDIT: on ver6 its still not align ffs.
         if (options.format == "mp4") format = "mp4   ";
         if (options.format == "m4a") format = "m4a   ";
         if (options.format == "3gp") format = "3gp    ";

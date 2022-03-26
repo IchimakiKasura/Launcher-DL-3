@@ -26,9 +26,12 @@ public partial class MainWindow
 
 	public async void Download(object s, RoutedEventArgs e)
 	{
+		IsDownloading = true;
+
 		if (Input_Name.Text == "Unavailable")
 		{
 			MessageBox.Show("This specific Text is reserved!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			IsDownloading = false;
 			return;
 		}
 
@@ -38,6 +41,7 @@ public partial class MainWindow
 		if (ValidLink.IsValid == false)
 		{
 			Output_text.AddFormattedText("<Red>[ERROR] <>Link is not Valid!");
+			IsDownloading = false;
 			return;
 		}
 		else Window_Components(true);

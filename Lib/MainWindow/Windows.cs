@@ -21,7 +21,7 @@ public partial class MainWindow
         Activated += delegate
         {
             Opac = new(1, TimeSpan.FromMilliseconds(200));
-            Anim = new((Color)ColorConverter.ConvertFromString("#FF713131"), TimeSpan.FromMilliseconds(200));
+            Anim = new((Color)ColorConverter.ConvertFromString(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
             Focus();
         };
 
