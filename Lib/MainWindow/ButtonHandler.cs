@@ -4,6 +4,8 @@ public partial class MainWindow
 {
 	public async void FileFormat(object s, RoutedEventArgs e)
 	{
+		DebugOutput.Button_Clicked("format");
+
 		Input_Format.Items.Clear();
 		TemporaryFormatList.Clear();
 		TemporaryFormatNames.Clear();
@@ -26,6 +28,7 @@ public partial class MainWindow
 
 	public async void Download(object s, RoutedEventArgs e)
 	{
+		DebugOutput.Button_Clicked("download");
 		IsDownloading = true;
 
 		if (Input_Name.Text == "Unavailable")
@@ -60,6 +63,7 @@ public partial class MainWindow
 
 	public async void Update(object s, RoutedEventArgs e)
 	{
+		DebugOutput.Button_Clicked("update");
 		Window_Components(true);
 		OutputComments.UpdateOutputComments();
 		await StartProcess(YTDL_Update());

@@ -35,16 +35,28 @@ public class OutputComments : MainWindow
 		MW.Output_text.AddFormattedText($"<gray%12>[] Playlist?:		 {MW.Config.EnablePlaylist}");
 		MW.Output_text.Break("gray");
 		MW.Output_text.AddFormattedText("<Yellow>[INFO] <>Downloading...");
+
+		DebugOutput.Button_Output("download", new{
+			DT = MW.Input_Type.Text,
+			Name = Name,
+			Format = FileFormatName,
+			Link = MW.Input_Link.Text,
+			MP3 = MW.Input_MpThreeFormat.IsChecked,
+			Playlist = MW.Config.EnablePlaylist
+		});
+
 	}
 
 	public static void UpdateOutputComments()
 	{
 		MW.Output_text.AddFormattedText("<Yellow>[INFO] <>Updating...");
+		DebugOutput.Button_Output("update");
 	}
 
 	public static void FileFormatOutputComments()
 	{
 		MW.Output_text.AddFormattedText("<Yellow>[INFO] <>Loading File Formats...");
+		DebugOutput.Button_Output("format");
 	}
 
 	public static void DownloadOutputCommentsLive(MemoryStream DocumentTemp, string StringData)

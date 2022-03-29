@@ -37,10 +37,12 @@ public partial class MainWindow
 				{
 					Output_text.AddFormattedText($"<Yellow>[INFO] <>Playlist is not supported on FileFormat");
 					Output_text.AddFormattedText($"<Yellow>[INFO] <>You can only download them.");
+					Output_text.AddFormattedText($"<Yellow>[INFO] <>Please Disable the playlist on the \"Config.kasu\" If you keep seeing this.");
 					Proc.Close();
 					ProcessEnds(false);
 				}
 
+			
 				string id = LauncherDL_Regex.Info.Match(StringData).Groups["id"].Value.Trim(); ;
 				string resolution = LauncherDL_Regex.Info.Match(StringData).Groups["fullResolution"].Value.Trim();
 				string size = LauncherDL_Regex.Info.Match(StringData).Groups["size"].Value.Trim();
@@ -174,6 +176,7 @@ public partial class MainWindow
 			{
 				if (StringData.Contains("ERROR") || StringData.Contains("Traceback"))
 				{
+					DebugOutput.ERROR_Debug(StringData);
 					Output_text.AddFormattedText($"<Red>[ERROR] <>The link given is not Supported or Unavailable");
 					Proc.Close();
 					ProcessEnds(false);

@@ -23,6 +23,7 @@ public partial class MainWindow
             Opac = new(1, TimeSpan.FromMilliseconds(200));
             Anim = new((Color)ColorConverter.ConvertFromString(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
             Focus();
+            DebugOutput.WindowFocusDebug(true);
         };
 
         Deactivated += delegate
@@ -30,19 +31,42 @@ public partial class MainWindow
             Opac = new(0, TimeSpan.FromMilliseconds(200));
             Anim = new(Colors.Black, TimeSpan.FromMilliseconds(200));
             Focus();
+            DebugOutput.WindowFocusDebug(false);
         };
     }
 
     // prevents closing while downloading
 	private void Window_Close(object s, CancelEventArgs handler)
 	{
+        DebugOutput.Close();
+
 		if (IsDownloading) {
 			var sagot = MessageBox.Show(
 				"Hey! You can't close me while Working! ಠ_ಠ",
 				"Hutao",
 				MessageBoxButton.OK, MessageBoxImage.Exclamation);
 			handler.Cancel = (sagot == MessageBoxResult.OK);;
+            DebugOutput.CloseCancel();
 		}
+
+
+        #region Saves a Log file lmao
+        
+        string Current_date = DateTime.Now.ToString().Replace("/",".").Replace(":", "-");
+
+        TextRange textRange = new TextRange(
+            // TextPointer to the start of content in the RichTextBox.
+            Output_text.Document.ContentStart,
+            // TextPointer to the end of content in the RichTextBox.
+            Output_text.Document.ContentEnd
+        );
+
+        if(textRange.Text.Length >= 221)
+        {
+            if (!Directory.Exists($"{Directory.GetCurrentDirectory}\\Logs")) Directory.CreateDirectory("Logs");
+            File.WriteAllText($"./Logs/{Current_date}.txt", textRange.Text);
+        }
+        #endregion
 	}
 
     // hides the Window's Border so it will looks like the "WindowStyle: None"

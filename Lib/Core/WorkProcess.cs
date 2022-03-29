@@ -104,5 +104,7 @@ public partial class MainWindow
         TemporaryFormatList.Add(options.id);
         Input_Format.Items.Add($"[{format}]       {options.resolution}    -   {options.size};       {options.bitrate};      {options.fps}   ");
         Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Added:{options.resolution};    {options.size}");
+
+        DebugOutput.FormatAdderDebug(options);
     }
 }

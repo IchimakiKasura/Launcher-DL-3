@@ -17,6 +17,7 @@ public partial class MainWindow
 {
     private async Task LoadConfig()
     {
+        
         // should've used JSON but damn,I don't want to add System.Text.Json or Newtonsoft.Json
         string Data = await File.ReadAllTextAsync("Config.kasu");
 
@@ -24,7 +25,7 @@ public partial class MainWindow
         {
             foreach(Match match in LauncherDL_Regex.KasuExtension.Matches(Data))
 		    {
-                Console.WriteLine(match);
+                DebugOutput.LoadConfig_Debug(match);
                 if (match.Groups["BackgroundName"].Success) Config.BackgroundName = match.Groups["BackgroundName"].Value.Trim();
                 if (match.Groups["GlowColor"].Success) Config.GlowColor = match.Groups["GlowColor"].Value.Trim();
                 if (match.Groups["BackgroundColor"].Success) Config.BackgroundColor = match.Groups["BackgroundColor"].Value.Trim();
@@ -41,13 +42,13 @@ public partial class MainWindow
             Window_BackgroundName.ImageSource = new BitmapImage(new Uri($"Images/{Config.BackgroundName}", UriKind.Relative));
             Window_DropShadow.Color = (Color)ColorConverter.ConvertFromString(Config.GlowColor);
 
+            DebugOutput.LoadConfig_Done(false);
             if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkGreen%14>SUCCESS <gray%14>\"Config.kasu\" loaded!");
         }
         catch
         {
-            Output_text.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
-            if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content}\"");
-            if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkRed%14>FAILED <gray%14>to load \"Config.kasu\"");
+            DebugOutput.LoadConfig_Done(true);
+           if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkRed%14>FAILED <gray%14>to load \"Config.kasu\"");
         }
 
         Input_Type.SelectedIndex = Config.DefaultFileTypeOnStartUp;

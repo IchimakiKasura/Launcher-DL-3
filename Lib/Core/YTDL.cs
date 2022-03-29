@@ -2,7 +2,6 @@ namespace Launcher_DL_v6;
 
 public class YTDL_object
 {
-	public string uhh { get; set; } // dont
 	public string Link { get; set; }
 	public string Arguments { get; set; }
 	public bool IsUpdate { get; set; } = false;
@@ -26,9 +25,13 @@ public partial class MainWindow
 
 	public YTDL_object YTDL_FileFormat()
 	{
+		string Args = $"--compat-options format-sort -F {Input_Link.Text}";
+
+		if(!Config.EnablePlaylist) Args += " --no-playlist";
+
 		return new()
 		{
-			uhh = $"-F {Input_Link.Text}",
+			Arguments = Args,
 			IsFileFormat = true
 		};
 
@@ -88,9 +91,11 @@ public partial class MainWindow
 			break;
 		}
 
+		if(!Config.EnablePlaylist) arguments += " --no-playlist";
+
 		return new()
 		{
-			uhh = arguments,
+			Arguments = arguments,
 			IsDownload = true
 		};
 	}

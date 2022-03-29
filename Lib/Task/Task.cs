@@ -29,13 +29,11 @@ public partial class MainWindow
 
 	private async Task DownloadTask(YTDL_object YT)
 	{
-		YT.Arguments = YT.uhh;
 		await ProcessStart(YT, DownloadOutput);
 	}
 
 	private  async Task FileFormatTask(YTDL_object YT)
 	{
-		YT.Arguments = YT.uhh;
 		await ProcessStart(YT, FileFormatOutput);
 	}
 }
