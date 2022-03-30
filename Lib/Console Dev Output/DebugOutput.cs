@@ -104,6 +104,16 @@ public class DebugOutput
         if(IsDebug)Console.WriteLine($"\x1b[31m[I don't feel so good]:\n{Text}\x1b[0m\n---------------------------------------------");
     }
 
+    public static void Selected_Language(string text)
+    {
+        if(IsDebug)Console.WriteLine($"\x1b[32m[LANGUAGE]\x1b[0m Current Language: {text}");
+    }
+
+    public static void Selected_Language_Error(string text)
+    {
+        if(IsDebug)Console.WriteLine($"\x1b[31m[LANGUAGE]\x1b[0m Error Can't Recognize \"{text}\", Please Check again.");
+    }
+
     // public static async void Test_Debug()
     // {
     //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Started!\n");

@@ -38,7 +38,22 @@ public partial class MainWindow
             }
 
             if (!File.Exists($"Images/{Config.BackgroundName}")) throw new Exception();
+            if (Config.DefaultFileTypeOnStartUp >= 3) throw new Exception(); 
 
+            switch (Config.SystemLanguage.ToLower())
+            {
+                default: DebugOutput.Selected_Language_Error(Config.SystemLanguage); throw new Exception();
+                case "japanese": DebugOutput.Selected_Language(Config.SystemLanguage); break;
+                case "tagalog": DebugOutput.Selected_Language(Config.SystemLanguage);break;
+                case "english": DebugOutput.Selected_Language(Config.SystemLanguage);break;
+                case "bruh": DebugOutput.Selected_Language(Config.SystemLanguage);break;
+                case "customized": DebugOutput.Selected_Language(Config.SystemLanguage);break;
+            }
+
+
+            // Check if BackgroundColor input is valid.
+            Color BackgroundColor = (Color)ColorConverter.ConvertFromString(Config.BackgroundColor);
+            
             Window_BackgroundName.ImageSource = new BitmapImage(new Uri($"Images/{Config.BackgroundName}", UriKind.Relative));
             Window_DropShadow.Color = (Color)ColorConverter.ConvertFromString(Config.GlowColor);
 
@@ -47,7 +62,8 @@ public partial class MainWindow
         }
         catch
         {
-            DebugOutput.LoadConfig_Done(true);
+           DebugOutput.LoadConfig_Done(true);
+           Config.BackgroundColor = new LauncherDefaultConfig().BackgroundColor;
            if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkRed%14>FAILED <gray%14>to load \"Config.kasu\"");
         }
 
