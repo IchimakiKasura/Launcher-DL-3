@@ -29,6 +29,11 @@ public partial class MainWindow
 		Button_Update.Click += Update;
 		Closing += Window_Close;
 		KeyDown += Window_PreviewKeyDown;
+		
+        Input_MpThreeFormat.Click += delegate
+        {
+            Config.AlwayDownloadInMP3 = Input_MpThreeFormat.IsChecked.Value;
+        };
 
 		#region Open Folder thing
 		Open_Folder.Click += delegate { OpenFolder(Config.DefaultOutput); };
@@ -65,5 +70,7 @@ public partial class MainWindow
 		}
 
 	}
+
+	public Color ClrConv(string color)	{ return (Color)ColorConverter.ConvertFromString(color); }
 
 }

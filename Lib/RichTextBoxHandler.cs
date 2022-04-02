@@ -33,7 +33,6 @@ public static class LauncherDL_RichTextBoxHandler
     /// <exception cref="ForegroundPropertyException"/>
     /// <exception cref="FontSizePropertyException"/>
     /// <exception cref="FontWeightPropertyException"/>
-
     public static void AddFormattedText(this RichTextBox rt, string Input, bool DontAddNewline = false)
     {
         // resets the Format

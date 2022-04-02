@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <Version>6.0.5</Version>
+    <Version>6.1</Version>
     <RootNamespace>Launcher_DL_v6</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>

@@ -21,7 +21,7 @@ public partial class MainWindow
         Activated += delegate
         {
             Opac = new(1, TimeSpan.FromMilliseconds(200));
-            Anim = new((Color)ColorConverter.ConvertFromString(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
+            Anim = new(ClrConv(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
             Focus();
             DebugOutput.WindowFocusDebug(true);
         };
@@ -112,6 +112,8 @@ public partial class MainWindow
             Input_Name.IsEnabled =
             Input_Type.IsEnabled =
             Input_MpThreeFormat.IsEnabled = true;
+
+            if(Input_Name.Text == "Unavailable") Input_Name.Text = string.Empty;
 
             if(Input_Type.SelectedIndex == 0) Input_Format.IsEnabled = true;
         }

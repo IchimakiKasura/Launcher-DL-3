@@ -16,12 +16,6 @@ public partial class MainWindow : Window
         // For Debug Purposes
         if(Console.OpenStandardInput(1) != Stream.Null)
         {
-            // this.KeyDown += delegate (object s, KeyEventArgs e){
-            //     if(e.Key == Key.P)
-            //     {
-            //         DebugOutput.Test_Debug();
-            //     }
-            // };
             DebugOutput.IsDebug = true;
             DebugOutput.StartUp();
         }
@@ -37,11 +31,6 @@ public partial class MainWindow : Window
         {
             Window_Components(false);
             MessageBox.Show(HiddenButtonText, "huzuaah!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-        };
-
-        Input_MpThreeFormat.Click += delegate
-        {
-            Config.AlwayDownloadInMP3 = Input_MpThreeFormat.IsChecked.Value;
         };
 
         InitializeTopButtons();

@@ -3,6 +3,8 @@ namespace Launcher_DL_v6;
 public class DebugOutput
 {
     static bool Started = false;
+
+    // Added this because I think it can cause performance issues
     public static bool IsDebug = false;
 
     public static void StartUp()
@@ -71,6 +73,7 @@ public class DebugOutput
             break;
         };
     }
+    
     public static void Button_Output(string WhatButton, dynamic Download = default)
     {
         if(!IsDebug) return;
@@ -106,66 +109,18 @@ public class DebugOutput
 
     public static void Selected_Language(string text)
     {
-        if(IsDebug)Console.WriteLine($"\x1b[32m[LANGUAGE]\x1b[0m Current Language: {text}");
+        if(text == "japanese" ||
+        text == "tagalog" ||
+        text == "english" ||
+        text == "default" ||
+        text == "bruh")
+        {
+            if(IsDebug)Console.WriteLine($"\x1b[32m[LANGUAGE]\x1b[0m Current Language: {text}");
+        }
+        else
+        {
+            if(IsDebug)Console.WriteLine($"\x1b[31m[LANGUAGE]\x1b[0m Error Can't Recognize \"{text}\", Please Check again.");
+        }
     }
-
-    public static void Selected_Language_Error(string text)
-    {
-        if(IsDebug)Console.WriteLine($"\x1b[31m[LANGUAGE]\x1b[0m Error Can't Recognize \"{text}\", Please Check again.");
-    }
-
-    // public static async void Test_Debug()
-    // {
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Started!\n");
-        
-    //     MW.Input_Link.Text = "https://www.youtube.com/watch?v=3vSxHROQ4Hs";
-
-    //     // File Format test
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m File format test");
-
-    //     // Video only [no sound]
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Video [No sound]");
-    //     MW.Input_Type.SelectedIndex = 0;
-    //     MW.Input_Format.Text = "313";
-    //     MW.Input_Name.Text = "Video [No sound]";
-    //     await Task.Run(delegate {Thread.Sleep(2000);});
-
-    //     // Video only [Type]
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Video [Type]");
-    //     MW.Input_Type.SelectedIndex = 1;
-    //     MW.Input_Name.Text = "Video [Type]";
-    //     await Task.Run(delegate {Thread.Sleep(2000);});
-
-
-    //     // audio only
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Audio");
-    //     MW.Input_Type.SelectedIndex = 2;
-    //     MW.Input_MpThreeFormat.IsChecked = false;
-    //     MW.Input_Name.Text = "Audio";
-    //     await Task.Run(delegate {Thread.Sleep(2000);});
-
-
-    //     // audio only [mp3 format]
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Audio [mp3]");
-    //     MW.Input_Type.SelectedIndex = 2;
-    //     MW.Input_MpThreeFormat.IsChecked = true;
-    //     MW.Input_Name.Text = "Audio [mp3]";
-    //     await Task.Run(delegate {Thread.Sleep(2000);});
-
-
-    //     // video with audio
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Custom");
-    //     MW.Input_Type.SelectedIndex = 0;
-    //     MW.Input_Format.Text = "137+140";
-    //     MW.Input_Name.Text = "Custom";
-    //     await Task.Run(delegate {Thread.Sleep(2000);});
-
-
-    //     if(IsDebug)Console.WriteLine($"\x1b[33m[TEST DEBUG]\x1b[0m Ended!\n");
-    //     MW.Input_Link.Text = string.Empty;
-    //     MW.Input_Name.Text = string.Empty;
-    //     MW.Input_Format.Text = "Best";
-
-    // }
 
 }
