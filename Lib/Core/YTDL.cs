@@ -13,6 +13,11 @@ public class YTDL_object
 
 public partial class MainWindow
 {
+	public string YTDL_Validate()
+	{
+		return $"--get-filename -o '%(title)s' {Input_Link.Text}";
+	}
+	
 	public YTDL_object YTDL_Update()
 	{
 		return new ()
@@ -77,15 +82,15 @@ public partial class MainWindow
 			// Audio
 			case 2:
 
-				arguments = $"-f bestaudio {Input_Link.Text}/Audio/%(title)s.%(ext)s";
+				arguments = $"-f bestaudio {Input_Link.Text} -o {Config.DefaultOutput}/Audio/%(title)s.%(ext)s";
 				if (Input_Name.Text != string.Empty && Input_Name.Text != "Unavailable")
-					arguments = $"-f bestaudio {Input_Link.Text}/Audio/{name}.%(ext)s";
+					arguments = $"-f bestaudio {Input_Link.Text} -o {Config.DefaultOutput}/Audio/{name}.%(ext)s";
 
 				if (Input_MpThreeFormat.IsChecked.Value)
 				{
-					arguments = $"-x --audio-format mp3 {Input_Link.Text}/Audio/%(title)s.%(ext)s --ffmpeg-location \"{Ffmpeg}\" --no-part";
+					arguments = $"-x --audio-format mp3 {Input_Link.Text} -o {Config.DefaultOutput}/Audio/%(title)s.%(ext)s --ffmpeg-location \"{Ffmpeg}\" --no-part";
 					if (Input_Name.Text != string.Empty && Input_Name.Text != "Unavailable")
-						arguments = $"-x --audio-format mp3 {Input_Link.Text}/Audio/{name}.%(ext)s --ffmpeg-location \"{Ffmpeg}\" --no-part";
+						arguments = $"-x --audio-format mp3 {Input_Link.Text} -o {Config.DefaultOutput}/Audio/{name}.%(ext)s --ffmpeg-location \"{Ffmpeg}\" --no-part";
 				}
 
 			break;

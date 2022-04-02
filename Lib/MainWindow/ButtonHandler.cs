@@ -2,95 +2,103 @@
 
 public partial class MainWindow
 {
-	public async void FileFormat(object s, RoutedEventArgs e)
-	{
-		DebugOutput.Button_Clicked("format");
+    public async void FileFormat(object s, RoutedEventArgs e)
+    {
+        DebugOutput.Button_Clicked("format");
 
-		Input_Format.Items.Clear();
-		TemporaryFormatList.Clear();
-		TemporaryFormatNames.Clear();
-		TemporarySelectedFileFormat = Input_Format.Text = "Best";
+        Input_Format.Items.Clear();
+        TemporaryFormatList.Clear();
+        TemporaryFormatNames.Clear();
+        TemporarySelectedFileFormat = Input_Format.Text = "Best";
+        
+        Window_Components(true);
 
-		ValidateLink ValidLink = new(Input_Link.Text);
-		Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link...");
+        Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link:");
+        Output_text.AddFormattedText($"<Gray%13>[LINK]	 {Input_Link.Text}");
 
-		if (ValidLink.IsValid == false)
-		{
-			Output_text.AddFormattedText("<Red>[ERROR] <>Link is not Valid!");
-			return;
-		}
-		else Window_Components(true);
+        ValidateLink ValidLink = await new ValidateLink().Validate(Input_Link.Text);
 
-		OutputComments.FileFormatOutputComments();
+        if (ValidLink.IsValid == false)
+        {
+            Output_text.AddFormattedText("<Red>[ERROR] <>Link is not Valid!");
+            Window_Components(false);
+            return;
+        }
 
-		await StartProcess(YTDL_FileFormat());
-	}
+        OutputComments.FileFormatOutputComments();
 
-	public async void Download(object s, RoutedEventArgs e)
-	{
-		DebugOutput.Button_Clicked("download");
-		IsDownloading = true;
+        await StartProcess(YTDL_FileFormat());
+    }
 
-		if (Input_Name.Text == "Unavailable")
-		{
-			MessageBox.Show("This specific Text is reserved!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-			IsDownloading = false;
-			return;
-		}
+    public async void Download(object s, RoutedEventArgs e)
+    {
+        DebugOutput.Button_Clicked("download");
+        IsDownloading = true;
 
-		ValidateLink ValidLink = new(Input_Link.Text);
-		Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link...");
+        if (Input_Name.Text == "Unavailable")
+        {
+            MessageBox.Show("This specific Text is reserved!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            IsDownloading = false;
+            return;
+        }
 
-		if (ValidLink.IsValid == false)
-		{
-			Output_text.AddFormattedText("<Red>[ERROR] <>Link is not Valid!");
-			IsDownloading = false;
-			return;
-		}
-		else Window_Components(true);
+        Window_Components(true);
 
-		if (ValidLink.HasPlaylist)
-		{
-			Output_text.AddFormattedText("<Yellow>[INFO] <>The Link is a Playlist...");
-		}
+        Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link:");
+        Output_text.AddFormattedText($"<Gray%13>[LINK]	 {Input_Link.Text}");
 
-		if(Input_Type.SelectedIndex != 2) Input_MpThreeFormat.IsChecked = false;
+        ValidateLink ValidLink = await new ValidateLink().Validate(Input_Link.Text);
 
-		OutputComments.DownloadOutputComments();
+        if (ValidLink.IsValid == false)
+        {
+            Output_text.AddFormattedText("<Red>[ERROR] <>Link is not Valid!");
+            IsDownloading = false;
+            Window_Components(false);
+            return;
+        }
 
-		await StartProcess(YTDL_Download());
-	}
+        if (ValidLink.HasPlaylist)
+        {
+            Output_text.AddFormattedText("<Yellow>[INFO] <>The Link is a Playlist...");
+        }
 
-	public async void Update(object s, RoutedEventArgs e)
-	{
-		DebugOutput.Button_Clicked("update");
-		Window_Components(true);
-		OutputComments.UpdateOutputComments();
-		await StartProcess(YTDL_Update());
-	}
+        if (Input_Type.SelectedIndex != 2) Input_MpThreeFormat.IsChecked = false;
 
-	public void OpenFolder(string output)
-	{
-		bool IsExist;
+        OutputComments.DownloadOutputComments();
 
-		if (Config.DefaultOutput == "output")
-		{
-			IsExist = Directory.Exists($"{Directory.GetCurrentDirectory()}\\{output}");
-		}
-		else
-		{
-			IsExist = Directory.Exists(output);
-		}
+        await StartProcess(YTDL_Download());
+    }
 
-		if (!IsExist)
-		{
-			output = Directory.GetCurrentDirectory();
-		}
+    public async void Update(object s, RoutedEventArgs e)
+    {
+        DebugOutput.Button_Clicked("update");
+        Window_Components(true);
+        OutputComments.UpdateOutputComments();
+        await StartProcess(YTDL_Update());
+    }
 
-		Process.Start(new ProcessStartInfo
-		{
-			Arguments = output,
-			FileName = "explorer.exe"
-		});
-	}
+    public void OpenFolder(string output)
+    {
+        bool IsExist;
+
+        if (Config.DefaultOutput == "output")
+        {
+            IsExist = Directory.Exists($"{Directory.GetCurrentDirectory()}\\{output}");
+        }
+        else
+        {
+            IsExist = Directory.Exists(output);
+        }
+
+        if (!IsExist)
+        {
+            output = Directory.GetCurrentDirectory();
+        }
+
+        Process.Start(new ProcessStartInfo
+        {
+            Arguments = output,
+            FileName = "explorer.exe"
+        });
+    }
 }

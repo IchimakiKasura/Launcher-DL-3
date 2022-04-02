@@ -79,7 +79,7 @@ public class OutputComments : MainWindow
 
 		string color = "White";
 
-		#region Change speed foreground based on the speed.
+		#region Change Foreground based on the speed.
 		if (speed.Contains("K"))
 		{
 			double speeds = double.Parse(Regex.Replace(speed, @"[a-zA-Z\/]", "").ToString());

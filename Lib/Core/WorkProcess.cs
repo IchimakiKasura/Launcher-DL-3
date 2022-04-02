@@ -72,15 +72,8 @@ public partial class MainWindow
             TemporaryEncodedName = string.Empty;
         }
 
-
-        if (Config.DefaultOutput == "output")
-        {
-            if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\{Config.DefaultOutput}")) Open_Folder.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            if (Directory.Exists(Config.DefaultOutput)) Open_Folder.Visibility = Visibility.Visible;
-        }
+        if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\{Config.DefaultOutput}")) Open_Folder.Visibility = Visibility.Visible;
+        if (Config.DefaultOutput != "output" && Directory.Exists(Config.DefaultOutput)) Open_Folder.Visibility = Visibility.Visible;
 
         // DEBUG //
         //foreach (var item in TemporaryFormatList)

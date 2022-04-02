@@ -20,7 +20,7 @@ global using System.Windows.Media.Animation;
 namespace Launcher_DL_v6;
 public partial class MainWindow
 {
-	readonly static string YDL_link = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin";
+    public readonly static string YDL_link = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin";
     private static string Ffmpeg = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data";
     private List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a" };
 

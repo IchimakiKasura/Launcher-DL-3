@@ -4,12 +4,12 @@ public partial class MainWindow
 {
     public void InputType(object s, SelectionChangedEventArgs e)
     {
-        if(Input_Type.SelectedIndex != 0)
+        if (Input_Type.SelectedIndex != 0)
         {
             Input_Format.Text = "Unavailable";
             Input_Format.IsEnabled = false;
         }
-        else 
+        else
         {
             Input_Format.Text = "best";
             Input_Format.IsEnabled = true;
@@ -21,12 +21,12 @@ public partial class MainWindow
             Input_MpThreeFormat.Visibility = Visibility.Visible;
         }
         else
-		{
+        {
             Input_MpThreeFormat.IsChecked = false;
             Input_MpThreeFormat.Visibility = Visibility.Hidden;
-		}
+        }
 
 
-		if(Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content.ToString()}\"");
+        if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content.ToString()}\"");
     }
 }

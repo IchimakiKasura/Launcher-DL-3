@@ -26,15 +26,15 @@ public partial class MainWindow
         }
         catch
         {
-            MessageBox.Show("Config.kasu is Missing!\nPlease create a Config.kasu to avoid this message","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+            MessageBox.Show("Config.kasu is Missing!\nPlease create a Config.kasu to avoid this message", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         int TotalDetected = 0;
 
         try
         {
-            foreach(Match match in LauncherDL_Regex.KasuExtension.Matches(Data))
-		    {
+            foreach (Match match in LauncherDL_Regex.KasuExtension.Matches(Data))
+            {
                 DebugOutput.LoadConfig_Debug(match);
                 if (match.Groups["BackgroundName"].Success) Config.BackgroundName = match.Groups["BackgroundName"].Value.Trim();
                 if (match.Groups["BackgroundColor"].Success) Config.BackgroundColor = match.Groups["BackgroundColor"].Value.Trim();
@@ -46,18 +46,18 @@ public partial class MainWindow
                 if (match.Groups["EnablePlaylist"].Success) Config.EnablePlaylist = bool.Parse(match.Groups["EnablePlaylist"].Value.Trim());
                 if (match.Groups["Language"].Success) Config.SystemLanguage = match.Groups["Language"].Value.Trim();
 
-                if(match.Success) ++TotalDetected;
+                if (match.Success) ++TotalDetected;
             }
 
             if (!File.Exists($"Images/{Config.BackgroundName}")) throw new Exception();
-            if (Config.DefaultFileTypeOnStartUp >= 3) throw new Exception(); 
+            if (Config.DefaultFileTypeOnStartUp >= 3) throw new Exception();
             if (TotalDetected != 9) throw new Exception();
 
             DebugOutput.Selected_Language(Config.SystemLanguage.ToLower());
 
             // Check if BackgroundColor input is valid.
             Color BackgroundColor = ClrConv(Config.BackgroundColor);
-            
+
             Window_BackgroundName.ImageSource = new BitmapImage(new Uri($"Images/{Config.BackgroundName}", UriKind.Relative));
             Window_DropShadow.Color = ClrConv(Config.GlowColor);
 
@@ -66,9 +66,9 @@ public partial class MainWindow
         }
         catch
         {
-           DebugOutput.LoadConfig_Done(true);
-           Config.BackgroundColor = new LauncherDefaultConfig().BackgroundColor;
-           if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkRed%14>FAILED <gray%14>to load \"Config.kasu\"");
+            DebugOutput.LoadConfig_Done(true);
+            Config.BackgroundColor = new LauncherDefaultConfig().BackgroundColor;
+            if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkRed%14>FAILED <gray%14>to load \"Config.kasu\"");
         }
 
         Input_Type.SelectedIndex = Config.DefaultFileTypeOnStartUp;

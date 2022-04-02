@@ -13,8 +13,14 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        if(Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1)
+        {
+            MessageBox.Show("Only one instance at a time", "Yep", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            Environment.Exit(0);
+        };
+
         // For Debug Purposes
-        if(Console.OpenStandardInput(1) != Stream.Null)
+        if (Console.OpenStandardInput(1) != Stream.Null)
         {
             DebugOutput.IsDebug = true;
             DebugOutput.StartUp();
