@@ -44,6 +44,8 @@ public partial class MainWindow
 
         Window_Components(true);
 
+        if (string.IsNullOrEmpty(Input_Name.Text)) Input_Name.Text = "Unavailable";
+
         Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link:");
         Output_text.AddFormattedText($"<Gray%13>[LINK]	 {Input_Link.Text}");
 

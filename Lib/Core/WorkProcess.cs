@@ -75,6 +75,10 @@ public partial class MainWindow
         if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\{Config.DefaultOutput}")) Open_Folder.Visibility = Visibility.Visible;
         if (Config.DefaultOutput != "output" && Directory.Exists(Config.DefaultOutput)) Open_Folder.Visibility = Visibility.Visible;
 
+        if (IsActive) taskbarinfo.ProgressValue = 0;
+
+        WindowFlash();
+
         // DEBUG //
         //foreach (var item in TemporaryFormatList)
         //{

@@ -12,6 +12,8 @@ public partial class MainWindow
             {
                 ProgressBarShow();
 
+                taskbarinfo.ProgressValue = Window_ProgressBar.Value / 100;
+
                 if (StringData.Contains("https | unknown")) return;
 
                 // ProgressBar lmao
@@ -120,6 +122,8 @@ public partial class MainWindow
             Dispatcher.Invoke(DispatcherPriority.Normal, (Action)delegate
             {
                 ProgressBarShow();
+
+                taskbarinfo.ProgressValue = Window_ProgressBar.Value / 100;
 
                 if (StringData.Contains("[download]"))
                 {

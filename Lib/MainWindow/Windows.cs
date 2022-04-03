@@ -2,6 +2,21 @@ namespace Launcher_DL_v6;
 
 public partial class MainWindow
 {
+    // Flashes the app in the Taskbar
+    public bool WindowFlash()
+    {
+        IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+        FLASHWINFO fInfo = new FLASHWINFO();
+
+        fInfo.cbSize = Convert.ToUInt32(Marshal.SizeOf(fInfo));
+        fInfo.hwnd = hWnd;
+        fInfo.dwFlags = FLASHW_ALL | FLASHW_TIMERNOFG;
+        fInfo.uCount = uint.MaxValue;
+        fInfo.dwTimeout = 0;
+
+        return FlashWindowEx(ref fInfo);
+    }
+
     private void WindowFocusAnimation()
     {
         void Focus()
@@ -20,6 +35,8 @@ public partial class MainWindow
 
         Activated += delegate
         {
+            if(taskbarinfo.ProgressValue == 1) taskbarinfo.ProgressValue = 0;
+            
             Opac = new(1, TimeSpan.FromMilliseconds(200));
             Anim = new(ClrConv(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
             Focus();
@@ -42,11 +59,12 @@ public partial class MainWindow
 
         if (IsDownloading)
         {
-            var sagot = MessageBox.Show(
+            MessageBoxResult sagot = MessageBox.Show(
                 "Hey! You can't close me while Working! ಠ_ಠ",
                 "Hutao",
                 MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            handler.Cancel = (sagot == MessageBoxResult.OK); ;
+
+            if(sagot == MessageBoxResult.OK) handler.Cancel = true;
             DebugOutput.CloseCancel();
         }
 
@@ -55,15 +73,15 @@ public partial class MainWindow
         string Current_date = DateTime.Now.ToString().Replace("/", ".").Replace(":", "-");
 
         TextRange textRange = new TextRange(
-            // TextPointer to the start of content in the RichTextBox.
             Output_text.Document.ContentStart,
-            // TextPointer to the end of content in the RichTextBox.
             Output_text.Document.ContentEnd
         );
 
         if (textRange.Text.Length >= 221)
         {
-            Output_text.AddText("Exiting...");
+            if (!IsDownloading) Output_text.AddText("Exiting...");
+            else Output_text.AddFormattedText("<Yellow>[INFO] <>Cannot Exit when download is started!");
+            
             if (!Directory.Exists($"{Directory.GetCurrentDirectory}\\Logs")) Directory.CreateDirectory("Logs");
             File.WriteAllText($"./Logs/{Current_date}.txt", textRange.Text);
         }

@@ -11,7 +11,7 @@ public partial class MainWindow
 
     private void CloseWindow(object sender, RoutedEventArgs handler)
     {
-        Application.Current.Shutdown();
+        this.Close();
     }
     private void MinimizeWindow(object sender, RoutedEventArgs handler)
     {

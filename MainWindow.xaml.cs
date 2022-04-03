@@ -27,6 +27,7 @@ public partial class MainWindow : Window
         }
 
         InitializeComponent();
+        WindowFlash();
         MW = this;
 
         WindowStyle = WindowStyle.SingleBorderWindow;
@@ -41,5 +42,6 @@ public partial class MainWindow : Window
 
         InitializeTopButtons();
         Initialize();
+
     }
 }

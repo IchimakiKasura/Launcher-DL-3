@@ -14,6 +14,11 @@
 		Loaded="Window_Loaded"
 		FontFamily="Noto Sans JP">
 
+	<Window.TaskbarItemInfo>
+		<TaskbarItemInfo x:Name="taskbarinfo" Description="An app with a taskbar info description" 
+						ProgressState="Normal"/>
+	</Window.TaskbarItemInfo>
+
 	<WindowChrome.WindowChrome>
 		<WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
 	</WindowChrome.WindowChrome>

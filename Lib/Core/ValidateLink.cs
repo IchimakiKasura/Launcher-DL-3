@@ -1,3 +1,4 @@
+using System.Text;
 namespace Launcher_DL_v6;
 
 public class ValidateLink
@@ -22,8 +23,9 @@ public class ValidateLink
                 HasPlaylist = UrlPath.Contains("&list=")
             };
         }
-        catch
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return new()
             {
                 IsValid = false,
@@ -31,7 +33,6 @@ public class ValidateLink
             };
         }
     }
-
     private async Task<string> GetFileName(string url)
     {
         string Name = string.Empty;
@@ -43,10 +44,12 @@ public class ValidateLink
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
-            CreateNoWindow = true
+            CreateNoWindow = false
         };
         Proc.EnableRaisingEvents = true;
 
+        Console.WriteLine(Proc.StartInfo.StandardOutputEncoding);
+        
         Proc.OutputDataReceived += delegate (object s, DataReceivedEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Data))
@@ -66,9 +69,8 @@ public class ValidateLink
                         DebugOutput.ERROR_Debug(e.Data);
                     }
                 });
-
         };
-
+    
         Proc.Start();
         Proc.BeginOutputReadLine();
         Proc.BeginErrorReadLine();
