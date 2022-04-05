@@ -6,6 +6,7 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Themes/Scrollview.xaml"/>
 				<ResourceDictionary Source="Themes/Buttons.xaml"/>
 				<ResourceDictionary Source="Themes/DropDown.xaml"/>
 				<ResourceDictionary Source="Themes/RichTextBox.xaml"/>

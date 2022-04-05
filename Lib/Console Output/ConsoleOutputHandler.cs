@@ -12,7 +12,7 @@ public partial class MainWindow
             {
                 ProgressBarShow();
 
-                taskbarinfo.ProgressValue = Window_ProgressBar.Value / 100;
+                TaskBarThingy.ProgressValue = Window_ProgressBar.Value / 100;
 
                 if (StringData.Contains("https | unknown")) return;
 
@@ -51,6 +51,7 @@ public partial class MainWindow
                 string bitrate = LauncherDL_Regex.Info.Match(StringData).Groups["Videobitrate"].Value.Trim();
                 string fps = LauncherDL_Regex.Info.Match(StringData).Groups["fps"].Value.Trim();
                 string format = LauncherDL_Regex.Info.Match(StringData).Groups["format"].Value.Trim();
+                string vcodec = LauncherDL_Regex.Info.Match(StringData).Groups["Vcodec"].Value.Trim();
 
                 if (resolution == string.Empty)
                 {
@@ -60,13 +61,15 @@ public partial class MainWindow
 
                 if (size.Contains("~")) size.Replace("~ ", "~");
 
+                
                 if (Regex.IsMatch(resolution, @".*x.*", RegexOptions.Compiled))
                 {
                     resolution = Regex.Replace(resolution, @".*x", "", RegexOptions.Compiled) + "p";
                     switch (format)
                     {
                         case "mp4":
-                            id += $"+{AudioOnly}";
+                            if(!string.IsNullOrEmpty(AudioOnly))
+                                id += $"+{AudioOnly}";
                             break;
                         case "webm":
                             id += "+bestaudio";
@@ -74,32 +77,24 @@ public partial class MainWindow
                     }
                 }
 
-                if (StringData != string.Empty && !StringData.Contains("["))
-                {
-                    if (fps != string.Empty) fps += " fps";
-
-                    dynamic obj = new
+                // avoids a codec that are unsupported by few players.
+                if (!string.IsNullOrEmpty(vcodec))
+                    if (StringData != string.Empty && !StringData.Contains("["))
                     {
-                        data = StringData,
-                        id = id,
-                        resolution = resolution,
-                        size = size,
-                        bitrate = bitrate,
-                        fps = fps,
-                        format = format
-                    };
+                        if (fps != string.Empty) fps += " fps";
 
-                    if (StringData == string.Empty)
-                    {
-                        temp = StringData;
-                        if (resolution != string.Empty)
+                        dynamic obj = new
                         {
-                            FormatAdder(obj);
-                        }
-                    }
-                    else
-                    {
-                        if (temp != StringData)
+                            data = StringData,
+                            id = id,
+                            resolution = resolution,
+                            size = size,
+                            bitrate = bitrate,
+                            fps = fps,
+                            format = format
+                        };
+
+                        if (StringData == string.Empty)
                         {
                             temp = StringData;
                             if (resolution != string.Empty)
@@ -107,9 +102,19 @@ public partial class MainWindow
                                 FormatAdder(obj);
                             }
                         }
-                        else temp = string.Empty;
+                        else
+                        {
+                            if (temp != StringData)
+                            {
+                                temp = StringData;
+                                if (resolution != string.Empty)
+                                {
+                                    FormatAdder(obj);
+                                }
+                            }
+                            else temp = string.Empty;
+                        }
                     }
-                }
             });
         }
     }
@@ -123,7 +128,7 @@ public partial class MainWindow
             {
                 ProgressBarShow();
 
-                taskbarinfo.ProgressValue = Window_ProgressBar.Value / 100;
+                TaskBarThingy.ProgressValue = Window_ProgressBar.Value / 100;
 
                 if (StringData.Contains("[download]"))
                 {

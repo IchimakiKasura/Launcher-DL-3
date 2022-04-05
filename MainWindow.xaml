@@ -15,7 +15,7 @@
 		FontFamily="Noto Sans JP">
 
 	<Window.TaskbarItemInfo>
-		<TaskbarItemInfo x:Name="taskbarinfo" Description="An app with a taskbar info description" 
+		<TaskbarItemInfo x:Name="TaskBarThingy" Description="An app with a taskbar info description" 
 						ProgressState="Normal"/>
 	</Window.TaskbarItemInfo>
 
@@ -73,7 +73,9 @@
 						 IsReadOnly="True"
 						 IsUndoEnabled="False"
 						 HorizontalAlignment="Right"
-						 Style="{StaticResource RTB}" Width="414"/>
+						 Style="{StaticResource RTB}"
+						 Width="414"
+						 VerticalScrollBarVisibility="Visible"/>
 
 				<StackPanel Margin="10,45,456,51">
 					<Label x:Name="Text_DownloadType" Content="Download Type:"
@@ -133,10 +135,16 @@
 					   FontSize="20"
 					   Padding="0,20,0,0" Margin="223,0,0,0" Grid.ColumnSpan="2"
 					   IsHitTestVisible="False"/>
-
+						
 						<ComboBox x:Name="Input_Format" Style="{StaticResource CB}"
 						 HorizontalContentAlignment="Left" Margin="0,54,45,-40"
-						 Text="Best" IsEditable="True"/>
+						 Text="Best" IsEditable="True" TextSearch.TextPath="Name">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding Name}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
 						<TextBox x:Name="Input_Name" Style="{StaticResource TB}"
 						 HorizontalContentAlignment="Left" Margin="228,54,0,-40"
 						 Uid="Optional" Grid.ColumnSpan="2"/>
@@ -194,6 +202,12 @@
 								<MenuItem
 							Header="webm"
 							x:Name="OpenDir_webm" />
+								<MenuItem
+							Header="3gp"
+							x:Name="OpenDir_threeGP" />
+								<MenuItem
+							Header="flv"
+							x:Name="OpenDir_flv" />
 							</MenuItem>
 						</ContextMenu>
 					</Button.ContextMenu>

@@ -35,7 +35,7 @@ public partial class MainWindow
 
         Activated += delegate
         {
-            if(taskbarinfo.ProgressValue == 1) taskbarinfo.ProgressValue = 0;
+            if(TaskBarThingy.ProgressValue == 1) TaskBarThingy.ProgressValue = 0;
             
             Opac = new(1, TimeSpan.FromMilliseconds(200));
             Anim = new(ClrConv(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
@@ -131,8 +131,6 @@ public partial class MainWindow
             Input_Name.IsEnabled =
             Input_Type.IsEnabled =
             Input_MpThreeFormat.IsEnabled = true;
-
-            if (Input_Name.Text == "Unavailable") Input_Name.Text = string.Empty;
 
             if (Input_Type.SelectedIndex == 0) Input_Format.IsEnabled = true;
         }

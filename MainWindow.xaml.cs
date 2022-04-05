@@ -13,7 +13,8 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        if(Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1)
+
+        if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1)
         {
             MessageBox.Show("Only one instance at a time", "Yep", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             Environment.Exit(0);
@@ -26,6 +27,7 @@ public partial class MainWindow : Window
             DebugOutput.StartUp();
         }
 
+        Pre_Initialize();
         InitializeComponent();
         WindowFlash();
         MW = this;
@@ -42,6 +44,5 @@ public partial class MainWindow : Window
 
         InitializeTopButtons();
         Initialize();
-
     }
 }

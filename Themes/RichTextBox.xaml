@@ -29,14 +29,9 @@
 							</Rectangle.Effect>
 						</Rectangle>
 						<Grid Name="SubContentGrid" Margin="0,1,0,1">
-							<ScrollViewer Margin="2"
-                                            x:Name="PART_ContentHost"
-                                            VerticalAlignment="Top"
-                                            Width="Auto"
-                                            Height="Auto"
-                                            BorderBrush="Transparent"
-                                            Background="Transparent"/>
-					</Grid>
+							<ScrollViewer x:Name="PART_ContentHost"
+										  Margin="4,5,4,6"/>
+						</Grid>
 					</Grid>
 					<ControlTemplate.Triggers>
 						<EventTrigger RoutedEvent="MouseEnter">

@@ -13,5 +13,5 @@ namespace Launcher_DL_v6
     /// </summary>
     public partial class App : Application
     {
-    }
+    };
 }

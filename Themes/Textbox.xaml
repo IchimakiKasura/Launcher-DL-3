@@ -9,26 +9,6 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">
-					<ControlTemplate.Triggers>
-						<EventTrigger RoutedEvent="MouseEnter">
-							<BeginStoryboard>
-								<Storyboard>
-									<ColorAnimation Storyboard.TargetProperty="(Control.BorderBrush).(SolidColorBrush.Color)"
-													To="Red"
-													Duration="00:00:00.1"/>
-								</Storyboard>
-							</BeginStoryboard>
-						</EventTrigger>
-						<EventTrigger RoutedEvent="MouseLeave">
-							<BeginStoryboard>
-								<Storyboard>
-									<ColorAnimation Storyboard.TargetProperty="(Control.BorderBrush).(SolidColorBrush.Color)"
-													To="#FF900000"
-													Duration="00:00:00.1"/>
-								</Storyboard>
-							</BeginStoryboard>
-						</EventTrigger>
-					</ControlTemplate.Triggers>
 					<Border Background="{TemplateBinding Background}"
 							BorderBrush="{TemplateBinding BorderBrush}"
 							BorderThickness="1"
@@ -52,21 +32,21 @@
 									 SelectionBrush="#FFFF9C9C"
 									 SelectionOpacity="0.3"
 									 CaretBrush="#FFFF9C9C"
-									 x:Name="PlaceHolder"
-									 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+									 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									 x:Name="MainText"/>
 
-							<TextBlock IsHitTestVisible="False"
+							<TextBlock x:Name="Placeholder"
+									   IsHitTestVisible="False"
                                        Text="{Binding Uid,RelativeSource={RelativeSource TemplatedParent}}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        Margin="0,-1,0,0"
                                        FontSize="20"
                                        Foreground="DimGray">
-
 								<TextBlock.Style>
 									<Style TargetType="{x:Type TextBlock}">
 										<Style.Triggers>
-											<DataTrigger Binding="{Binding Text, ElementName=PlaceHolder}" Value="">
+											<DataTrigger Binding="{Binding Text, ElementName=MainText}" Value="">
 												<Setter Property="Visibility" Value="Visible"/>
 											</DataTrigger>
 										</Style.Triggers>
@@ -76,14 +56,33 @@
 							</TextBlock>
 						</Grid>
 					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter TargetName="Placeholder" Property="Foreground" Value="Red"/>
+							<Setter TargetName="Placeholder" Property="Text" Value="Unavailable"/>
+							<Setter TargetName="MainText" Property="Foreground" Value="Red"/>
+						</Trigger>
+						<EventTrigger RoutedEvent="MouseEnter">
+							<BeginStoryboard>
+								<Storyboard>
+									<ColorAnimation Storyboard.TargetProperty="(Control.BorderBrush).(SolidColorBrush.Color)"
+													To="Red"
+													Duration="00:00:00.1"/>
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="MouseLeave">
+							<BeginStoryboard>
+								<Storyboard>
+									<ColorAnimation Storyboard.TargetProperty="(Control.BorderBrush).(SolidColorBrush.Color)"
+													To="#FF900000"
+													Duration="00:00:00.1"/>
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-		<Style.Triggers>
-			<Trigger Property="IsEnabled" Value="false">
-				<Setter Property="Foreground" Value="Red"/>
-				<Setter Property="Text" Value="Unavailable"/>
-			</Trigger>
-		</Style.Triggers>
 	</Style>
 </ResourceDictionary>

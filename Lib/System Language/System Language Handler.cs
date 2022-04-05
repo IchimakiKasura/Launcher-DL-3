@@ -36,7 +36,7 @@ internal class System_Language_Handler : MainWindow
         MW.ComboBox_Label_Custom.Content = "カスタム";
         MW.ComboBox_Label_Video.Content = "ビデオ";
         MW.ComboBox_Label_Audio.Content = "オーディオ";
-        MW.Input_MpThreeFormat.Content = "mp3形式を強制する";
+        MW.Input_MpThreeFormat.Content = "ｍｐ３形式を強制する";
         MW.Text_Link.Content = "リンク:";
         MW.Input_Link.Uid = "有効なリンク";
         MW.Input_Name.Uid = "オプショナル";
@@ -44,10 +44,12 @@ internal class System_Language_Handler : MainWindow
         MW.OpenDir_Video.Header = "ビデオ開ける";
         MW.OpenDir_Audio.Header = "オーディオ開ける";
         MW.OpenDir_Formatted.Header = "フォーマット済み";
-        MW.OpenDir_mFourA.Header = "ｍ４a";
+        MW.OpenDir_mFourA.Header = "ｍ４ａ";
         MW.OpenDir_mpThree.Header = "ｍｐ３";
         MW.OpenDir_mpFour.Header = "ｍｐ４";
-        MW.OpenDir_webm.Header = "weｂｍ";
+        MW.OpenDir_webm.Header = "ｗｅｂｍ";
+        MW.OpenDir_threeGP.Header = "３ｇｐ";
+        MW.OpenDir_flv.Header = "ｆｌｖ";
     }
 
     public static void Tagalog(string LineType = default)
@@ -73,6 +75,8 @@ internal class System_Language_Handler : MainWindow
         MW.OpenDir_mpThree.Header = "em pi 3";
         MW.OpenDir_mpFour.Header = "empi lig- em pi four";
         MW.OpenDir_webm.Header = "webem";
+        MW.OpenDir_threeGP.Header = "3-geepee";
+        MW.OpenDir_flv.Header = "ep-el-b";
     }
 
     public static void bruh(string LineType = default)
@@ -98,6 +102,8 @@ internal class System_Language_Handler : MainWindow
         MW.OpenDir_mpThree.Header = "MP3-S";
         MW.OpenDir_mpFour.Header = "MP4EASADAWDKASLDORJGR";
         MW.OpenDir_webm.Header = "WEBENEMENEMBEMENB";
+        MW.OpenDir_threeGP.Header = "gpgpgp";
+        MW.OpenDir_flv.Header = "feleve";
     }
 
 }

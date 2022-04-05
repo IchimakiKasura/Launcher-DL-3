@@ -2,6 +2,7 @@
 global using System.IO;
 global using System.Text;
 global using System.Windows;
+global using System.Reflection;
 global using System.Diagnostics;
 global using System.Windows.Input;
 global using System.Windows.Media;
@@ -33,7 +34,7 @@ public partial class MainWindow
     private static string Ffmpeg = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data";
 
     // For the renaming process
-    private List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a" };
+    private List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a", "3gp", "flv" };
 
     // Hidden button / Update notes
     readonly string HiddenButtonText = "LauncherDL Development Build\n\n" +
@@ -86,3 +87,4 @@ public partial class MainWindow
 
 }
 //https://www.youtube.com/playlist?list=PLbQl2vL-gF3-ijF3Se5qneu8ryV4pI2hx
+//https://www.youtube.com/watch?v=ZWdYxQz4UqE

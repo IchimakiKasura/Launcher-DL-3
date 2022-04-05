@@ -14,7 +14,7 @@ public partial class MainWindow
         Window_Components(true);
 
         Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link:");
-        Output_text.AddFormattedText($"<Gray%13>[LINK]	 {Input_Link.Text}");
+        Output_text.AddFormattedText($"<Gray%13>[LINK]	 {Input_Link.Text.Replace("<","$lt$").Replace(">","$gt$")}");
 
         ValidateLink ValidLink = await new ValidateLink().Validate(Input_Link.Text);
 
@@ -35,19 +35,27 @@ public partial class MainWindow
         DebugOutput.Button_Clicked("download");
         IsDownloading = true;
 
-        if (Input_Name.Text == "Unavailable")
+        if (!string.IsNullOrEmpty(Input_Name.Text))
         {
-            MessageBox.Show("This specific Text is reserved!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            IsDownloading = false;
-            return;
+            string UnwantedChars = "\\/*:?\"<>|";
+            char[] arr = UnwantedChars.ToCharArray();
+
+            foreach(char ch in arr)
+            {
+                if(Input_Name.Text.Contains(ch))
+                {
+                    MessageBox.Show("File name cannot contain the following characters:\n                             \\ / * : ? \" < > |", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    IsDownloading = false;
+                    return;
+                }
+            }
+
         }
 
         Window_Components(true);
 
-        if (string.IsNullOrEmpty(Input_Name.Text)) Input_Name.Text = "Unavailable";
-
         Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link:");
-        Output_text.AddFormattedText($"<Gray%13>[LINK]	 {Input_Link.Text}");
+        Output_text.AddFormattedText($"<Gray%13>[LINK]	 {Input_Link.Text.Replace("<", "$lt$").Replace(">", "$gt$")}");
 
         ValidateLink ValidLink = await new ValidateLink().Validate(Input_Link.Text);
 

@@ -6,13 +6,15 @@ public partial class MainWindow
     {
         if (Input_Type.SelectedIndex != 0)
         {
-            Input_Format.Text = "Unavailable";
+            Input_Format.Text = string.Empty;
             Input_Format.IsEnabled = false;
+            Button_Format.IsEnabled = false;
         }
         else
         {
             Input_Format.Text = "best";
-            Input_Format.IsEnabled = true;
+            Input_Format.IsEnabled = !Button_Format.IsEnabled;
+            Button_Format.IsEnabled = !Button_Format.IsEnabled;
         }
 
         if (Input_Type.SelectedIndex == 2)

@@ -25,7 +25,7 @@ public class ValidateLink
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine($"\x1b[31m{e}\x1b[0m");
             return new()
             {
                 IsValid = false,

@@ -2,12 +2,32 @@
 
 public partial class MainWindow
 {
+	// Fixes the drop menus going from right to left because i don't know what happened.
+	// Some say its because of the Tablet but I don't use Tablet PC or either have one.
+	// anyways rip tablet users because this forces the menus to go left to right.
+	private void Pre_Initialize()
+	{
+		var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
+		Action setAlignmentValue = () =>
+		{
+			if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
+		};
+
+		setAlignmentValue();
+
+		SystemParameters.StaticPropertyChanged += (sender, e) =>
+		{
+			setAlignmentValue();
+		};
+	}
+
 	private async void Initialize()
 	{
 		//idfk whats dis
 		MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata(60));
 
 		WindowFocusAnimation();
+		UserCommentDetect();
 
 		// help
 		// EDIT: Turns out its just my CPU (2.4Ghz) is slow thats why the animations are choppy when my CPU is on full load.
@@ -31,9 +51,15 @@ public partial class MainWindow
 		KeyDown += Window_PreviewKeyDown;
 		
         Input_MpThreeFormat.Click += delegate
-        {
+		{
             Config.AlwayDownloadInMP3 = Input_MpThreeFormat.IsChecked.Value;
         };
+
+		Input_Format.SelectionChanged += delegate
+		{
+			var CaretPos = Input_Format.Template.FindName("PART_EditableTextBox", Input_Format) as TextBox;
+			CaretPos.CaretIndex = 0;
+		};
 
 		#region Open Folder thing
 		Open_Folder.Click += delegate { OpenFolder(Config.DefaultOutput); };
@@ -45,6 +71,8 @@ public partial class MainWindow
 		OpenDir_mFourA.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\formatted\\m4a"); };
 		OpenDir_mpFour.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\formatted\\mp4"); };
 		OpenDir_mpThree.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\formatted\\mp3"); };
+		OpenDir_threeGP.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\formatted\\3gp"); };
+		OpenDir_flv.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\formatted\\flv"); };
 		#endregion
 
 		#endregion
@@ -56,6 +84,10 @@ public partial class MainWindow
 		Output_text.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
 		if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content}\"");
 		#endregion
+
+		Input_Format.SelectionChanged += delegate {
+			Console.WriteLine(Input_Format.Text);
+		};
 
 		await LoadConfig();
 		System_Language_Handler.LoadLanguage();

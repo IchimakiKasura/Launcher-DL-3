@@ -75,7 +75,7 @@ public partial class MainWindow
         if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\{Config.DefaultOutput}")) Open_Folder.Visibility = Visibility.Visible;
         if (Config.DefaultOutput != "output" && Directory.Exists(Config.DefaultOutput)) Open_Folder.Visibility = Visibility.Visible;
 
-        if (IsActive) taskbarinfo.ProgressValue = 0;
+        if (IsActive) TaskBarThingy.ProgressValue = 0;
 
         WindowFlash();
 
@@ -85,7 +85,7 @@ public partial class MainWindow
         //    Console.WriteLine(item);
         //}
 
-    }   
+    }
 
     private void FormatAdder(dynamic options)
     {
@@ -93,13 +93,22 @@ public partial class MainWindow
 
         // ye I kinda hate when its not aligned.
         // EDIT: on ver6 its still not align ffs.
-        if (options.format == "mp4") format = "mp4   ";
-        if (options.format == "m4a") format = "m4a   ";
-        if (options.format == "3gp") format = "3gp    ";
+        if (options.format == "mp4") format = "mp4    ";
+        if (options.format == "m4a") format = "m4a    ";
+        if (options.format == "3gp") format = "3gp     ";
 
         TemporaryFormatNames.Add(options.data);
         TemporaryFormatList.Add(options.id);
-        Input_Format.Items.Add($"[{format}]       {options.resolution}    -   {options.size};       {options.bitrate};      {options.fps}   ");
+		Input_Format.Items.Add(new
+        {
+            Name = $"[{options.format}] {options.resolution}; {options.size}",
+            Id = $"[{Regex.Replace(options.id, "\\+.*","")}]",
+            Format = format,
+            Resolution = options.resolution,
+            Size = options.size,
+            Bitrate = options.bitrate,
+            Fps = options.fps
+        });
         Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Added:{options.resolution};    {options.size}");
 
         DebugOutput.FormatAdderDebug(options);

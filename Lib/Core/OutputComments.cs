@@ -9,22 +9,13 @@ public class OutputComments : MainWindow
 		string FileFormatName;
 
 		// Check the ComboBox if any changes made to the File Format Text
+		FileFormatName = MW.Input_Format.Text;
+		MW.TemporarySelectedFileFormat = MW.Input_Format.Text;
 		if (MW.Input_Format.SelectedIndex != -1)
-		{
 			MW.TemporarySelectedFileFormat = MW.TemporaryFormatList[MW.Input_Format.SelectedIndex];
-			string selected = MW.Input_Format.Text;
-			string name = LauncherDL_Regex.SelectedRes.Match(selected).Groups["name"].Value;
-			string size = LauncherDL_Regex.SelectedRes.Match(selected).Groups["size"].Value.Trim();
-			FileFormatName = $"{name} [{size}]";
-		}
-		else
-		{
-			FileFormatName = MW.Input_Format.Text;
-			MW.TemporarySelectedFileFormat = MW.Input_Format.Text;
-		}
 
 
-		if (MW.Input_Name.Text == "Unavailable" && MW.Input_Name.Text == string.Empty) Name = "N/A";
+		if (string.IsNullOrEmpty(MW.Input_Name.Text)) Name = "N/A";
 
 		MW.Output_text.Break("gray");
 		MW.Output_text.AddFormattedText($"<gray%12>[] Download Type:	 {MW.Input_Type.Text}");

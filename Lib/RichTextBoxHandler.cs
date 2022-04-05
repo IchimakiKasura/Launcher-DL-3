@@ -6,6 +6,8 @@ namespace Launcher_DL_v6;
 /// </summary>
 public static class LauncherDL_RichTextBoxHandler
 {
+    readonly private static Regex RTBregex = new(@"<(?<color>.*?)(?:%(?:(?<size>.*?)\|(?<weight>.*?))|%(?<sizeOnly>.*?)|)>(?<text>.*?)(?=<|$)", RegexOptions.Compiled);
+
     // I don't know why I even add this cuz I know I only used he AddFormatedText cuz I can add colours lol
     public static void AddText(this RichTextBox box, string text, string color = default)
     {
@@ -25,8 +27,9 @@ public static class LauncherDL_RichTextBoxHandler
     /// <see langword="&quot;&lt;##ff0000&gt;Hello &lt;#00ff00&gt;World!&quot;"/><br/>
     /// <see langword="&quot;&lt;Red%15|Black&gt;Hello &lt;Green%15|Thin&gt;World!&quot;"/><br/>
     /// <see langword="&quot;&lt;Red%10&gt;Hello &lt;Green%5&gt;World!&quot;"/> <br/>
-    /// For the "&lt;" and "&gt;" escaped characters Do this:<br/>
-    /// for less that <see langword="$lt$"/>, for greater than <see langword="$gt$"/>
+    /// For escape characters Do this:<br/>
+    /// for "&lt;" do <see langword="$lt$"/><br/>for "&gt;" do <see langword="$gt$"/><br/>
+    /// for "%" do <see langword="$perc$"/><br/>for "|" than <see langword="$vbar$"/>
     /// </summary>
     /// <param name="Input">Input Text</param>
     /// <param name="DontAddNewline">Don't Automatically line?<br/>Default: <see langword="false"/></param>
@@ -38,9 +41,11 @@ public static class LauncherDL_RichTextBoxHandler
         // resets the Format
         Input = Input + "<>";
 
+        if(Input.Substring(0) != "<") Input = "<>"+Input;
+
         if (!DontAddNewline) Input = Input + "\r";
         TextRange range;
-        foreach (Match textMatch in LauncherDL_Regex.RTBregex.Matches(Input))
+        foreach (Match textMatch in RTBregex.Matches(Input))
         {
             range = new(rt.Document.ContentEnd, rt.Document.ContentEnd);
 
@@ -59,6 +64,8 @@ public static class LauncherDL_RichTextBoxHandler
 
             text = text.Replace("$lt$", "<");
             text = text.Replace("$gt$", ">");
+            text = text.Replace("$perc$", "%");
+            text = text.Replace("$vbar$", "|");
 
             range.Text = text;
             try { range.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color)); } catch { throw new ForegroundPropertyException("The Entered Color or Hex are Invalid."); };

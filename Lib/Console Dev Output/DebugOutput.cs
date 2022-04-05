@@ -125,4 +125,18 @@ public class DebugOutput
         }
     }
 
+    // debug for the fileformat dropdown
+    // for(int i = 0; i < 21; i++)
+    // {
+    //     Input_Format.Items.Add(new
+    //     {
+    //         Name = $"[{i}] 45546; 456456",
+    //         Id = $"[{i}]",
+    //         Format = "23123",
+    //         Resolution = "123123",
+    //         Size = "123123",
+    //         Bitrate = "123123",
+    //         Fps = "123123"
+    //     });
+    // }
 }
