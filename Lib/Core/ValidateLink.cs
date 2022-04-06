@@ -1,5 +1,5 @@
-using System.Text;
 namespace Launcher_DL_v6;
+
 
 public class ValidateLink
 {
@@ -38,17 +38,14 @@ public class ValidateLink
         string Name = string.Empty;
 
         Process Proc = new();
-
         Proc.StartInfo = new(MainWindow.YDL_link, MW.YTDL_Validate())
         {
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
-            CreateNoWindow = false
+            CreateNoWindow = true
         };
         Proc.EnableRaisingEvents = true;
-
-        Console.WriteLine(Proc.StartInfo.StandardOutputEncoding);
         
         Proc.OutputDataReceived += delegate (object s, DataReceivedEventArgs e)
         {
@@ -58,6 +55,7 @@ public class ValidateLink
                     MW.Output_text.AddFormattedText($"<Green>[SUCCESS] <>{e.Data}");
                 });
         };
+
         Proc.ErrorDataReceived += delegate (object s, DataReceivedEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Data))
@@ -78,4 +76,5 @@ public class ValidateLink
 
         return Name;
     }
+
 }

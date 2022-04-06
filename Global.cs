@@ -2,6 +2,7 @@
 global using System.IO;
 global using System.Text;
 global using System.Windows;
+global using Microsoft.Win32;
 global using System.Reflection;
 global using System.Diagnostics;
 global using System.Windows.Input;
@@ -68,6 +69,7 @@ public partial class MainWindow
     // others
     private bool IsDownloading = false;
     private MemoryStream DocumentTemp;
+
 
     // Window Flashing
     [DllImport("user32.dll", CallingConvention = CallingConvention.Cdecl)]

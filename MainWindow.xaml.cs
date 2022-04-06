@@ -1,4 +1,6 @@
-﻿namespace Launcher_DL_v6;
+﻿using System.Globalization;
+using System.Threading;
+namespace Launcher_DL_v6;
 
 ///==============================================================///
 ///            ████████╗██████╗░░█████╗░██████╗░░██████╗         ///
@@ -13,7 +15,6 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-
         if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1)
         {
             MessageBox.Show("Only one instance at a time", "Yep", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -27,7 +28,6 @@ public partial class MainWindow : Window
             DebugOutput.StartUp();
         }
 
-        Pre_Initialize();
         InitializeComponent();
         WindowFlash();
         MW = this;

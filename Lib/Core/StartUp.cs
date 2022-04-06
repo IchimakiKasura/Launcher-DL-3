@@ -2,24 +2,6 @@
 
 public partial class MainWindow
 {
-	// Fixes the drop menus going from right to left because i don't know what happened.
-	// Some say its because of the Tablet but I don't use Tablet PC or either have one.
-	// anyways rip tablet users because this forces the menus to go left to right.
-	private void Pre_Initialize()
-	{
-		var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
-		Action setAlignmentValue = () =>
-		{
-			if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
-		};
-
-		setAlignmentValue();
-
-		SystemParameters.StaticPropertyChanged += (sender, e) =>
-		{
-			setAlignmentValue();
-		};
-	}
 
 	private async void Initialize()
 	{
