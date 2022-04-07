@@ -90,7 +90,6 @@ public class DebugOutput
                 Console.WriteLine($"Name:		 {Download.Name}");
                 Console.WriteLine($"Format:		 {Download.Format}");
                 Console.WriteLine($"Link:		{Download.Link}");
-                Console.WriteLine($"Force MP3:	{Download.MP3}");
                 Console.WriteLine($"Playlist?:	{Download.Playlist}");
                 break;
             case "update":

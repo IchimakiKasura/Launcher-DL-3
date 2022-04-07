@@ -44,13 +44,6 @@ DefaultOutput:              "output"
 DefaultFileTypeOnStartUp:   "0"
 
 
-
-! When Audio is selected the MP3 check box is automatically checked.
-!============================================================
-AlwayDownloadInMP3:         "true"
-
-
-
 ! Shows the "[SYSTEM]" outputs on the Log.
 !============================================================
 ShowSystemOutput:           "true"

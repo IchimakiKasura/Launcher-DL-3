@@ -37,6 +37,10 @@ public partial class MainWindow
     // For the renaming process
     private List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a", "3gp", "flv" };
 
+    // Types
+    public List<string> VideoType = new() { "mp4", "mkv", "webm", "flv", "auto" };
+    public List<string> AudioType = new() { "mp3", "webm", "m4a", "mp4", "auto"};
+
     // Hidden button / Update notes
     readonly string HiddenButtonText = "LauncherDL Development Build\n\n" +
         "OMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\n" +

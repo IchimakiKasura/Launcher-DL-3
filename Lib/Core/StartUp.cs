@@ -5,6 +5,7 @@ public partial class MainWindow
 
 	private async void Initialize()
 	{
+
 		//idfk whats dis
 		MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata(60));
 
@@ -21,7 +22,7 @@ public partial class MainWindow
 		if ((RenderCapability.Tier >> 16) != 2)
 		{
 			MessageBox.Show("Sorry it needs DX9+ cuz I'm not that good at optimizing performance.\nIf you want to get rid of this Go to the Repository/SourceCode and remove this \"IF\" statement and try ur luck\nIf it runs well on your PC","lmao",MessageBoxButton.OK,MessageBoxImage.Exclamation);
-			Environment.Exit(0);
+			Close();
 		}
 
 		#region EventHandlers
@@ -31,16 +32,16 @@ public partial class MainWindow
 		Button_Update.Click += Update;
 		Closing += Window_Close;
 		KeyDown += Window_PreviewKeyDown;
-		
-        Input_MpThreeFormat.Click += delegate
-		{
-            Config.AlwayDownloadInMP3 = Input_MpThreeFormat.IsChecked.Value;
-        };
 
 		Input_Format.SelectionChanged += delegate
 		{
 			var CaretPos = Input_Format.Template.FindName("PART_EditableTextBox", Input_Format) as TextBox;
 			CaretPos.CaretIndex = 0;
+		};
+
+		WindowBG.MouseDown += delegate
+		{
+			Keyboard.ClearFocus();
 		};
 
 		#region Open Folder thing
@@ -66,10 +67,6 @@ public partial class MainWindow
 		Output_text.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
 		if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content}\"");
 		#endregion
-
-		Input_Format.SelectionChanged += delegate {
-			Console.WriteLine(Input_Format.Text);
-		};
 
 		await LoadConfig();
 		System_Language_Handler.LoadLanguage();

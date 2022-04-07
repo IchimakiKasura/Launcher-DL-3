@@ -8,7 +8,6 @@ public class LauncherDefaultConfig
     public string   DefaultOutput { get; set; }             = "output";
     public string   SystemLanguage { get; set; }            = "default";
     public int      DefaultFileTypeOnStartUp { get; set; }  = 0;
-    public bool     AlwayDownloadInMP3 { get; set; }        = true;
     public bool     ShowSystemOutput { get; set; }          = true;
     public bool     EnablePlaylist { get; set; }            = false;
 }
@@ -41,7 +40,6 @@ public partial class MainWindow
                 if (match.Groups["GlowColor"].Success) Config.GlowColor = match.Groups["GlowColor"].Value.Trim();
                 if (match.Groups["DefaultOutput"].Success) Config.DefaultOutput = match.Groups["DefaultOutput"].Value.Trim();
                 if (match.Groups["DefaultFileTypeOnStartUp"].Success) Config.DefaultFileTypeOnStartUp = int.Parse(match.Groups["DefaultFileTypeOnStartUp"].Value.Trim());
-                if (match.Groups["AlwayDownloadInMP3"].Success) Config.AlwayDownloadInMP3 = bool.Parse(match.Groups["AlwayDownloadInMP3"].Value.Trim());
                 if (match.Groups["ShowSystemOutput"].Success) Config.ShowSystemOutput = bool.Parse(match.Groups["ShowSystemOutput"].Value.Trim());
                 if (match.Groups["EnablePlaylist"].Success) Config.EnablePlaylist = bool.Parse(match.Groups["EnablePlaylist"].Value.Trim());
                 if (match.Groups["Language"].Success) Config.SystemLanguage = match.Groups["Language"].Value.Trim();
@@ -51,7 +49,7 @@ public partial class MainWindow
 
             if (!File.Exists($"Images/{Config.BackgroundName}")) throw new Exception();
             if (Config.DefaultFileTypeOnStartUp >= 3) throw new Exception();
-            if (TotalDetected != 9) throw new Exception();
+            if (TotalDetected != 8) throw new Exception();
 
             DebugOutput.Selected_Language(Config.SystemLanguage.ToLower());
 
@@ -72,6 +70,5 @@ public partial class MainWindow
         }
 
         Input_Type.SelectedIndex = Config.DefaultFileTypeOnStartUp;
-        Input_MpThreeFormat.IsChecked = Config.AlwayDownloadInMP3;
     }
 }

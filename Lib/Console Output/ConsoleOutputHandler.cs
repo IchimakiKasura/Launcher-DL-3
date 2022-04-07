@@ -143,12 +143,11 @@ public partial class MainWindow
                 }
 
                 //FFmpeg converting
-                if (StringData.Contains("[ExtractAudio]"))
+                if (StringData.Contains("[ExtractAudio]") || StringData.Contains("[VideoConvertor]"))
                 {
                     Output_text.LoadText(DocumentTemp);
-                    Output_text.AddFormattedText("<#83fa57>[FFMPEG] <>Processing フォマっと...");
+                    Output_text.AddFormattedText("<#83fa57>[PROCESSING] <>Processing / Converting フォマっと...");
                 }
-
             });
         }
     }

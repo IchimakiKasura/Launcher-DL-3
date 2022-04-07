@@ -10,9 +10,12 @@ public class OutputComments : MainWindow
 
 		// Check the ComboBox if any changes made to the File Format Text
 		FileFormatName = MW.Input_Format.Text;
-		MW.TemporarySelectedFileFormat = MW.Input_Format.Text;
-		if (MW.Input_Format.SelectedIndex != -1)
-			MW.TemporarySelectedFileFormat = MW.TemporaryFormatList[MW.Input_Format.SelectedIndex];
+		if(MW.Input_Type.SelectedIndex == 0)
+		{
+			MW.TemporarySelectedFileFormat = MW.Input_Format.Text;
+			if (MW.Input_Format.SelectedIndex != -1)
+				MW.TemporarySelectedFileFormat = MW.TemporaryFormatList[MW.Input_Format.SelectedIndex];
+		}
 
 
 		if (string.IsNullOrEmpty(MW.Input_Name.Text)) Name = "N/A";
@@ -22,7 +25,6 @@ public class OutputComments : MainWindow
 		MW.Output_text.AddFormattedText($"<gray%12>[] Name:		 {Name}");
 		MW.Output_text.AddFormattedText($"<gray%12>[] Format:		 {FileFormatName}");
 		MW.Output_text.AddFormattedText($"<gray%12>[] Link:			 {MW.Input_Link.Text}");
-		MW.Output_text.AddFormattedText($"<gray%12>[] Force MP3:		 {MW.Input_MpThreeFormat.IsChecked}");
 		MW.Output_text.AddFormattedText($"<gray%12>[] Playlist?:		 {MW.Config.EnablePlaylist}");
 		MW.Output_text.Break("gray");
 		MW.Output_text.AddFormattedText("<Yellow>[INFO] <>Downloading...");
@@ -32,7 +34,6 @@ public class OutputComments : MainWindow
 			Name = Name,
 			Format = FileFormatName,
 			Link = MW.Input_Link.Text,
-			MP3 = MW.Input_MpThreeFormat.IsChecked,
 			Playlist = MW.Config.EnablePlaylist
 		});
 

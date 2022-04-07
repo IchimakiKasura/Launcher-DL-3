@@ -109,14 +109,14 @@ public static class LauncherDL_RichTextBoxHandler
     }
 
     /// <summary>
-    /// Add line "===================================="
+    /// Add line "================================="
     /// </summary>
     /// <param name="color"></param>
     public static void Break(this RichTextBox rt, string color = default)
     {
         if (color == default) color = "White";
         TextRange tr = new(rt.Document.ContentEnd, rt.Document.ContentEnd);
-        tr.Text = "====================================\r";
+        tr.Text = "=================================\r";
         tr.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color));
         //tr.ApplyPropertyValue(Control.FontSizeProperty, size);
         rt.ScrollToEnd();

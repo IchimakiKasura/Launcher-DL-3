@@ -36,7 +36,6 @@ internal class System_Language_Handler : MainWindow
         MW.ComboBox_Label_Custom.Content = "カスタム";
         MW.ComboBox_Label_Video.Content = "ビデオ";
         MW.ComboBox_Label_Audio.Content = "オーディオ";
-        MW.Input_MpThreeFormat.Content = "ｍｐ３形式を強制する";
         MW.Text_Link.Content = "リンク:";
         MW.Input_Link.Uid = "有効なリンク";
         MW.Input_Name.Uid = "オプショナル";
@@ -50,6 +49,9 @@ internal class System_Language_Handler : MainWindow
         MW.OpenDir_webm.Header = "ｗｅｂｍ";
         MW.OpenDir_threeGP.Header = "３ｇｐ";
         MW.OpenDir_flv.Header = "ｆｌｖ";
+        MW.OpenDir_mkv.Header = "ｍｋｖ";
+        MW.VideoType = new() { "ｍｐ４", "ｍｋｖ", "ｗｅｂｍ", "ｆｌｖ", "３ｇｐ" };
+        MW.AudioType = new() { "ｍｐ３", "ｗｅｂｍ", "ｍ４ａ", "ｍｐ４"};
     }
 
     public static void Tagalog(string LineType = default)
@@ -63,7 +65,6 @@ internal class System_Language_Handler : MainWindow
         MW.ComboBox_Label_Custom.Content = "Sariling paraan?";
         MW.ComboBox_Label_Video.Content = "Bidyo";
         MW.ComboBox_Label_Audio.Content = "Musika";
-        MW.Input_MpThreeFormat.Content = "Gawing Mp3 pormat.";
         MW.Text_Link.Content = "Ang link:";
         MW.Input_Link.Uid = "Totoong Link";
         MW.Input_Name.Uid = "Opsyonal";
@@ -77,6 +78,9 @@ internal class System_Language_Handler : MainWindow
         MW.OpenDir_webm.Header = "webem";
         MW.OpenDir_threeGP.Header = "3-geepee";
         MW.OpenDir_flv.Header = "ep-el-b";
+        MW.OpenDir_mkv.Header = "em-k-b";
+        MW.VideoType = new() { "empi lig- em pi four", "em-k-b", "webem", "ep-el-b", "3-geepee" };
+        MW.AudioType = new() { "em pi 3", "webem", "em-4-a", "empi lig- em pi four"};
     }
 
     public static void bruh(string LineType = default)
@@ -90,7 +94,6 @@ internal class System_Language_Handler : MainWindow
         MW.ComboBox_Label_Custom.Content = "Custom?!?";
         MW.ComboBox_Label_Video.Content = "Vid...";
         MW.ComboBox_Label_Audio.Content = "Illegal audio";
-        MW.Input_MpThreeFormat.Content = "MP5 format";
         MW.Text_Link.Content = "Bruh you illiterate?:";
         MW.Input_Link.Uid = "Real Link you fuck";
         MW.Input_Name.Uid = "Name it if you fucking want to name it";
@@ -104,6 +107,9 @@ internal class System_Language_Handler : MainWindow
         MW.OpenDir_webm.Header = "WEBENEMENEMBEMENB";
         MW.OpenDir_threeGP.Header = "gpgpgp";
         MW.OpenDir_flv.Header = "feleve";
+        MW.OpenDir_mkv.Header = "mkvvkmkv";
+        MW.VideoType = new() { "MP4EASADAWDKASLDORJGR", "mkvvkmkv", "WEBENEMENEMBEMENB", "feleve", "gpgpgp" };
+        MW.AudioType = new() { "MP3-S", "WEBENEMENEMBEMENB", "M4A1", "MP4EASADAWDKASLDORJGR"};
     }
 
 }

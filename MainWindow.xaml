@@ -41,7 +41,7 @@
 			<Border.Background>
 				<ImageBrush x:Name="Window_BackgroundName" ImageSource="pack://siteoforigin:,,,/Images/background.png" Opacity="0.5"/>
 			</Border.Background>
-			<Grid>
+			<Grid >
 				<!--#region Top | Head -->
 				<Border Background="#A31F0000"
 					CornerRadius="10,10,0,0"
@@ -77,12 +77,12 @@
 						 Width="414"
 						 VerticalScrollBarVisibility="Visible"/>
 
-				<StackPanel Margin="10,45,456,51">
+				<StackPanel Margin="10,45,456,252">
 					<Label x:Name="Text_DownloadType" Content="Download Type:"
 					   HorizontalContentAlignment="Center"
 					   Foreground="White"
 					   FontWeight="SemiBold"
-					   FontSize="15"/>
+					   FontSize="15" IsHitTestVisible="False" Width="199"/>
 					<ComboBox x:Name="Input_Type" HorizontalContentAlignment="Center"
 						  HorizontalAlignment="Center"
 						  Width="200"
@@ -110,7 +110,7 @@
 					   Foreground="White"
 					   FontWeight="SemiBold"
 					   FontSize="20"
-					   Padding="0,10,0,0"/>
+					   Padding="0,10,0,0" IsHitTestVisible="False" Width="65"/>
 
 					<TextBox x:Name="Input_Link" Style="{StaticResource TB}"
 						 HorizontalContentAlignment="Center"
@@ -126,16 +126,14 @@
 					   Foreground="White"
 					   FontWeight="SemiBold"
 					   FontSize="20"
-					   Padding="0,20,0,0" Margin="0,0,45,0"
-					   IsHitTestVisible="False"/>
+					   Padding="0,20,0,0" Margin="0,0,45,0" IsHitTestVisible="False"/>
 						<Label x:Name="Text_Name" Content="Name:"
 					   HorizontalContentAlignment="Center"
 					   Foreground="White"
 					   FontWeight="SemiBold"
 					   FontSize="20"
-					   Padding="0,20,0,0" Margin="223,0,0,0" Grid.ColumnSpan="2"
-					   IsHitTestVisible="False"/>
-						
+					   Padding="0,20,0,0" Margin="223,0,0,0" Grid.ColumnSpan="2" IsHitTestVisible="False"/>
+
 						<ComboBox x:Name="Input_Format" Style="{StaticResource CB}"
 						 HorizontalContentAlignment="Left" Margin="0,54,45,-40"
 						 Text="Best" IsEditable="True" TextSearch.TextPath="Name">
@@ -163,9 +161,6 @@
 						Margin="10,408,456,36"
 						Style="{StaticResource Venti}"
 						Background="#CCFBC2C2" ToolTip="Update"/>
-
-				<CheckBox x:Name="Input_MpThreeFormat" Content="Force MP3 format."
-						  Foreground="White" Margin="336,87,429,423" Cursor="Hand" Visibility="Hidden"/>
 
 				<ProgressBar x:Name="Window_ProgressBar"
 							 Margin="488,482,10,28"
@@ -208,6 +203,9 @@
 								<MenuItem
 							Header="flv"
 							x:Name="OpenDir_flv" />
+								<MenuItem
+							Header="mkv"
+							x:Name="OpenDir_mkv" />
 							</MenuItem>
 						</ContextMenu>
 					</Button.ContextMenu>

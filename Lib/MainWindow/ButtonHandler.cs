@@ -72,8 +72,6 @@ public partial class MainWindow
             Output_text.AddFormattedText("<Yellow>[INFO] <>The Link is a Playlist...");
         }
 
-        if (Input_Type.SelectedIndex != 2) Input_MpThreeFormat.IsChecked = false;
-
         OutputComments.DownloadOutputComments();
 
         await StartProcess(YTDL_Download());

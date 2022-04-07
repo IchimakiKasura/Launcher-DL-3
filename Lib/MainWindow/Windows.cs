@@ -48,6 +48,7 @@ public partial class MainWindow
             Opac = new(0, TimeSpan.FromMilliseconds(200));
             Anim = new(Colors.Black, TimeSpan.FromMilliseconds(200));
             Focus();
+            Keyboard.ClearFocus();
             DebugOutput.WindowFocusDebug(false);
         };
     }
@@ -119,8 +120,7 @@ public partial class MainWindow
             Input_Link.IsEnabled =
             Input_Name.IsEnabled =
             Input_Format.IsEnabled =
-            Input_Type.IsEnabled =
-            Input_MpThreeFormat.IsEnabled = false;
+            Input_Type.IsEnabled = false;
         }
         else
         {
@@ -129,10 +129,8 @@ public partial class MainWindow
             Button_Update.IsEnabled =
             Input_Link.IsEnabled =
             Input_Name.IsEnabled =
-            Input_Type.IsEnabled =
-            Input_MpThreeFormat.IsEnabled = true;
-
-            if (Input_Type.SelectedIndex == 0) Input_Format.IsEnabled = true;
+            Input_Type.IsEnabled = 
+            Input_Format.IsEnabled = true;
         }
     }
 }
