@@ -336,4 +336,44 @@
 	</Style>
 	<!--#endregion-->
 
+	<!-- #region Normal Buttons -->
+	<Style x:Key="NormalButtons" TargetType="Button">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Background="{TemplateBinding Background}"
+												BorderBrush="{TemplateBinding BorderBrush}"
+												BorderThickness="1"
+												CornerRadius="5">
+						<ContentPresenter x:Name="Button"
+															  Content="{TemplateBinding Content}"
+															  HorizontalAlignment="Center"
+															  VerticalAlignment="Center"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<BeginStoryboard>
+					<Storyboard>
+						<ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+															To="#FF900000"
+															Duration="00:00:00.1"/>
+					</Storyboard>
+				</BeginStoryboard>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<BeginStoryboard>
+					<Storyboard>
+						<ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+															To="#74000000"
+															Duration="00:00:00.1"/>
+					</Storyboard>
+				</BeginStoryboard>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+	<!--#endregion-->
+	
 </ResourceDictionary>

@@ -16,4 +16,8 @@ public static class LauncherDL_Regex
     // kasu Extension
     readonly public static Regex KasuExtension = new("BackgroundName:.*\"(?<BackgroundName>.*)\"|GlowColor:.*\"(?<GlowColor>.*)\"|DefaultFileTypeOnStartUp:.*\"(?<DefaultFileTypeOnStartUp>.*)\"|AlwayDownloadInMP3:.*\"(?<AlwayDownloadInMP3>.*)\"|ShowSystemOutput:.*\"(?<ShowSystemOutput>.*)\"|EnablePlaylist:.*\"(?<EnablePlaylist>.*)\"|Language:.*\"(?<Language>.*)\"|DefaultOutput:.*\"(?<DefaultOutput>.*)\"|BackgroundColor:.*\"(?<BackgroundColor>.*)\"", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
+    // Conversion
+    readonly public static Regex C_Current = new(@"time=(?<CurrentTime>[\d\w:]{8})");
+    readonly public static Regex C_Total = new(@"Duration:.*?(?<TotalTime>[\d\w:]{8})");
+
 }

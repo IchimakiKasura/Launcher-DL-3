@@ -2,11 +2,14 @@
 
 internal class System_Language_Handler : MainWindow
 {
+    public static string DefaultInputLinkUID = "Valid Link";
+    public static string DefaultLinkContent = "Link:";
+    public static string DefaultInputLinkUIDTwo = "File Location";
+    public static string DefaultLinkContentTwo = "File:";
+
     public static void LoadLanguage()
     {
-        MW.Config.SystemLanguage = MW.Config.SystemLanguage.ToLower();
-
-        switch (MW.Config.SystemLanguage)
+        switch (MW.Config.SystemLanguage.ToLower())
         {
 			case "english":		English();	break;
 
@@ -27,6 +30,8 @@ internal class System_Language_Handler : MainWindow
 
     public static void Japanese(string LineType = default)
     {
+        DefaultInputLinkUIDTwo = "ファイルの場所";
+        DefaultLinkContentTwo = "ファイル:";
         MW.Button_Download.Content = "ダウンロード";
         MW.Button_Format.Content = "ファイルフォーマット";
         MW.Button_Update.Content = "アップデート";
@@ -36,12 +41,14 @@ internal class System_Language_Handler : MainWindow
         MW.ComboBox_Label_Custom.Content = "カスタム";
         MW.ComboBox_Label_Video.Content = "ビデオ";
         MW.ComboBox_Label_Audio.Content = "オーディオ";
-        MW.Text_Link.Content = "リンク:";
-        MW.Input_Link.Uid = "有効なリンク";
+        MW.Text_Link.Content = DefaultLinkContent = "リンク:";
+        DefaultInputLinkUID = MW.Input_Link.Uid = "有効なリンク";
+        MW.Open_File.Content = "ファイルを開く";
         MW.Input_Name.Uid = "オプショナル";
         MW.Open_Folder.Content = "フォルダ開ける";
         MW.OpenDir_Video.Header = "ビデオ開ける";
         MW.OpenDir_Audio.Header = "オーディオ開ける";
+        MW.OpenDir_Convert.Header = "変換済みを開く";
         MW.OpenDir_Formatted.Header = "フォーマット済み";
         MW.OpenDir_mFourA.Header = "ｍ４ａ";
         MW.OpenDir_mpThree.Header = "ｍｐ３";
@@ -56,6 +63,8 @@ internal class System_Language_Handler : MainWindow
 
     public static void Tagalog(string LineType = default)
     {
+        DefaultInputLinkUIDTwo = "Lokasyon ng File";
+        DefaultLinkContentTwo = "Ang File:";
         MW.Button_Download.Content = "I-Download";
         MW.Button_Format.Content = "Pormat ng File";
         MW.Button_Update.Content = "I-Update";
@@ -65,26 +74,21 @@ internal class System_Language_Handler : MainWindow
         MW.ComboBox_Label_Custom.Content = "Sariling paraan?";
         MW.ComboBox_Label_Video.Content = "Bidyo";
         MW.ComboBox_Label_Audio.Content = "Musika";
-        MW.Text_Link.Content = "Ang link:";
-        MW.Input_Link.Uid = "Totoong Link";
+        MW.Text_Link.Content = DefaultLinkContent = "Ang link:";
+        DefaultInputLinkUID = MW.Input_Link.Uid = "Totoong Link";
+        MW.Open_File.Content = "Buksan ang File";
         MW.Input_Name.Uid = "Opsyonal";
-        MW.Open_Folder.Content = "Buksan Paniklop";
+        MW.Open_Folder.Content = "Buksan ang Paniklop";
         MW.OpenDir_Video.Header = "Buksan ang Bidyo Polder";
         MW.OpenDir_Audio.Header = "Buksan ang Musika Polder";
+        MW.OpenDir_Convert.Header = "Buksan ang na-convert";
         MW.OpenDir_Formatted.Header = "Pormado";
-        MW.OpenDir_mFourA.Header = "em-4-a";
-        MW.OpenDir_mpThree.Header = "em pi 3";
-        MW.OpenDir_mpFour.Header = "empi lig- em pi four";
-        MW.OpenDir_webm.Header = "webem";
-        MW.OpenDir_threeGP.Header = "3-geepee";
-        MW.OpenDir_flv.Header = "ep-el-b";
-        MW.OpenDir_mkv.Header = "em-k-b";
-        MW.VideoType = new() { "empi lig- em pi four", "em-k-b", "webem", "ep-el-b", "3-geepee" };
-        MW.AudioType = new() { "em pi 3", "webem", "em-4-a", "empi lig- em pi four"};
     }
 
     public static void bruh(string LineType = default)
     {
+        DefaultInputLinkUIDTwo = "The file location okay?";
+        DefaultLinkContentTwo = "Where did you hide the file:";
         MW.Button_Download.Content = "Fucken Download";
         MW.Button_Format.Content = "U gonna format Akira?";
         MW.Button_Update.Content = "Update this archon fuck";
@@ -94,12 +98,14 @@ internal class System_Language_Handler : MainWindow
         MW.ComboBox_Label_Custom.Content = "Custom?!?";
         MW.ComboBox_Label_Video.Content = "Vid...";
         MW.ComboBox_Label_Audio.Content = "Illegal audio";
-        MW.Text_Link.Content = "Bruh you illiterate?:";
-        MW.Input_Link.Uid = "Real Link you fuck";
+        MW.Text_Link.Content = DefaultLinkContent = "Bruh you illiterate?:";
+        DefaultInputLinkUID = MW.Input_Link.Uid = "Real Link you fuck";
+        MW.Open_File.Content = "Open File?";
         MW.Input_Name.Uid = "Name it if you fucking want to name it";
         MW.Open_Folder.Content = "Open Fuck";
         MW.OpenDir_Video.Header = "Open the fucking video folder";
         MW.OpenDir_Audio.Header = "Open the fucking audio folder";
+        MW.OpenDir_Convert.Header = "Open the fucking converted folder";
         MW.OpenDir_Formatted.Header = "Those other 4 formats because you picked Custom";
         MW.OpenDir_mFourA.Header = "M4A1";
         MW.OpenDir_mpThree.Header = "MP3-S";

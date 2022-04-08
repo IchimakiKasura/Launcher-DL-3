@@ -77,6 +77,15 @@
 						 Width="414"
 						 VerticalScrollBarVisibility="Visible"/>
 
+				<Button x:Name="Open_File"
+						Content="Open File"
+						BorderBrush="#FF900000"
+						Background="#74000000"
+						Foreground="White"
+						Cursor="Hand"
+						Visibility="Hidden"
+						Style="{StaticResource NormalButtons}" Width="83" Margin="373,151,456,343"/>
+
 				<StackPanel Margin="10,45,456,252">
 					<Label x:Name="Text_DownloadType" Content="Download Type:"
 					   HorizontalContentAlignment="Center"
@@ -103,6 +112,10 @@
 						Content="Audio"
 						x:Name="ComboBox_Label_Audio"
 						ToolTip="Download the Audio's &quot;best&quot; format."/>
+						<ComboBoxItem Style="{StaticResource DownloadType}"
+						Content="Convert"
+						x:Name="ComboBox_Label_Convert"
+						ToolTip="Convert a file to another format type."/>
 					</ComboBox>
 
 					<Label x:Name="Text_Link" Content="Link:"
@@ -114,7 +127,7 @@
 
 					<TextBox x:Name="Input_Link" Style="{StaticResource TB}"
 						 HorizontalContentAlignment="Center"
-						 Uid="Valid Link"/>
+						 Uid="Valid Link" Width="446"/>
 
 					<Grid Margin="0,-15,0,0">
 						<Grid.ColumnDefinitions>
@@ -139,7 +152,12 @@
 						 Text="Best" IsEditable="True" TextSearch.TextPath="Name">
 							<ComboBox.ItemTemplate>
 								<DataTemplate>
-									<TextBlock Text="{Binding Name}"/>
+									<TextBlock FontSize="20"
+											   FontWeight="SemiBold"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center"
+											   Margin="3,0,0,0"
+											   Text="{Binding Name}"/>
 								</DataTemplate>
 							</ComboBox.ItemTemplate>
 						</ComboBox>
@@ -173,7 +191,8 @@
 						Background="#74000000"
 						Foreground="White"
 						Cursor="Hand"
-						Visibility="Hidden">
+						Visibility="Hidden"
+						Style="{StaticResource NormalButtons}">
 					<Button.ContextMenu>
 						<ContextMenu StaysOpen="true">
 							<MenuItem
@@ -182,6 +201,9 @@
 							<MenuItem
 						Header="Open Audio"
 						x:Name="OpenDir_Audio" />
+							<MenuItem
+						Header="Open Converted"
+						x:Name="OpenDir_Convert" />
 							<MenuItem
 						Header="Formatted"
 								x:Name="OpenDir_Formatted">
@@ -209,45 +231,6 @@
 							</MenuItem>
 						</ContextMenu>
 					</Button.ContextMenu>
-					<Button.Resources>
-						<Style TargetType="Button">
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="Button">
-										<Border Background="{TemplateBinding Background}"
-												BorderBrush="{TemplateBinding BorderBrush}"
-												BorderThickness="1"
-												CornerRadius="5">
-											<ContentPresenter x:Name="Button"
-															  Content="{TemplateBinding Content}"
-															  HorizontalAlignment="Center"
-															  VerticalAlignment="Center"/>
-										</Border>
-									</ControlTemplate>
-								</Setter.Value>
-							</Setter>
-							<Style.Triggers>
-								<EventTrigger RoutedEvent="MouseEnter">
-									<BeginStoryboard>
-										<Storyboard>
-											<ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-															To="#FF900000"
-															Duration="00:00:00.1"/>
-										</Storyboard>
-									</BeginStoryboard>
-								</EventTrigger>
-								<EventTrigger RoutedEvent="MouseLeave">
-									<BeginStoryboard>
-										<Storyboard>
-											<ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-															To="#74000000"
-															Duration="00:00:00.1"/>
-										</Storyboard>
-									</BeginStoryboard>
-								</EventTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Resources>
 				</Button>
 				<!--#endregion-->
 

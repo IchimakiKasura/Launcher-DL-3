@@ -176,6 +176,20 @@ public partial class MainWindow
         }
     }
 
+    public void ConvertOutput(object s, DataReceivedEventArgs e)
+	{
+        string StringData = e.Data;
+        if (!string.IsNullOrEmpty(e.Data))
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (Action)delegate
+            {
+
+                Console.WriteLine(StringData);
+
+            });
+        }
+    }
+
     public void ErrorOutput(object s, DataReceivedEventArgs e)
     {
         string StringData = e.Data;

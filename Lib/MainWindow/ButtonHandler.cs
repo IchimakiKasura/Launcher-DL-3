@@ -77,6 +77,11 @@ public partial class MainWindow
         await StartProcess(YTDL_Download());
     }
 
+    public async void ConvertFile(object s, RoutedEventArgs e)
+	{
+        Console.WriteLine(":O");
+	}
+
     public async void Update(object s, RoutedEventArgs e)
     {
         DebugOutput.Button_Clicked("update");

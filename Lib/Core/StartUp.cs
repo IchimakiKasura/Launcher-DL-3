@@ -49,6 +49,7 @@ public partial class MainWindow
 
 		OpenDir_Audio.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\Audio"); };
 		OpenDir_Video.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\Video"); };
+		OpenDir_Convert.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\Converted"); };
 
 		OpenDir_webm.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\formatted\\webm"); };
 		OpenDir_mFourA.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\formatted\\m4a"); };

@@ -41,6 +41,9 @@ public partial class MainWindow
     public List<string> VideoType = new() { "mp4", "mkv", "webm", "flv", "auto" };
     public List<string> AudioType = new() { "mp3", "webm", "m4a", "mp4", "auto"};
 
+    //Convert
+    public List<string> ConvertType = new() { "mp4", "mp3", "flv", "webm", "m4a", "mkv", "avi", "wmv", "wma", "ogg", "aac"};
+
     // Hidden button / Update notes
     readonly string HiddenButtonText = "LauncherDL Development Build\n\n" +
         "OMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\n" +
