@@ -93,6 +93,13 @@ public partial class MainWindow
             return;
         }
 
+        if(!File.Exists(Input_Link.Text))
+        {
+            Output_text.AddFormattedText("<Red>[ERROR] <>No file selected!");
+            return;
+        }
+
+
         ProgressBarShow();
         IsDownloading = true;
         Window_Components(true);
@@ -108,7 +115,7 @@ public partial class MainWindow
         {
             UseShellExecute = false,
             RedirectStandardError = true,
-            CreateNoWindow = false
+            CreateNoWindow = true
         };
         
         Output_text.AddFormattedText("<#83fa57>[PROCESSING] <>Please wait until the conversion is finished.");

@@ -53,13 +53,19 @@ public partial class MainWindow
 
     // Hidden button / Update notes
     readonly string HiddenButtonText = "LauncherDL Development Build\n\n" +
-        "OMG this is so Ｅ Ｐ Ｉ Ｃ!!\n\n" +
-        "New GUI/Layout, Animations!?!\n\n" +
-        "The OLD Button Hover Animation from ver3 is even back!??\n\n\n" +
-        "Update v6.1:\n" +
-        "Added Few Languages\n" +
-        "Added Customizable Background color\n" +
-        "Fixed font family\n\n" +
+        "[New Features]\n"+
+        "- New \"Convert\" type! Now you can now\nConvert videos or audios into another format.\n"+
+        "- Format option is fully redesigned/reworked.\n"+
+        "- App will now open in a single instance.\n"+
+        "- New Added Taskbar Flashing / Progress bar.\n"+
+        "- Format ID/Code are now showing.\n"+
+        "- Console outputs more info now and saves a Log on exit!\n\n"+
+        "[Fixes]\n"+
+        "- Choosing Audio Type will not download to its correct location.\n"+
+        "- Fixed where closing the application will actually close even the\npop-up message stops you from closing it.\n"+
+        "- Fixed where all the context menu are from right to left are now left to right.\n"+
+        "- Textbox's focus are now fixed when clicking away from it."+
+        "- Fixed where fonts doesn't actually renders even though its embedded to the resource.\n"+
         "Created by Kasura.";
 
 

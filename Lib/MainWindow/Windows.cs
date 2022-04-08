@@ -125,14 +125,16 @@ public partial class MainWindow
         }
         else
         {
-            Button_Format.IsEnabled =
+
             Button_Download.IsEnabled =
             Button_Update.IsEnabled =
             Input_Link.IsEnabled =
             Input_Name.IsEnabled =
             Input_Type.IsEnabled =
-            Open_Folder.IsEnabled =
+            Open_Folder.IsEnabled = 
             Input_Format.IsEnabled = true;
+            
+            if (Input_Type.SelectedIndex == 0) Button_Format.IsEnabled = true;
         }
     }
 }
