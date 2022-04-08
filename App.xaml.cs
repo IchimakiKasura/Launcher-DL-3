@@ -9,14 +9,24 @@
         {
             ContextMenuAdjust();
 
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Nls\CodePage", true);
-            key.SetValue("ACP", "65001", RegistryValueKind.String);
+			try
+			{
+                RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Nls\CodePage", true);
+                key.SetValue("ACP", "65001", RegistryValueKind.String);
+			}
+            catch
+			{
+                MessageBox.Show("For best experience, Run the application in Administrator\n if you're not Ok seeings blank titles in the console because its not\nrendered in UTF-8 format", "Note", MessageBoxButton.OK, MessageBoxImage.Warning);
+			};
         }
         
         void App_Exit(object s, ExitEventArgs e)
         {
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Nls\CodePage", true);
-            key.SetValue("ACP", "1252", RegistryValueKind.String);
+			try
+            {
+                RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Nls\CodePage", true);
+                key.SetValue("ACP", "1252", RegistryValueKind.String);
+            } catch { }
         }
 
         // Fixes the drop menus going from right to left because i don't know what happened.

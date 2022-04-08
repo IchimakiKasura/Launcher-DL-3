@@ -25,24 +25,31 @@ public partial class MainWindow
 {
     public static MainWindow MW;
 
+
     // Version
     readonly string Version = "Build Version:\nDevelopment Build";
+
 
     // ydl.bin location
     public readonly static string YDL_link = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin";
 
+
     // ffmpeg location
     private static string Ffmpeg = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data";
 
+
     // For the renaming process
     private List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a", "3gp", "flv" };
+
 
     // Types
     public List<string> VideoType = new() { "mp4", "mkv", "webm", "flv", "auto" };
     public List<string> AudioType = new() { "mp3", "webm", "m4a", "mp4", "auto"};
 
+
     //Convert
     public List<string> ConvertType = new() { "mp4", "mp3", "flv", "webm", "m4a", "mkv", "avi", "wmv", "wma", "ogg", "aac"};
+
 
     // Hidden button / Update notes
     readonly string HiddenButtonText = "LauncherDL Development Build\n\n" +
@@ -55,15 +62,19 @@ public partial class MainWindow
         "Fixed font family\n\n" +
         "Created by Kasura.";
 
+
     // config
     public LauncherDefaultConfig Config = new();
+
 
     // Download / Update / File Format
     private Process Proc;
 
+
     // Window focus animations
     private DoubleAnimation Opac;
     private ColorAnimation Anim;
+
 
     // Temporary variables
     private string TemporaryEncodedName = string.Empty;
@@ -76,7 +87,6 @@ public partial class MainWindow
     // others
     private bool IsDownloading = false;
     private MemoryStream DocumentTemp;
-
 
     // Window Flashing
     [DllImport("user32.dll", CallingConvention = CallingConvention.Cdecl)]

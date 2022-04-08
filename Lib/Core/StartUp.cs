@@ -32,6 +32,7 @@ public partial class MainWindow
 		Button_Update.Click += Update;
 		Closing += Window_Close;
 		KeyDown += Window_PreviewKeyDown;
+		Open_File.Click += OpenFile;
 
 		Input_Format.SelectionChanged += delegate
 		{
@@ -44,9 +45,9 @@ public partial class MainWindow
 			Keyboard.ClearFocus();
 		};
 
+
 		#region Open Folder thing
 		Open_Folder.Click += delegate { OpenFolder(Config.DefaultOutput); };
-
 		OpenDir_Audio.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\Audio"); };
 		OpenDir_Video.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\Video"); };
 		OpenDir_Convert.Click += delegate { OpenFolder($"{Config.DefaultOutput}\\Converted"); };

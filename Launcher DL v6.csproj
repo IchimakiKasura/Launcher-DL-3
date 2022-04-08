@@ -15,11 +15,13 @@
     <Description>Downloads any audio or video</Description>
     <DebugType>embedded</DebugType>
     <Product>LauncherDL</Product>
+    <PublisherName>Ichimaki Kasura</PublisherName>
     <PackageId>LauncherDL</PackageId>
     <Authors>Ichimaki Kasura</Authors>
     <Company>Ichimaki Kasura</Company>
     <Copyright>Copyright © 2022</Copyright>
     <AssemblyName>uVad</AssemblyName>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,11 +33,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\NotoSansJP-Regular.otf" />
+    <None Remove="Fonts\NotoSansJP-Light.otf" />
+    <None Remove="Fonts\NotoSansJP-Medium.otf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\NotoSansJP-Regular.otf" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -132,6 +135,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\NotoSansJP-Medium.otf" />
     <Resource Include="Images\Icon.ico" />
     <Resource Include="Images\akira.png" />
     <Resource Include="Images\asutorufo.jpeg" />

@@ -48,6 +48,7 @@ public partial class MainWindow
         switch(Input_Type.SelectedIndex)
         {
             case 0:
+                Title = "Launcher DL - Custom";
                 Input_Format.IsReadOnly = false;
                 Input_Format.IsEditable = true;
                 Input_Format.Items.Clear();
@@ -59,18 +60,21 @@ public partial class MainWindow
             break;
 
             case 1:
+                Title = "Launcher DL - Video";
                 InputFormatShortCut();
                 SelectedFormat("Video");
                 Input_Format.SelectedIndex = 0;
             break;
 
             case 2:
+                Title = "Launcher DL - Audio";
                 InputFormatShortCut();
                 SelectedFormat("Audio");
                 Input_Format.SelectedIndex = 0;
             break;
 
             case 3:
+                Title = "Launcher DL - Convert";
                 InputFormatShortCut();
                 SelectedFormat("Convert");
                 Input_Link.HorizontalAlignment =
@@ -79,6 +83,7 @@ public partial class MainWindow
                 Text_Link.Width = 360;
                 Input_Link.Uid = System_Language_Handler.DefaultInputLinkUIDTwo;
                 Text_Link.Content = System_Language_Handler.DefaultLinkContentTwo;
+                Input_Name.Uid = System_Language_Handler.DefaultNameInputTwo;
                 Open_File.Visibility = Visibility.Visible;
                 Button_Download.Click -= Download;
                 Button_Download.Click += ConvertFile;
@@ -94,11 +99,14 @@ public partial class MainWindow
             Text_Link.Width = 65;
             Input_Link.Uid = System_Language_Handler.DefaultInputLinkUID;
             Text_Link.Content = System_Language_Handler.DefaultLinkContent;
+            Input_Name.Uid = System_Language_Handler.DefaultNameInput;
             Open_File.Visibility = Visibility.Hidden;
             Button_Download.Click -= ConvertFile;
+            Button_Download.Click -= Download;
             Button_Download.Click += Download;
         }
 
         if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content.ToString()}\"");
+        TaskBarThingy.Description = Title;
     }
 }

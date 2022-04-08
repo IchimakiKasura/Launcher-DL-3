@@ -120,6 +120,7 @@ public partial class MainWindow
             Input_Link.IsEnabled =
             Input_Name.IsEnabled =
             Input_Format.IsEnabled =
+            Open_Folder.IsEnabled = 
             Input_Type.IsEnabled = false;
         }
         else
@@ -129,7 +130,8 @@ public partial class MainWindow
             Button_Update.IsEnabled =
             Input_Link.IsEnabled =
             Input_Name.IsEnabled =
-            Input_Type.IsEnabled = 
+            Input_Type.IsEnabled =
+            Open_Folder.IsEnabled =
             Input_Format.IsEnabled = true;
         }
     }

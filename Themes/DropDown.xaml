@@ -56,7 +56,7 @@
 		<Setter Property="MinWidth" Value="120"/>
 		<Setter Property="MinHeight" Value="20"/>
 		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="FontFamily" Value="Noto Sans JP"/>
+		<Setter Property="FontFamily" Value="./Fonts/#Noto Sans JP"/>
 		<Setter Property="Effect">
 			<Setter.Value>
 				<DropShadowEffect ShadowDepth="0"
@@ -86,7 +86,7 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
 						<TextBlock x:Name="Placeholder"
 							Foreground="DimGray"
-							FontFamily="Noto Sans JP"
+							FontFamily="./Fonts/#Noto Sans JP"
 							FontSize="20"
 							Background="{TemplateBinding Background}"
                             HorizontalAlignment="Center" 
@@ -98,7 +98,7 @@
 							IsHitTestVisible="False"/>
 						<TextBox x:Name="PART_EditableTextBox"
 							Foreground="White"
-							FontFamily="Noto Sans JP"
+							FontFamily="./Fonts/#Noto Sans JP"
 							FontSize="20"
 							FontWeight="SemiBold"
 							Background="{TemplateBinding Background}"
@@ -247,5 +247,3 @@
 	</Style>
 
 </ResourceDictionary>
-<!--Template="{StaticResource ComboBoxTextBox}"-->
-	

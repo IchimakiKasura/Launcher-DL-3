@@ -12,11 +12,10 @@
 		Background="Transparent"
         Title="Launcher DL" Height="548" Width="932"
 		Loaded="Window_Loaded"
-		FontFamily="Noto Sans JP">
+		FontFamily="./Fonts/#Noto Sans JP">
 
 	<Window.TaskbarItemInfo>
-		<TaskbarItemInfo x:Name="TaskBarThingy" Description="An app with a taskbar info description" 
-						ProgressState="Normal"/>
+		<TaskbarItemInfo x:Name="TaskBarThingy" ProgressState="Normal"/>
 	</Window.TaskbarItemInfo>
 
 	<WindowChrome.WindowChrome>
@@ -66,9 +65,9 @@
 				<RichTextBox x:Name="Output_text"
 						 Margin="0,45,10,51"
 						 Padding="10"
-						 FontFamily="Noto Sans JP"
 						 Focusable="False"
 						 FontSize="10"
+						 FontFamily="./Fonts/#Noto Sans JP"
 						 Foreground="White"
 						 IsReadOnly="True"
 						 IsUndoEnabled="False"
@@ -84,7 +83,7 @@
 						Foreground="White"
 						Cursor="Hand"
 						Visibility="Hidden"
-						Style="{StaticResource NormalButtons}" Width="83" Margin="373,151,456,343"/>
+						Style="{StaticResource NormalButtons}" Margin="375,146,456,347.3"/>
 
 				<StackPanel Margin="10,45,456,252">
 					<Label x:Name="Text_DownloadType" Content="Download Type:"
@@ -170,15 +169,18 @@
 				<Button x:Name="Button_Format" Content="ファイルフォーマット"
 						Margin="10,264,456,180"
 						Style="{StaticResource Akira}"
-						Background="#CCFBC2C2" ToolTip="Fetch File formats"/>
+						Background="#CCFBC2C2" ToolTip="Fetch File formats"
+						FontFamily="./Fonts/#Noto Sans JP"/>
 				<Button x:Name="Button_Download" Content="ダウンロード"
 						Margin="10,336,456,108"
 						Style="{StaticResource Astolfo}"
-						Background="#CCFBC2C2" ToolTip="Download"/>
+						Background="#CCFBC2C2" ToolTip="Download"
+						FontFamily="./Fonts/#Noto Sans JP"/>
 				<Button x:Name="Button_Update" Content="アップデート"
 						Margin="10,408,456,36"
 						Style="{StaticResource Venti}"
-						Background="#CCFBC2C2" ToolTip="Update"/>
+						Background="#CCFBC2C2" ToolTip="Update"
+						FontFamily="./Fonts/#Noto Sans JP"/>
 
 				<ProgressBar x:Name="Window_ProgressBar"
 							 Margin="488,482,10,28"
@@ -244,7 +246,8 @@
 							   FontWeight="Medium"
 							   FontSize="9"
 							   Margin="10,5,0,0"
-							   ToolTip="Like bruh what's this Ⓒ thing? Isn't just I made CLI have a GUI?"/>
+							   ToolTip="Like bruh what's this Ⓒ thing? Isn't just I made CLI have a GUI?"
+/>
 					<TextBlock x:Name="Window_VersionLabel"
 							   Text="Build Version:&#x0a;N/A"
 							   HorizontalAlignment="Center"

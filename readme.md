@@ -35,19 +35,15 @@ To run on **Normal mode** change the output type from the csproj to "WinExe"
 NOTE: im still inexperience on using MSBUILD so i'll try my best so that you'll no longer change it manually.
 
 ## console problem troubleshoot
-If you're not seeing any custom characters like japanese words in the console, follow these steps:<br>
-**Control Panel** > **Region** > **Administrive** > **Change System Locale** > **Beta: Use Unicode-UTF8 for worldwide languages support**
-![image](https://user-images.githubusercontent.com/80595346/161425242-6ff6f4f0-07bd-458f-8e4d-d55ec85613be.png)
-
-before:<br>
+If the Text are not displaying properly like Unicode characters are blanks:<br>
 ![image](https://user-images.githubusercontent.com/80595346/161425308-52d40856-caf4-4235-ba0e-e04be35eab9f.png)
 
-after:<br>
+Run the application in Administrator.<br>
 ![image](https://user-images.githubusercontent.com/80595346/161425340-672b3a0c-8ac1-45cb-9e15-c205b1a8dc0d.png)
 
-<br>
-<br>
-I made this because it enhance my coding ability.
+---
+
+## I made this because it enhances my coding ability.
 
 | Name | Picture Preview |
 |------|:-----------------:|

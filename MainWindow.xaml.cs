@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Threading;
-namespace Launcher_DL_v6;
+﻿namespace Launcher_DL_v6;
 
 ///==============================================================///
 ///            ████████╗██████╗░░█████╗░██████╗░░██████╗         ///
@@ -10,11 +8,11 @@ namespace Launcher_DL_v6;
 ///            ░░░██║░░░██║░░██║██║░░██║██║░░░░░██████╔╝         /// 
 /// I lov-like ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═════╝░ no homo*///
 /// =============================================================///
-
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
+
         if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1)
         {
             MessageBox.Show("Only one instance at a time", "Yep", MessageBoxButton.OK, MessageBoxImage.Exclamation);

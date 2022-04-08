@@ -4,8 +4,10 @@ internal class System_Language_Handler : MainWindow
 {
     public static string DefaultInputLinkUID = "Valid Link";
     public static string DefaultLinkContent = "Link:";
+    public static string DefaultNameInput = "optional";
     public static string DefaultInputLinkUIDTwo = "File Location";
     public static string DefaultLinkContentTwo = "File:";
+    public static string DefaultNameInputTwo = "Required";
 
     public static void LoadLanguage()
     {
@@ -30,6 +32,7 @@ internal class System_Language_Handler : MainWindow
 
     public static void Japanese(string LineType = default)
     {
+        DefaultNameInputTwo = "所要";
         DefaultInputLinkUIDTwo = "ファイルの場所";
         DefaultLinkContentTwo = "ファイル:";
         MW.Button_Download.Content = "ダウンロード";
@@ -44,7 +47,7 @@ internal class System_Language_Handler : MainWindow
         MW.Text_Link.Content = DefaultLinkContent = "リンク:";
         DefaultInputLinkUID = MW.Input_Link.Uid = "有効なリンク";
         MW.Open_File.Content = "ファイルを開く";
-        MW.Input_Name.Uid = "オプショナル";
+        MW.Input_Name.Uid = DefaultNameInput ="オプショナル";
         MW.Open_Folder.Content = "フォルダ開ける";
         MW.OpenDir_Video.Header = "ビデオ開ける";
         MW.OpenDir_Audio.Header = "オーディオ開ける";
@@ -63,6 +66,7 @@ internal class System_Language_Handler : MainWindow
 
     public static void Tagalog(string LineType = default)
     {
+        DefaultNameInputTwo = "Kailangan";
         DefaultInputLinkUIDTwo = "Lokasyon ng File";
         DefaultLinkContentTwo = "Ang File:";
         MW.Button_Download.Content = "I-Download";
@@ -77,7 +81,7 @@ internal class System_Language_Handler : MainWindow
         MW.Text_Link.Content = DefaultLinkContent = "Ang link:";
         DefaultInputLinkUID = MW.Input_Link.Uid = "Totoong Link";
         MW.Open_File.Content = "Buksan ang File";
-        MW.Input_Name.Uid = "Opsyonal";
+        MW.Input_Name.Uid = DefaultNameInput ="Opsyonal";
         MW.Open_Folder.Content = "Buksan ang Paniklop";
         MW.OpenDir_Video.Header = "Buksan ang Bidyo Polder";
         MW.OpenDir_Audio.Header = "Buksan ang Musika Polder";
@@ -87,6 +91,7 @@ internal class System_Language_Handler : MainWindow
 
     public static void bruh(string LineType = default)
     {
+        DefaultNameInputTwo = "Name this fucker";
         DefaultInputLinkUIDTwo = "The file location okay?";
         DefaultLinkContentTwo = "Where did you hide the file:";
         MW.Button_Download.Content = "Fucken Download";
@@ -101,7 +106,7 @@ internal class System_Language_Handler : MainWindow
         MW.Text_Link.Content = DefaultLinkContent = "Bruh you illiterate?:";
         DefaultInputLinkUID = MW.Input_Link.Uid = "Real Link you fuck";
         MW.Open_File.Content = "Open File?";
-        MW.Input_Name.Uid = "Name it if you fucking want to name it";
+        MW.Input_Name.Uid = DefaultNameInput = "Name it if you fucking want to name it";
         MW.Open_Folder.Content = "Open Fuck";
         MW.OpenDir_Video.Header = "Open the fucking video folder";
         MW.OpenDir_Audio.Header = "Open the fucking audio folder";

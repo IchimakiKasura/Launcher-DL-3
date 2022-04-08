@@ -135,6 +135,7 @@
 	<!--#region Body Buttons -->	
 	<Style x:Key="BodyButtonTemp" TargetType="Button">
 		<Setter Property="FontSize" Value="20"/>
+		<Setter Property="FontFamily" Value="./Fonts/#Noto Sans JP"/>
 		<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
 		<Setter Property="FontWeight" Value="UltraBold"/>
 		<Setter Property="Height" Value="60"/>

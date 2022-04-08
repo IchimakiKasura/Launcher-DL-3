@@ -3,14 +3,13 @@
 public partial class MainWindow
 {
     string AudioOnly;
+    int TotalDuration;
     public void FileFormatOutput(object s, DataReceivedEventArgs e)
     {
         string StringData = e.Data;
         if (!string.IsNullOrEmpty(e.Data))
-        {
             Dispatcher.Invoke(DispatcherPriority.Normal, (Action)delegate
             {
-                ProgressBarShow();
 
                 TaskBarThingy.ProgressValue = Window_ProgressBar.Value / 100;
 
@@ -116,17 +115,14 @@ public partial class MainWindow
                         }
                     }
             });
-        }
     }
 
     public void DownloadOutput(object s, DataReceivedEventArgs e)
     {
         string StringData = e.Data;
         if (!string.IsNullOrEmpty(StringData))
-        {
             Dispatcher.Invoke(DispatcherPriority.Normal, (Action)delegate
             {
-                ProgressBarShow();
 
                 TaskBarThingy.ProgressValue = Window_ProgressBar.Value / 100;
 
@@ -149,14 +145,12 @@ public partial class MainWindow
                     Output_text.AddFormattedText("<#83fa57>[PROCESSING] <>Processing / Converting フォマっと...");
                 }
             });
-        }
     }
 
     public void UpdateOutput(object s, DataReceivedEventArgs e)
     {
         string StringData = e.Data;
         if (!string.IsNullOrEmpty(StringData))
-        {
             Dispatcher.Invoke(DispatcherPriority.Normal, (Action)delegate
             {
                 if (StringData.Contains("yt-dlp is up to date"))
@@ -173,28 +167,38 @@ public partial class MainWindow
                     Output_text.AddFormattedText($"<Pink>[YEY] Updated!");
 
             });
-        }
+        
     }
 
     public void ConvertOutput(object s, DataReceivedEventArgs e)
 	{
+        // frame= 7290 fps=263 q=-1.0 Lsize=   22360kB time=00:04:03.05 bitrate= 753.6kbits/s speed=8.78x
         string StringData = e.Data;
         if (!string.IsNullOrEmpty(e.Data))
-        {
             Dispatcher.Invoke(DispatcherPriority.Normal, (Action)delegate
             {
+                TaskBarThingy.ProgressValue = Window_ProgressBar.Value / 100;
 
-                Console.WriteLine(StringData);
+                string TotalTime = LauncherDL_Regex.C_Total.Match(StringData).Groups["TotalTime"].Value.Trim();
+                string CurrentTime = LauncherDL_Regex.C_Current.Match(StringData).Groups["CurrentTime"].Value.Trim();
+                int CurrentTimeInt;
+
+                if(!string.IsNullOrEmpty(TotalTime))
+                    TotalDuration = (int)TimeSpan.Parse(TotalTime).TotalSeconds;
+
+                if(!string.IsNullOrEmpty(CurrentTime))
+                {
+                    CurrentTimeInt = (int)TimeSpan.Parse(CurrentTime).TotalSeconds;
+                    Window_ProgressBar.Value = (double)((decimal)CurrentTimeInt/(decimal)TotalDuration)*100;
+                }
 
             });
-        }
     }
 
     public void ErrorOutput(object s, DataReceivedEventArgs e)
     {
         string StringData = e.Data;
         if (!string.IsNullOrEmpty(StringData))
-        {
             Dispatcher.Invoke(DispatcherPriority.Normal, (Action)delegate
             {
                 if (StringData.Contains("ERROR") || StringData.Contains("Traceback"))
@@ -205,7 +209,7 @@ public partial class MainWindow
                     ProcessEnds(false);
                 }
             });
-        }
+        
     }
 
 }
