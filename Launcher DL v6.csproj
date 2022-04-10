@@ -1,45 +1,59 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <Version>6.1</Version>
-    <RootNamespace>Launcher_DL_v6</RootNamespace>
-    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
-    <Nullable>disable</Nullable>
-    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <Platforms>AnyCPU;x64</Platforms>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <Description>Downloads any audio or video</Description>
-    <DebugType>embedded</DebugType>
-    <Product>LauncherDL</Product>
-    <PublisherName>Ichimaki Kasura</PublisherName>
-    <PackageId>LauncherDL</PackageId>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PackageId>Launcher DL</PackageId>
     <Authors>Ichimaki Kasura</Authors>
     <Company>Ichimaki Kasura</Company>
+    <Product>Launcher DL</Product>
     <Copyright>Copyright © 2022</Copyright>
+    <AssemblyVersion>6.5.0.0</AssemblyVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <AssemblyName>uVad</AssemblyName>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Optimize>True</Optimize>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Optimize>True</Optimize>
+    <LangVersion>latest</LangVersion>
+    <DebugType>embedded</DebugType>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <ApplicationIcon>Images/Icon.ico</ApplicationIcon>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\NotoSansJP-Light.otf" />
-    <None Remove="Fonts\NotoSansJP-Medium.otf" />
+    <Reference Include="kasuNhentaiCS.Json">
+      <HintPath>..\kasu.NhentaiApi parser\output\kasuNhentaiCS.Json.dll</HintPath>
+    </Reference>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>  
+  
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.IO" />
+    <Using Include="System.Text" />
+    <Using Include="System.Windows" />
+    <Using Include="Microsoft.Win32" />
+    <Using Include="System.Reflection" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Windows.Input" />
+    <Using Include="System.Windows.Media" />
+    <Using Include="System.ComponentModel" />
+    <Using Include="System.Windows.Interop" />
+    <Using Include="System.Threading.Tasks" />
+    <Using Include="System.Windows.Controls" />
+    <Using Include="System.Windows.Threading" />
+    <Using Include="System.Windows.Documents" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Windows.Media.Imaging" />
+    <Using Include="System.Runtime.InteropServices" />
+    <Using Include="System.Text.RegularExpressions" />
+    <Using Include="System.Windows.Media.Animation" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Update="Images\background.png">
@@ -130,6 +144,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="LauncherDL_Data\ydl.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LauncherDL_Data\LanguagePack">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

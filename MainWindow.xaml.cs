@@ -13,6 +13,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
 
+        Hide();
         if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1)
         {
             MessageBox.Show("Only one instance at a time", "Yep", MessageBoxButton.OK, MessageBoxImage.Exclamation);

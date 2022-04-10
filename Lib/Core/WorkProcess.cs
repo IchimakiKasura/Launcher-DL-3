@@ -10,6 +10,7 @@ public partial class MainWindow
 
 		if (YT.IsFileFormat)
         {
+            if(!IsAppUsed) IsAppUsed = true;
             await FileFormatTask(YT);
             if (TemporaryFormatList.Count > 1)
             {
@@ -26,6 +27,7 @@ public partial class MainWindow
 
         if (YT.IsDownload)
         {
+            if(!IsAppUsed) IsAppUsed = true;
             await DownloadTask(YT);
             ProcessEnds(true);
             Output_text.AddFormattedText("<Pink>[YEY] Download Completed!");

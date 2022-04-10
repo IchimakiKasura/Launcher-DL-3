@@ -11,8 +11,9 @@ public class DebugOutput
     {
         // Only shows when the OutputType is on "Exe" and not "WinExe"
         Console.OutputEncoding = Encoding.UTF8;
-        Console.Title = "LauncherDL: ==== DEVELOPMENT/EXPERIMENTAL BUILD VERSION ====";
-        Console.WriteLine("==== DEVELOPMENT/EXPERIMENTAL BUILD VERSION ====");
+        Console.Title = "LauncherDL: ==== DEBUG ====";
+        Console.WriteLine("==== DEBUG ====\n");
+        Console.WriteLine("\x1b[33mWARNING: If you run \"--debug\" command YOU must close the app by the Window itself\nnot the console because it'll not change the ACP in the registry to default.\nRelauncher and closing through the window will fix it.\x1b[0m");
     }
 
     public static void Close()

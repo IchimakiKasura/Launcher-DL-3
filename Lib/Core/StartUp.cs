@@ -71,8 +71,9 @@ public partial class MainWindow
 		#endregion
 
 		await LoadConfig();
-		System_Language_Handler.LoadLanguage();
-
+		await System_Language_Handler.LoadLanguage();
+		Show();
+		
 		if (Directory.Exists($"{Directory.GetCurrentDirectory()}\\{Config.DefaultOutput}")) Open_Folder.Visibility = Visibility.Visible;
 		if (Config.DefaultOutput != "output" && Directory.Exists(Config.DefaultOutput)) Open_Folder.Visibility = Visibility.Visible;
 

@@ -1,126 +1,98 @@
 ﻿namespace Launcher_DL_v6;
 
+using kasuNhentaiCS.Json;
 internal class System_Language_Handler : MainWindow
 {
-    public static string DefaultInputLinkUID = "Valid Link";
-    public static string DefaultLinkContent = "Link:";
-    public static string DefaultNameInput = "optional";
-    public static string DefaultInputLinkUIDTwo = "File Location";
-    public static string DefaultLinkContentTwo = "File:";
-    public static string DefaultNameInputTwo = "Required";
 
-    public static void LoadLanguage()
+    public static string Button_Convert = "Convert";
+    public static string Placeholder_Link = "Valid Link";
+    public static string Placeholder_Optional = "optional";
+    public static string Placeholder_File = "File Location";
+    public static string Placeholder_Required = "Required";
+    public static string Label_Link = "Link:";
+    public static string Label_File = "File:";
+
+
+    public static async Task LoadLanguage()
     {
+
+        if (!File.Exists("LauncherDL_Data/LanguagePack"))
+        {
+            MessageBox.Show("LanguagePack is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MW.Close();
+        };
+
+        string json = await File.ReadAllTextAsync("LauncherDL_Data/LanguagePack");
+        for (int i = 0; i < 5; i++) json = Encoding.UTF8.GetString(Convert.FromBase64String(json));
+
+        JsonDeserializer Text = new (json);
+
         switch (MW.Config.SystemLanguage.ToLower())
         {
-			case "english":		English();	break;
+            case "english":     English(); break;
 
-			case "japanese":	Japanese(); break;
+            case "japanese":    AppLanguage(Text, 0); break;
 
-			case "tagalog":		Tagalog();	break;
+            case "tagalog":     AppLanguage(Text, 1); break;
 
-			case "bruh":		bruh();		break;
+            case "bruh":        AppLanguage(Text, 2); break;
         }
     }
 
-    public static void English(string LineType = default)
+    public static void English()
     {
         MW.Button_Download.Content = "Download";
         MW.Button_Format.Content = "File Format";
         MW.Button_Update.Content = "Update";
     }
 
-    public static void Japanese(string LineType = default)
+    public static void AppLanguage(JsonDeserializer Text, int Langauge)
     {
-        DefaultNameInputTwo = "所要";
-        DefaultInputLinkUIDTwo = "ファイルの場所";
-        DefaultLinkContentTwo = "ファイル:";
-        MW.Button_Download.Content = "ダウンロード";
-        MW.Button_Format.Content = "ファイルフォーマット";
-        MW.Button_Update.Content = "アップデート";
-        MW.Text_DownloadType.Content = "ダウンロードタイプ:";
-        MW.Text_Format.Content = "フォーマット";
-        MW.Text_Name.Content = "名前";
-        MW.ComboBox_Label_Custom.Content = "カスタム";
-        MW.ComboBox_Label_Video.Content = "ビデオ";
-        MW.ComboBox_Label_Audio.Content = "オーディオ";
-        MW.Text_Link.Content = DefaultLinkContent = "リンク:";
-        DefaultInputLinkUID = MW.Input_Link.Uid = "有効なリンク";
-        MW.Open_File.Content = "ファイルを開く";
-        MW.Input_Name.Uid = DefaultNameInput ="オプショナル";
-        MW.Open_Folder.Content = "フォルダ開ける";
-        MW.OpenDir_Video.Header = "ビデオ開ける";
-        MW.OpenDir_Audio.Header = "オーディオ開ける";
-        MW.OpenDir_Convert.Header = "変換済みを開く";
-        MW.OpenDir_Formatted.Header = "フォーマット済み";
-        MW.OpenDir_mFourA.Header = "ｍ４ａ";
-        MW.OpenDir_mpThree.Header = "ｍｐ３";
-        MW.OpenDir_mpFour.Header = "ｍｐ４";
-        MW.OpenDir_webm.Header = "ｗｅｂｍ";
-        MW.OpenDir_threeGP.Header = "３ｇｐ";
-        MW.OpenDir_flv.Header = "ｆｌｖ";
-        MW.OpenDir_mkv.Header = "ｍｋｖ";
-        MW.VideoType = new() { "ｍｐ４", "ｍｋｖ", "ｗｅｂｍ", "ｆｌｖ", "３ｇｐ" };
-        MW.AudioType = new() { "ｍｐ３", "ｗｅｂｍ", "ｍ４ａ", "ｍｐ４"};
-    }
+        // Labels
+        MW.Text_DownloadType.Content = Text.selector($"Counter:{Langauge}>Label>Type");
+        MW.Text_Format.Content = Text.selector($"Counter:{Langauge}>Label>Format");
+        MW.Text_Link.Content = Label_Link = Text.selector($"Counter:{Langauge}>Label>Link");
+        MW.Text_Name.Content = Text.selector($"Counter:{Langauge}>Label>Name");
+        Label_File = Text.selector($"Counter:{Langauge}>Label>File");
 
-    public static void Tagalog(string LineType = default)
-    {
-        DefaultNameInputTwo = "Kailangan";
-        DefaultInputLinkUIDTwo = "Lokasyon ng File";
-        DefaultLinkContentTwo = "Ang File:";
-        MW.Button_Download.Content = "I-Download";
-        MW.Button_Format.Content = "Pormat ng File";
-        MW.Button_Update.Content = "I-Update";
-        MW.Text_DownloadType.Content = "Uri ng I-dodownload:";
-        MW.Text_Format.Content = "Pormat";
-        MW.Text_Name.Content = "Pangalan";
-        MW.ComboBox_Label_Custom.Content = "Sariling paraan?";
-        MW.ComboBox_Label_Video.Content = "Bidyo";
-        MW.ComboBox_Label_Audio.Content = "Musika";
-        MW.Text_Link.Content = DefaultLinkContent = "Ang link:";
-        DefaultInputLinkUID = MW.Input_Link.Uid = "Totoong Link";
-        MW.Open_File.Content = "Buksan ang File";
-        MW.Input_Name.Uid = DefaultNameInput ="Opsyonal";
-        MW.Open_Folder.Content = "Buksan ang Paniklop";
-        MW.OpenDir_Video.Header = "Buksan ang Bidyo Polder";
-        MW.OpenDir_Audio.Header = "Buksan ang Musika Polder";
-        MW.OpenDir_Convert.Header = "Buksan ang na-convert";
-        MW.OpenDir_Formatted.Header = "Pormado";
-    }
+        // Placeholder
+        MW.Input_Link.Uid = Placeholder_Link = Text.selector($"Counter:{Langauge}>Placeholder>Link");
+        MW.Input_Link.Uid = Placeholder_File = Text.selector($"Counter:{Langauge}>Placeholder>File");
+        MW.Input_Name.Uid = Placeholder_Optional = Text.selector($"Counter:{Langauge}>Placeholder>Optional");
+        MW.Input_Name.Uid = Placeholder_Required = Text.selector($"Counter:{Langauge}>Placeholder>Required");
 
-    public static void bruh(string LineType = default)
-    {
-        DefaultNameInputTwo = "Name this fucker";
-        DefaultInputLinkUIDTwo = "The file location okay?";
-        DefaultLinkContentTwo = "Where did you hide the file:";
-        MW.Button_Download.Content = "Fucken Download";
-        MW.Button_Format.Content = "U gonna format Akira?";
-        MW.Button_Update.Content = "Update this archon fuck";
-        MW.Text_DownloadType.Content = "What fucken type:";
-        MW.Text_Format.Content = "For-fucking-mat";
-        MW.Text_Name.Content = "Name the fuck?";
-        MW.ComboBox_Label_Custom.Content = "Custom?!?";
-        MW.ComboBox_Label_Video.Content = "Vid...";
-        MW.ComboBox_Label_Audio.Content = "Illegal audio";
-        MW.Text_Link.Content = DefaultLinkContent = "Bruh you illiterate?:";
-        DefaultInputLinkUID = MW.Input_Link.Uid = "Real Link you fuck";
-        MW.Open_File.Content = "Open File?";
-        MW.Input_Name.Uid = DefaultNameInput = "Name it if you fucking want to name it";
-        MW.Open_Folder.Content = "Open Fuck";
-        MW.OpenDir_Video.Header = "Open the fucking video folder";
-        MW.OpenDir_Audio.Header = "Open the fucking audio folder";
-        MW.OpenDir_Convert.Header = "Open the fucking converted folder";
-        MW.OpenDir_Formatted.Header = "Those other 4 formats because you picked Custom";
-        MW.OpenDir_mFourA.Header = "M4A1";
-        MW.OpenDir_mpThree.Header = "MP3-S";
-        MW.OpenDir_mpFour.Header = "MP4EASADAWDKASLDORJGR";
-        MW.OpenDir_webm.Header = "WEBENEMENEMBEMENB";
-        MW.OpenDir_threeGP.Header = "gpgpgp";
-        MW.OpenDir_flv.Header = "feleve";
-        MW.OpenDir_mkv.Header = "mkvvkmkv";
-        MW.VideoType = new() { "MP4EASADAWDKASLDORJGR", "mkvvkmkv", "WEBENEMENEMBEMENB", "feleve", "gpgpgp" };
-        MW.AudioType = new() { "MP3-S", "WEBENEMENEMBEMENB", "M4A1", "MP4EASADAWDKASLDORJGR"};
+        // Buttons
+        MW.Button_Format.Content = Text.selector($"Counter:{Langauge}>Button>Format");
+        MW.Button_Download.Content = Text.selector($"Counter:{Langauge}>Button>Download");
+        MW.Button_Update.Content = Text.selector($"Counter:{Langauge}>Button>Update");
+        MW.Open_Folder.Content = Text.selector($"Counter:{Langauge}>Button>OpenFolder");
+        MW.Open_File.Content = Text.selector($"Counter:{Langauge}>Button>OpenFile");
+        Button_Convert = Text.selector($"Counter:{Langauge}>Button>Convert");
+
+        // Types
+        MW.ComboBox_Label_Custom.Content = Text.selector($"Counter:{Langauge}>Types>Custom");
+        MW.ComboBox_Label_Video.Content = Text.selector($"Counter:{Langauge}>Types>Video");
+        MW.ComboBox_Label_Audio.Content = Text.selector($"Counter:{Langauge}>Types>Audio");
+        MW.ComboBox_Label_Convert.Content = Text.selector($"Counter:{Langauge}>Types>Convert");
+
+        // Open Folder Context Menu
+        MW.OpenDir_Video.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Video");
+        MW.OpenDir_Audio.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Audio");
+        MW.OpenDir_Convert.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Convert");
+        MW.OpenDir_Formatted.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formatted");
+
+        // Formatted Context Menu
+        if (Langauge != 1)
+        {
+            MW.OpenDir_mFourA.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formats>m4a");
+            MW.OpenDir_mpThree.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formats>mp3");
+            MW.OpenDir_mpFour.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formats>mp4");
+            MW.OpenDir_webm.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formats>webm");
+            MW.OpenDir_mkv.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formats>mkv");
+            MW.OpenDir_threeGP.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formats>3gp");
+            MW.OpenDir_flv.Header = Text.selector($"Counter:{Langauge}>OpenFolder>Formats>flv");
+        }
+
     }
 
 }

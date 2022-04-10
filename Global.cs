@@ -1,25 +1,4 @@
-﻿global using System;
-global using System.IO;
-global using System.Text;
-global using System.Windows;
-global using Microsoft.Win32;
-global using System.Reflection;
-global using System.Diagnostics;
-global using System.Windows.Input;
-global using System.Windows.Media;
-global using System.ComponentModel;
-global using System.Windows.Interop;
-global using System.Threading.Tasks;
-global using System.Windows.Controls;
-global using System.Windows.Threading;
-global using System.Windows.Documents;
-global using System.Collections.Generic;
-global using System.Windows.Media.Imaging;
-global using System.Runtime.InteropServices;
-global using System.Text.RegularExpressions;
-global using System.Windows.Media.Animation;
-
-namespace Launcher_DL_v6;
+﻿namespace Launcher_DL_v6;
 // Variables for MainWindow
 public partial class MainWindow
 {
@@ -93,6 +72,8 @@ public partial class MainWindow
     // others
     private bool IsDownloading = false;
     private MemoryStream DocumentTemp;
+    public bool IsAppUsed = false;
+
 
     // Window Flashing
     [DllImport("user32.dll", CallingConvention = CallingConvention.Cdecl)]

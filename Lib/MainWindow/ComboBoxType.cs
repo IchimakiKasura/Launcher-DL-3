@@ -81,9 +81,9 @@ public partial class MainWindow
                 Text_Link.HorizontalAlignment = HorizontalAlignment.Left;
                 Input_Link.Width =
                 Text_Link.Width = 360;
-                Input_Link.Uid = System_Language_Handler.DefaultInputLinkUIDTwo;
-                Text_Link.Content = System_Language_Handler.DefaultLinkContentTwo;
-                Input_Name.Uid = System_Language_Handler.DefaultNameInputTwo;
+                Input_Link.Uid = System_Language_Handler.Placeholder_File;
+                Text_Link.Content = System_Language_Handler.Label_File;
+                Input_Name.Uid = System_Language_Handler.Placeholder_Required;
                 Open_File.Visibility = Visibility.Visible;
                 Button_Download.Click -= Download;
                 Button_Download.Click += ConvertFile;
@@ -97,9 +97,9 @@ public partial class MainWindow
             Text_Link.HorizontalAlignment = HorizontalAlignment.Center;
             Input_Link.Width = 446;
             Text_Link.Width = 65;
-            Input_Link.Uid = System_Language_Handler.DefaultInputLinkUID;
-            Text_Link.Content = System_Language_Handler.DefaultLinkContent;
-            Input_Name.Uid = System_Language_Handler.DefaultNameInput;
+            Input_Link.Uid = System_Language_Handler.Placeholder_Link;
+            Text_Link.Content = System_Language_Handler.Label_Link;
+            Input_Name.Uid = System_Language_Handler.Placeholder_Optional;
             Open_File.Visibility = Visibility.Hidden;
             Button_Download.Click -= ConvertFile;
             Button_Download.Click -= Download;

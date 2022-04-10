@@ -21,16 +21,11 @@ Cloning my project? sure..?
 ## Requirements
 - .NET 6.0 SDK
 
-There are two ways to run: <br>
-- [**Debug Mode**]
-    - In debug mode a Debug Console prompt will show. This is where to easily notice any weird bugs
-    and also see if things are working the way they are:
-    ![image](https://user-images.githubusercontent.com/80595346/161400931-48cc5260-9b6f-4c78-ae70-af5d0637a8cd.png)
-- [**Normal Mode**]
-    - Its like the same thing but with no console prompt.
+To run **Debug mode**:<br>
+run the app with the argument `--debug`.<br>
+ex:
 
-To run on **Debug mode** change the output type from the csproj to "Exe"
-To run on **Normal mode** change the output type from the csproj to "WinExe"
+    uvad --debug
 
 NOTE: im still inexperience on using MSBUILD so i'll try my best so that you'll no longer change it manually.
 

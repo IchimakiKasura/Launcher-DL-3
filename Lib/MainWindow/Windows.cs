@@ -78,7 +78,7 @@ public partial class MainWindow
             Output_text.Document.ContentEnd
         );
 
-        if (textRange.Text.Length >= 221)
+        if (IsAppUsed)
         {
             if (!IsDownloading) Output_text.AddText("Exiting...");
             else Output_text.AddFormattedText("<Yellow>[INFO] <>Cannot Exit when download is started!");
