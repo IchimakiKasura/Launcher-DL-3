@@ -9,6 +9,7 @@
 ! "Samples/Senku.png"
 ! "Samples/ILLEGAL.png"
 ! change the background.
+! DEFAULT: background.png
 !============================================================
 BackgroundName:             "background.png"
 
@@ -16,6 +17,7 @@ BackgroundName:             "background.png"
 
 ! change the background.
 ! NOTE: the first two letters are Alpha if you are using a HEX format.
+! DEFAULT: #FF713131
 !============================================================
 BackgroundColor:            "#FF713131"
 
@@ -23,13 +25,14 @@ BackgroundColor:            "#FF713131"
 
 ! change the outer glow color.
 ! NOTE: the first two letters are Alpha if you are using a HEX format.
+! DEFAULT: #FFFF8282
 !============================================================
 GlowColor:                  "#FFFF8282"
 
 
 
 ! Default output folder
-! default is "output"
+! DEFAULT: output
 !============================================================
 DefaultOutput:              "output"
 
@@ -40,11 +43,13 @@ DefaultOutput:              "output"
 ! 0 = Custom
 ! 1 = Video
 ! 2 = Audio
+! DEFAULT: 0
 !============================================================
 DefaultFileTypeOnStartUp:   "0"
 
 
 ! Shows the "[SYSTEM]" outputs on the Log.
+! DEFAULT: true
 !============================================================
 ShowSystemOutput:           "true"
 
@@ -52,17 +57,34 @@ ShowSystemOutput:           "true"
 
 ! When downloading a playlist video.
 ! If false it will no longer ask "Download the Playlist?"
+! DEFAULT: false
 !============================================================
 EnablePlaylist:             "false"
 
 
 
 ! Change System Language
-! Default: "default"
 ! Available Languages:
 ! "Tagalog"
 ! "English"
 ! "Japanese" - idfk if its accurate
 ! "Bruh"
+! DEFAULT: default
 !============================================================
-Language:                   "English"
+Language:                   "Japanese"
+
+
+! If you're trying to download a video that needs an account.
+! Enable this option.
+! DEFAULT AllowCookies: false
+! DEFAULT BrowserCookie: chrome
+!============================================================
+AllowCookies:               "false"
+BrowserCookie:              "chrome"
+
+
+! If you're experiencing animation issues or performance issues.
+! Disable this option.
+! DEFAULT: true
+!============================================================
+EpicAnimations:             "true"

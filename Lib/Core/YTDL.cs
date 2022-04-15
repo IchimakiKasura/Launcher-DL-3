@@ -1,121 +1,127 @@
-namespace Launcher_DL_v6;
+namespace Launcher_DL.Lib.Core;
 
-public class YTDL_object
+sealed class YTDL_object
 {
-	public string Link { get; set; }
-	public string Arguments { get; set; }
-	public bool IsUpdate { get; set; } = false;
-	public bool IsDownload { get; set; } = false;
-	public bool IsFileFormat { get; set; } = false;
+    public string Link { get; set; }
+    public string Arguments { get; set; }
+    public bool IsUpdate { get; set; } = false;
+    public bool IsDownload { get; set; } = false;
+    public bool IsFileFormat { get; set; } = false;
 
 }
 
 
-public partial class MainWindow
+sealed class YTDL : Global
 {
-	public string YTDL_Validate()
-	{
-		return $"--get-filename -o '%(title)s' {Input_Link.Text}";
-	}
-	
-	public YTDL_object YTDL_Update()
-	{
-		return new ()
-		{
-			Link = Input_Link.Text,
-			Arguments = "-U",
-			IsUpdate = true
-		};
-	}
+    public string YTDL_Validate()
+    {
+        return $"--get-filename -o '%(title)s' {Input_Link.Text} --verbose --no-playlist --encoding utf8";
+    }
 
-	public YTDL_object YTDL_FileFormat()
-	{
-		string Args = $"--compat-options format-sort -F {Input_Link.Text}";
+    public YTDL_object YTDL_Update()
+    {
+        return new()
+        {
+            Link = Input_Link.Text,
+            Arguments = "-U",
+            IsUpdate = true
+        };
+    }
 
-		if(!Config.EnablePlaylist) Args += " --no-playlist";
+    public YTDL_object YTDL_FileFormat()
+    {
+        string Args = $"--compat-options format-sort -F {Input_Link.Text}";
 
-		return new()
-		{
-			Arguments = Args,
-			IsFileFormat = true
-		};
+        if (!Config.EnablePlaylist) Args += " --no-playlist";
 
-	}
+        return new()
+        {
+            Arguments = Args,
+            IsFileFormat = true
+        };
 
-	public YTDL_object YTDL_Download()
-	{
-		string arguments = string.Empty;
-		string name = string.Empty;
+    }
 
-		if(!string.IsNullOrEmpty(Input_Name.Text))
-		{
-			TemporaryEncodedName = name = Convert.ToBase64String(Encoding.UTF8.GetBytes(Input_Name.Text));
-		}
+    public YTDL_object YTDL_Download()
+    {
+        string arguments = string.Empty;
+        string name = string.Empty;
 
-		switch(Input_Type.SelectedIndex)
-		{
-			// Custom
-			case 0:
+        if (!string.IsNullOrEmpty(Input_Name.Text))
+        {
+            TemporaryEncodedName = name = Convert.ToBase64String(Encoding.UTF8.GetBytes(Input_Name.Text));
+        }
 
-				arguments = $"-f \"{TemporarySelectedFileFormat}\" {Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
+        switch (Input_Type.SelectedIndex)
+        {
+            // Custom
+            case 0:
 
-				if (TemporarySelectedFileFormat.Contains("Best") || TemporarySelectedFileFormat.Contains("best"))
-					arguments = $"-f b {Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
-				
-				if(string.IsNullOrEmpty(Input_Format.Text))
-					arguments = $"{Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
+                arguments = $"-f \"{TemporarySelectedFileFormat}\" {Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
 
-				if (!string.IsNullOrEmpty(Input_Name.Text))
-					arguments = arguments.Replace("%(title)s", name);
+                if (TemporarySelectedFileFormat.Contains("Best") || TemporarySelectedFileFormat.Contains("best"))
+                    arguments = $"-f b {Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
 
-			break;
+                if (string.IsNullOrEmpty(Input_Format.Text))
+                    arguments = $"{Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
 
-			// Video
-			case 1:
+                if (Input_Format.Text.Contains("-"))
+                {
+                    arguments = $"{Input_Format.Text} {Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
+                }
 
-				arguments = "--recode-video";
-				switch(Input_Format.SelectedIndex)
-				{
-					case 0: arguments += " mp4"; break;
-					case 1: arguments += " mkv"; break;
-					case 2: arguments += " webm"; break;
-					case 3: arguments += " flv"; break;
-					case 4: arguments = "-f b"; break;
-				};
+                if (!string.IsNullOrEmpty(Input_Name.Text))
+                    arguments = arguments.Replace("%(title)s", name);
 
-				if (!string.IsNullOrEmpty(Input_Name.Text))
-					arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Video/{name}.%(ext)s";
-				else arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Video/%(title)s.%(ext)s";
+                break;
 
-			break;
+            // Video
+            case 1:
 
-			// Audio
-			case 2:
+                arguments = "--recode-video";
+                switch (Input_Format.SelectedIndex)
+                {
+                    case 0: arguments += " mp4"; break;
+                    case 1: arguments += " mkv"; break;
+                    case 2: arguments += " webm"; break;
+                    case 3: arguments += " flv"; break;
+                    case 4: arguments = "-f b"; break;
+                };
 
-				arguments = "-x --audio-format";
-				switch(Input_Format.SelectedIndex)
-				{
-					case 0: arguments += $" mp3"; break;
-					case 1: arguments += $" webm"; break;
-					case 2: arguments += $" m4a"; break;
-					case 3: arguments += $" mp4"; break;
-					case 4: arguments = $"-f bestaudio"; break;
-				};
+                if (!string.IsNullOrEmpty(Input_Name.Text))
+                    arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Video/{name}.%(ext)s";
+                else arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Video/%(title)s.%(ext)s";
 
-				if (!string.IsNullOrEmpty(Input_Name.Text))
-					arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Audio/{name}.%(ext)s";
-				else arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Audio/%(title)s.%(ext)s";
+                break;
 
-			break;
-		}
+            // Audio
+            case 2:
 
-		if(!Config.EnablePlaylist) arguments += " --no-playlist";
-		arguments += $" --ffmpeg-location \"{Ffmpeg}\" --no-part";
-		
-		return new()
-		{
-			Arguments = arguments,
-			IsDownload = true
-		};
-	}
+                arguments = "-x --audio-format";
+                switch (Input_Format.SelectedIndex)
+                {
+                    case 0: arguments += $" mp3"; break;
+                    case 1: arguments += $" webm"; break;
+                    case 2: arguments += $" m4a"; break;
+                    case 3: arguments += $" mp4"; break;
+                    case 4: arguments = $"-x -f b"; break;
+                };
+
+                if (!string.IsNullOrEmpty(Input_Name.Text))
+                    arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Audio/{name}.%(ext)s";
+                else arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Audio/%(title)s.%(ext)s";
+
+                break;
+        }
+
+        if (!Config.EnablePlaylist) arguments += " --no-playlist";
+        if (Config.AllowCookies) arguments += $"--cookies-from-browser {Config.BrowserCookie}";
+        arguments += $" --ffmpeg-location \"{Ffmpeg}\" --no-part";
+
+        return new()
+        {
+            Arguments = arguments,
+            IsDownload = true
+        };
+    }
 }

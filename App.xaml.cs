@@ -1,76 +1,110 @@
-﻿namespace Launcher_DL_v6
+﻿namespace Launcher_DL;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    const uint ENABLE_QUICK_EDIT = 0x0040;
+    #region DLL imports
+    [DllImport("user32.dll")]
+    private static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+    [DllImport("kernel32.dll", ExactSpelling = true)]
+    private static extern IntPtr GetConsoleWindow();
+    [DllImport("Kernel32")]
+    private static extern void AllocConsole();
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern IntPtr GetStdHandle(int nStdHandle);
+
+    [DllImport("kernel32.dll")]
+    static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode);
+
+    [DllImport("kernel32.dll")]
+    static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
+    #endregion
+    private void App_Startup(object s, StartupEventArgs e)
     {
-        private const int MF_BYCOMMAND = 0x00000000;
-        public const int SC_CLOSE = 0xF060;
-        public const int SC_MINIMIZE = 0xF020;
-        public const int SC_MAXIMIZE = 0xF030;
+        Application.Current.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
 
-        [DllImport("user32.dll")]
-        public static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-
-        [DllImport("kernel32.dll", ExactSpelling = true)]
-        private static extern IntPtr GetConsoleWindow();
-
-        [DllImport("Kernel32")]
-        private static extern void AllocConsole();
-
-        void App_Startup(object s, StartupEventArgs e)
+        // Prevents opening another app.
+        if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
         {
-            ContextMenuAdjust();
+            MessageBox.Show("Only one instance at a time", "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            Environment.Exit(0);
+        };
 
-			try
-			{
-                RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Nls\CodePage", true);
-                key.SetValue("ACP", "65001", RegistryValueKind.String);
-			}
-            catch
-			{
-                MessageBox.Show("For best experience, Run the application in Administrator\n if you're not Ok seeings blank titles in the console because its not\nrendered in UTF-8 format", "Note", MessageBoxButton.OK, MessageBoxImage.Warning);
-			};
+        ContextMenuAdjust();
 
-            if(e.Args.Length == 1)
-            {
-                if(e.Args[0] == "--debug") AllocConsole();
-                DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_CLOSE, MF_BYCOMMAND);
-                DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_MINIMIZE, MF_BYCOMMAND);
-                DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_MAXIMIZE, MF_BYCOMMAND);
-            }
+        if (e.Args.Length == 1)
+        {
+            if (e.Args[0] != "--debug") return;
+            AllocConsole();
+
+            uint consoleMode;
+            IntPtr consoleHandle = GetStdHandle(-10);
+            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF060, 0x00000000);
+            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF020, 0x00000000);
+            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF030, 0x00000000);
+            GetConsoleMode(consoleHandle, out consoleMode);
+            consoleMode &= ~ENABLE_QUICK_EDIT;
+            SetConsoleMode(consoleHandle, consoleMode);
         }
-        
-        void App_Exit(object s, ExitEventArgs e)
-        {
-			try
-            {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Nls\CodePage", true);
-                key.SetValue("ACP", "1252", RegistryValueKind.String);
-            } catch { }
-        }
+    }
 
-        // Fixes the drop menus going from right to left because i don't know what happened.
-        // Some say its because of the Tablet but I don't use Tablet PC or either have one.
-        // anyways rip tablet users because this forces the menus to go left to right.
-        private void ContextMenuAdjust()
-        {
-            var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
-            Action setAlignmentValue = () =>
-            {
-                if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
-            };
+    private void App_Exit(object s, ExitEventArgs e)
+    {
+        // To be used in future.
+    }
 
+    // Fixes the drop menus going from right to left because i don't know what happened.
+    // Some say its because of the Tablet but I don't use Tablet PC or even have one.
+    private void ContextMenuAdjust()
+    {
+        var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
+        Action setAlignmentValue = () =>
+        {
+            if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
+        };
+
+        setAlignmentValue();
+
+        SystemParameters.StaticPropertyChanged += (sender, e) =>
+        {
             setAlignmentValue();
+        };
+    }
 
-            SystemParameters.StaticPropertyChanged += (sender, e) =>
-            {
-                setAlignmentValue();
-            };
+    private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        CancellationTokenSource oldSource = Interlocked.Exchange(ref Global.CancelWork, null);
+        if (oldSource != null)
+        {
+            oldSource.Cancel();
+            oldSource.Dispose();
         }
-    };
+
+        Global.IsDownloading = false;
+        string errorMessage = $"It Appears the the application encounters an Error!\n\n{e.Exception}";
+
+        // Checks if the Unhandled exception has a custom message.
+        try
+        {
+            var Check = e.Exception.InnerException.Message;
+            errorMessage = $"It Appears the the application encounters an Error!\n\n{Check}";
+        }
+        catch { };
+
+        Global.IsAppUsed = true;
+        Global.Output_text.Break("Red");
+        Global.Output_text.AddText(errorMessage, "Red");
+        Global.Output_text.Break("Red");
+        DebugOutput.UnhandledError(errorMessage);
+
+        if (MessageBox.Show(MainWindow, errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+            MainWindow.Close();
+
+        e.Handled = true;
+    }
 }

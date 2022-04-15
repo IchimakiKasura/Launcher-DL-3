@@ -1,5 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style TargetType="TextBox">
+		<Setter Property="ContextMenu" Value="{DynamicResource TextBoxMenu}" />
+	</Style>
+
 	<Style TargetType="TextBox" x:Key="TB" >
 		<Setter Property="Height" Value="35"/>
 		<Setter Property="Background" Value="#74000000"/>

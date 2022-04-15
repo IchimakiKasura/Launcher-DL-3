@@ -1,4 +1,4 @@
-﻿<Window x:Class="Launcher_DL_v6.MainWindow"
+﻿<Window x:Class="Launcher_DL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,10 +6,9 @@
         mc:Ignorable="d"
 		ResizeMode="CanMinimize"
 		WindowStartupLocation="CenterScreen"
-		WindowStyle="None"
+		WindowStyle="SingleBorderWindow"
 		Background="Transparent"
         Title="Launcher DL" Height="548" Width="932"
-		Loaded="Window_Loaded"
 		FontFamily="./Fonts/#Noto Sans JP">
 
 	<Window.TaskbarItemInfo>
@@ -45,7 +44,7 @@
 					Height="35"
 					Margin="0,0,0,493"
 					Opacity="1"
-					MouseDown="WindowDrag">
+					x:Name="WindowDrag">
 					<Grid>
 						<Image Source="Images/Icon.ico" Margin="9,0,880,0"/>
 						<TextBlock Text="Launcher DL"
@@ -53,8 +52,8 @@
 							   FontWeight="Light"
 							   FontSize="15"
 							   Padding="37,4.5,0,0"/>
-						<Button x:Name="CloseButton" Content="✕" Style="{StaticResource ExitButtonAlt}" Margin="862,0,0,0" ToolTip="Close"/>
-						<Button x:Name="Minimize" Content="—" Style="{StaticResource MinimizeButtonAlt}" Margin="812,0,50,0" ToolTip="Minimize"/>
+						<Button x:Name="CloseButton" Content="✕" Style="{StaticResource ExitButtonAlt}" Margin="862,0,0,0"/>
+						<Button x:Name="Minimize" Content="—" Style="{StaticResource MinimizeButtonAlt}" Margin="812,0,50,0"/>
 					</Grid>
 				</Border>
 				<!--#endregion-->
@@ -99,20 +98,16 @@
 						  IsReadOnly="True">
 						<ComboBoxItem Style="{StaticResource DownloadType}"
 						Content="Custom"
-						ToolTip="Customize settings before downloading."
 						x:Name="ComboBox_Label_Custom"/>
 						<ComboBoxItem Style="{StaticResource DownloadType}"
 						Content="Video"
-						x:Name="ComboBox_Label_Video"
-						ToolTip="Download the Video's &quot;best&quot; format."/>
+						x:Name="ComboBox_Label_Video"/>
 						<ComboBoxItem Style="{StaticResource DownloadType}"
 						Content="Audio"
-						x:Name="ComboBox_Label_Audio"
-						ToolTip="Download the Audio's &quot;best&quot; format."/>
+						x:Name="ComboBox_Label_Audio"/>
 						<ComboBoxItem Style="{StaticResource DownloadType}"
 						Content="Convert"
-						x:Name="ComboBox_Label_Convert"
-						ToolTip="Convert a file to another format type."/>
+						x:Name="ComboBox_Label_Convert"/>
 					</ComboBox>
 
 					<Label x:Name="Text_Link" Content="Link:"
@@ -126,7 +121,7 @@
 						 HorizontalContentAlignment="Center"
 						 Uid="Valid Link" Width="446"/>
 
-					<Grid Margin="0,-15,0,0">
+						<Grid Margin="0,-15,0,0">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="263*"/>
 							<ColumnDefinition Width="183*"/>
@@ -167,17 +162,17 @@
 				<Button x:Name="Button_Format" Content="ファイルフォーマット"
 						Margin="10,264,456,180"
 						Style="{StaticResource Akira}"
-						Background="#CCFBC2C2" ToolTip="Fetch File formats"
+						Background="#CCFBC2C2"
 						FontFamily="./Fonts/#Noto Sans JP"/>
 				<Button x:Name="Button_Download" Content="ダウンロード"
 						Margin="10,336,456,108"
 						Style="{StaticResource Astolfo}"
-						Background="#CCFBC2C2" ToolTip="Download"
+						Background="#CCFBC2C2"
 						FontFamily="./Fonts/#Noto Sans JP"/>
 				<Button x:Name="Button_Update" Content="アップデート"
 						Margin="10,408,456,36"
 						Style="{StaticResource Venti}"
-						Background="#CCFBC2C2" ToolTip="Update"
+						Background="#CCFBC2C2"
 						FontFamily="./Fonts/#Noto Sans JP"/>
 
 				<ProgressBar x:Name="Window_ProgressBar"
@@ -191,43 +186,50 @@
 						Background="#74000000"
 						Foreground="White"
 						Cursor="Hand"
-						Visibility="Hidden"
+						Visibility="Visible"
 						Style="{StaticResource NormalButtons}">
 					<Button.ContextMenu>
 						<ContextMenu StaysOpen="true">
-							<MenuItem
-						Header="Open Video"
-						x:Name="OpenDir_Video" />
-							<MenuItem
-						Header="Open Audio"
-						x:Name="OpenDir_Audio" />
-							<MenuItem
-						Header="Open Converted"
-						x:Name="OpenDir_Convert" />
-							<MenuItem
-						Header="Formatted"
-								x:Name="OpenDir_Formatted">
-								<MenuItem
-							Header="m4a"
-							x:Name="OpenDir_mFourA" />
-								<MenuItem
-							Header="mp3"
-							x:Name="OpenDir_mpThree" />
-								<MenuItem
-							Header="mp4"
-							x:Name="OpenDir_mpFour" />
-								<MenuItem
-							Header="webm"
-							x:Name="OpenDir_webm" />
-								<MenuItem
-							Header="3gp"
-							x:Name="OpenDir_threeGP" />
-								<MenuItem
-							Header="flv"
-							x:Name="OpenDir_flv" />
-								<MenuItem
-							Header="mkv"
-							x:Name="OpenDir_mkv" />
+							<MenuItem Header="Open Video"
+									  x:Name="OpenDir_Video">
+								<MenuItem.Icon>
+									<Image Source="pack://application:,,,/Images/ContextMenu/multimedia.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Open Audio"
+									 x:Name="OpenDir_Audio">
+								<MenuItem.Icon>
+									<Image Source="pack://application:,,,/Images/ContextMenu/volume.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Open Converted"
+									 x:Name="OpenDir_Convert">
+								<MenuItem.Icon>
+									<Image Source="pack://application:,,,/Images/ContextMenu/convert.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Logs"
+									 x:Name="OpenDir_Logs">
+								<MenuItem.Icon>
+									<Image Source="pack://application:,,,/Images/ContextMenu/log-file.png"/>
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Formatted"
+									 x:Name="OpenDir_Formatted">
+								<MenuItem Header="m4a"
+										  x:Name="OpenDir_mFourA" />
+								<MenuItem Header="mp3"
+										  x:Name="OpenDir_mpThree" />
+								<MenuItem Header="mp4"
+										  x:Name="OpenDir_mpFour" />
+								<MenuItem Header="webm"
+										  x:Name="OpenDir_webm" />
+								<MenuItem Header="3gp"
+										  x:Name="OpenDir_threeGP" />
+								<MenuItem Header="flv"
+										  x:Name="OpenDir_flv" />
+								<MenuItem Header="mkv"
+										  x:Name="OpenDir_mkv" />
 							</MenuItem>
 						</ContextMenu>
 					</Button.ContextMenu>
@@ -243,9 +245,7 @@
 							   TextAlignment="Center"
 							   FontWeight="Medium"
 							   FontSize="9"
-							   Margin="10,5,0,0"
-							   ToolTip="Like bruh what's this Ⓒ thing? Isn't just I made CLI have a GUI?"
-/>
+							   Margin="10,5,0,0"/>
 					<TextBlock x:Name="Window_VersionLabel"
 							   Text="Build Version:&#x0a;N/A"
 							   HorizontalAlignment="Center"

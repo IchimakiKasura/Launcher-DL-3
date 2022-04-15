@@ -111,7 +111,8 @@
                             IsReadOnly="{TemplateBinding IsReadOnly}"
 							SelectionBrush="#FFFF9C9C"
 						    CaretBrush="#FFFF9C9C"
-							SelectionOpacity="0.3"/>
+							SelectionOpacity="0.3"
+							ContextMenu="{DynamicResource TextBoxMenu}"/>
 						<Popup 
                             Name="Popup"
                             Placement="Bottom"
