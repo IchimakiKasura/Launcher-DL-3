@@ -4,8 +4,15 @@ sealed class Buttons : Global
 {
     public static async void FileFormat(object s, RoutedEventArgs e)
     {
-
+        
         DebugOutput.Button_Clicked("format");
+        
+        if (string.IsNullOrEmpty(Input_Link.Text)) 
+        {
+            Output_text.AddFormattedText("<Yellow>[INFO] <>No Link");
+            return;
+        }
+
         WindowsComp.Window_Components(true);
 
         Output_text.AddFormattedText("<Yellow>[INFO] <>Validating Link:");
@@ -19,13 +26,11 @@ sealed class Buttons : Global
             WindowsComp.Window_Components(false);
             return;
         }
-        else
-        {
-            Input_Format.Items.Clear();
-            TemporaryFormatList.Clear();
-            TemporaryFormatNames.Clear();
-            TemporarySelectedFileFormat = Input_Format.Text = "Best";
-        }
+
+        Input_Format.Items.Clear();
+        TemporaryFormatList.Clear();
+        TemporaryFormatNames.Clear();
+        TemporarySelectedFileFormat = Input_Format.Text = "Best";
 
         if (ValidLink.IsValid == false)
         {
@@ -42,6 +47,13 @@ sealed class Buttons : Global
     public static async void Download(object s, RoutedEventArgs e)
     {
         DebugOutput.Button_Clicked("download");
+                
+        if (string.IsNullOrEmpty(Input_Link.Text)) 
+        {
+            Output_text.AddFormattedText("<Yellow>[INFO] <>No Link");
+            return;
+        }
+
         IsDownloading = true;
 
         if (!string.IsNullOrEmpty(Input_Name.Text))
@@ -85,16 +97,13 @@ sealed class Buttons : Global
         }
 
         if (ValidLink.HasPlaylist)
-        {
             Output_text.AddFormattedText("<Yellow>[INFO] <>The Link is a Playlist...");
-        }
 
         OutputComments.DownloadOutputComments();
         ProgressBarAnim.ProgressBarShow();
         await WorkProcess.StartProcess(new YTDL().YTDL_Download());
     }
 
-    // This is kinda messy
     public static async void ConvertFile(object s, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(Input_Link.Text))
@@ -125,22 +134,7 @@ sealed class Buttons : Global
 
         string Command = $"-i \"{Input_Link.Text}\" -q 0 \"{Config.DefaultOutput}\\Convert\\{Input_Name.Text}.{Input_Format.Text}\"";
 
-
-        Proc = new();
-        Proc.StartInfo = new($"{Ffmpeg}\\ffmpeg.exe", Command)
-        {
-            UseShellExecute = false,
-            RedirectStandardError = true,
-            CreateNoWindow = true
-        };
-
-        Output_text.AddFormattedText("<#83fa57>[PROCESSING] <>Please wait until the conversion is finished.");
-
-        Proc.EnableRaisingEvents = true;
-        Proc.ErrorDataReceived += ConsoleOutputHandler.ConvertOutput;
-        Proc.Start();
-        Proc.BeginErrorReadLine();
-        await Proc.WaitForExitAsync();
+        await ConvertProcess.ConvertFileType(Command);
 
         Output_text.AddFormattedText($"<Pink>[YEY] <>File converted: \"{Config.DefaultOutput}\\Convert\\{Input_Name.Text}.{Input_Format.Text}\"");
 
@@ -174,21 +168,13 @@ sealed class Buttons : Global
 
     public static void OpenFolder(string output)
     {
-        bool IsExist;
+        bool IsExist = Directory.Exists($"{Directory.GetCurrentDirectory()}\\{output}");
 
-        if (Config.DefaultOutput == "output")
-        {
-            IsExist = Directory.Exists($"{Directory.GetCurrentDirectory()}\\{output}");
-        }
-        else
-        {
+        if (Config.DefaultOutput != "output")
             IsExist = Directory.Exists(output);
-        }
 
         if (!IsExist)
-        {
             output = Directory.GetCurrentDirectory();
-        }
 
         Process.Start(new ProcessStartInfo
         {
