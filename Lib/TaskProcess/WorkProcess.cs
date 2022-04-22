@@ -18,21 +18,24 @@ sealed class WorkProcess : Global
             }
             else
             {
-                Output_text.AddFormattedText($"<Red>[ERROR] <>Fetching format failed:\n" +
-                "<Gray>1. Link is not supported?\n" +
-                "<Gray%13>If link is not supported try downloading it using \"Video\" type\n or setting the Format option to \"best\"\n" +
+                Output_text.AddFormattedText($"<Red>[ERROR] <>Fetching format failed:\r" +
+                "<Gray>1. Link is not supported?\r" +
+                "<Gray%10>[ If link is not supported try downloading it using \"Video\" type\r or setting the Format option to \"best\" ]\r" +
                 "<Gray>2. Slow internet might caused the problem.");
             }
         }
 
-        if (YT.IsDownload)
+        if (!YT.IsDownload)
         {
-            if (!IsAppUsed) IsAppUsed = true;
-            await TaskProcessComp.DownloadTask(YT);
-            ProcessEnds(true);
-            Output_text.AddFormattedText("<Pink>[YEY] Download Completed!");
+            ProcessEnds(false);
+            return;
         }
-        else ProcessEnds(false);
+
+        if (!IsAppUsed) IsAppUsed = true;
+        await TaskProcessComp.DownloadTask(YT);
+        ProcessEnds(true);
+        Output_text.AddFormattedText("<Pink>[YEY] Download Completed!");
+
     }
 
     public static void ProcessEnds(bool IsDownload)
@@ -42,6 +45,7 @@ sealed class WorkProcess : Global
         ProgressBarAnim.ProgressBarHide();
         OpenFolderCheck.OpenFolderChecks();
         Window_ProgressBar.Value = 0;
+        TaskBarThingy.Description = MainWindowStatic.Title;
 
         if (IsDownload) Output_text.LoadText(DocumentTemp);
 
@@ -89,6 +93,74 @@ sealed class WorkProcess : Global
         //    Console.WriteLine(item);
         //}
 
+    }
+
+    public static void FileFormatProcess(string StringData, string AudioOnly)
+    {
+        string id = RegexComp.Info.Match(StringData).Groups["id"].Value.Trim(),
+        resolution = RegexComp.Info.Match(StringData).Groups["fullResolution"].Value.Trim(),
+        size = RegexComp.Info.Match(StringData).Groups["size"].Value.Trim(),
+        bitrate = RegexComp.Info.Match(StringData).Groups["Videobitrate"].Value.Trim(),
+        fps = RegexComp.Info.Match(StringData).Groups["fps"].Value.Trim(),
+        format = RegexComp.Info.Match(StringData).Groups["format"].Value.Trim(),
+        vcodec = RegexComp.Info.Match(StringData).Groups["Vcodec"].Value.Trim();
+
+        if (resolution == string.Empty)
+        {
+            resolution = RegexComp.Info.Match(StringData).Groups["audioOnly"].Value.Trim();
+            if (format == "m4a") AudioOnly = id;
+        }
+
+        if (size.Contains("~")) size.Replace("~ ", "~");
+
+        if (Regex.IsMatch(resolution, @".*x.*", RegexOptions.Compiled))
+        {
+            resolution = Regex.Replace(resolution, @".*x", "", RegexOptions.Compiled) + "p";
+            switch (format)
+            {
+                case "mp4":
+                    if (!string.IsNullOrEmpty(AudioOnly)) id += $"+{AudioOnly}";
+                    break;
+                case "webm":
+                    id += "+bestaudio";
+                    break;
+            }
+        }
+
+        // voids a codec that are unsupported by few players.
+        if (string.IsNullOrEmpty(vcodec)) return;
+
+        if (StringData != string.Empty && !StringData.Contains("["))
+        {
+            if (fps != string.Empty) fps += " fps";
+
+            dynamic obj = new
+            {
+                data = StringData,
+                id = id,
+                resolution = resolution,
+                size = size,
+                bitrate = bitrate,
+                fps = fps,
+                format = format
+            };
+
+            if (StringData != string.Empty)
+            {
+                temp = StringData;
+                if (resolution != string.Empty) FormatAdder(obj);
+                return;
+            }
+
+            if (temp != StringData)
+            {
+                temp = StringData;
+                if (resolution != string.Empty) FormatAdder(obj);
+                return;
+            }
+
+            temp = string.Empty;
+        }
     }
 
     public static void FormatAdder(dynamic options)

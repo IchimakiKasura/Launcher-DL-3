@@ -1,5 +1,6 @@
 namespace Launcher_DL.Lib.Core;
 
+/// <summary>The class name says it all</summary>
 sealed class EventHandlers : Global
 {
     public static void SetupEvents()

@@ -1,5 +1,9 @@
 namespace Launcher_DL.Lib.Core;
 
+/// <summary>
+/// Checks if folder exist to set the context menu's<br/>
+/// buttons to be available or not.
+/// </summary>
 sealed class OpenFolderCheck : Global
 {
     public static void OpenFolderChecks()

@@ -43,7 +43,7 @@ class WindowsComp : Global
             if (TaskBarThingy.ProgressValue == 1) TaskBarThingy.ProgressValue = 0;
 
             Opac = new(1, TimeSpan.FromMilliseconds(200));
-            Anim = new(InitialStartUp.ClrConv(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
+            Anim = new(ClrConv(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
             Focus();
             DebugOutput.WindowFocusDebug(true);
         };
@@ -133,20 +133,18 @@ class WindowsComp : Global
             Input_Format.IsEnabled =
             Open_Folder.IsEnabled =
             Input_Type.IsEnabled = false;
+            return;
         }
-        else
-        {
 
-            Button_Download.IsEnabled =
-            Button_Update.IsEnabled =
-            Input_Link.IsEnabled =
-            Input_Name.IsEnabled =
-            Input_Type.IsEnabled =
-            Open_Folder.IsEnabled =
-            Input_Format.IsEnabled = true;
+        Button_Download.IsEnabled =
+        Button_Update.IsEnabled =
+        Input_Link.IsEnabled =
+        Input_Name.IsEnabled =
+        Input_Type.IsEnabled =
+        Open_Folder.IsEnabled =
+        Input_Format.IsEnabled = true;
 
-            if (Input_Type.SelectedIndex == 0) Button_Format.IsEnabled = true;
-        }
+        if (Input_Type.SelectedIndex == 0) Button_Format.IsEnabled = true;
     }
 
     /// <summary>

@@ -1,10 +1,12 @@
 ﻿namespace Launcher_DL.Lib.Core;
 
+/// <summary>Startup Class</summary>
 sealed class InitialStartUp : Global
 {
+    /// <summary>Setups the settings and variables</summary>
     public static void Initialize()
     {
-        CancellationTokenSource newSource = new CancellationTokenSource();
+        CancellationTokenSource newSource = new();
         CancellationTokenSource oldSource = Interlocked.Exchange(ref CancelWork, newSource);
         if (oldSource != null)
         {
@@ -37,23 +39,14 @@ sealed class InitialStartUp : Global
             Config.EpicAnimations = false;
         }
 
-        #region Output Log Startup Texts
-        Output_text.AddFormattedText("<Gray%15>堂主の私に何か用かな？あれ、知らなかった？私が往生堂七十七代目堂主、胡桃だよ！でもあなた、ツヤのある髪に健康そうな体してる･･･そっか！仕事以外で私に用があるってことだね？<>");
-        Output_text.Break("Gray");
-
-        Output_text.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
-        if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content}\"");
-        #endregion
+        OutputComments.StartUpOutputComments();
 
         // Loads the config and Language.
         ConfigComp.LoadConfig(newSource.Token).GetAwaiter();
         System_Language_Handler.LoadLanguage(newSource.Token).GetAwaiter();
 
 
-        MainWindowStatic.Show();
+        MainWindowStatic.Visibility = Visibility.Visible;
         MainWindowStatic.ShowActivated = true;
-        MainWindowStatic.Topmost = true;
     }
-
-    public static Color ClrConv(string color) { return (Color)ColorConverter.ConvertFromString(color); }
 }

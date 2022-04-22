@@ -1,9 +1,7 @@
 namespace Launcher_DL.Lib.Language;
 
-using kasuNhentaiCS.Json;
 sealed class System_Language_Handler : Global
 {
-
     public static string Button_Convert = "Convert";
     public static string Placeholder_Link = "Valid Link";
     public static string Placeholder_Optional = "optional";
@@ -15,17 +13,17 @@ sealed class System_Language_Handler : Global
 
     public static async Task LoadLanguage(CancellationToken ct)
     {
-        if (!File.Exists("LanguagePack.kasu"))
+        if (!File.Exists(KasuLangName))
         {
             MessageBox.Show("LanguagePack is missing!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             MainWindowStatic.Close();
         };
 
-        string json = await File.ReadAllTextAsync("LanguagePack.kasu", ct);
+        string json = await File.ReadAllTextAsync(KasuLangName, ct);
 
         for (int i = 0; i < 5; i++) json = Encoding.UTF8.GetString(Convert.FromBase64String(json));
 
-        JsonDeserializer Text = new(json);
+        kasuNhentaiCS.Json.JsonDeserializer Text = new(json);
 
         switch (Config.SystemLanguage.ToLower())
         {
@@ -46,7 +44,7 @@ sealed class System_Language_Handler : Global
         Button_Update.Content = "Update";
     }
 
-    public static void AppLanguage(JsonDeserializer Text, int Langauge)
+    public static void AppLanguage(kasuNhentaiCS.Json.JsonDeserializer Text, int Langauge)
     {
         // Labels
         Text_DownloadType.Content = Text.selector($"Counter:{Langauge}>Label>Type");

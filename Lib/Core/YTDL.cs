@@ -1,5 +1,6 @@
 namespace Launcher_DL.Lib.Core;
 
+/// <summary>YTDL objects</summary>
 sealed class YTDL_object
 {
     public string Link { get; set; }
@@ -10,12 +11,14 @@ sealed class YTDL_object
 
 }
 
-
+/// <summary>Youtube DLP arguments generator?</summary>
 sealed class YTDL : Global
 {
     public string YTDL_Validate()
     {
-        return $"--get-filename -o '%(title)s' {Input_Link.Text} --verbose --no-playlist --encoding utf8";
+        string arg = $"--get-filename -o '%(title)s' {Input_Link.Text} --verbose --no-playlist --encoding utf8";
+        if (Config.AllowCookies) arg += $" --cookies-from-browser {Config.BrowserCookie}";
+        return arg;
     }
 
     public YTDL_object YTDL_Update()
@@ -33,6 +36,7 @@ sealed class YTDL : Global
         string Args = $"--compat-options format-sort -F {Input_Link.Text}";
 
         if (!Config.EnablePlaylist) Args += " --no-playlist";
+        if (Config.AllowCookies) Args += $" --cookies-from-browser {Config.BrowserCookie}";
 
         return new()
         {
@@ -48,8 +52,12 @@ sealed class YTDL : Global
         string name = string.Empty;
 
         if (!string.IsNullOrEmpty(Input_Name.Text))
-        {
             TemporaryEncodedName = name = Convert.ToBase64String(Encoding.UTF8.GetBytes(Input_Name.Text));
+
+        if (Input_Link.Text.Contains("facebook") && string.IsNullOrEmpty(Input_Name.Text))
+        {
+            var TempName = $"Facebook [{Regex.Match(Input_Link.Text, @"\/(?<Name>[0-9]+)").Groups["Name"].Value}]";
+            TemporaryEncodedName = name = Convert.ToBase64String(Encoding.UTF8.GetBytes(TempName));
         }
 
         switch (Input_Type.SelectedIndex)
@@ -66,12 +74,7 @@ sealed class YTDL : Global
                     arguments = $"{Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
 
                 if (Input_Format.Text.Contains("-"))
-                {
                     arguments = $"{Input_Format.Text} {Input_Link.Text} -o {Config.DefaultOutput}/formatted/%(ext)s/%(title)s.%(ext)s";
-                }
-
-                if (!string.IsNullOrEmpty(Input_Name.Text))
-                    arguments = arguments.Replace("%(title)s", name);
 
                 break;
 
@@ -88,10 +91,7 @@ sealed class YTDL : Global
                     case 4: arguments = "-f b"; break;
                 };
 
-                if (!string.IsNullOrEmpty(Input_Name.Text))
-                    arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Video/{name}.%(ext)s";
-                else arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Video/%(title)s.%(ext)s";
-
+                arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Video/%(title)s.%(ext)s";
                 break;
 
             // Audio
@@ -107,16 +107,16 @@ sealed class YTDL : Global
                     case 4: arguments = $"-x -f b"; break;
                 };
 
-                if (!string.IsNullOrEmpty(Input_Name.Text))
-                    arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Audio/{name}.%(ext)s";
-                else arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Audio/%(title)s.%(ext)s";
-
+                arguments += $" {Input_Link.Text} -o {Config.DefaultOutput}/Audio/%(title)s.%(ext)s";
                 break;
         }
 
         if (!Config.EnablePlaylist) arguments += " --no-playlist";
-        if (Config.AllowCookies) arguments += $"--cookies-from-browser {Config.BrowserCookie}";
+        if (Config.AllowCookies) arguments += $" --cookies-from-browser {Config.BrowserCookie}";
         arguments += $" --ffmpeg-location \"{Ffmpeg}\" --no-part";
+
+        if (!string.IsNullOrEmpty(name))
+            arguments = arguments.Replace("%(title)s", name);
 
         return new()
         {

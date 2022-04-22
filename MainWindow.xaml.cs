@@ -20,7 +20,6 @@ public partial class MainWindow : Window
         }
 
         InitializeComponent();
-        StaticSetup();
         Global.MainWindowStatic = this;
 
         // Setups an Event for taskbar flashing
@@ -33,6 +32,10 @@ public partial class MainWindow : Window
         {
             MessageBox.Show(Global.HiddenButtonText, "huzuaah!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
         };
+
+        // Defines all the MainWindow instantiated variables
+        // to static variables.
+        StaticSetup();
 
         // Configures the Top Buttons Events
         TopButtons.InitializeTopButtons();

@@ -1,4 +1,6 @@
-﻿namespace Launcher_DL;
+﻿using Update;
+
+namespace Launcher_DL;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -24,9 +26,13 @@ public partial class App : Application
     [DllImport("kernel32.dll")]
     static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
     #endregion
+    
     private void App_Startup(object s, StartupEventArgs e)
     {
         Application.Current.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
+
+        // Checks if there's new version of the Launcher DL
+        new Updater();
 
         // Prevents opening another app.
         if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)

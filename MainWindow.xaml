@@ -9,7 +9,8 @@
 		WindowStyle="SingleBorderWindow"
 		Background="Transparent"
         Title="Launcher DL" Height="548" Width="932"
-		FontFamily="./Fonts/#Noto Sans JP">
+		FontFamily="./Fonts/#Noto Sans JP"
+		Visibility="Hidden">
 
 	<Window.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="TaskBarThingy" ProgressState="Normal"/>

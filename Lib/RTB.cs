@@ -66,7 +66,13 @@ public static class LauncherDL_RichTextBoxHandler
             text = text.Replace("$perc$", "%");
             text = text.Replace("$vbar$", "|");
 
-            range.Text = text;
+            try{
+                range.Text = text;
+            } catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
             try { range.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color)); } catch { throw new ForegroundPropertyException("The Entered Color or Hex are Invalid."); };
             try { range.ApplyPropertyValue(Control.FontSizeProperty, size); } catch { throw new FontSizePropertyException("The Entered font size are Invalid."); };
             try { range.ApplyPropertyValue(Control.FontWeightProperty, weight); } catch { throw new FontWeightPropertyException("The Entered font weight are Invalid."); };

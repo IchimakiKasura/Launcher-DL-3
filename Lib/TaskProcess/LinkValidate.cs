@@ -11,13 +11,17 @@ sealed class LinkValidate : Global
 
     public async Task<LinkValidate> Validate(string url)
     {
-        if (IsSameUrl != url) IsSameUrl = url;
-        else return new()
+        if(!string.IsNullOrEmpty(url))
         {
-            IsValid = !IsError,
-            HasPlaylist = TempHasPlaylist,
-            IsFetched = true
-        };
+            if (IsSameUrl == url) return new()
+            {
+                IsValid = !IsError,
+                HasPlaylist = TempHasPlaylist,
+                IsFetched = true
+            };
+
+            IsSameUrl = url;
+        }
 
         try
         {
@@ -32,9 +36,9 @@ sealed class LinkValidate : Global
                 HasPlaylist = TempHasPlaylist
             };
         }
-        catch (Exception e)
+        catch //(Exception e)
         {
-            Console.WriteLine($"\x1b[31m{e}\x1b[0m");
+            // Console.WriteLine($"\x1b[31m{e}\x1b[0m");
             return new()
             {
                 IsValid = false,
@@ -75,11 +79,12 @@ sealed class LinkValidate : Global
                 {
                     if (e.Data.Contains("ERROR") || e.Data.Contains("Traceback"))
                     {
+                        TempHasPlaylist = false;
                         if (e.Data.Contains("--no-playlist"))
                             TempHasPlaylist = true;
-                        else TempHasPlaylist = false;
 
-                        if (e.Data.Contains("cookies")) Output_text.AddFormattedText($"<Yellow>[INFO] <>If the link from facebook or other social media that is not public or need an account, Please set the \"AllowCookies\" on the \"Config\"");
+                        if (e.Data.Contains("cookies"))
+                            Output_text.AddFormattedText($"<Yellow>[INFO] <>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\"");
 
                         IsError = true;
                         DebugOutput.ERROR_Debug(e.Data);

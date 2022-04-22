@@ -1,4 +1,6 @@
 namespace Launcher_DL.Lib;
+
+[Serializable]
 public class LauncherDefaultConfig
 {
     public string BackgroundName { get; set; } = "background.png";
@@ -16,6 +18,8 @@ public class LauncherDefaultConfig
 
 sealed class ConfigComp : Global
 {
+    static int TotalDetected = 0;
+
     // should've used JSON but damn,I don't want to add System.Text.Json or Newtonsoft.Json
     /// <summary>
     /// Loads the <see langword="Config.kasu"/>
@@ -26,7 +30,7 @@ sealed class ConfigComp : Global
 
         try
         {
-            Data = await File.ReadAllTextAsync("Config.kasu", ct);
+            Data = await File.ReadAllTextAsync(KasuConfigName, ct);
         }
         catch
         {
@@ -34,8 +38,6 @@ sealed class ConfigComp : Global
             DebugOutput.LoadConfig_Done(true);
             if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkRed%14>FAILED <gray%14>to locate \"Config.kasu\"");
         }
-
-        int TotalDetected = 0;
 
         try
         {
@@ -61,37 +63,18 @@ sealed class ConfigComp : Global
                 if (match.Success) ++TotalDetected;
             }
 
-            #region Exceptions
-            if (!File.Exists($"Images/{Config.BackgroundName}")) throw new Exception();
-            if (Config.DefaultFileTypeOnStartUp >= 3) throw new Exception();
-            if (TotalDetected != 11) throw new Exception();
-            if (Config.SystemLanguage.ToLower() == "japanese" ||
-            Config.SystemLanguage.ToLower() == "tagalog" ||
-            Config.SystemLanguage.ToLower() == "english" ||
-            Config.SystemLanguage.ToLower() == "default" ||
-            Config.SystemLanguage.ToLower() == "bruh") { /*good*/ }
-            else throw new Exception();
-            #endregion
+            ThrowException();
 
             DebugOutput.Selected_Language(Config.SystemLanguage.ToLower());
 
             // Custom Background Color
-            Color BackgroundColor = InitialStartUp.ClrConv(Config.BackgroundColor);
+            Color BackgroundColor = ClrConv(Config.BackgroundColor);
             // Custom Background Image
             Window_BackgroundName.ImageSource = new BitmapImage(new Uri($"Images/{Config.BackgroundName}", UriKind.Relative));
             // Custom Window Glow / DropShadow
-            Window_DropShadow.Color = InitialStartUp.ClrConv(Config.GlowColor);
+            Window_DropShadow.Color = ClrConv(Config.GlowColor);
 
-            if (!Config.EpicAnimations)
-            {
-                MainWindowStatic.Button_Format.Style = (Style)Application.Current.FindResource("AkiraDisabled");
-                MainWindowStatic.Button_Download.Style = (Style)Application.Current.FindResource("AstolfoDisabled");
-                MainWindowStatic.Button_Update.Style = (Style)Application.Current.FindResource("VentiDisabled");
-                var TypePopup = (System.Windows.Controls.Primitives.Popup)MainWindowStatic.Input_Type.Template.FindName("Popup", MainWindowStatic.Input_Type);
-                var FormatPopup = (System.Windows.Controls.Primitives.Popup)MainWindowStatic.Input_Type.Template.FindName("Popup", MainWindowStatic.Input_Format);
-                FormatPopup.PopupAnimation =
-                TypePopup.PopupAnimation = System.Windows.Controls.Primitives.PopupAnimation.None;
-            };
+            if (!Config.EpicAnimations) TurnOffAnimations();
 
             DebugOutput.LoadConfig_Done(false);
             if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <DarkGreen%14>SUCCESS <gray%14>\"Config.kasu\" loaded!");
@@ -105,4 +88,32 @@ sealed class ConfigComp : Global
 
         Input_Type.SelectedIndex = Config.DefaultFileTypeOnStartUp;
     }
+
+    private static void TurnOffAnimations()
+    {
+        MainWindowStatic.Button_Format.Style = (Style)Application.Current.FindResource("AkiraDisabled");
+        MainWindowStatic.Button_Download.Style = (Style)Application.Current.FindResource("AstolfoDisabled");
+        MainWindowStatic.Button_Update.Style = (Style)Application.Current.FindResource("VentiDisabled");
+        var TypePopup = (System.Windows.Controls.Primitives.Popup)MainWindowStatic.Input_Type.Template.FindName("Popup", MainWindowStatic.Input_Type);
+        var FormatPopup = (System.Windows.Controls.Primitives.Popup)MainWindowStatic.Input_Type.Template.FindName("Popup", MainWindowStatic.Input_Format);
+        FormatPopup.PopupAnimation =
+        TypePopup.PopupAnimation = System.Windows.Controls.Primitives.PopupAnimation.None;
+    }
+
+    private static void ThrowException()
+    {
+        if (!File.Exists($"Images/{Config.BackgroundName}")) throw new Exception();
+        
+        if (Config.DefaultFileTypeOnStartUp >= 3) throw new Exception();
+        
+        if (TotalDetected != 11) throw new Exception();
+
+        if (Config.SystemLanguage.ToLower() == "japanese" ||
+        Config.SystemLanguage.ToLower() == "tagalog" ||
+        Config.SystemLanguage.ToLower() == "english" ||
+        Config.SystemLanguage.ToLower() == "default" ||
+        Config.SystemLanguage.ToLower() == "bruh") { /*good*/ }
+        else throw new Exception();
+    }
+
 }

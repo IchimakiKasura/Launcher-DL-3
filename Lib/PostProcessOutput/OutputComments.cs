@@ -2,6 +2,7 @@ namespace Launcher_DL.Lib.PostProcessOutput;
 
 sealed class OutputComments : Global
 {
+
     public static void DownloadOutputComments()
     {
         Input_Name.Text = Input_Name.Text.Trim();
@@ -76,14 +77,14 @@ sealed class OutputComments : Global
         if (speed.Contains("K"))
         {
             double speeds = double.Parse(Regex.Replace(speed, @"[a-zA-Z\/]", "").ToString());
-            if (speeds < 199.99) color = "#381900";
-            else color = "Red";
+            if (speeds > 199.99) color = "Red";
+            color = "#381900";
         }
         if (speed.Contains("M"))
         {
             double speeds = double.Parse(Regex.Replace(speed, @"[a-zA-Z\/]", "").ToString());
-            if (speeds < 0.99) color = "#fff154";
-            else color = "#83fa57";
+            if (speeds > 0.99) color = "#83fa57";
+            color = "#fff154";
         }
         if (speed.Contains("G")) color = "Pink";
         #endregion
@@ -98,6 +99,15 @@ sealed class OutputComments : Global
         if (progress != string.Empty)
             Window_ProgressBar.Value = int.Parse(Regex.Replace(progress.Trim(), @"\..*", "", RegexOptions.Compiled).ToString());
 
+    }
+
+    public static void StartUpOutputComments()
+    {
+        Output_text.AddFormattedText("<Gray%15>堂主の私に何か用かな？あれ、知らなかった？私が往生堂七十七代目堂主、胡桃だよ！でもあなた、ツヤのある髪に健康そうな体してる･･･そっか！仕事以外で私に用があるってことだね？<>");
+        Output_text.Break("Gray");
+
+        Output_text.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
+        if (Config.ShowSystemOutput) Output_text.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to \"{((ComboBoxItem)Input_Type.SelectedItem).Content}\"");
     }
 
 }

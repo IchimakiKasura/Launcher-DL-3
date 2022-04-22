@@ -48,6 +48,7 @@ DefaultOutput:              "output"
 DefaultFileTypeOnStartUp:   "0"
 
 
+
 ! Shows the "[SYSTEM]" outputs on the Log.
 ! DEFAULT: true
 !============================================================
@@ -71,7 +72,8 @@ EnablePlaylist:             "false"
 ! "Bruh"
 ! DEFAULT: default
 !============================================================
-Language:                   "Japanese"
+Language:                   "default"
+
 
 
 ! If you're trying to download a video that needs an account.
@@ -79,8 +81,9 @@ Language:                   "Japanese"
 ! DEFAULT AllowCookies: false
 ! DEFAULT BrowserCookie: chrome
 !============================================================
-AllowCookies:               "false"
+AllowCookies:               "true"
 BrowserCookie:              "chrome"
+
 
 
 ! If you're experiencing animation issues or performance issues.

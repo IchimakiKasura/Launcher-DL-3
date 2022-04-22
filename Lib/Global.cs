@@ -1,11 +1,14 @@
 namespace Launcher_DL.Lib;
 
-public partial class Global
+partial class Global
 {
+    /// <summary>
+    /// MainWindow but in <see langword="static"/>
+    /// </summary>
     public static MainWindow MainWindowStatic;
 
     /// <summary>App current Version</summary>
-    public readonly static string AppVersion = "Build Version:\nDevelopment Build";
+    public const string AppVersion = "Build Version:\nDevelopment Build";
 
 
     /// <summary><see langword="ydl.bin"/> Location</summary>
@@ -13,23 +16,29 @@ public partial class Global
 
 
     /// <summary><see langword="ffmpeg"/> Location</summary>
-    public static string Ffmpeg = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data";
+    public readonly static string Ffmpeg = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data";
 
 
+    /// <summary><see langword="Config.kasu"/> Location</summary>
+    public const string KasuConfigName = "Config.kasu";
+
+
+    /// <summary><see langword="LanguagePack.kasu"/> Location</summary>
+    public const string KasuLangName = "LanguagePack.kasu";
+
+    #region File Formats
     /// <summary>for Renaming Process</summary>
     public static List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a", "3gp", "flv" };
-
-
     /// <summary>Video Type Formats</summary>
     public static List<string> VideoType = new() { "mp4", "mkv", "webm", "flv", "auto" };
     /// <summary>Audio Type Formats</summary>
     public static List<string> AudioType = new() { "mp3", "webm", "m4a", "mp4", "auto" };
     /// <summary>Convert Type Formats</summary>
     public static List<string> ConvertType = new() { "mp4", "mp3", "flv", "webm", "m4a", "mkv", "avi", "wmv", "wma", "ogg", "aac", "wav" };
-
+    #endregion
 
     /// <summary>Hidden Button | Release notes</summary>
-    public static readonly string HiddenButtonText = "LauncherDL Development Build\n\n" +
+    public const string HiddenButtonText = "LauncherDL Development Build\n\n" +
         "[New Features]\n" +
         "- New \"Convert\" type! Now you can now\nConvert videos or audios into another format.\n" +
         "- Format option is fully redesigned/reworked.\n" +
@@ -49,7 +58,7 @@ public partial class Global
     /// <summary>Config</summary>
     public static LauncherDefaultConfig Config = new();
 
-    /// <summary>Download / Update / File Format</summary>
+    /// <summary>Download / Update / File Format / Convert</summary>
     public static Process Proc;
 
 
@@ -82,6 +91,7 @@ public partial class Global
     /// <summary>Cancel ongoing task</summary>
     public static CancellationTokenSource CancelWork;
     public static string CurrentLinkTitle;
+    public static Func<string, Color> ClrConv = (string color) => (Color)ColorConverter.ConvertFromString(color);
     #endregion
 
 
