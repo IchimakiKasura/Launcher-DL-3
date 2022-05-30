@@ -78,19 +78,43 @@
 											VerticalAlignment="Center"
 											ContentSource="Icon"
 											Grid.Column="0"
-											HorizontalAlignment="Center"/>
+											HorizontalAlignment="Center">
+								<ContentPresenter.Effect>
+									<DropShadowEffect ShadowDepth="0"
+													Direction="0"
+													Color="Black"
+													Opacity="1"
+													BlurRadius="5"/>
+								</ContentPresenter.Effect>
+							</ContentPresenter>
 							<ContentPresenter x:Name="ContentPresenter"
 											  Content="{TemplateBinding Header}"
 											  Grid.Column="1" ContentSource="Header"
 											  Margin="{TemplateBinding Padding}"
 											  RecognizesAccessKey="True"
 											  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-											  Uid="ContentPresenter_33"/>
+											  Uid="ContentPresenter_33">
+								<ContentPresenter.Effect>
+									<DropShadowEffect ShadowDepth="0"
+													Direction="0"
+													Color="Black"
+													Opacity="1"
+													BlurRadius="5"/>
+								</ContentPresenter.Effect>
+							</ContentPresenter>
 							<TextBlock x:Name="InputGestureText"
 									 Grid.Column="2"
 									 Text="{TemplateBinding InputGestureText}"
 									 Margin="5,2,2,2"
-									 DockPanel.Dock="Right" />
+									 DockPanel.Dock="Right">
+								<TextBlock.Effect>
+									<DropShadowEffect ShadowDepth="0"
+													Direction="0"
+													Color="Black"
+													Opacity="1"
+													BlurRadius="5"/>
+								</TextBlock.Effect>
+							</TextBlock>
 							<Path  Grid.Column="3"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"
@@ -147,6 +171,8 @@
 			Value="Hidden" />
 		<Setter Property="VerticalScrollBarVisibility"
 			Value="Auto" />
+		<Setter Property="IsDeferredScrollingEnabled"
+			Value="true"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ScrollViewer}">

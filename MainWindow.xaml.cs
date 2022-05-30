@@ -10,37 +10,39 @@
 /// =============================================================///
 public partial class MainWindow : Window
 {
-    public MainWindow()
-    {
-        // For Debug Purposes
-        if (Console.OpenStandardInput(1) != Stream.Null)
-        {
-            DebugOutput.IsDebug = true;
-            DebugOutput.StartUp();
-        }
+	public MainWindow()
+	{
+		Visibility = Visibility.Hidden;
 
-        InitializeComponent();
-        Global.MainWindowStatic = this;
+		// For Debug Purposes
+		if (Console.OpenStandardInput(1) != Stream.Null)
+		{
+			DebugOutput.IsDebug = true;
+			DebugOutput.StartUp();
+		}
 
-        // Setups an Event for taskbar flashing
-        WindowsComp.WindowFlash();
+		InitializeComponent();
+		Global.MainWindowStatic = this;
 
-        Window_VersionLabel.Text = Global.AppVersion;
+		// Setups an Event for taskbar flashing
+		WindowsComp.WindowFlash();
 
-        // hidden more like Patch/update notes
-        Window_Hidden.MouseDown += delegate
-        {
-            MessageBox.Show(Global.HiddenButtonText, "huzuaah!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-        };
+		Window_VersionLabel.Text = Global.AppVersion;
 
-        // Defines all the MainWindow instantiated variables
-        // to static variables.
-        StaticSetup();
+		// hidden more like Patch/update notes
+		Window_Hidden.MouseDown += delegate
+		{
+			MessageBox.Show(Global.HiddenButtonText, "huzuaah!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+		};
 
-        // Configures the Top Buttons Events
-        TopButtons.InitializeTopButtons();
+		// Defines all the MainWindow instantiated variables
+		// to static variables.
+		StaticSetup();
 
-        // Configures the rest of the Components Events
-        InitialStartUp.Initialize();
-    }
+		// Configures the Top Buttons Events
+		TopButtons.InitializeTopButtons();
+
+		// Configures the rest of the Components Events
+		InitialStartUp.Initialize();
+	}
 }

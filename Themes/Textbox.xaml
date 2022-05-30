@@ -1,10 +1,12 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Style TargetType="TextBox">
 		<Setter Property="ContextMenu" Value="{DynamicResource TextBoxMenu}" />
+		<Setter Property="AcceptsReturn" Value="False"/>
+		<Setter Property="IsUndoEnabled" Value="False"/>
+		<Setter Property="UndoLimit" Value="0"/>
 	</Style>
-
 	<Style TargetType="TextBox" x:Key="TB" >
 		<Setter Property="Height" Value="35"/>
 		<Setter Property="Background" Value="#74000000"/>
@@ -39,7 +41,6 @@
 									 CaretBrush="#FFFF9C9C"
 									 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 									 x:Name="MainText"/>
-
 							<TextBlock x:Name="Placeholder"
 									   IsHitTestVisible="False"
                                        Text="{Binding Uid,RelativeSource={RelativeSource TemplatedParent}}"

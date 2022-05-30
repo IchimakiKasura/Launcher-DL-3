@@ -1,32 +1,172 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Launcher_DL.Lib.Global"
+	xmlns:local="clr-namespace:Launcher_DL.Lib.Windows">
 	<!--#region Body Buttons Animations -->
 	<Storyboard x:Key="MouseEnter">
 		<DoubleAnimation Storyboard.TargetName="BorderBG"
 						Storyboard.TargetProperty="(Brush.Opacity)"
 						To="0.85"
-						Duration="00:00:00.2"
+						Duration="{x:Static local:Buttons.AnimationTime}"
 						Timeline.DesiredFrameRate="60"/>
 		<RectAnimation Storyboard.TargetName="BorderBG"
 						Storyboard.TargetProperty="(ImageBrush.Viewport)"
 						To="0,0,1,1.6"
-						Duration="00:00:00.2"
+						Duration="{x:Static local:Buttons.AnimationTime}"
 						Timeline.DesiredFrameRate="60"/>
 	</Storyboard>
 	<Storyboard x:Key="MouseLeave">
 		<DoubleAnimation Storyboard.TargetName="BorderBG"
 						Storyboard.TargetProperty="(Brush.Opacity)"
 						To="0"
-						Duration="00:00:00.2"
+						Duration="{x:Static local:Buttons.AnimationTime}"
 						Timeline.DesiredFrameRate="60"/>
 		<RectAnimation Storyboard.TargetName="BorderBG"
 						Storyboard.TargetProperty="(ImageBrush.Viewport)"
 						To="0,0,1,3"
-						Duration="00:00:00.2"
+						Duration="{x:Static local:Buttons.AnimationTime}"
 						Timeline.DesiredFrameRate="60"/>
 	</Storyboard>
 	<!--#endregion-->
-
+	
+	<!-- Im not good at this shit -->
+	<!--#region BodyButtonTemp -->
+	<Storyboard x:Key="MouseEnterBody">
+		<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity" To="1" Duration="00:00:00.1"/>
+		<DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)" To="23" Duration="00:00:00.1"/>
+		<DoubleAnimation Storyboard.TargetProperty="Width" To="440" Duration="00:00:00.1"/>
+		<DoubleAnimation Storyboard.TargetProperty="Height" To="67.5" Duration="00:00:00.1"/>
+		<ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="00:00:00.1"/>
+	</Storyboard>
+	<Storyboard x:Key="MouseLeaveBody">
+		<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity" To="0" Duration="00:00:00.1"/>
+		<DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)" To="20" Duration="00:00:00.1"/>
+		<DoubleAnimation Storyboard.TargetProperty="Width" To="420" Duration="00:00:00.1"/>
+		<DoubleAnimation Storyboard.TargetProperty="Height" To="60" Duration="00:00:00.1"/>
+		<ColorAnimation  Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Black" Duration="00:00:00.1"/>
+	</Storyboard>
+	<Storyboard x:Key="MouseEnterBodyDisabled">
+		<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity" To="1" Duration="0"/>
+		<DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)" To="23" Duration="0"/>
+		<DoubleAnimation Storyboard.TargetProperty="Width" To="440" Duration="0"/>
+		<DoubleAnimation Storyboard.TargetProperty="Height" To="67.5" Duration="0"/>
+		<ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0"/>
+	</Storyboard>
+	<Storyboard x:Key="MouseLeaveBodyDisabled">
+		<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity" To="0" Duration="0"/>
+		<DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)" To="20" Duration="0"/>
+		<DoubleAnimation Storyboard.TargetProperty="Width" To="420" Duration="0"/>
+		<DoubleAnimation Storyboard.TargetProperty="Height" To="60" Duration="0"/>
+		<ColorAnimation  Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0"/>
+	</Storyboard>
+	<!--#endregion-->
+	
+	<!--#region ControlTemplates -->
+	<ControlTemplate TargetType="Button" x:Key="AkiraTemplate">
+		<Border Background="{TemplateBinding Background}"
+							CornerRadius="10"
+							Cursor="Hand">
+			<Border CornerRadius="10">
+				<ContentPresenter x:Name="Button"
+												Content="{TemplateBinding Content}"
+												HorizontalAlignment="Center" 
+												VerticalAlignment="Center">
+					<ContentPresenter.Effect>
+						<DropShadowEffect Color="red"
+														Direction="0"
+														ShadowDepth="0"
+														BlurRadius="5" />
+					</ContentPresenter.Effect>
+				</ContentPresenter>
+				<Border.Background>
+					<ImageBrush x:Name="BorderBG"
+												ImageSource="/Images/akira.png"
+												Stretch="UniformToFill"
+												Viewport="0,0,1,3"
+												Opacity="0"/>
+				</Border.Background>
+				<Border.Triggers>
+					<EventTrigger RoutedEvent="MouseEnter">
+						<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
+					</EventTrigger>
+					<EventTrigger RoutedEvent="MouseLeave">
+						<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
+					</EventTrigger>
+				</Border.Triggers>
+			</Border>
+		</Border>
+	</ControlTemplate>
+	<ControlTemplate TargetType="Button" x:Key="AstofloTemplate">
+		<Border Background="{TemplateBinding Background}"
+								CornerRadius="10"
+								Cursor="Hand">
+			<Border CornerRadius="10">
+				<Border.Background>
+					<ImageBrush x:Name="BorderBG"
+											ImageSource="/Images/asutorufo.jpeg"
+											Stretch="UniformToFill"
+											Viewport="0,0,1,2.5"
+											Opacity="0"/>
+				</Border.Background>
+				<ContentPresenter x:Name="Button"
+											Content="{TemplateBinding Content}"
+											HorizontalAlignment="Center" 
+											VerticalAlignment="Center">
+					<ContentPresenter.Effect>
+						<DropShadowEffect Color="red"
+													  Direction="0"
+													  ShadowDepth="0"
+													  BlurRadius="5" />
+					</ContentPresenter.Effect>
+				</ContentPresenter>
+				<Border.Triggers>
+					<EventTrigger RoutedEvent="MouseEnter">
+						<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
+					</EventTrigger>
+					<EventTrigger RoutedEvent="MouseLeave">
+						<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
+					</EventTrigger>
+				</Border.Triggers>
+			</Border>
+		</Border>
+	</ControlTemplate>
+	<ControlTemplate TargetType="Button" x:Key="VentiTemplate">
+		<Border Background="{TemplateBinding Background}"
+								CornerRadius="10"
+								Cursor="Hand">
+			<Border CornerRadius="10">
+				<Border.Background>
+					<ImageBrush x:Name="BorderBG"
+											Opacity="0"
+											ImageSource="/Images/venti.jpg"
+											Stretch="UniformToFill"
+											Viewport="0,0,1,4"/>
+				</Border.Background>
+				<ContentPresenter x:Name="Button"
+											Content="{TemplateBinding Content}"
+											HorizontalAlignment="Center" 
+											VerticalAlignment="Center">
+					<ContentPresenter.Effect>
+						<DropShadowEffect Color="red"
+													  Direction="0"
+													  ShadowDepth="0"
+													  BlurRadius="5" />
+					</ContentPresenter.Effect>
+				</ContentPresenter>
+			</Border>
+			<Border.Triggers>
+				<EventTrigger RoutedEvent="MouseEnter">
+					<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
+				</EventTrigger>
+				<EventTrigger RoutedEvent="MouseLeave">
+					<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
+				</EventTrigger>
+			</Border.Triggers>
+		</Border>
+	</ControlTemplate>
+	<!--#endregion-->
+	
 	<!--#region Top Buttons -->
 	<Style x:Key="TopButtonTheme" TargetType="Button">
 		<Setter Property="Cursor" Value="Hand"/>
@@ -35,7 +175,6 @@
 		<Setter Property="Height" Value="35"/>
 		<Setter Property="Width" Value="50"/>
 	</Style>
-
 	<Style x:Key="ExitButtonAlt" TargetType="Button" BasedOn="{StaticResource TopButtonTheme}">
 		<Setter Property="Background" Value="#00AD0000"/>
 		<Setter Property="Effect">
@@ -83,7 +222,6 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-
 	<Style x:Key="MinimizeButtonAlt" TargetType="Button" BasedOn="{StaticResource TopButtonTheme}">
 		<Setter Property="Background" Value="#007B6161"/>
 		<Setter Property="Effect">
@@ -131,212 +269,113 @@
 		</Setter>
 	</Style>
 	<!--#endregion-->
-
-	<!--#region Body Buttons -->	
-	<Style x:Key="BodyButtonTemp" TargetType="Button">
+	
+	<!--#region Body Buttons -->
+	<Style x:Key="BodyButtonMain" TargetType="Button">
 		<Setter Property="FontSize" Value="20"/>
-		<Setter Property="FontFamily" Value="./Fonts/#Noto Sans JP"/>
+		<Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Noto Sans JP"/>
 		<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
 		<Setter Property="FontWeight" Value="UltraBold"/>
 		<Setter Property="Height" Value="60"/>
 		<Setter Property="Width" Value="420"/>
 		<Style.Triggers>
-			<EventTrigger RoutedEvent="MouseEnter">
-				<BeginStoryboard>
-					<Storyboard>
-						<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity"
-										 To="1" 
-										 Duration="00:00:00.1"/>
-						<DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)"
-										 To="23" 
-										 Duration="00:00:00.1"/>
-						<ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
-										 To="White" 
-										 Duration="00:00:00.2"/>
-						<DoubleAnimation Storyboard.TargetProperty="Width"
-											To="440" 
-											Duration="00:00:00.1"/>
-						<DoubleAnimation Storyboard.TargetProperty="Height"
-											To="67.5" 
-											Duration="00:00:00.1"/>
-					</Storyboard>
-				</BeginStoryboard>
-			</EventTrigger>
-			<EventTrigger RoutedEvent="MouseLeave">
-				<BeginStoryboard>
-					<Storyboard>
-						<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity"
-										 To="0"
-										 Duration="00:00:00.1"/>
-						<DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)"
-										 To="20" 
-										 Duration="00:00:00.1"/>
-						<ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
-										 To="Black" 
-										 Duration="00:00:00.2"/>
-						<DoubleAnimation Storyboard.TargetProperty="Width"
-											To="420" 
-											Duration="00:00:00.1"/>
-						<DoubleAnimation Storyboard.TargetProperty="Height"
-											To="60" 
-											Duration="00:00:00.1"/>
-					</Storyboard>
-				</BeginStoryboard>
-			</EventTrigger>
 			<Trigger Property="IsEnabled" Value="false">
 				<Setter Property="Foreground" Value="Red"/>
 			</Trigger>
 		</Style.Triggers>
 	</Style>
-
+	<!--#region Enabled-->
+	<Style x:Key="BodyButtonTemp" TargetType="Button" BasedOn="{StaticResource BodyButtonMain}">
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnterBody}}"/>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeaveBody}}"/>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
 	<Style x:Key="Akira" TargetType="Button" BasedOn="{StaticResource BodyButtonTemp}">
 		<Setter Property="Effect">
 			<Setter.Value>
 				<DropShadowEffect Color="Blue"
-								  ShadowDepth="0"
-								  Opacity="0"
-								  BlurRadius="30"/>
+									  ShadowDepth="0"
+									  Opacity="0"
+									  BlurRadius="30"/>
 			</Setter.Value>
 		</Setter>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Border Background="{TemplateBinding Background}"
-							CornerRadius="10"
-							Cursor="Hand">
-							<Border CornerRadius="10">
-								<ContentPresenter x:Name="Button"
-												Content="{TemplateBinding Content}"
-												HorizontalAlignment="Center" 
-												VerticalAlignment="Center">
-									<ContentPresenter.Effect>
-										<DropShadowEffect Color="red"
-														Direction="0"
-														ShadowDepth="0"
-														BlurRadius="5" />
-									</ContentPresenter.Effect>
-								</ContentPresenter>
-								<Border.Background>
-									<ImageBrush x:Name="BorderBG"
-												ImageSource="/Images/akira.png"
-												Stretch="UniformToFill"
-												Viewport="0,0,1,3"
-												Opacity="0"/>
-								</Border.Background>
-								<Border.Triggers>
-									<EventTrigger RoutedEvent="MouseEnter">
-										<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
-									</EventTrigger>
-									<EventTrigger RoutedEvent="MouseLeave">
-										<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
-									</EventTrigger>
-								</Border.Triggers>
-							</Border>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+		<Setter Property="Template" Value="{StaticResource AkiraTemplate}"/>
 	</Style>
-
 	<Style x:Key="Astolfo" TargetType="Button" BasedOn="{StaticResource BodyButtonTemp}">
 		<Setter Property="Effect">
 			<Setter.Value>
 				<DropShadowEffect Color="Pink"
-								  ShadowDepth="0"
-								  Opacity="0"
-								  BlurRadius="30"/>
+									  ShadowDepth="0"
+									  Opacity="0"
+									  BlurRadius="30"/>
 			</Setter.Value>
 		</Setter>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Border Background="{TemplateBinding Background}"
-								CornerRadius="10"
-								Cursor="Hand">
-						<Border CornerRadius="10">
-							<Border.Background>
-								<ImageBrush x:Name="BorderBG"
-											ImageSource="/Images/asutorufo.jpeg"
-											Stretch="UniformToFill"
-											Viewport="0,0,1,2.5"
-											Opacity="0"/>
-							</Border.Background>
-							<ContentPresenter x:Name="Button"
-											Content="{TemplateBinding Content}"
-											HorizontalAlignment="Center" 
-											VerticalAlignment="Center">
-								<ContentPresenter.Effect>
-									<DropShadowEffect Color="red"
-													  Direction="0"
-													  ShadowDepth="0"
-													  BlurRadius="5" />
-								</ContentPresenter.Effect>
-							</ContentPresenter>
-							<Border.Triggers>
-								<EventTrigger RoutedEvent="MouseEnter">
-									<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
-								</EventTrigger>
-								<EventTrigger RoutedEvent="MouseLeave">
-									<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
-								</EventTrigger>
-							</Border.Triggers>
-						</Border>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+		<Setter Property="Template" Value="{StaticResource AstofloTemplate}"/>
 	</Style>
-
 	<Style x:Key="Venti" TargetType="Button" BasedOn="{StaticResource BodyButtonTemp}">
 		<Setter Property="Effect">
 			<Setter.Value>
 				<DropShadowEffect Color="Aqua"
-								  ShadowDepth="0"
-								  Opacity="0"
-								  BlurRadius="30"/>
+											  ShadowDepth="0"
+											  Opacity="0"
+											  BlurRadius="30"/>
 			</Setter.Value>
 		</Setter>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Border Background="{TemplateBinding Background}"
-								CornerRadius="10"
-								Cursor="Hand">
-						<Border CornerRadius="10">
-							<Border.Background>
-								<ImageBrush x:Name="BorderBG"
-											Opacity="0"
-											ImageSource="/Images/venti.jpg"
-											Stretch="UniformToFill"
-											Viewport="0,0,1,4"/>
-							</Border.Background>
-							<ContentPresenter x:Name="Button"
-											Content="{TemplateBinding Content}"
-											HorizontalAlignment="Center" 
-											VerticalAlignment="Center">
-								<ContentPresenter.Effect>
-									<DropShadowEffect Color="red"
-													  Direction="0"
-													  ShadowDepth="0"
-													  BlurRadius="5" />
-								</ContentPresenter.Effect>
-							</ContentPresenter>
-						</Border>
-						<Border.Triggers>
-							<EventTrigger RoutedEvent="MouseEnter">
-								<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnter}}"/>
-							</EventTrigger>
-							<EventTrigger RoutedEvent="MouseLeave">
-								<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeave}}"/>
-							</EventTrigger>
-						</Border.Triggers>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+		<Setter Property="Template" Value="{StaticResource VentiTemplate}"/>
 	</Style>
 	<!--#endregion-->
-
+	<!--#region Disabled-->
+	<Style x:Key="BodyButtonTempDisabled" TargetType="Button" BasedOn="{StaticResource BodyButtonMain}">
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseEnterBodyDisabled}}"/>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<BeginStoryboard Storyboard="{Binding Source={StaticResource MouseLeaveBodyDisabled}}"/>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+	<Style x:Key="AkiraDisabled" TargetType="Button" BasedOn="{StaticResource BodyButtonTempDisabled}">
+		<Setter Property="Effect">
+			<Setter.Value>
+				<DropShadowEffect Color="Blue"
+									  ShadowDepth="0"
+									  Opacity="0"
+									  BlurRadius="30"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template" Value="{StaticResource AkiraTemplate}"/>
+	</Style>
+	<Style x:Key="AstolfoDisabled" TargetType="Button" BasedOn="{StaticResource BodyButtonTempDisabled}">
+		<Setter Property="Effect">
+			<Setter.Value>
+				<DropShadowEffect Color="Pink"
+									  ShadowDepth="0"
+									  Opacity="0"
+									  BlurRadius="30"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template" Value="{StaticResource AstofloTemplate}"/>
+	</Style>
+	<Style x:Key="VentiDisabled" TargetType="Button" BasedOn="{StaticResource BodyButtonTempDisabled}">
+		<Setter Property="Effect">
+			<Setter.Value>
+				<DropShadowEffect Color="Aqua"
+									  ShadowDepth="0"
+									  Opacity="0"
+									  BlurRadius="30"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template" Value="{StaticResource VentiTemplate}"/>
+	</Style>
+	<!--#endregion-->
+	<!--#endregion-->
+	
 	<!-- #region Normal Buttons -->
 	<Style x:Key="NormalButtons" TargetType="Button">
 		<Setter Property="Template">
@@ -376,5 +415,4 @@
 		</Style.Triggers>
 	</Style>
 	<!--#endregion-->
-	
 </ResourceDictionary>

@@ -80,6 +80,9 @@ Language:                   "default"
 ! Enable this option.
 ! DEFAULT AllowCookies: false
 ! DEFAULT BrowserCookie: chrome
+! Available: brave, chrome, chromium, edge, firefox, opera, safari, vivaldi
+! NOTE: You must have atleast one of these browsers and select the
+! browser that you currently using or logon to.
 !============================================================
 AllowCookies:               "true"
 BrowserCookie:              "chrome"

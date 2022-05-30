@@ -1,5 +1,6 @@
 /.ionide
 /.vs
+/.vscode
 /bin
 /obj
 /FodyWeavers.xml

@@ -1,116 +1,117 @@
-﻿using Update;
-
-namespace Launcher_DL;
+﻿namespace Launcher_DL;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
 public partial class App : Application
 {
-    const uint ENABLE_QUICK_EDIT = 0x0040;
-    #region DLL imports
-    [DllImport("user32.dll")]
-    private static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
-    [DllImport("user32.dll")]
-    private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-    [DllImport("kernel32.dll", ExactSpelling = true)]
-    private static extern IntPtr GetConsoleWindow();
-    [DllImport("Kernel32")]
-    private static extern void AllocConsole();
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern IntPtr GetStdHandle(int nStdHandle);
+	const uint ENABLE_QUICK_EDIT = 0x0040;
+	#region DLL imports
+	[DllImport("user32.dll")]
+	private static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
+	[DllImport("user32.dll")]
+	private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+	[DllImport("kernel32.dll", ExactSpelling = true)]
+	private static extern IntPtr GetConsoleWindow();
+	[DllImport("Kernel32")]
+	private static extern void AllocConsole();
+	[DllImport("kernel32.dll", SetLastError = true)]
+	private static extern IntPtr GetStdHandle(int nStdHandle);
 
-    [DllImport("kernel32.dll")]
-    static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode);
+	[DllImport("kernel32.dll")]
+	static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode);
 
-    [DllImport("kernel32.dll")]
-    static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
-    #endregion
-    
-    private void App_Startup(object s, StartupEventArgs e)
-    {
-        Application.Current.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
+	[DllImport("kernel32.dll")]
+	static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
+	#endregion
 
-        // Checks if there's new version of the Launcher DL
-        new Updater();
+	private void App_Startup(object s, StartupEventArgs e)
+	{
+		DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
 
-        // Prevents opening another app.
-        if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
-        {
-            MessageBox.Show("Only one instance at a time", "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            Environment.Exit(0);
-        };
+		// Checks if there's new version of the Launcher DL
+		Update.Updater Update = new();
 
-        ContextMenuAdjust();
+		// Prevents opening another app.
+		if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
+		{
+			MessageBox.Show("Only one instance at a time", "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			Environment.Exit(0);
+		};
 
-        if (e.Args.Length == 1)
-        {
-            if (e.Args[0] != "--debug") return;
-            AllocConsole();
+		ContextMenuAdjust();
 
-            uint consoleMode;
-            IntPtr consoleHandle = GetStdHandle(-10);
-            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF060, 0x00000000);
-            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF020, 0x00000000);
-            DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF030, 0x00000000);
-            GetConsoleMode(consoleHandle, out consoleMode);
-            consoleMode &= ~ENABLE_QUICK_EDIT;
-            SetConsoleMode(consoleHandle, consoleMode);
-        }
-    }
+		if (e.Args.Length == 1)
+		{
+			if (e.Args[0] != "--debug") return;
+			AllocConsole();
 
-    private void App_Exit(object s, ExitEventArgs e)
-    {
-        // To be used in future.
-    }
+			IntPtr consoleHandle = GetStdHandle(-10);
+			DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF060, 0x00000000);
+			DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF020, 0x00000000);
+			DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF030, 0x00000000);
+			GetConsoleMode(consoleHandle, out uint consoleMode);
+			consoleMode &= ~ENABLE_QUICK_EDIT;
+			SetConsoleMode(consoleHandle, consoleMode);
+		}
+	}
 
-    // Fixes the drop menus going from right to left because i don't know what happened.
-    // Some say its because of the Tablet but I don't use Tablet PC or even have one.
-    private void ContextMenuAdjust()
-    {
-        var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
-        Action setAlignmentValue = () =>
-        {
-            if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
-        };
+	private void App_Exit(object s, ExitEventArgs e)
+	{
+		// To be used in future.
+	}
 
-        setAlignmentValue();
+	// Fixes the drop menus going from right to left because i don't know what happened.
+	// Some say its because of the Tablet but I don't use Tablet PC or even have one.
+	private void ContextMenuAdjust()
+	{
+		var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
+		Action setAlignmentValue = () =>
+		{
+			if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
+		};
 
-        SystemParameters.StaticPropertyChanged += (sender, e) =>
-        {
-            setAlignmentValue();
-        };
-    }
+		setAlignmentValue();
 
-    private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-    {
-        CancellationTokenSource oldSource = Interlocked.Exchange(ref Global.CancelWork, null);
-        if (oldSource != null)
-        {
-            oldSource.Cancel();
-            oldSource.Dispose();
-        }
+		SystemParameters.StaticPropertyChanged += (sender, e) =>
+		{
+			setAlignmentValue();
+		};
+	}
 
-        Global.IsDownloading = false;
-        string errorMessage = $"It Appears the the application encounters an Error!\n\n{e.Exception}";
+	private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+	{
+		CancellationTokenSource oldSource = Interlocked.Exchange(ref Global.CancelWork, null);
+		if (oldSource != null)
+		{
+			oldSource.Cancel();
+			oldSource.Dispose();
+		}
 
-        // Checks if the Unhandled exception has a custom message.
-        try
-        {
-            var Check = e.Exception.InnerException.Message;
-            errorMessage = $"It Appears the the application encounters an Error!\n\n{Check}";
-        }
-        catch { };
+		Global.IsDownloading = false;
+		string errorMessage = $"It Appears the the application encounters an Error!\n\n{e.Exception}";
 
-        Global.IsAppUsed = true;
-        Global.Output_text.Break("Red");
-        Global.Output_text.AddText(errorMessage, "Red");
-        Global.Output_text.Break("Red");
-        DebugOutput.UnhandledError(errorMessage);
+		// Checks if the Unhandled exception has a custom message.
+		try
+		{
+			if (e.Exception.InnerException != null)
+				errorMessage = $"It Appears the the application encounters an Error!\n\n{e.Exception.InnerException.Message}";
+		}
+		catch { };
 
-        if (MessageBox.Show(MainWindow, errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
-            MainWindow.Close();
+		if(Global.Output_text != null)
+		{
+			Global.IsAppUsed = true;
+			Global.Output_text.Break("Red");
+			Global.Output_text.AddText(errorMessage, "Red");
+			Global.Output_text.Break("Red");
+		}
 
-        e.Handled = true;
-    }
+		DebugOutput.UnhandledError(errorMessage);
+
+		if (MessageBox.Show(MainWindow, errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+			MainWindow.Close();
+
+		e.Handled = true;
+	}
 }
