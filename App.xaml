@@ -7,14 +7,14 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="Themes/Textbox.xaml"/>
-				<ResourceDictionary Source="Themes/Buttons.xaml"/>
-				<ResourceDictionary Source="Themes/DropDown.xaml"/>
-				<ResourceDictionary Source="Themes/Scrollview.xaml"/>
-				<ResourceDictionary Source="Themes/RichTextBox.xaml"/>
-				<ResourceDictionary Source="Themes/ProgressBar.xaml"/>
-				<ResourceDictionary Source="Themes/ContextMenu.xaml"/>
-				<ResourceDictionary Source="Themes/ToolTip.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/Resources.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/ComboBoxResources.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/ButtonResource.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/RichTextBoxResource.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/ScrollViewResource.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/TextboxResource.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/ProgressBarResource.xaml"/>
+				<ResourceDictionary Source="ResourceDictionary/ContextMenuResource.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

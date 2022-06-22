@@ -3,15 +3,16 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:DLButtons="clr-namespace:Launcher_DL.ResourceDictionary"
 		mc:Ignorable="d"
 		ResizeMode="CanMinimize"
 		WindowStartupLocation="CenterScreen"
-		WindowStyle="SingleBorderWindow"
+		WindowStyle="None"
 		Background="Transparent"
 		Title="Launcher DL"
 		Height="548"
 		Width="932"
-		FontFamily="pack://application:,,,/Fonts/#Noto Sans JP">
+		FontFamily="{StaticResource DefaultFont}">
 
 	<Window.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="TaskBarThingy" ProgressState="Normal" />
@@ -28,107 +29,78 @@
 		</Style>
 	</Window.Resources>
 	<Window.Effect>
-		<DropShadowEffect x:Name="Window_DropShadow" Opacity="0" ShadowDepth="0" BlurRadius="10" Direction="0" Color="#FFFF8282" />
+		<DropShadowEffect x:Name="Window_DropShadow" Opacity="1" ShadowDepth="0" BlurRadius="7.5" Direction="0" Color="#FFFF8282" />
 	</Window.Effect>
 	<!--#endregion-->
 
-	<Border x:Name="WindowBG" Background="Transparent" Margin="10,10,10,10">
+	<Border x:Name="WindowBG" Background="Black" Margin="10,10,10,10">
 		<Border CornerRadius="10">
 			<Border.Background>
-				<ImageBrush x:Name="Window_BackgroundName" ImageSource="pack://siteoforigin:,,,/Images/background.png" Opacity="0.5" />
+				<ImageBrush x:Name="Window_BackgroundName" ImageSource="pack://siteoforigin:,,,/Images/background.jpg" Opacity="0.5"/>
 			</Border.Background>
 
-			<Grid>
-				
+			<Grid ScrollViewer.VerticalScrollBarVisibility="Disabled" SnapsToDevicePixels="True">
+
 				<!--#region Top | Head -->
 				<Border Background="#A31F0000" CornerRadius="10,10,0,0" Height="35" Margin="0,0,0,493" Opacity="1" x:Name="WindowDrag">
 					<Grid>
-						<Image Source="Images/Icon.ico" Margin="9,0,880,0" />
-						<TextBlock Text="Launcher DL" Foreground="White" FontWeight="Light" FontSize="15" Padding="37,4.5,0,0" />
+						<Image Source="Images/Icon.ico" Margin="9,0,884,0" IsHitTestVisible="False"/>
+						<TextBlock Text="Launcher DL" Foreground="White" FontWeight="Light" FontSize="10" Padding="34,9,0,0" IsHitTestVisible="False"/>
 						<Button x:Name="CloseButton" Content="✕" Style="{StaticResource ExitButtonAlt}" Margin="862,0,0,0" />
 						<Button x:Name="Minimize" Content="—" Style="{StaticResource MinimizeButtonAlt}" Margin="812,0,50,0" />
 					</Grid>
 				</Border>
 				<!--#endregion-->
-				
+
 				<!--#region Body -->
-				<RichTextBox x:Name="Output_text" Margin="0,45,10,51" Padding="10" Focusable="False" FontSize="10" FontFamily="./Fonts/#Noto Sans JP" Foreground="White" IsReadOnly="True" IsUndoEnabled="False" HorizontalAlignment="Right" Style="{StaticResource RTB}" Width="414" VerticalScrollBarVisibility="Visible" />
-				<Button x:Name="Open_File" Content="Open File" BorderBrush="#FF900000" Background="#74000000" Foreground="White" Cursor="Hand" Visibility="Hidden" Style="{StaticResource NormalButtons}" Margin="375,146,456,347.3" />
-				<StackPanel Margin="10,45,456,252">
-					<Label x:Name="Text_DownloadType" Content="Download Type:" HorizontalContentAlignment="Center" Foreground="White" FontWeight="SemiBold" FontSize="15" IsHitTestVisible="False" Width="199" />
-					<ComboBox x:Name="Input_Type" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="200" FontSize="20" SelectedIndex="0" FontWeight="DemiBold" Style="{StaticResource CB}" IsReadOnly="True">
-						<ComboBoxItem Style="{StaticResource DownloadType}" Content="Custom" x:Name="ComboBox_Label_Custom" />
-						<ComboBoxItem Style="{StaticResource DownloadType}" Content="Video" x:Name="ComboBox_Label_Video" />
-						<ComboBoxItem Style="{StaticResource DownloadType}" Content="Audio" x:Name="ComboBox_Label_Audio" />
-						<ComboBoxItem Style="{StaticResource DownloadType}" Content="Convert" x:Name="ComboBox_Label_Convert" />
-					</ComboBox>
-					<Label x:Name="Text_Link" Content="Link:" HorizontalContentAlignment="Center" Foreground="White" FontWeight="SemiBold" FontSize="20" Padding="0,10,0,0" IsHitTestVisible="False" Width="65" />
-					<TextBox x:Name="Input_Link" Style="{StaticResource TB}" HorizontalContentAlignment="Center" Uid="Valid Link" Width="446" />
-					<Grid Margin="0,-15,0,0">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="263*" />
-							<ColumnDefinition Width="183*" />
-						</Grid.ColumnDefinitions>
-						<Label x:Name="Text_Format" Content="Format:" HorizontalContentAlignment="Center" Foreground="White" FontWeight="SemiBold" FontSize="20" Padding="0,20,0,0" Margin="0,0,45,0" IsHitTestVisible="False" />
-						<Label x:Name="Text_Name" Content="Name:" HorizontalContentAlignment="Center" Foreground="White" FontWeight="SemiBold" FontSize="20" Padding="0,20,0,0" Margin="223,0,0,0" Grid.ColumnSpan="2" IsHitTestVisible="False" />
-						<ComboBox x:Name="Input_Format" Style="{StaticResource CB}" HorizontalContentAlignment="Left" Margin="0,54,45,-40" Text="Best" IsEditable="True" TextSearch.TextPath="Name">
-							<ComboBox.ItemTemplate>
-								<DataTemplate>
-									<TextBlock FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,0,0" Text="{Binding Name}" />
-								</DataTemplate>
-							</ComboBox.ItemTemplate>
-						</ComboBox>
-						<TextBox x:Name="Input_Name" Style="{StaticResource TB}" HorizontalContentAlignment="Left" Margin="228,54,0,-40" Uid="Optional" Grid.ColumnSpan="2" />
-					</Grid>
-				</StackPanel>
-				<Button x:Name="Button_Format" Content="ファイルフォーマット" Margin="10,264,456,180" Style="{StaticResource Akira}" Background="#CCFBC2C2" FontFamily="./Fonts/#Noto Sans JP" />
-				<Button x:Name="Button_Download" Content="ダウンロード" Margin="10,336,456,108" Style="{StaticResource Astolfo}" Background="#CCFBC2C2" FontFamily="./Fonts/#Noto Sans JP" />
-				<Button x:Name="Button_Update" Content="アップデート" Margin="10,408,456,36" Style="{StaticResource Venti}" Background="#CCFBC2C2" FontFamily="./Fonts/#Noto Sans JP" />
-				<ProgressBar x:Name="Window_ProgressBar" Margin="488,482,10,28" Opacity="0" />
-				<Button x:Name="Open_Folder" Margin="800,502,11,4" Content="Open Folder" BorderBrush="#FF900000" Background="#74000000" Foreground="White" Cursor="Hand" Visibility="Visible" Style="{StaticResource NormalButtons}">
-					<Button.ContextMenu>
-						<ContextMenu StaysOpen="true">
-							<MenuItem Header="Open Video" x:Name="OpenDir_Video">
-								<MenuItem.Icon>
-									<Image Source="pack://application:,,,/Images/ContextMenu/multimedia.png" />
-								</MenuItem.Icon>
-							</MenuItem>
-							<MenuItem Header="Open Audio" x:Name="OpenDir_Audio">
-								<MenuItem.Icon>
-									<Image Source="pack://application:,,,/Images/ContextMenu/volume.png" />
-								</MenuItem.Icon>
-							</MenuItem>
-							<MenuItem Header="Open Converted" x:Name="OpenDir_Convert">
-								<MenuItem.Icon>
-									<Image Source="pack://application:,,,/Images/ContextMenu/convert.png" />
-								</MenuItem.Icon>
-							</MenuItem>
-							<MenuItem Header="Logs" x:Name="OpenDir_Logs">
-								<MenuItem.Icon>
-									<Image Source="pack://application:,,,/Images/ContextMenu/log-file.png" />
-								</MenuItem.Icon>
-							</MenuItem>
-							<MenuItem Header="Formatted" x:Name="OpenDir_Formatted">
-								<MenuItem Header="m4a" x:Name="OpenDir_mFourA" />
-								<MenuItem Header="mp3" x:Name="OpenDir_mpThree" />
-								<MenuItem Header="mp4" x:Name="OpenDir_mpFour" />
-								<MenuItem Header="webm" x:Name="OpenDir_webm" />
-								<MenuItem Header="3gp" x:Name="OpenDir_threeGP" />
-								<MenuItem Header="flv" x:Name="OpenDir_flv" />
-								<MenuItem Header="mkv" x:Name="OpenDir_mkv" />
-							</MenuItem>
-						</ContextMenu>
-					</Button.ContextMenu>
-				</Button>
+				<RichTextBox x:Name="Output_text" Margin="0,45,10,51" Padding="10" Focusable="False" FontSize="10" FontFamily="{StaticResource DefaultFont}"  IsReadOnly="True" IsUndoEnabled="False" HorizontalAlignment="Right" Style="{StaticResource RTB}" Width="414" VerticalScrollBarVisibility="Visible" />
+
+				<Button x:Name="Open_File" Content="Open File" Visibility="Hidden" Style="{StaticResource NormalButtons}" Margin="375,146,456,347.3" />
+
+				<Label x:Name="Text_DownloadType" Content="Download Type:" Style="{StaticResource DL_Labels}" Margin="133,50,579,455" FontSize="15"/>
+				<ComboBox x:Name="Input_Type" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="200" FontSize="20" SelectedIndex="0" FontWeight="DemiBold" Style="{StaticResource CB}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="133,73,0,420">
+					<ComboBoxItem Style="{StaticResource DownloadType}" Content="Custom" x:Name="ComboBox_Label_Custom" />
+					<ComboBoxItem Style="{StaticResource DownloadType}" Content="Video" x:Name="ComboBox_Label_Video" />
+					<ComboBoxItem Style="{StaticResource DownloadType}" Content="Audio" x:Name="ComboBox_Label_Audio" />
+					<ComboBoxItem Style="{StaticResource DownloadType}" Content="Convert" x:Name="ComboBox_Label_Convert" />
+				</ComboBox>
+				<Label x:Name="Text_Link" Content="Link:" Style="{StaticResource DL_Labels}" IsHitTestVisible="False" Margin="10,113,456,378" />
+				<TextBox x:Name="Input_Link" Style="{StaticResource TB}" HorizontalContentAlignment="Center" Uid="Valid Link" Width="446" Margin="10,146,456,347"/>
+				<Label x:Name="Text_Format" Content="Format:" Style="{StaticResource DL_Labels}" Margin="10,198,684,302"/>
+				<Label x:Name="Text_Name" Content="Name:" Style="{StaticResource DL_Labels}" Margin="238,198,456,302"/>
+				<ComboBox x:Name="Input_Format" Style="{StaticResource CB}" HorizontalContentAlignment="Left" Margin="10,226,684,267" Text="Best" IsEditable="True" TextSearch.TextPath="Name">
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,0,0" Text="{Binding Name}" />
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
+				<TextBox x:Name="Input_Name" Style="{StaticResource TB}" HorizontalContentAlignment="Left" Margin="238,226,456,267" Uid="Optional" />
+
+				<DLButtons:ButtonControl x:Name="Button_Format" Margin="10,264,456,180" Text="ファイルフォーマット" DL_EffectColor="Blue" DL_Image="Images/akira.jpg"/>
+				<DLButtons:ButtonControl x:Name="Button_Download" Margin="10,336,456,108" Text="ダウンロード" DL_EffectColor="Pink" DL_Image="Images/asutorufo.jpg"/>
+				<DLButtons:ButtonControl x:Name="Button_Update" Margin="10,408,456,36" Text="アップデート" DL_EffectColor="Aqua" DL_Image="Images/venti.jpg"/>
+
+				<ProgressBar x:Name="Window_ProgressBar" Margin="488,478,10,30" Opacity="0" RenderTransformOrigin="0.5,0.5" >
+					<ProgressBar.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform ScaleY="-1"/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</ProgressBar.RenderTransform>
+				</ProgressBar>
+				<Button x:Name="Open_Folder" Margin="800,500,11,4" Content="Open Folder" Visibility="Visible" Style="{StaticResource NormalButtons}" ContextMenu="{StaticResource OpenFolderCM}"/>
 				<!--#endregion-->
-				
+
 				<!--#region footer -->
 				<Grid Margin="0,485,0,0" VerticalAlignment="Bottom">
 					<TextBlock x:Name="Window_Hidden" Text="Copyright Ⓒ 2022 Kasura" HorizontalAlignment="Left" TextAlignment="Center" FontWeight="Medium" FontSize="9" Margin="10,5,0,0" />
 					<TextBlock x:Name="Window_VersionLabel" Text="Build Version:&#x0a;N/A" HorizontalAlignment="Center" TextAlignment="Center" FontWeight="Medium" FontSize="8" Margin="0,-4,0,4" />
 				</Grid>
 				<!--#endregion-->
-				
+
 			</Grid>
 		</Border>
 	</Border>

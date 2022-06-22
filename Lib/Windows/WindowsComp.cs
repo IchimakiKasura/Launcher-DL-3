@@ -42,8 +42,8 @@ class WindowsComp : Global
 		{
 			if (TaskBarThingy.ProgressValue == 1) TaskBarThingy.ProgressValue = 0;
 
-			Opac = new(1, TimeSpan.FromMilliseconds(200));
-			Anim = new(ClrConv(Config.BackgroundColor), TimeSpan.FromMilliseconds(200));
+			Opac = new(0.4, TimeSpan.FromMilliseconds(100));
+			Anim = new(ClrConv(Config.BackgroundColor), TimeSpan.FromMilliseconds(100));
 			Focus();
 			GC.Collect();
 			DebugOutput.WindowFocusDebug(true);
@@ -51,8 +51,8 @@ class WindowsComp : Global
 
 		MainWindowStatic.Deactivated += delegate
 		{
-			Opac = new(0, TimeSpan.FromMilliseconds(200));
-			Anim = new(Colors.Black, TimeSpan.FromMilliseconds(200));
+			Opac = new(0, TimeSpan.FromMilliseconds(100));
+			Anim = new(Colors.Black, TimeSpan.FromMilliseconds(100));
 			Focus();
 			Keyboard.ClearFocus();
 			DebugOutput.WindowFocusDebug(false);

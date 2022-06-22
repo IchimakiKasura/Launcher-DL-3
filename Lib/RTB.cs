@@ -132,11 +132,16 @@ public static class LauncherDL_RichTextBoxHandler
 	/// <param name="rt"></param>
 	public static void ScrollEndEvent(this RichTextBox rt, object s, EventArgs e)
 	{
+		if(!rt.IsInitialized) return;
+		
 		try
 		{
 			rt.ScrollToEnd();
 		}
-		catch { return; }
+		catch {
+			//MessageBox.Show("ass");
+			return;
+		}
 	}
 }
 

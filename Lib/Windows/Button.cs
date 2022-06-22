@@ -3,21 +3,6 @@ namespace Launcher_DL.Lib.Windows;
 public partial class Buttons : Global
 {
 
-	public static Duration AnimationTime { get; set; }
-
-	public static void InitiateAnimation()
-	{
-		AnimationTime = TimeSpan.Parse("00:00:00.1");
-
-		if (!Config.EpicAnimations)
-		{
-			AnimationTime = TimeSpan.Parse("0");
-			Button_Format.Style = Application.Current.FindResource("AkiraDisabled") as Style;
-			Button_Download.Style = Application.Current.FindResource("AstolfoDisabled") as Style;
-			Button_Update.Style = Application.Current.FindResource("VentiDisabled") as Style;
-		}
-	}
-
 	public static async void FileFormat(object s, RoutedEventArgs e)
 	{
 
@@ -182,6 +167,11 @@ public partial class Buttons : Global
 		await WorkProcess.StartProcess(new YTDL().YTDL_Update());
 	}
 
+	public static void GConLeave(object s, RoutedEventArgs e)
+	{
+		GC.Collect();
+	}
+
 	public static void OpenFolder(string output)
 	{
 		bool IsExist = Directory.Exists($"{Directory.GetCurrentDirectory()}\\{output}");
@@ -198,4 +188,5 @@ public partial class Buttons : Global
 			FileName = "explorer.exe"
 		});
 	}
+	
 }

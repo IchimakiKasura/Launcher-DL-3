@@ -14,9 +14,6 @@ sealed class InitialStartUp : Global
 			oldSource.Dispose();
 		}
 
-		//idfk whats dis
-		MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata(60));
-
 		WindowsComp.WindowFocusAnimation();
 		ConsoleComment.UserCommentDetect();
 		EventHandlers.SetupEvents();
@@ -45,7 +42,7 @@ sealed class InitialStartUp : Global
 			Config.EpicAnimations = false;
 		}
 
-		Buttons.InitiateAnimation();
+		DL_Resources.ResourcesScript.InitiateAnimation();
 
 		MainWindowStatic.Visibility = Visibility.Visible;
 		MainWindowStatic.ShowActivated = true;

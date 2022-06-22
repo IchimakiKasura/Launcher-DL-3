@@ -22,6 +22,7 @@ public partial class MainWindow : Window
 		}
 
 		InitializeComponent();
+		WindowStyle = WindowStyle.SingleBorderWindow;
 		Global.MainWindowStatic = this;
 
 		// Setups an Event for taskbar flashing

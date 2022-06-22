@@ -84,14 +84,14 @@ sealed class ComboBoxComp : Global
 				Input_Link.Uid = System_Language_Handler.Placeholder_File;
 				Text_Link.Content = System_Language_Handler.Label_File;
 				Input_Name.Uid = System_Language_Handler.Placeholder_Required;
-				Button_Download.Content = System_Language_Handler.ComboBox_Label_Convert.Content;
+				Button_Download.Text = System_Language_Handler.ComboBox_Label_Convert.ContentStringFormat;
 				Open_File.Visibility = Visibility.Visible;
 				Button_Download.Click -= Buttons.Download;
 				Button_Download.Click += Buttons.ConvertFile;
 				Input_Format.SelectedIndex = 0;
 
 				if (Config.SystemLanguage.ToLower() == "default")
-					Button_Download.Content = "コンバート";
+					Button_Download.Text = "コンバート";
 
 				break;
 		};
@@ -105,7 +105,7 @@ sealed class ComboBoxComp : Global
 			Input_Link.Uid = System_Language_Handler.Placeholder_Link;
 			Text_Link.Content = System_Language_Handler.Label_Link;
 			Input_Name.Uid = System_Language_Handler.Placeholder_Optional;
-			Button_Download.Content = System_Language_Handler.Button_Download_Default;
+			Button_Download.Text = System_Language_Handler.Button_Download_Default;
 			Open_File.Visibility = Visibility.Hidden;
 			Button_Download.Click -= Buttons.ConvertFile;
 			Button_Download.Click -= Buttons.Download;

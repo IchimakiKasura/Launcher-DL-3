@@ -76,7 +76,7 @@
     <None Update="Config.kasu">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\background.png">
+    <None Update="Images\background.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\Samples\Andromeda.png">
@@ -177,8 +177,8 @@
     <Resource Include="Images\ContextMenu\log-file.png" />
     <Resource Include="Images\ContextMenu\multimedia.png" />
     <Resource Include="Images\Icon.ico" />
-    <Resource Include="Images\akira.png" />
-    <Resource Include="Images\asutorufo.jpeg" />
+    <Resource Include="Images\akira.jpg" />
+    <Resource Include="Images\asutorufo.jpg" />
     <Resource Include="Images\venti.jpg" />
   </ItemGroup>
 

@@ -3,7 +3,7 @@ namespace Launcher_DL.Lib;
 [Serializable]
 public class LauncherDefaultConfig
 {
-	public string BackgroundName { get; set; } = "background.png";
+	public string BackgroundName { get; set; } = "background.jpg";
 	public string BackgroundColor { get; set; } = "#A31F0000";
 	public string GlowColor { get; set; } = "#FFFF8282";
 	public string DefaultOutput { get; set; } = "output";
@@ -41,8 +41,7 @@ sealed class ConfigComp : Global
 
 		try
 		{
-			foreach (Match match in RegexComp.KasuExtension.Matches(Data))
-			{
+			Parallel.ForEach(RegexComp.KasuExtension.Matches(Data), match =>{
 				DebugOutput.LoadConfig_Debug(match);
 				if (match.Groups["BackgroundName"].Success) Config.BackgroundName = match.Groups["BackgroundName"].Value.Trim();
 				if (match.Groups["BackgroundColor"].Success) Config.BackgroundColor = match.Groups["BackgroundColor"].Value.Trim();
@@ -57,7 +56,7 @@ sealed class ConfigComp : Global
 				if (match.Groups["EpicAnimations"].Success) Config.EpicAnimations = bool.Parse(match.Groups["EpicAnimations"].Value.Trim());
 
 				if (match.Success) ++TotalDetected;
-			}
+			});
 
 			ThrowException();
 
@@ -97,14 +96,13 @@ sealed class ConfigComp : Global
 		// checks the total options are present in the config.kasu
 		if (TotalDetected != 11) throw new Exception();
 
-		foreach(string lang in Languages)
-		{
+		Parallel.ForEach(Languages, (lang, state)=>{
 			if(Config.SystemLanguage.ToLower() == lang)
 			{
 				SystemLanguageConfirm = true;
-				break;
+				state.Break();
 			}
-		}
+		});
 
 		if(!SystemLanguageConfirm) throw new Exception();
 	}

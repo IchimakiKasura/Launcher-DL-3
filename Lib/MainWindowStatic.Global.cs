@@ -7,9 +7,9 @@ public partial class Global
 	internal static Button Open_File;
 	internal static Button Open_Folder;
 	internal static Button CloseButton;
-	internal static Button Button_Update;
-	internal static Button Button_Format;
-	internal static Button Button_Download;
+	internal static ResourceDictionary.ButtonControl Button_Update;
+	internal static ResourceDictionary.ButtonControl Button_Format;
+	internal static ResourceDictionary.ButtonControl Button_Download;
 	internal static MenuItem OpenDir_flv;
 	internal static MenuItem OpenDir_mkv;
 	internal static MenuItem OpenDir_webm;

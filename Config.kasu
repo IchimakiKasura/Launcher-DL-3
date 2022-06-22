@@ -1,6 +1,7 @@
 ! Only change the values inside the quotes.
 
 ! Here are some few samples for backgrounds for you :>
+! NOTE: the larger the file size/resolution will affect the app's perfomance.
 ! "Samples/Genshin.png"
 ! "Samples/Andromeda.png"
 ! "Samples/Yato.png"
@@ -9,9 +10,9 @@
 ! "Samples/Senku.png"
 ! "Samples/ILLEGAL.png"
 ! change the background.
-! DEFAULT: background.png
+! DEFAULT: background.jpg
 !============================================================
-BackgroundName:             "background.png"
+BackgroundName:             "background.jpg"
 
 
 

@@ -5,6 +5,7 @@
 /// </summary>
 public partial class App : Application
 {
+
 	const uint ENABLE_QUICK_EDIT = 0x0040;
 	#region DLL imports
 	[DllImport("user32.dll")]
@@ -27,7 +28,16 @@ public partial class App : Application
 
 	private void App_Startup(object s, StartupEventArgs e)
 	{
-		DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
+		//idk
+		PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
+
+		Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
+
+		#if DEBUG
+			// none
+		#else
+			DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
+		#endif
 
 		// Checks if there's new version of the Launcher DL
 		Update.Updater Update = new();

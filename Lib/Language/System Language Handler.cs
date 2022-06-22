@@ -39,9 +39,9 @@ sealed class System_Language_Handler : Global
 
 	public static void English()
 	{
-		Button_Download.Content = "Download";
-		Button_Format.Content = "File Format";
-		Button_Update.Content = "Update";
+		Button_Download.Text = "Download";
+		Button_Format.Text = "File Format";
+		Button_Update.Text = "Update";
 	}
 
 	public static void AppLanguage(kasuNhentaiCS.Json.JsonDeserializer Text, int Langauge)
@@ -60,9 +60,9 @@ sealed class System_Language_Handler : Global
 		Input_Name.Uid = Placeholder_Required = Text.selector($"Counter:{Langauge}>Placeholder>Required");
 
 		// Buttons
-		Button_Format.Content = Text.selector($"Counter:{Langauge}>Button>Format");
-		Button_Download.Content = Button_Download_Default = Text.selector($"Counter:{Langauge}>Button>Download");
-		Button_Update.Content = Text.selector($"Counter:{Langauge}>Button>Update");
+		Button_Format.Text = Text.selector($"Counter:{Langauge}>Button>Format");
+		Button_Download.Text = Button_Download_Default = Text.selector($"Counter:{Langauge}>Button>Download");
+		Button_Update.Text = Text.selector($"Counter:{Langauge}>Button>Update");
 		Open_Folder.Content = Text.selector($"Counter:{Langauge}>Button>OpenFolder");
 		Open_File.Content = Text.selector($"Counter:{Langauge}>Button>OpenFile");
 		Button_Convert = Text.selector($"Counter:{Langauge}>Button>Convert");

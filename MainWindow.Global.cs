@@ -12,18 +12,18 @@ public partial class MainWindow
 		Global.Button_Update = Button_Update;
 		Global.Button_Format = Button_Format;
 		Global.Button_Download = Button_Download;
-		Global.OpenDir_flv = OpenDir_flv;
-		Global.OpenDir_mkv = OpenDir_mkv;
-		Global.OpenDir_webm = OpenDir_webm;
-		Global.OpenDir_Audio = OpenDir_Audio;
-		Global.OpenDir_Video = OpenDir_Video;
-		Global.OpenDir_Logs = OpenDir_Logs;
-		Global.OpenDir_mFourA = OpenDir_mFourA;
-		Global.OpenDir_mpFour = OpenDir_mpFour;
-		Global.OpenDir_mpThree = OpenDir_mpThree;
-		Global.OpenDir_threeGP = OpenDir_threeGP;
-		Global.OpenDir_Convert = OpenDir_Convert;
-		Global.OpenDir_Formatted = OpenDir_Formatted;
+		Global.OpenDir_flv = ContextMenuButtons.CMB.OpenDir_flv;
+		Global.OpenDir_mkv = ContextMenuButtons.CMB.OpenDir_mkv;
+		Global.OpenDir_webm = ContextMenuButtons.CMB.OpenDir_webm;
+		Global.OpenDir_Audio = ContextMenuButtons.CMB.OpenDir_Audio;
+		Global.OpenDir_Video = ContextMenuButtons.CMB.OpenDir_Video;
+		Global.OpenDir_Logs = ContextMenuButtons.CMB.OpenDir_Logs;
+		Global.OpenDir_mFourA = ContextMenuButtons.CMB.OpenDir_mFourA;
+		Global.OpenDir_mpFour = ContextMenuButtons.CMB.OpenDir_mpFour;
+		Global.OpenDir_mpThree = ContextMenuButtons.CMB.OpenDir_mpThree;
+		Global.OpenDir_threeGP = ContextMenuButtons.CMB.OpenDir_threeGP;
+		Global.OpenDir_Convert = ContextMenuButtons.CMB.OpenDir_Convert;
+		Global.OpenDir_Formatted = ContextMenuButtons.CMB.OpenDir_Formatted;
 
 		// Inputs
 		Global.Input_Link = Input_Link;
