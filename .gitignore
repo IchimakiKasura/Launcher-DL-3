@@ -1,7 +1,8 @@
-/.ionide
-/.vs
-/.vscode
-/bin
-/obj
-/FodyWeavers.xml
-/FodyWeavers.xsd
+.ionide
+.vs
+.vscode
+bin
+obj
+FodyWeavers.xsd
+LauncherDL Profiler Debug
+ydl.cs

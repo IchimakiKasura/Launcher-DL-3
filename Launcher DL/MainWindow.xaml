@@ -1,0 +1,78 @@
+﻿<Window x:Class="Launcher_DL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Launcher_DL"
+				xmlns:DLControl="clr-namespace:DLControls;assembly=graphics"
+        mc:Ignorable="d"
+				ResizeMode="CanMinimize"
+				WindowStartupLocation="CenterScreen"
+				WindowStyle="None"
+				Background="Transparent"
+        Title="Launcher DL"
+        Height="500"
+        Width="850"
+				Effect="{StaticResource WindowDropShadow}"
+        FontFamily="{StaticResource DefaultFont}">
+
+	<WindowChrome.WindowChrome>
+		<WindowChrome GlassFrameThickness="0"
+									CornerRadius="0"
+									CaptionHeight="0"
+									UseAeroCaptionButtons="False"
+									ResizeBorderThickness="7" />
+	</WindowChrome.WindowChrome>
+
+	<!--#region Window style -->
+	<Window.Resources>
+		<Style TargetType="Border">
+			<Setter Property="CornerRadius" Value="10" />
+		</Style>
+	</Window.Resources>
+	<!--#endregion-->
+
+	<Border x:Name="windowInnerBG" Background="Black" Margin="10,10,10,10" CornerRadius="10">
+		<Border Focusable="True">
+			<Border.Background>
+				<ImageBrush ImageSource="pack://siteoforigin:,,,/Images/background.jpg" Opacity="0.5"/>
+			</Border.Background>
+			<Canvas CacheMode="BitmapCache" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased">
+				<Border Background="#A34F002F" CornerRadius="10,10,0,0" Height="35" Opacity="1" x:Name="windowDrag" Width="830">
+					<Grid>
+
+						<Image IsHitTestVisible="False" Source="{Binding Source={x:Static DLControl:DLStrings.Icon}}" Margin="8,0,801,0"/>
+						<TextBlock Text="Launcher DL" Foreground="White" FontWeight="Medium"  FontSize="14" Padding="34,9,0,0" IsHitTestVisible="False"/>
+						
+						<Button x:Name="CloseButton"
+										Content="✕"
+										Style="{StaticResource ExitButtonAlt}"
+										Margin="780,0,0,0" />
+
+						<Button x:Name="Minimize"
+										Content="—"
+										Style="{StaticResource MinimizeButtonAlt}"
+										Margin="730,0,50,0" />
+										
+					</Grid>
+				</Border>
+
+				<TextBlock x:Name="textBlock" Style="{StaticResource TextBlockResource}" Margin="310,66,431,382">Link</TextBlock>
+				<DLControl:TextBoxControl x:Name="textBoxLink" Width="387"/>
+				<TextBlock Style="{StaticResource TextBlockResource}" Margin="310,119,431,332">Format</TextBlock>
+				<DLControl:TextBoxControl x:Name="textBoxFormat" Width="387"/>
+				<TextBlock Style="{StaticResource TextBlockResource}" Margin="310,170,435,278">Name</TextBlock>
+				<DLControl:TextBoxControl x:Name="textBoxName" Width="387"/>
+
+				<DLControl:ButtonControl x:Name="buttonFileFormat"/>
+				<DLControl:ButtonControl x:Name="buttonDownload"/>
+				<DLControl:ButtonControl x:Name="buttonUpdate"/>
+				<DLControl:ButtonControl x:Name="buttonOpenFile"/>
+
+				<DLControl:ProgressBarControl x:Name="progressBar" Canvas.Left="300" Canvas.Top="434" Width="502" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				<DLControl:ConsoleControl ConsoleHeight="192" ConsoleWidth="502" x:Name="console" Margin="300,231,27,57"/>
+
+			</Canvas>
+		</Border>
+	</Border>
+</Window>

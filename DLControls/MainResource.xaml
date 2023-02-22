@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/graphics;component/Buttons/TopButtons.xaml"/>
+		<ResourceDictionary Source="/graphics;component/ScrollViewResource.xaml"/>
+		<ResourceDictionary Source="/graphics;component/ContextMenuResource.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	
+	<SolidColorBrush x:Key="ButtonBG" Color="#CCFBC2C2"/>
+	<SolidColorBrush x:Key="ButtonBGDisabled" Color="#CC5D4949"/>
+	<SolidColorBrush x:Key="DefaultBorderBrush" Color="#FF011F4C"/>
+	<SolidColorBrush x:Key="74000000" Color="#74000000"/>
+	<SolidColorBrush x:Key="DF900000" Color="#DF900000"/>
+	<FontFamily x:Key="DefaultFont">/graphics;component/Fonts/#Noto Sans JP</FontFamily>
+
+	<Color x:Key="GradientOne">#0E102F8E</Color>
+	<Color x:Key="GradientTwo">#FF0A2167</Color>
+	<Color x:Key="DefaultColor">#FF011F4C</Color>
+	<Color x:Key="CC882A2A_Color">#CC011F4C</Color>
+
+	<DropShadowEffect x:Key="ContentPresenterEffect" Color="Red" BlurRadius="2.5" ShadowDepth="0" RenderingBias="Performance"/>
+	<DropShadowEffect x:Key="CB_RTB_BM_Effect" Color="Black" BlurRadius="2.5" ShadowDepth="0" Direction="0" RenderingBias="Performance"/>
+	<DropShadowEffect x:Key="WindowDropShadow" Opacity="1" ShadowDepth="0" BlurRadius="10" Direction="0" Color="#FF7DB5FF" RenderingBias="Performance"/>
+
+	<DropShadowEffect x:Key="ExitDSE" Color="#FFAD0000" Opacity="0" ShadowDepth="0" Direction="0" BlurRadius="5" RenderingBias="Performance"/>
+	<DropShadowEffect x:Key="MinDSE" Color="#FFC19F9F" Opacity="0" ShadowDepth="0" Direction="0" BlurRadius="5" RenderingBias="Performance"/>
+
+	<Style x:Key="TextBlockResource" TargetType="TextBlock">
+		<Setter Property="FontSize" Value="24"/>
+		<Setter Property="FontWeight" Value="Bold"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Effect">
+			<Setter.Value>
+				<DropShadowEffect ShadowDepth="2" Direction="0" BlurRadius="0" RenderingBias="Performance"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="TextBox">
+		<Setter Property="ContextMenu" Value="{StaticResource TextBoxMenu}" />
+		<Setter Property="AcceptsReturn" Value="False"/>
+		<Setter Property="IsUndoEnabled" Value="False"/>
+		<Setter Property="UndoLimit" Value="0"/>
+	</Style>
+	
+</ResourceDictionary>
