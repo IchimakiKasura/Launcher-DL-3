@@ -10,11 +10,6 @@
 // TOFIX:
 //	nothing, just clean the code idk.
 //	Take more time. (what)
-//
-#if DEBUG
-#warning App is not on Release, Building on DEBUG mode
-#endif
-// So that I can know if I forgot to build the app on Release
 
 //=========================================================//
 //   ██████╗██╗  ██╗██╗███████╗ █████╗ ████████╗ ██████╗   //
@@ -28,7 +23,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        InitializeComponent();
+		InitializeComponent();
 
 		WindowStyle = WindowStyle.SingleBorderWindow;
 
@@ -40,7 +35,7 @@ public partial class MainWindow : Window
 		#if DEBUG
 		ConsoleDebug.InitiateConsoleDebug();
 		#endif
-		
+
 		OnStartUp.Initialize();
 	}
 }

@@ -3,10 +3,10 @@
   <PropertyGroup>
     <AssemblyName>graphics</AssemblyName>
     <TargetFramework>net7.0-windows</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>DLControls</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
+    <NoWarn>NU1701,CS8981,NU1503</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

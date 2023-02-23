@@ -27,6 +27,9 @@ Cloning my project? sure..?
 - Requirements
   - .NET 7.0 SDK
 
+To build the app just run the `BuildAPP.bat` if you have dotnet installed<br>
+or run MSBUILD `msbuild Build/BuildLauncherDL.csproj` if dotnet having trouble copying files.
+
 ---
 
 <center>

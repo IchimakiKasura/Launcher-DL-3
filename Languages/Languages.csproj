@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <AssemblyName>Languages</AssemblyName>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>DLLanguages</RootNamespace>
     <Nullable>enable</Nullable>
+    <NoWarn>NU1701,CS8981,NU1503</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

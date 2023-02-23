@@ -1,35 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Compile Remove="Core/Debug/*.*"/>
+  <PropertyGroup Condition="$(Configuration) == Debug">
+    <OutputType>Exe</OutputType>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration) == Release">
+    <OutputType>WinExe</OutputType>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(Configuration) == Release">
+    <Compile Remove="Core/Debug/*.*" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <ItemGroup Condition="$(Configuration) == Debug">
     <Using Include="Launcher_DL.Core.Debug" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputType>Exe</OutputType>
-    <Platforms>AnyCPU;x64</Platforms>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputType>WinExe</OutputType>
-    <Platforms>AnyCPU;x64</Platforms>
-  </PropertyGroup>
-  
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>Launcher_DL</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
-
     <ApplicationIcon>..\Images\Icon.ico</ApplicationIcon>
     <AssemblyName>uVad</AssemblyName>
-    
-    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
-    <AllowedReferenceRelatedFileExtensions>false</AllowedReferenceRelatedFileExtensions>
-    <DebugType>none</DebugType>
-
-    <NoWarn>NU1701</NoWarn>
+    <NoWarn>NU1701,CS8981,NU1503</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,8 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DLControls\DLControls.csproj" />
-    <ProjectReference Include="..\Languages\Languages.csproj" />
+    <ProjectReference Include="..\DLControls\DLControls.csproj"/>
+    <ProjectReference Include="..\Languages\Languages.csproj"/>
   </ItemGroup>
 
   <ItemGroup>

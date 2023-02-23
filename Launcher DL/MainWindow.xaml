@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Launcher_DL"
-				xmlns:DLControl="clr-namespace:DLControls;assembly=graphics"
+		xmlns:DLControl="clr-namespace:DLControls;assembly=graphics"
         mc:Ignorable="d"
-				ResizeMode="CanMinimize"
-				WindowStartupLocation="CenterScreen"
-				WindowStyle="None"
-				Background="Transparent"
+		ResizeMode="CanMinimize"
+		WindowStartupLocation="CenterScreen"
+		WindowStyle="None"
+		Background="Transparent"
         Title="Launcher DL"
         Height="500"
         Width="850"
-				Effect="{StaticResource WindowDropShadow}"
+		Effect="{StaticResource WindowDropShadow}"
         FontFamily="{StaticResource DefaultFont}">
 
 	<WindowChrome.WindowChrome>
