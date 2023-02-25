@@ -29,31 +29,65 @@ public partial class TextBoxControl : UserControl
 	public HorizontalAlignment TextPlaceholderAlignment
 	{
 		get => (HorizontalAlignment)GetValue(TextPlaceholderAlignmentProperty);
-		set
-		{
-			SetValue(TextPlaceholderAlignmentProperty, value);
-		}
+		set => SetValue(TextPlaceholderAlignmentProperty, value);
+		
 	}
 
 	public string Text
 	{
-		get
-		{
-			return UserTextBox.Text;
-		}
-		set
-		{
-			UserTextBox.Text = value;
-		}
+		get => UserTextBox.Text;
+		set => UserTextBox.Text = value;
 	}
-	private void Text_GotFocus(object s,RoutedEventArgs e){isTextBoxFocused = true;}
-	private void Text_LostFocus(object s,RoutedEventArgs e){isTextBoxFocused = false;}
 
 	public bool isTextBoxFocused { get; set; }
+
+	private TextBlock Placeholder;
 
 	public TextBoxControl()
 	{
 		InitializeComponent();
 	}
 
+	private void ContentLoaded(object sender, RoutedEventArgs e)
+	{
+		Grid UserGrid = (Grid)UserTextBox.Template.FindName("UserTextBoxGRID",UserTextBox);
+
+		Placeholder = new()
+		{
+			IsHitTestVisible = false,
+			Text = TextPlaceholder,
+			VerticalAlignment = VerticalAlignment.Center,
+			HorizontalAlignment = TextPlaceholderAlignment,
+			Margin = TextPlaceholderMargin,
+			FontSize = 20,
+			Foreground = Brushes.DimGray
+		};
+
+		UserGrid.Children.Add(Placeholder);
+
+		UserTextBox.TextChanged += delegate
+		{
+			if (Text == "")
+			{
+				UserGrid.Children.Remove(Placeholder);
+				UserGrid.Children.Add(Placeholder);
+			} else UserGrid.Children.Remove(Placeholder);
+		};
+
+		UserTextBox.IsEnabledChanged += delegate
+		{
+			UserTextBox.Foreground =
+			Placeholder.Foreground = Brushes.Red;
+			Placeholder.Text = "Unavailable";
+			if (UserTextBox.IsEnabled)
+			{
+				UserTextBox.Foreground = Brushes.White;
+				Placeholder.Foreground = Brushes.DimGray;
+				Placeholder.Text = TextPlaceholder;
+			}
+		};
+
+		UserTextBox.GotFocus += delegate { isTextBoxFocused = true; };
+		UserTextBox.LostFocus += delegate { isTextBoxFocused = false; };
+	}
 }

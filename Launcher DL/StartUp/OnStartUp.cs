@@ -43,16 +43,16 @@ class OnStartUp
 		buttonUpdate.BorderEffect = Colors.Aqua;
 		buttonOpenFile.BorderEffect = Colors.Red;
 
-		// Button Margin
-		buttonFileFormat.Margin = new(24,155,556,261);
-		buttonDownload.Margin = new(24,231,556,183);
-		buttonUpdate.Margin = new(24,309,556,105);
-		buttonOpenFile.Margin = new(24,387,556,29);
-
 		// Button Icon Heights
 		buttonFileFormat.IconHeight = 
 		buttonUpdate.IconHeight = 
 		buttonOpenFile.IconHeight = 35;
+
+		// Button Storyboards
+		buttonFileFormat.IsAnimationOn = 
+		buttonDownload.IsAnimationOn = 
+		buttonUpdate.IsAnimationOn = 
+		buttonOpenFile.IsAnimationOn = config.EpicAnimations;
 	}
 
 	private static void InitiateContextMenu()
@@ -80,17 +80,9 @@ class OnStartUp
 	}
 
 	private static void InitializeTextBoxComponents()
-	{
-		// Adjust TextBox Canvas Positions
-		Canvas.SetLeft(textBoxLink, 415);
-		Canvas.SetLeft(textBoxFormat, 415);
-		Canvas.SetLeft(textBoxName, 415);
-		Canvas.SetTop(textBoxLink, 67);
-		Canvas.SetTop(textBoxFormat, 117);
-		Canvas.SetTop(textBoxName, 171);
-		
-		textBoxLink.TextPlaceholderAlignment = HorizontalAlignment.Center;
-		textBoxFormat.TextPlaceholderAlignment = HorizontalAlignment.Center;
+	{		
+		textBoxLink.TextPlaceholderAlignment = 
+		textBoxFormat.TextPlaceholderAlignment = 
 		textBoxName.TextPlaceholderAlignment = HorizontalAlignment.Center;
 	}
 }

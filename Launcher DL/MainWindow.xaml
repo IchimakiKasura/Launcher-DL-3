@@ -37,7 +37,7 @@
 			<Border.Background>
 				<ImageBrush ImageSource="pack://siteoforigin:,,,/Images/background.jpg" Opacity="0.5"/>
 			</Border.Background>
-			<Canvas CacheMode="BitmapCache" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased">
+			<Canvas x:Name="windowCanvas" CacheMode="BitmapCache" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased">
 				<Border Background="#A34F002F" CornerRadius="10,10,0,0" Height="35" Opacity="1" x:Name="windowDrag" Width="830">
 					<Grid>
 
@@ -57,20 +57,20 @@
 					</Grid>
 				</Border>
 
-				<TextBlock x:Name="textBlock" Style="{StaticResource TextBlockResource}" Margin="310,66,431,382">Link</TextBlock>
-				<DLControl:TextBoxControl x:Name="textBoxLink" Width="387"/>
-				<TextBlock Style="{StaticResource TextBlockResource}" Margin="310,119,431,332">Format</TextBlock>
-				<DLControl:TextBoxControl x:Name="textBoxFormat" Width="387"/>
-				<TextBlock Style="{StaticResource TextBlockResource}" Margin="310,170,435,278">Name</TextBlock>
-				<DLControl:TextBoxControl x:Name="textBoxName" Width="387"/>
+				<TextBlock x:Name="textBlockLink" Style="{StaticResource TextBlockResource}" Margin="310,66,431,382">Link</TextBlock>
+				<DLControl:TextBoxControl x:Name="textBoxLink" Width="387" Canvas.Top="67" Canvas.Left="415"/>
+				<TextBlock x:Name="textBlockFormat" Style="{StaticResource TextBlockResource}" Margin="310,119,431,332">Format</TextBlock>
+				<DLControl:TextBoxControl x:Name="textBoxFormat" Width="387" Canvas.Top="117" Canvas.Left="415"/>
+				<TextBlock x:Name="textBlockName" Style="{StaticResource TextBlockResource}" Margin="310,170,435,278">Name</TextBlock>
+				<DLControl:TextBoxControl x:Name="textBoxName" Width="387"  Canvas.Top="171" Canvas.Left="415"/>
 
-				<DLControl:ButtonControl x:Name="buttonFileFormat"/>
-				<DLControl:ButtonControl x:Name="buttonDownload"/>
-				<DLControl:ButtonControl x:Name="buttonUpdate"/>
-				<DLControl:ButtonControl x:Name="buttonOpenFile"/>
+				<DLControl:ButtonControl x:Name="buttonFileFormat" Margin="24,155,556,261"/>
+				<DLControl:ButtonControl x:Name="buttonDownload" Margin="24,231,556,183"/>
+				<DLControl:ButtonControl x:Name="buttonUpdate" Margin="24,309,556,105"/>
+				<DLControl:ButtonControl x:Name="buttonOpenFile" Margin="24,387,556,29"/>
 
-				<DLControl:ProgressBarControl x:Name="progressBar" Canvas.Left="300" Canvas.Top="434" Width="502" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				<DLControl:ConsoleControl ConsoleHeight="192" ConsoleWidth="502" x:Name="console" Margin="300,231,27,57"/>
+				<!--<DLControl:ProgressBarControl x:Name="progressBar" Canvas.Left="300" Canvas.Top="434"/>-->
 
 			</Canvas>
 		</Border>

@@ -4,9 +4,9 @@ class EventHandlers
 {
 	public static void InitializeEventHandlers()
 	{
-		MainWindowStatic.Loaded += WindowsComponents.Window_Loaded;
+		MainWindowStatic.Loaded += WindowsComponents.WindowLoaded;
 
-		windowDrag.MouseDown += WindowsComponents.Window_Drag;
+		windowDrag.MouseDown += WindowsComponents.WindowDrag;
 		Minimize.Click += TopButtons.MinimizeWindow;
 		CloseButton.Click += TopButtons.CloseWindow;
 	}

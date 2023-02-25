@@ -24,5 +24,7 @@ public partial class Global
 	public static TextBoxControl textBoxLink { get; set; }
 	public static TextBoxControl textBoxFormat { get; set; }
 	public static TextBoxControl textBoxName { get; set; }
+
+	public static Canvas windowCanvas { get; set; }
 }
 

@@ -28,7 +28,7 @@
 							<Border Background="{TemplateBinding Background}"
 							CornerRadius="10"
 							Cursor="Hand">
-								<Border CornerRadius="10">
+								<Border CornerRadius="10" x:Name="UserButtonMainBorder">
 
 									<Grid>
 										<Image Source="{Binding Icon, ElementName=root}"  Height="{Binding IconHeight, ElementName=root}" Width="{Binding IconWidth, ElementName=root}" Margin="11,8,189,7"/>
@@ -44,52 +44,8 @@
 											ImageSource="{Binding Image, ElementName=root}"
 											Stretch="UniformToFill"
 											Viewport="-0.3,0,1.5,1.8"
-											Opacity="0"
-											VirtualizingPanel.IsVirtualizing="True"
-											VirtualizingPanel.VirtualizationMode="Recycling"/>
+											Opacity="0"/>
 									</Border.Background>
-
-									<Border.Triggers>
-										
-										<EventTrigger RoutedEvent="Loaded">
-											<RemoveStoryboard BeginStoryboardName="ButtonMouseEnter"/>
-											<RemoveStoryboard BeginStoryboardName="ButtonMouseLeave"/>
-										</EventTrigger>
-										
-										<EventTrigger RoutedEvent="MouseEnter">
-											<RemoveStoryboard BeginStoryboardName="ButtonMouseLeave" />
-											<BeginStoryboard x:Name="ButtonMouseEnter">
-												<Storyboard>
-													<DoubleAnimation Storyboard.TargetName="b_Image"
-																Storyboard.TargetProperty="(Brush.Opacity)"
-																To="0.85"
-																Duration="0:0:.10"/>
-													<RectAnimation Storyboard.TargetName="b_Image"
-																Storyboard.TargetProperty="(ImageBrush.Viewport)"
-																To="0,0,1,1"
-																Duration="0:0:.10"/>
-												</Storyboard>
-											</BeginStoryboard>
-										</EventTrigger>
-										
-										<EventTrigger RoutedEvent="MouseLeave">
-											<RemoveStoryboard BeginStoryboardName="ButtonMouseEnter" />
-											<BeginStoryboard x:Name="ButtonMouseLeave">
-												<Storyboard>
-													<DoubleAnimation Storyboard.TargetName="b_Image"
-																Storyboard.TargetProperty="(Brush.Opacity)"
-																To="0"
-																Duration="0:0:.05"/>
-													<RectAnimation Storyboard.TargetName="b_Image"
-																Storyboard.TargetProperty="(ImageBrush.Viewport)"
-																To="-0.3,0,1.5,1.8"
-																Duration="0:0:.05"/>
-												</Storyboard>
-											</BeginStoryboard>
-										</EventTrigger>
-										
-									</Border.Triggers>
-
 								</Border>
 							</Border>
 						</ControlTemplate>
@@ -103,43 +59,10 @@
 				</Setter>
 				
 				<Style.Triggers>
-					
 					<Trigger Property="IsEnabled" Value="false">
 						<Setter Property="Foreground" Value="Red"/>
 						<Setter Property="Background" Value="{StaticResource ButtonBGDisabled}"/>
 					</Trigger>
-					
-					<EventTrigger RoutedEvent="Loaded">
-						<RemoveStoryboard BeginStoryboardName="ButtonMouseEnter"/>
-						<RemoveStoryboard BeginStoryboardName="ButtonMouseLeave"/>
-					</EventTrigger>
-					
-					<EventTrigger RoutedEvent="MouseEnter">
-						<RemoveStoryboard BeginStoryboardName="ButtonMouseLeave" />
-						<BeginStoryboard x:Name="ButtonMouseEnter">
-							<Storyboard>
-								<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity" To="1" Duration="0:0:.1"/>
-								<DoubleAnimation Storyboard.TargetProperty="Width" To="260" Duration="0:0:.1"/>
-								<DoubleAnimation Storyboard.TargetProperty="Height" To="67.5" Duration="0:0:.1"/>
-								<ThicknessAnimation Storyboard.TargetProperty="Margin" To="-5,-1.5,0,0" Duration="0:0:.1"/>
-								<ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:.1"/>
-							</Storyboard>
-						</BeginStoryboard>
-					</EventTrigger>
-					
-					<EventTrigger RoutedEvent="MouseLeave">
-						<RemoveStoryboard BeginStoryboardName="ButtonMouseEnter" />
-						<BeginStoryboard x:Name="ButtonMouseLeave">
-							<Storyboard>
-								<DoubleAnimation Storyboard.TargetProperty="(Effect).Opacity" To="0" Duration="0:0:.1"/>
-								<DoubleAnimation Storyboard.TargetProperty="Width" To="250" Duration="0:0:.1"/>
-								<DoubleAnimation Storyboard.TargetProperty="Height" To="65" Duration="0:0:.1"/>
-								<ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,0,0,0" Duration="0:0:.1"/>
-								<ColorAnimation  Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0:0:.1"/>
-							</Storyboard>
-						</BeginStoryboard>
-					</EventTrigger>
-					
 				</Style.Triggers>
 				
 			</Style>

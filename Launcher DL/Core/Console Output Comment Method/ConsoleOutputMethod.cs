@@ -15,5 +15,11 @@ internal class ConsoleOutputMethod
 		#endif
 	}
 
+	public async static void ConfigOutputComment(bool IsSuccess, string error = default)
+	{
+		await WindowsComponents.WindowAwaitLoad();
+		if (config.ShowSystemOutput && IsSuccess) console.AddFormattedText($"<#a85192%14>[SYSTEM] <Green%14>SUCCESS <Gray%14>Config loaded");
+		if (config.ShowSystemOutput && !IsSuccess) console.AddFormattedText($"<#a85192%14>[SYSTEM] <Red%14>FAILED <Gray%14>{error}");
+	}
 }
 

@@ -20,12 +20,13 @@ public partial class MainWindow
 		Global.windowDrag = windowDrag;
 		Global.windowInnerBG = windowInnerBG;
 
-		Global.progressBar = progressBar;
 		Global.console = console;
 
 		Global.textBoxLink = textBoxLink;
 		Global.textBoxFormat= textBoxFormat;
 		Global.textBoxName= textBoxName;
+
+		Global.windowCanvas = windowCanvas;
 
 	}
 }

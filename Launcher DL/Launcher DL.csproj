@@ -2,11 +2,11 @@
 
   <PropertyGroup Condition="$(Configuration) == Debug">
     <OutputType>Exe</OutputType>
-    <Platforms>AnyCPU</Platforms>
+    <Platforms>x64;AnyCPU</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration) == Release">
     <OutputType>WinExe</OutputType>
-    <Platforms>AnyCPU</Platforms>
+    <Platforms>x64;AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup Condition="$(Configuration) == Release">

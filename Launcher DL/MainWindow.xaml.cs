@@ -28,14 +28,23 @@ public partial class MainWindow : Window
 		WindowStyle = WindowStyle.SingleBorderWindow;
 
 		MainWindowStatic = this;
-		config = Config.ReadConfigINI();
-
 		InitiateStaticComponents();
 
 		#if DEBUG
 		ConsoleDebug.InitiateConsoleDebug();
 		#endif
 
+		config = Config.ReadConfigINI();
 		OnStartUp.Initialize();
+
+		buttonFileFormat.Click += delegate
+		{
+			WindowsComponents.WindowProgressBar(ProgressBarState.Show);
+		};
+
+		buttonDownload.Click += delegate
+		{
+			WindowsComponents.WindowProgressBar(ProgressBarState.Hide);
+		};
 	}
 }

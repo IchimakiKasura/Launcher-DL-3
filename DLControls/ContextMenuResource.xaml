@@ -56,14 +56,14 @@
             </Setter.Value>
         </Setter>
 	</Style>
-	
+
 	<Style TargetType="MenuItem">
 		<Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
 		<Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
 		<Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="MenuItem">
-                    <Border x:Name="Bd"
+			<Setter.Value>
+				<ControlTemplate TargetType="MenuItem">
+					<Border x:Name="Bd"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Background="{TemplateBinding Background}"
@@ -72,83 +72,70 @@
                         CornerRadius="5">
 						<Grid CacheMode="BitmapCache" >
 							<Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="IconWidth" Width="35" SharedSizeGroup="Icon" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
-                                <ColumnDefinition Width="15" />
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter x:Name="Icon"
+								<ColumnDefinition x:Name="IconWidth" Width="35" SharedSizeGroup="Icon" />
+								<ColumnDefinition/>
+								<ColumnDefinition SharedSizeGroup="Shortcut" />
+								<ColumnDefinition Width="15" />
+							</Grid.ColumnDefinitions>
+							<ContentPresenter x:Name="Icon"
                                 Height="17"
                                 VerticalAlignment="Center"
                                 ContentSource="Icon"
                                 Grid.Column="0"
-                                HorizontalAlignment="Center"
-                                Effect="{StaticResource CB_RTB_BM_Effect}"/>
-                            <ContentPresenter x:Name="ContentPresenter"
+                                HorizontalAlignment="Center"/>
+							<ContentPresenter x:Name="ContentPresenter"
                                 Content="{TemplateBinding Header}"
                                 Grid.Column="1" ContentSource="Header"
                                 Margin="{TemplateBinding Padding}"
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                Uid="ContentPresenter_33"
-                                Effect="{StaticResource CB_RTB_BM_Effect}"/>
-                            <TextBlock x:Name="InputGestureText"
+                                Uid="ContentPresenter_33"/>
+							<TextBlock x:Name="InputGestureText"
                                 Grid.Column="2"
                                 Text="{TemplateBinding InputGestureText}"
                                 Margin="5,2,2,2"
                                 DockPanel.Dock="Right"/>
-                            <Path  Grid.Column="3"
+							<Path  Grid.Column="3"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Data="M 0 0 L 0 7 L 4 3.5 Z"
                                 Fill="Blue"
                                 Visibility="Hidden"/>
-                            <Popup x:Name="Popup"
+							<Popup x:Name="Popup"
                                     Placement="Right"
                                     IsOpen="{TemplateBinding IsSubmenuOpen}"
                                     AllowsTransparency="True"
                                     Focusable="False"
                                     PopupAnimation="Fade">
-                                <Border x:Name="SubmenuBorder"
+								<Border x:Name="SubmenuBorder"
                                         Background="DarkBlue"
                                         BorderThickness="2"
                                         BorderBrush="#4F000000"
                                         CornerRadius="5"
-                                        Padding="4">
-                                    <ScrollViewer CanContentScroll="True" Style="{DynamicResource MenuScrollViewer}">
-                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
-                                    </ScrollViewer>
-                                </Border>
-                            </Popup>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-						
-                        <Trigger Property="IsHighlighted" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
+                                        Padding="4"/>
+							</Popup>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+
+						<Trigger Property="IsHighlighted" Value="True">
+							<Setter Property="Cursor" Value="Hand"/>
 							<Setter Property="Background" TargetName="Bd" Value="#E5040540"/>
 							<Setter Property="BorderBrush" TargetName="Bd" Value="#FF0406b0"/>
-                        </Trigger>
-						
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="#FF6B6A6A"/>
-                        </Trigger>
-						
-                        <Trigger Property="Icon" Value="{x:Null}">
-                            <Setter TargetName="IconWidth" Property="Width"	Value="5" />
-                        </Trigger>
-						
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-	</Style>
-	
-	<Style x:Key="MenuScrollViewer" TargetType="{x:Type ScrollViewer}">
-		<Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
-		<Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
-		<Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
-		<Setter Property="IsDeferredScrollingEnabled" Value="True"/>
+						</Trigger>
+
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="#FF6B6A6A"/>
+						</Trigger>
+
+						<Trigger Property="Icon" Value="{x:Null}">
+							<Setter TargetName="IconWidth" Property="Width"	Value="5" />
+						</Trigger>
+
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 </ResourceDictionary>

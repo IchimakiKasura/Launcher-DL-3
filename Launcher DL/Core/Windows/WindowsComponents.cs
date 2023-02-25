@@ -2,7 +2,7 @@
 
 class WindowsComponents
 {
-	public static void Window_Loaded(object sender, RoutedEventArgs e)
+	public static void WindowLoaded(object sender, RoutedEventArgs e)
 	{
 		new TransparencyConverter(MainWindowStatic).MakeTransparent();
 	}
@@ -37,10 +37,40 @@ class WindowsComponents
 
 	}
 
-	public static void Window_Drag(object sender, MouseButtonEventArgs e)
+	public static void WindowDrag(object sender, MouseButtonEventArgs e)
 	{
 		if (e.ChangedButton == MouseButton.Left) MainWindowStatic.DragMove();
 	}
 
-}
+	public static void WindowProgressBar(ProgressBarState State)
+	{
+		// if(!progressBar.IsInitialized)
+		// {
+			progressBar = new() { Width = 502 };
+			Canvas.SetLeft(progressBar, 300);
+			Canvas.SetTop(progressBar, 434);
+		// }
 
+		switch(State)
+		{
+			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar); break;
+			case ProgressBarState.Show: windowCanvas.Children.Add(progressBar); break;
+		}
+	}
+
+	public static async Task WindowAwaitLoad()
+	{
+		if(!MainWindowStatic.IsLoaded)
+		{
+			await Task.Run(()=>{
+				MainWindowStatic.Dispatcher.Invoke(async()=>
+				{
+					while(!MainWindowStatic.IsLoaded)
+					{
+						await Task.Delay(100);
+					}
+				});
+			});
+		}
+	}
+}

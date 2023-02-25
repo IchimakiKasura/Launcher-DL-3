@@ -29,5 +29,7 @@ public partial class Global
 	public static List<string> ConvertType = new() { "mp4", "mp3", "flv", "webm", "m4a", "mkv", "avi", "wmv", "wma", "ogg", "aac", "wav" };
 	#endregion
 
+	public enum ProgressBarState{Hide,Show}
+
 }
 
