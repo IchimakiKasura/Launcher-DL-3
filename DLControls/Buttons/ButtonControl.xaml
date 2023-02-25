@@ -1,7 +1,8 @@
 <UserControl x:Class="DLControls.ButtonControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 x:Name="root">
+			 x:Name="root"
+			 Loaded="ContentLoaded">
 
 	<UserControl.Resources>
 		<ResourceDictionary>

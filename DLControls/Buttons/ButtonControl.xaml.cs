@@ -64,14 +64,17 @@ public partial class ButtonControl : UserControl
 	public ButtonControl()
     {
         InitializeComponent();
+	}
 
+    private void ContentLoaded(object s, RoutedEventArgs e)
+    {
         // I know I should've merged them but 
         // its better this way for me to organize
         // until i found a solution.
         ButtonStoryboardMain();
         ButtonStoryboardIMAGE();
         ButtonStoryboardTEXT();
-	}
+    }
 
     // NOTE: Code is kinda scuffed will refactor this if I found a solution.
     // EDIT: will try foreach or other methods that would likely to work? idk im not that of an expert at c#
@@ -207,6 +210,7 @@ public partial class ButtonControl : UserControl
             STYB_ImageOpacity.Begin();
             STYB_ImageViewport.Begin();
         }
+
         UserButton.MouseEnter += delegate {SetStoryboard(true);GC.Collect();};
         UserButton.MouseLeave += delegate {SetStoryboard(false);GC.Collect();};
     }
