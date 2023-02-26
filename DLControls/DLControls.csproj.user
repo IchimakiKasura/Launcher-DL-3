@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="ComboBox\ComboBoxControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Console\ConsoleControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +17,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Buttons\TopButtons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ComboBox\ComboBoxControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Console\ConsoleControl.xaml">

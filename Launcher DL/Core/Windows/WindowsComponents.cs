@@ -23,7 +23,7 @@ class WindowsComponents
 			WindowAnimation = new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
 			Focus();
 			GC.Collect();
-			//DebugOutput.WindowFocusDebug(true);
+			ConsoleDebug.WindowFocused(true);
 		};
 
 		MainWindowStatic.Deactivated += delegate
@@ -31,8 +31,8 @@ class WindowsComponents
 			WindowOpacity = new(0, TimeSpan.FromMilliseconds(100));
 			WindowAnimation = new(Colors.Black, TimeSpan.FromMilliseconds(100));
 			Focus();
-			Keyboard.ClearFocus();
-			//DebugOutput.WindowFocusDebug(false);
+			//Keyboard.ClearFocus();
+			ConsoleDebug.WindowFocused(false);
 		};
 
 	}
@@ -44,13 +44,6 @@ class WindowsComponents
 
 	public static void WindowProgressBar(ProgressBarState State)
 	{
-		// if(!progressBar.IsInitialized)
-		// {
-			progressBar = new() { Width = 502 };
-			Canvas.SetLeft(progressBar, 300);
-			Canvas.SetTop(progressBar, 434);
-		// }
-
 		switch(State)
 		{
 			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar); break;
@@ -58,19 +51,45 @@ class WindowsComponents
 		}
 	}
 
-	public static async Task WindowAwaitLoad()
+	public static async Task WindowAwaitLoad(bool a)
 	{
-		if(!MainWindowStatic.IsLoaded)
+		if(!a)
 		{
 			await Task.Run(()=>{
 				MainWindowStatic.Dispatcher.Invoke(async()=>
 				{
-					while(!MainWindowStatic.IsLoaded)
+					while(!a)
 					{
-						await Task.Delay(100);
+						await Task.Delay(200);
 					}
 				});
 			});
+		}
+	}
+
+	// why does the Format combobox doesnt turn to bright red its just a dim
+	// unlike the others.
+	public static void FreezeComponents(bool Freeze)
+	{
+		buttonFileFormat.IsEnabled = true;
+		buttonDownload.IsEnabled = true;
+		buttonUpdate.IsEnabled = true;
+		buttonOpenFile.IsEnabled = true;
+		textBoxLink.IsEnabled = true;
+		textBoxName.IsEnabled = true;
+		comboBoxType.IsEnabled = true;
+		comboBoxFormat.IsEnabled = true;
+
+		if(Freeze)
+		{
+			buttonFileFormat.IsEnabled = false;
+			buttonDownload.IsEnabled = false;
+			buttonUpdate.IsEnabled = false;
+			buttonOpenFile.IsEnabled = false;
+			textBoxLink.IsEnabled = false;
+			textBoxName.IsEnabled = false;
+			comboBoxType.IsEnabled = false;
+			comboBoxFormat.IsEnabled = false;
 		}
 	}
 }

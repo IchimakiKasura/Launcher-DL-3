@@ -1,14 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup Condition="$(Configuration) == Debug">
-    <OutputType>Exe</OutputType>
-    <Platforms>x64;AnyCPU</Platforms>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration) == Release">
-    <OutputType>WinExe</OutputType>
-    <Platforms>x64;AnyCPU</Platforms>
-  </PropertyGroup>
-
   <ItemGroup Condition="$(Configuration) == Release">
     <Compile Remove="Core/Debug/*.*" />
   </ItemGroup>
@@ -19,6 +10,8 @@
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>Launcher_DL</RootNamespace>
+    <OutputType>WinExe</OutputType>
+    <Platforms>x64;AnyCPU</Platforms>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>..\Images\Icon.ico</ApplicationIcon>
@@ -35,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DLControls\DLControls.csproj"/>
-    <ProjectReference Include="..\Languages\Languages.csproj"/>
+    <ProjectReference Include="..\DLControls\DLControls.csproj" />
+    <ProjectReference Include="..\Languages\Languages.csproj" />
   </ItemGroup>
 
   <ItemGroup>

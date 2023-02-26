@@ -18,13 +18,20 @@ public partial class Global
 	public static Border windowDrag { get; set; }
 	public static Border windowInnerBG { get; set; }
 
-	public static ProgressBarControl progressBar { get; set; }
+	public static ProgressBarControl progressBar { get; set; } = new() { Width = 502 };
 	public static ConsoleControl console { get; set; }
 
 	public static TextBoxControl textBoxLink { get; set; }
-	public static TextBoxControl textBoxFormat { get; set; }
 	public static TextBoxControl textBoxName { get; set; }
 
 	public static Canvas windowCanvas { get; set; }
+
+	public static ComboBoxControl comboBoxType { get; set; }
+	public static ComboBoxControl comboBoxFormat { get; set; }
+
+	public static TextBlock textBlockLink { get; set; }
+	public static TextBlock textBlockFormat { get; set; }
+	public static TextBlock textBlockName { get; set; }
+	public static TextBlock textBlockType { get; set; }
 }
 

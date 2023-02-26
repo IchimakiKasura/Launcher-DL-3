@@ -9,6 +9,7 @@ class EventHandlers
 		windowDrag.MouseDown += WindowsComponents.WindowDrag;
 		Minimize.Click += TopButtons.MinimizeWindow;
 		CloseButton.Click += TopButtons.CloseWindow;
+		windowInnerBG.MouseDown += delegate { Keyboard.ClearFocus(); };
 	}
 }
 

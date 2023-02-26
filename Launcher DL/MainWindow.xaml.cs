@@ -1,11 +1,12 @@
 ﻿namespace Launcher_DL;
 
 // TODO:
-//	Finish making the UserControl for the ComboBox
+//	Refactor the configuration.cs because it did look bad.
+//	Clean the ComboBoxControl code.
+//  Implement the YDL.cs based on the old script from v6	
 //
-//	Create Seperate Storyboard for when "EpicAnimation" is off
-//	
-//	
+//  After implementing YDL, please just don't over use the TASK method again
+//  to avoid that "Cannot re-enter paragraph" error Try using background task.
 //
 // TOFIX:
 //	nothing, just clean the code idk.
@@ -27,8 +28,7 @@ public partial class MainWindow : Window
 
 		WindowStyle = WindowStyle.SingleBorderWindow;
 
-		MainWindowStatic = this;
-		InitiateStaticComponents();
+		InitiateStaticComponents(this);
 
 		#if DEBUG
 		ConsoleDebug.InitiateConsoleDebug();
@@ -45,6 +45,11 @@ public partial class MainWindow : Window
 		buttonDownload.Click += delegate
 		{
 			WindowsComponents.WindowProgressBar(ProgressBarState.Hide);
+		};
+
+		buttonUpdate.Click += delegate
+		{
+			WindowsComponents.FreezeComponents(true);
 		};
 	}
 }

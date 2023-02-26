@@ -10,16 +10,32 @@ internal class ConsoleOutputMethod
 		console.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
 		if (config.ShowSystemOutput) console.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to W.I.P"); //\"{((ComboBoxItem)Input_Type.SelectedItem).Content}\"
 
-		#if !DEBUG
+#if !DEBUG
 		InitiateTheWindow.InitiateMePlease = "Initiate";
-		#endif
+#endif
 	}
 
-	public async static void ConfigOutputComment(bool IsSuccess, string error = default)
+	public async static void ConfigOutputComment(int IsSuccess, string error = default, string Name = default)
 	{
-		await WindowsComponents.WindowAwaitLoad();
-		if (config.ShowSystemOutput && IsSuccess) console.AddFormattedText($"<#a85192%14>[SYSTEM] <Green%14>SUCCESS <Gray%14>Config loaded");
-		if (config.ShowSystemOutput && !IsSuccess) console.AddFormattedText($"<#a85192%14>[SYSTEM] <Red%14>FAILED <Gray%14>{error}");
+		await WindowsComponents.WindowAwaitLoad(console.IsLoaded);
+
+		if(config.ShowSystemOutput)
+		{
+			switch(IsSuccess)
+			{
+				case 0:
+					console.AddFormattedText($"<#a85192%14>[SYSTEM] <Green%14>SUCCESS <Gray%14>Config loaded");
+				break;
+
+				case 1:
+					console.AddFormattedText($"<#a85192%14>[SYSTEM] <Red%14>FAILED <Gray%14>Error on loading [ {Name} ]");
+					console.AddFormattedText($"<DimGray%12>ERROR: {error}", true);
+				break;
+
+				case 2:
+					console.AddFormattedText($"<#a85192%14>[SYSTEM] <Red%14>FAILED <Gray%14>Default Config loaded");
+				break;
+			}
+		}
 	}
 }
-

@@ -1,10 +1,13 @@
 ﻿using DLLanguages;
 using DLLanguages.Pick;
+using System.Windows.Controls;
 
 namespace Launcher_DL.StartUp;
 
 class OnStartUp
 {
+	static List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
+
 	// Initializes all the values for XML
 	// (Avoiding too much shit on the XML to look the clean)
 	public static void Initialize()
@@ -16,9 +19,14 @@ class OnStartUp
 
 		InitializeButtonsComponents();
 		InitializeTextBoxComponents();
+		InitiateComboBoxComponents();
+		InitializeTextBlockComponents();
 		InitiateContextMenu();
 
 		ConsoleOutputMethod.StartUpOutputComments();
+
+		Canvas.SetLeft(progressBar, 300);
+		Canvas.SetTop(progressBar, 434);
 
 		GC.Collect();
 	}
@@ -58,7 +66,7 @@ class OnStartUp
 	private static void InitiateContextMenu()
 	{
 		ContextMenuResource.Link = textBoxLink;
-		ContextMenuResource.Format = textBoxFormat;
+		ContextMenuResource.Format = comboBoxFormat;
 		ContextMenuResource.Name = textBoxName;
 	}
 
@@ -75,14 +83,49 @@ class OnStartUp
 
 		// TextBox Placeholders
 		textBoxLink.TextPlaceholder = Language.Placeholder_Link;
-		// textBoxFormat.TextPlaceholder = Language.Placeholder_File;
 		textBoxName.TextPlaceholder = Language.Placeholder_Optional;
+
+		// ComboBox
+		ComboBoxTypes[0].Content = Language.Types_Custom;
+		ComboBoxTypes[1].Content = Language.Types_Video;
+		ComboBoxTypes[2].Content = Language.Types_Audio;
+		ComboBoxTypes[3].Content = Language.Types_Convert;
 	}
 
 	private static void InitializeTextBoxComponents()
 	{		
 		textBoxLink.TextPlaceholderAlignment = 
-		textBoxFormat.TextPlaceholderAlignment = 
 		textBoxName.TextPlaceholderAlignment = HorizontalAlignment.Center;
+	}
+
+	private static async void InitiateComboBoxComponents()
+	{
+		Canvas.SetTop(comboBoxType, 89);
+
+		await WindowsComponents.WindowAwaitLoad(comboBoxType.IsLoaded);
+
+		ComboBox CBT = comboBoxType.UserControlMain;
+
+		CBT.Width = comboBoxType.Width;
+		CBT.SelectedIndex = config.DefaultFileTypeOnStartUp;
+		CBT.HorizontalContentAlignment = HorizontalAlignment.Center;
+
+		comboBoxFormat.UserControlMain.Width = comboBoxFormat.Width;
+
+		ScrollViewer.SetVerticalScrollBarVisibility(CBT, ScrollBarVisibility.Disabled);
+
+		foreach (var (value, index) in ComboBoxTypes.Select((value, i) => (value, i)))
+		{
+			ComboBoxTypes[index].Style = (Style)CBT.FindResource("DownloadType");
+			comboBoxType.UserControlMain.Items.Add(ComboBoxTypes[index]);
+		}
+	}
+
+	private static void InitializeTextBlockComponents()
+	{
+		textBlockLink.Style =
+		textBlockFormat.Style =
+		textBlockName.Style =
+		textBlockType.Style = (Style)App.Current.FindResource("TextBlockResource");
 	}
 }

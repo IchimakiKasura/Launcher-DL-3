@@ -5,6 +5,26 @@
     /// </summary>
     public partial class App : Application
     {
+		const uint ENABLE_QUICK_EDIT = 0x0040;
+		#region DLL imports
+		[DllImport("user32.dll")]
+		private static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
+		[DllImport("user32.dll")]
+		private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+		[DllImport("kernel32.dll", ExactSpelling = true)]
+		private static extern IntPtr GetConsoleWindow();
+		[DllImport("Kernel32")]
+		private static extern void AllocConsole();
+		[DllImport("kernel32.dll", SetLastError = true)]
+		private static extern IntPtr GetStdHandle(int nStdHandle);
+
+		[DllImport("kernel32.dll")]
+		static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode);
+
+		[DllImport("kernel32.dll")]
+		static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
+		#endregion
+
 		private void App_Startup(object s, StartupEventArgs e)
 		{
 			PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
@@ -13,6 +33,16 @@
 
 			#if !DEBUG
 				DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
+			#else
+				AllocConsole();
+
+				IntPtr consoleHandle = GetStdHandle(-10);
+				DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF060, 0x00000000);
+				DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF020, 0x00000000);
+				DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), 0xF030, 0x00000000);
+				GetConsoleMode(consoleHandle, out uint consoleMode);
+				consoleMode &= ~ENABLE_QUICK_EDIT;
+				SetConsoleMode(consoleHandle, consoleMode);
 			#endif
 		}
 

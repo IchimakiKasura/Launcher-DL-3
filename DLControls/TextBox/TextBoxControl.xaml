@@ -15,6 +15,7 @@
 	<Grid>
 		<Grid.Resources>
 			<Style TargetType="TextBox" x:Key="UserTextBoxMain">
+				<Setter Property="FontFamily" Value="{StaticResource DefaultFont}" />
 				<Setter Property="Height" Value="35"/>
 				<Setter Property="Background" Value="{StaticResource 74000000}"/>
 				<Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
@@ -37,8 +38,7 @@
 									 SelectionBrush="#FFFF9C9C"
 									 SelectionOpacity="0.3"
 									 CaretBrush="#FFFF9C9C"
-									 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-									 x:Name="MainText"/>
+									 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 								</Grid>
 							</Border>
 							<ControlTemplate.Triggers>
@@ -67,6 +67,6 @@
 			</Style>
 		</Grid.Resources>
 
-		<TextBox x:Name="UserTextBox" Style="{StaticResource UserTextBoxMain}"/>
+		<TextBox x:Name="UserTextBox" Style="{StaticResource UserTextBoxMain}" FontWeight="SemiBold"/>
 	</Grid>
 </UserControl>

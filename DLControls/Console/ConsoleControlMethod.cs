@@ -17,7 +17,13 @@ public partial class ConsoleControl
 	///<inheritdoc cref="AddFormattedText(string, bool)"/>
 	public void AddFormattedText(string Input)
 	{
-		AddFormattedText(Input, false);
+		AddFormattedText(Input, false, false);
+	}
+
+	///<inheritdoc cref="AddFormattedText(string, bool)"/>
+	public void AddFormattedText(string Input, bool isItalic)
+	{
+		AddFormattedText(Input,isItalic, false);
 	}
 
 	/// <summary id="1" >
@@ -34,11 +40,12 @@ public partial class ConsoleControl
 	/// for "%" do <see langword="$perc$"/><br/>for "|" than <see langword="$vbar$"/>
 	/// </summary>
 	/// <param name="Input">Input Text</param>
+	/// <param name="isItalic">add that sweet leaning type of shit</param>
 	/// <param name="DontAddNewline">Don't Automatically line?<br/>Default: <see langword="false"/></param>
 	/// <exception cref="ForegroundPropertyException"/>
 	/// <exception cref="FontSizePropertyException"/>
 	/// <exception cref="FontWeightPropertyException"/>
-	public void AddFormattedText(string Input, bool DontAddNewline)
+	public void AddFormattedText(string Input, bool isItalic, bool DontAddNewline)
 	{
 		// resets the Format
 		Input += "<>";
@@ -47,6 +54,7 @@ public partial class ConsoleControl
 
 		if (!DontAddNewline) Input += "\r";
 		TextRange range;
+		FontStyle _FontStyle;
 
 		foreach (Match textMatch in RTBregex.Matches(Input).Cast<Match>()) 
 		{
@@ -58,6 +66,9 @@ public partial class ConsoleControl
 			string size = string.IsNullOrEmpty(textMatch.Groups["size"].Value) ? string.IsNullOrEmpty(textMatch.Groups["sizeOnly"].Value) ? "19" : textMatch.Groups["sizeOnly"].Value : textMatch.Groups["size"].Value;
 			string weight = string.IsNullOrEmpty(textMatch.Groups["weight"].Value) ? "Normal" : textMatch.Groups["weight"].Value;
 			string text = textMatch.Groups["text"].Value;
+
+			if (isItalic) _FontStyle = FontStyles.Italic;
+			else _FontStyle = FontStyles.Normal;
 
 			text = text.Replace("$lt$", "<");
 			text = text.Replace("$gt$", ">");
@@ -73,6 +84,7 @@ public partial class ConsoleControl
 				MessageBox.Show(e.Message);
 			}
 
+			range.ApplyPropertyValue(Control.FontStyleProperty, _FontStyle);
 			try { range.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color)); } catch { throw new ForegroundPropertyException("The Entered Color or Hex are Invalid."); };
 			try { range.ApplyPropertyValue(Control.FontSizeProperty, size); } catch {  throw new FontSizePropertyException("The Entered font size are Invalid."); };
 			try { range.ApplyPropertyValue(Control.FontWeightProperty, weight); } catch { throw new FontWeightPropertyException("The Entered font weight are Invalid."); };

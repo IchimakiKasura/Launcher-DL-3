@@ -18,6 +18,8 @@ public class DefaultConfig
 
 	public int DefaultFileTypeOnStartUp { get; set; } = 0;
 	public LanguageName Language { get; set; } = 0;
+	
+	public bool ConfigReadFinished = false;
 }
 
 public class Config
@@ -25,8 +27,8 @@ public class Config
 	static bool error = false;
 	public static DefaultConfig ReadConfigINI(string Name = "Config.ini")
 	{
-		var parser = new FileIniDataParser();
-		var DefaultConfiguration = new DefaultConfig();
+		FileIniDataParser parser = new();
+		DefaultConfig DefaultConfiguration = new();
 		IniData Data = parser.ReadFile(Name);
 
 		string LanguageCheck = Data["App"]["Language"];
@@ -41,51 +43,58 @@ public class Config
 			case "bruh": DefaultConfiguration.Language = LanguageName.bruh; break;
 		}
 
-		CheckError<string>(DefaultConfiguration.background, Data["Background"]["backgroundName"]);
-		CheckError<Color>(DefaultConfiguration.backgroundColor, Data["Background"]["backgroundColor"]);
-		CheckError<Color>(DefaultConfiguration.backgroundGlow, Data["Background"]["backgroundGlowColor"]);
-
-		CheckError<string>(DefaultConfiguration.DefaultOutput, Data["File"]["DefaultOutput"]);
-
-		CheckError<bool>(DefaultConfiguration.ShowSystemOutput, Data["Console"]["ShowSystemOutput"]);
-
-		CheckError<int>(DefaultConfiguration.DefaultFileTypeOnStartUp, Data["DropDown"]["DefaultFileTypeOnStartUp"]);
-
-		CheckError<bool>(DefaultConfiguration.EnablePlaylist, Data["Playlist"]["EnablePlaylist"]);
-		CheckError<bool>(DefaultConfiguration.EpicAnimations, Data["graphics"]["EpicAnimations"]);
-		CheckError<string>(DefaultConfiguration.BrowserCookie, Data["BrowserCookie"]["BrowserCookie"]);
-		
-		// Well they are excluded on Release mode so what gives
-		#if DEBUG
-			ConsoleDebug.LoadingConfig<string>(DefaultConfiguration.background, Data["Background"]["backgroundName"],"backgroundName");
-			ConsoleDebug.LoadingConfig<Color>(DefaultConfiguration.backgroundColor, ClrConv(Data["Background"]["backgroundColor"]),"backgroundColor");
-			ConsoleDebug.LoadingConfig<Color>(DefaultConfiguration.backgroundGlow, ClrConv(Data["Background"]["backgroundGlowColor"]),"backgroundGlowColor");
-			ConsoleDebug.LoadingConfig<string>(DefaultConfiguration.DefaultOutput, Data["File"]["DefaultOutput"],"DefaultOutput");
-			ConsoleDebug.LoadingConfig<bool>(DefaultConfiguration.ShowSystemOutput, bool.Parse(Data["Console"]["ShowSystemOutput"]),"ShowSystemOutput");
-			ConsoleDebug.LoadingConfig<int>(DefaultConfiguration.DefaultFileTypeOnStartUp, int.Parse(Data["DropDown"]["DefaultFileTypeOnStartUp"]),"DefaultFileTypeOnStartUp");
-			ConsoleDebug.LoadingConfig<bool>(DefaultConfiguration.EnablePlaylist, bool.Parse(Data["Playlist"]["EnablePlaylist"]),"EnablePlaylist");
-			ConsoleDebug.LoadingConfig<bool>(DefaultConfiguration.EpicAnimations, bool.Parse(Data["graphics"]["EpicAnimations"]),"EpicAnimations");
-			ConsoleDebug.LoadingConfig<string>(DefaultConfiguration.BrowserCookie, Data["BrowserCookie"]["BrowserCookie"],"BrowserCookie");
-		#endif
+		// So passing the variables on the arguments
+		// then changing the variables on that method
+		// doesn't actually change the real one but only change
+		// the value on that scope only?
+		// I guess I didn't read enough documentation about scoping on c# 
+		#region pretty ugly code
+		if(CheckError(DefaultConfiguration.background, Data["Background"]["backgroundName"],"backgroundName"))
+			DefaultConfiguration.background = Data["Background"]["backgroundName"];
+		if(CheckError(DefaultConfiguration.backgroundColor, Data["Background"]["backgroundColor"],"backgroundColor"))
+			DefaultConfiguration.backgroundColor = ClrConv(Data["Background"]["backgroundColor"]);
+		if(CheckError(DefaultConfiguration.backgroundGlow, Data["Background"]["backgroundGlowColor"],"backgroundGlowColor"))
+			DefaultConfiguration.backgroundGlow = ClrConv(Data["Background"]["backgroundGlowColor"]);
+		if(CheckError(DefaultConfiguration.DefaultOutput, Data["File"]["DefaultOutput"],"DefaultOutput"))
+			DefaultConfiguration.DefaultOutput = Data["File"]["DefaultOutput"];
+		if(CheckError(DefaultConfiguration.ShowSystemOutput, Data["Console"]["ShowSystemOutput"],"ShowSystemOutput"))
+			DefaultConfiguration.ShowSystemOutput = bool.Parse(Data["Console"]["ShowSystemOutput"]);
+		if(CheckError(DefaultConfiguration.DefaultFileTypeOnStartUp, Data["DropDown"]["DefaultFileTypeOnStartUp"],"DefaultFileTypeOnStartUp"))
+			DefaultConfiguration.DefaultFileTypeOnStartUp = int.Parse(Data["DropDown"]["DefaultFileTypeOnStartUp"]);
+		if(CheckError(DefaultConfiguration.EnablePlaylist, Data["Playlist"]["EnablePlaylist"],"EnablePlaylist"))
+			DefaultConfiguration.EnablePlaylist = bool.Parse(Data["Playlist"]["EnablePlaylist"]);
+		if(CheckError(DefaultConfiguration.EpicAnimations, Data["graphics"]["EpicAnimations"],"EpicAnimations"))
+			DefaultConfiguration.EpicAnimations = bool.Parse(Data["graphics"]["EpicAnimations"]);
+		if(CheckError(DefaultConfiguration.AllowCookies, Data["Cookies"]["AllowCookies"],"AllowCookies"))
+			DefaultConfiguration.AllowCookies = bool.Parse(Data["Cookies"]["AllowCookies"]);
+		if(CheckError(DefaultConfiguration.BrowserCookie, Data["Cookies"]["BrowserCookie"],"BrowserCookie"))
+			DefaultConfiguration.BrowserCookie = Data["Cookies"]["BrowserCookie"];
+		#endregion
 
 		if(!error)
 		{
-			ConsoleOutputMethod.ConfigOutputComment(true);
+			ConsoleOutputMethod.ConfigOutputComment(0);
 			#if DEBUG
 				ConsoleDebug.LoadConfigDone(false);
 			#endif
 		}
 		else 
 		{
+			ConsoleOutputMethod.ConfigOutputComment(2);
 			#if DEBUG
 				ConsoleDebug.LoadConfigDone(true);
 			#endif
 		}
+		DefaultConfiguration.ConfigReadFinished = true;
 		return DefaultConfiguration;
 	}
 
-	private static void CheckError<T>(T a,dynamic b)
+	// it was a "void" but i turned to bool now because idfk
+	private static bool CheckError(dynamic a,dynamic b,string c)
 	{
+		#if DEBUG
+			ConsoleDebug.LoadingConfig(a,b,c);
+		#endif
 		try
 		{
 			switch(a.GetType().ToString())
@@ -95,11 +104,12 @@ public class Config
 				case "System.Windows.Media.Color": a = ClrConv(b); break;
 				case "System.Boolean": a = bool.Parse(b); break;
 			}
-
 		} catch(Exception e)
 		{
 			error = true;
-			ConsoleOutputMethod.ConfigOutputComment(false, e.Message);
+			ConsoleOutputMethod.ConfigOutputComment(1, e.Message, c);
 		}
+		if(error) return false;
+		else return true;
 	} 
 }

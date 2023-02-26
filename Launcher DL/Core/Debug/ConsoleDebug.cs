@@ -5,6 +5,7 @@
 /// </summary>
 class ConsoleDebug
 {
+	static int count = 0;
 	public static void InitiateConsoleDebug()
 	{
 		// Only shows when the OutputType is on "Exe" and not "WinExe"
@@ -21,28 +22,42 @@ class ConsoleDebug
 		//if (config.DefaultOutput != "output" && Directory.Exists(config.DefaultOutput)) Console.WriteLine("\x1b[32m[OUTPUT]\x1b[0m custom \"output\" folder Found!");
 		if (!isFailed)
 		{
-			Console.WriteLine("---------------------------------------------");
-			Console.WriteLine("Config Reading Success ✔️");
+			Console.WriteLine("-------------------------------------------------------------");
+			Console.WriteLine("Config Reading Success ✅");
 			return;
 		}
 
-		Console.WriteLine("---------------------------------------------");
+		Console.WriteLine("-------------------------------------------------------------");
 		Console.WriteLine("Config Reading Failed ❌\n");
 		Console.WriteLine("Using Default Config");
 	}
 
-	public static void LoadingConfig<T>(T a, dynamic b, string c)
+	// goddamn it  I got lazy naming these parameters
+	public static void LoadingConfig(dynamic a, dynamic b, string c)
 	{
-		Console.Write($"Loading {c}..		");
-		string _a = a.GetType().ToString();
-		string _b = "System.String";
+		Console.Write($"Loading {c}");
 		try
 		{
-			_b = b.GetType().ToString();
-		} catch{};
+			switch(a.GetType().ToString())
+			{
+				case "System.String": a = b; break;
+				case "System.Int32": a = int.Parse(b); break;
+				case "System.Windows.Media.Color": a = ClrConv(b); break;
+				case "System.Boolean": a = bool.Parse(b); break;
+			}
+			Console.SetCursorPosition(34,4 + count);
+			Console.Write($"\x1b[32mLOADED! = {b}\x1b[0m\n");
+		} catch
+		{
+			Console.SetCursorPosition(34,4 + count);
+			Console.Write($"\x1b[31mFAILED! = {b}\x1b[0m\n");
+		};
+		count++;
+	}
 
-		if(_a == _b) Console.WriteLine($"\x1b[32mLOADED!\x1b[0m");
-		else Console.WriteLine($"\x1b[31mFAILED!\x1b[0m");
-
+	public static void WindowFocused(bool isFocused)
+	{
+		if (isFocused) Console.WriteLine("Window is Focused!");
+		else Console.WriteLine("Window is Unfocused!");
 	}
 }

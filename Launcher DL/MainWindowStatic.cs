@@ -2,11 +2,13 @@
 
 public partial class MainWindow
 {
-	void InitiateStaticComponents()
+	void InitiateStaticComponents(MainWindow mainwindow)
 	{
+		MainWindowStatic = mainwindow;
+
 		//// Idk about these
 		/**/VisualBitmapScalingMode = BitmapScalingMode.LowQuality;
-		/**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(90));
+		/**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
 		////	
 
 		Global.Minimize = Minimize;
@@ -23,10 +25,17 @@ public partial class MainWindow
 		Global.console = console;
 
 		Global.textBoxLink = textBoxLink;
-		Global.textBoxFormat= textBoxFormat;
 		Global.textBoxName= textBoxName;
 
 		Global.windowCanvas = windowCanvas;
+
+		Global.comboBoxType = comboBoxType;
+		Global.comboBoxFormat = comboBoxFormat;
+
+		Global.textBlockLink = textBlockLink;
+		Global.textBlockFormat = textBlockFormat;
+		Global.textBlockName = textBlockName;
+		Global.textBlockType = textBlockType;
 
 	}
 }
