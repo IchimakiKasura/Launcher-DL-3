@@ -16,7 +16,16 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>..\Images\Icon.ico</ApplicationIcon>
     <AssemblyName>uVad</AssemblyName>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <NoWarn>NU1701,CS8981,NU1503</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Ichimaki Kasura</Authors>
+    <PackageId>Launcher DL [Development]</PackageId>
+    <Product>Launcher DL [Development]</Product>
+    <Copyright>Copyright © 2023</Copyright>
+    <AssemblyVersion>7.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

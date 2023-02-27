@@ -4,20 +4,20 @@ namespace Launcher_DL.Core.Configuration;
 
 public class DefaultConfig
 {
-	public string background { get; set; } = "background.png";
-	public string DefaultOutput { get; set; } = "output";
-	public string BrowserCookie { get; set; } = "chrome";
+	public string background = "background.png";
+	public string DefaultOutput = "output";
+	public string BrowserCookie = "chrome";
 
-	public Color backgroundColor { get; set; } = ClrConv("#FF161438");
-	public Color backgroundGlow { get; set; } = ClrConv("#FF7DB5FF");
+	public Color backgroundColor = ClrConv("#FF161438");
+	public Color backgroundGlow = ClrConv("#FF7DB5FF");
 
-	public bool ShowSystemOutput { get; set; } = true;
-	public bool EnablePlaylist { get; set; } = true;
-	public bool EpicAnimations { get; set; } = true;
-	public bool AllowCookies { get; set; } = false;
+	public bool ShowSystemOutput = true;
+	public bool EnablePlaylist = true;
+	public bool EpicAnimations = true;
+	public bool AllowCookies = false;
 
-	public int DefaultFileTypeOnStartUp { get; set; } = 0;
-	public LanguageName Language { get; set; } = 0;
+	public int DefaultFileTypeOnStartUp  = 0;
+	public LanguageName Language  = 0;
 	
 	public bool ConfigReadFinished = false;
 }
@@ -25,10 +25,11 @@ public class DefaultConfig
 public class Config
 {
 	static bool error = false;
+	static DefaultConfig DefaultConfiguration;
 	public static DefaultConfig ReadConfigINI(string Name = "Config.ini")
 	{
 		FileIniDataParser parser = new();
-		DefaultConfig DefaultConfiguration = new();
+		DefaultConfiguration = new();
 		IniData Data = parser.ReadFile(Name);
 
 		string LanguageCheck = Data["App"]["Language"];
@@ -43,33 +44,20 @@ public class Config
 			case "bruh": DefaultConfiguration.Language = LanguageName.bruh; break;
 		}
 
-		// So passing the variables on the arguments
-		// then changing the variables on that method
-		// doesn't actually change the real one but only change
-		// the value on that scope only?
-		// I guess I didn't read enough documentation about scoping on c# 
-		#region pretty ugly code
-		if(CheckError(DefaultConfiguration.background, Data["Background"]["backgroundName"],"backgroundName"))
-			DefaultConfiguration.background = Data["Background"]["backgroundName"];
-		if(CheckError(DefaultConfiguration.backgroundColor, Data["Background"]["backgroundColor"],"backgroundColor"))
-			DefaultConfiguration.backgroundColor = ClrConv(Data["Background"]["backgroundColor"]);
-		if(CheckError(DefaultConfiguration.backgroundGlow, Data["Background"]["backgroundGlowColor"],"backgroundGlowColor"))
-			DefaultConfiguration.backgroundGlow = ClrConv(Data["Background"]["backgroundGlowColor"]);
-		if(CheckError(DefaultConfiguration.DefaultOutput, Data["File"]["DefaultOutput"],"DefaultOutput"))
-			DefaultConfiguration.DefaultOutput = Data["File"]["DefaultOutput"];
-		if(CheckError(DefaultConfiguration.ShowSystemOutput, Data["Console"]["ShowSystemOutput"],"ShowSystemOutput"))
-			DefaultConfiguration.ShowSystemOutput = bool.Parse(Data["Console"]["ShowSystemOutput"]);
-		if(CheckError(DefaultConfiguration.DefaultFileTypeOnStartUp, Data["DropDown"]["DefaultFileTypeOnStartUp"],"DefaultFileTypeOnStartUp"))
-			DefaultConfiguration.DefaultFileTypeOnStartUp = int.Parse(Data["DropDown"]["DefaultFileTypeOnStartUp"]);
-		if(CheckError(DefaultConfiguration.EnablePlaylist, Data["Playlist"]["EnablePlaylist"],"EnablePlaylist"))
-			DefaultConfiguration.EnablePlaylist = bool.Parse(Data["Playlist"]["EnablePlaylist"]);
-		if(CheckError(DefaultConfiguration.EpicAnimations, Data["graphics"]["EpicAnimations"],"EpicAnimations"))
-			DefaultConfiguration.EpicAnimations = bool.Parse(Data["graphics"]["EpicAnimations"]);
-		if(CheckError(DefaultConfiguration.AllowCookies, Data["Cookies"]["AllowCookies"],"AllowCookies"))
-			DefaultConfiguration.AllowCookies = bool.Parse(Data["Cookies"]["AllowCookies"]);
-		if(CheckError(DefaultConfiguration.BrowserCookie, Data["Cookies"]["BrowserCookie"],"BrowserCookie"))
-			DefaultConfiguration.BrowserCookie = Data["Cookies"]["BrowserCookie"];
-		#endregion
+		// HOLY FUCKING SHIT I JUST NEEDED TO ADD THE "REF" BECAUSE ITS JUST PASSING ITS VALUE
+		// SO IF I TRIED TO CHANGE THE VALUE FROM THAT METHOD IT WONT CHANGE UNLESS I REFERENCE IT
+		// THANKS TO THIS SAVIOR:
+		// https://codeeasy.io/lesson/passing_parameters_to_functions
+		CheckError(ref DefaultConfiguration.background, Data["Background"]["backgroundName"],"backgroundName");
+		CheckError(ref DefaultConfiguration.backgroundColor, Data["Background"]["backgroundColor"],"backgroundColor");
+		CheckError(ref DefaultConfiguration.backgroundGlow, Data["Background"]["backgroundGlowColor"],"backgroundGlowColor");
+		CheckError(ref DefaultConfiguration.DefaultOutput, Data["File"]["DefaultOutput"],"DefaultOutput");
+		CheckError(ref DefaultConfiguration.ShowSystemOutput, Data["Console"]["ShowSystemOutput"],"ShowSystemOutput");
+		CheckError(ref DefaultConfiguration.DefaultFileTypeOnStartUp, Data["DropDown"]["DefaultFileTypeOnStartUp"],"DefaultFileTypeOnStartUp");
+		CheckError(ref DefaultConfiguration.EnablePlaylist, Data["Playlist"]["EnablePlaylist"],"EnablePlaylist");
+		CheckError(ref DefaultConfiguration.EpicAnimations, Data["graphics"]["EpicAnimations"],"EpicAnimations");
+		CheckError(ref DefaultConfiguration.AllowCookies, Data["Cookies"]["AllowCookies"],"AllowCookies");
+		CheckError(ref DefaultConfiguration.BrowserCookie, Data["Cookies"]["BrowserCookie"],"BrowserCookie");
 
 		if(!error)
 		{
@@ -89,27 +77,26 @@ public class Config
 		return DefaultConfiguration;
 	}
 
-	// it was a "void" but i turned to bool now because idfk
-	private static bool CheckError(dynamic a,dynamic b,string c)
+	private static void CheckError<T>(ref T a,dynamic b,string c)
 	{
 		#if DEBUG
 			ConsoleDebug.LoadingConfig(a,b,c);
 		#endif
+
 		try
 		{
 			switch(a.GetType().ToString())
 			{
-				case "System.String": a = b; break;
-				case "System.Int32": a = int.Parse(b); break;
-				case "System.Windows.Media.Color": a = ClrConv(b); break;
-				case "System.Boolean": a = bool.Parse(b); break;
+				case "System.String": 				a = b; 				break;
+				case "System.Int32": 				a = int.Parse(b); 	break;
+				case "System.Windows.Media.Color": 	a = ClrConv(b); 	break;
+				case "System.Boolean": 				a = bool.Parse(b); 	break;
 			}
+			
 		} catch(Exception e)
 		{
 			error = true;
 			ConsoleOutputMethod.ConfigOutputComment(1, e.Message, c);
 		}
-		if(error) return false;
-		else return true;
 	} 
 }
