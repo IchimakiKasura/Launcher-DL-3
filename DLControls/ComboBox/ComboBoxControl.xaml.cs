@@ -10,51 +10,98 @@ namespace DLControls
 	{
 		readonly static DependencyProperty TextEditableProperty =
 			DependencyProperty.Register("TextEditable", typeof(bool), typeof(ComboBoxControl));
-
 		readonly static DependencyProperty PlaceholderTextProperty =
 			DependencyProperty.Register("PlaceholderText", typeof(string), typeof(ComboBoxControl), new("default (Best)"));
-
 		readonly static DependencyProperty PlaceholderUnavailableProperty =
 			DependencyProperty.Register("PlaceholderUnavailable", typeof(string), typeof(ComboBoxControl), new("Unavailable"));
+		readonly static DependencyProperty PlaceholderAlignmentProperty =
+			DependencyProperty.Register("PlaceholderAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
+		readonly static DependencyProperty ContentAlignmentProperty =
+			DependencyProperty.Register("ContentAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
+		readonly static DependencyProperty ItemIndexProperty =
+			DependencyProperty.Register("ItemIndex", typeof(int), typeof(ComboBoxControl));
+		readonly static DependencyProperty ShowVerticalScrollbarProperty =
+			DependencyProperty.Register("ShowVerticalScrollbar", typeof(bool), typeof(ComboBoxControl));
 
-
-		public string PlaceholderText
-		{
-			get => (string)GetValue(PlaceholderTextProperty);
-			set => SetValue(PlaceholderTextProperty, value);
-		}
-
-		public string PlaceholderUnavailable
-		{
-			get => (string)(GetValue(PlaceholderUnavailableProperty));
-			set => SetValue(PlaceholderUnavailableProperty, value);
-		}
-
-		public ComboBox UserControlMain { get; set; }
-
-		public bool isTextFocused { get; set; }
 		public bool TextEditable
 		{
 			get => (bool)GetValue(TextEditableProperty);
 			set => SetValue(TextEditableProperty, value);
 		}
+		public string PlaceholderText
+		{
+			get => (string)GetValue(PlaceholderTextProperty);
+			set => SetValue(PlaceholderTextProperty, value);
+		}
+		public string PlaceholderUnavailable
+		{
+			get => (string)(GetValue(PlaceholderUnavailableProperty));
+			set => SetValue(PlaceholderUnavailableProperty, value);
+		}
+		public HorizontalAlignment PlaceholderAlignment
+		{
+			get => (HorizontalAlignment)(GetValue(PlaceholderAlignmentProperty));
+			set
+			{
+				SetValue(PlaceholderAlignmentProperty, value);
+				Placeholder.HorizontalContentAlignment = value;
+			}
+		}
+		public HorizontalAlignment ContentAlignment
+		{
+			get => (HorizontalAlignment)(GetValue(ContentAlignmentProperty));
+			set
+			{
+				SetValue(ContentAlignmentProperty, value);
+				UserComboBox.HorizontalContentAlignment = value;
+			}
+		}
+		public int ItemIndex
+		{
+			get => (int)GetValue(ItemIndexProperty);
+			set
+			{
+				SetValue(ItemIndexProperty, value);
+				UserComboBox.SelectedIndex = value;
+			}
+		}
+		public bool ShowVerticalScrollbar
+		{
+			get => (bool)GetValue(ShowVerticalScrollbarProperty);
+			set
+			{
+				SetValue(ShowVerticalScrollbarProperty, value);
+				
+				ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Disabled);
 
-		TextBox Placeholder;
+				if(value)
+					ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
+			}
+		}
+		public bool isTextFocused { get; set; }
+		public static Style comboBoxStyle;
 		public TextBox MainText;
+		TextBox Placeholder;
 
 		public ComboBoxControl()
 		{
 			InitializeComponent();
 
-			UserControlMain = UserComboBox;
+			comboBoxStyle = (Style)UserComboBox.FindResource("DownloadType");
+		}
+
+		public void ItemsAdd(object Element)
+		{
+			UserComboBox.Items.Add(Element);
 		}
 
 		private void ContentLoad(object s, RoutedEventArgs e)
 		{
 			SetupTextBox();
 			SetBorderStoryboard();
-			ContentPresenter Content = (ContentPresenter)UserComboBox.Template.FindName("ContentSite", UserComboBox);
-			Grid comboBoxGRID = (Grid)UserComboBox.Template.FindName("ComboBoxGRID", UserComboBox);
+
+			ContentPresenter Content = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
+			Grid comboBoxGRID = GetTemplateResource<Grid>("ComboBoxGRID", UserComboBox);
 
 			if (TextEditable)
 			{
@@ -75,6 +122,7 @@ namespace DLControls
 				UserComboBox.Foreground = Brushes.White;
 				Placeholder.Foreground = Brushes.DimGray;
 				Placeholder.Text = PlaceholderText;
+
 				if(!IsEnabled)
 				{
 					UserComboBox.Foreground =
@@ -121,7 +169,8 @@ namespace DLControls
 
 		private void SetBorderStoryboard()
 		{
-			Border border = (Border)((ToggleButton)UserComboBox.Template.FindName("ToggleButton", UserComboBox)).Template.FindName("ToggleButtonBorder", (ToggleButton)UserComboBox.Template.FindName("ToggleButton", UserComboBox));
+			ToggleButton TB = GetTemplateResource<ToggleButton>("ToggleButton", UserComboBox);
+			Border border = GetTemplateResource<Border>("ToggleButtonBorder", TB);
 
 			MainText.GotFocus += delegate { isTextFocused = true; };
 			MainText.LostFocus += delegate { isTextFocused = false; };

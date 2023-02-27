@@ -57,11 +57,11 @@
 					</Grid>
 				</Border>
 
-				<TextBlock x:Name="textBlockLink" Margin="310,66,431,382">Link</TextBlock>
+				<DLControl:TextBlockControl x:Name="textBlockLink" Canvas.Top="69" Canvas.Left="310" Text="Link" Width="90" HorizontalAlignment="Left"/>
 				<DLControl:TextBoxControl x:Name="textBoxLink" Width="387" Canvas.Top="67" Canvas.Left="415"/>
-				<TextBlock x:Name="textBlockFormat" Margin="310,119,431,332">Format</TextBlock>
+				<DLControl:TextBlockControl x:Name="textBlockFormat" Canvas.Top="122" Canvas.Left="310" Text="Format" Width="90" HorizontalAlignment="Left"/>
 				<DLControl:ComboBoxControl x:Name="comboBoxFormat" Canvas.Top="117" Canvas.Left="415" Width="387" TextEditable="True"/>
-				<TextBlock x:Name="textBlockName" Margin="310,170,435,278">Name</TextBlock>
+				<DLControl:TextBlockControl x:Name="textBlockName" Canvas.Top="173" Canvas.Left="310" Text="Name" Width="90" HorizontalAlignment="Left"/>
 				<DLControl:TextBoxControl x:Name="textBoxName" Width="387" Canvas.Top="171" Canvas.Left="415"/>
 
 				<DLControl:ButtonControl x:Name="buttonFileFormat" Margin="24,155,556,261"/>
@@ -71,7 +71,7 @@
 
 				<DLControl:ConsoleControl ConsoleHeight="192" ConsoleWidth="502" x:Name="console" Margin="300,231,27,57"/>
 
-				<TextBlock x:Name="textBlockType" Canvas.Left="15" Canvas.Top="50" TextAlignment="Center" Width="267">Download Type</TextBlock>
+				<DLControl:TextBlockControl x:Name="textBlockType" Canvas.Top="50" Canvas.Left="70" Text="Download Type" Width="157" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				<DLControl:ComboBoxControl x:Name="comboBoxType" Canvas.Left="66" Canvas.Top="84" Width="166" TextEditable="False"/>
 			</Canvas>
 		</Border>

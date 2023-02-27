@@ -1,15 +1,11 @@
-﻿using DLLanguages;
-using DLLanguages.Pick;
-using System.Windows.Controls;
-
-namespace Launcher_DL.StartUp;
+﻿namespace Launcher_DL.StartUp;
 
 class OnStartUp
 {
 	static List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
 
-	// Initializes all the values for XML
-	// (Avoiding too much shit on the XML to look the clean)
+	// Initializes all the values for XAML
+	// (Avoiding too much shit on the XAML to look the clean)
 	public static void Initialize()
 	{
 		InitializeLanguage();
@@ -18,9 +14,11 @@ class OnStartUp
 		WindowsComponents.WindowFocusAnimation();
 
 		InitializeButtonsComponents();
+
 		InitializeTextBoxComponents();
+
 		InitiateComboBoxComponents();
-		InitializeTextBlockComponents();
+
 		InitiateContextMenu();
 
 		ConsoleOutputMethod.StartUpOutputComments();
@@ -29,6 +27,7 @@ class OnStartUp
 		Canvas.SetTop(progressBar, 434);
 
 		GC.Collect();
+		
 	}
 
 	private static void InitializeButtonsComponents()
@@ -70,28 +69,6 @@ class OnStartUp
 		ContextMenuResource.Name = textBoxName;
 	}
 
-	private static void InitializeLanguage()
-	{
-		Language = new(config.Language);
-		ShrinkFront.AutoShrink(config.Language);
-
-		// Buttons
-		buttonFileFormat.Text = Language.Button_Format;
-		buttonDownload.Text = Language.Button_Download;
-		buttonUpdate.Text = Language.Button_Update;
-		buttonOpenFile.Text = Language.Button_OpenFile;
-
-		// TextBox Placeholders
-		textBoxLink.TextPlaceholder = Language.Placeholder_Link;
-		textBoxName.TextPlaceholder = Language.Placeholder_Optional;
-
-		// ComboBox
-		ComboBoxTypes[0].Content = Language.Types_Custom;
-		ComboBoxTypes[1].Content = Language.Types_Video;
-		ComboBoxTypes[2].Content = Language.Types_Audio;
-		ComboBoxTypes[3].Content = Language.Types_Convert;
-	}
-
 	private static void InitializeTextBoxComponents()
 	{		
 		textBoxLink.TextPlaceholderAlignment = 
@@ -104,28 +81,42 @@ class OnStartUp
 
 		await WindowsComponents.WindowAwaitLoad(comboBoxType.IsLoaded);
 
-		ComboBox CBT = comboBoxType.UserControlMain;
-
-		CBT.Width = comboBoxType.Width;
-		CBT.SelectedIndex = config.DefaultFileTypeOnStartUp;
-		CBT.HorizontalContentAlignment = HorizontalAlignment.Center;
-
-		comboBoxFormat.UserControlMain.Width = comboBoxFormat.Width;
-
-		ScrollViewer.SetVerticalScrollBarVisibility(CBT, ScrollBarVisibility.Disabled);
+		comboBoxType.ItemIndex = config.DefaultFileTypeOnStartUp;
+		comboBoxType.ContentAlignment = HorizontalAlignment.Center;
+		comboBoxType.ShowVerticalScrollbar = false;
 
 		foreach (var (value, index) in ComboBoxTypes.Select((value, i) => (value, i)))
 		{
-			ComboBoxTypes[index].Style = (Style)CBT.FindResource("DownloadType");
-			comboBoxType.UserControlMain.Items.Add(ComboBoxTypes[index]);
+			ComboBoxTypes[index].Style = ComboBoxControl.comboBoxStyle;
+			comboBoxType.ItemsAdd(ComboBoxTypes[index]);
 		}
 	}
 
-	private static void InitializeTextBlockComponents()
+	private static void InitializeLanguage()
 	{
-		textBlockLink.Style =
-		textBlockFormat.Style =
-		textBlockName.Style =
-		textBlockType.Style = (Style)App.Current.FindResource("TextBlockResource");
+		Language = new(config.Language);
+
+		// Buttons
+		buttonFileFormat.Text = Language.Button_Format;
+		buttonDownload.Text = Language.Button_Download;
+		buttonUpdate.Text = Language.Button_Update;
+		buttonOpenFile.Text = Language.Button_OpenFile;
+
+		// Placeholders
+		textBoxLink.TextPlaceholder = Language.Placeholder_Link;
+		comboBoxFormat.PlaceholderText = $"\"Best\"";
+		textBoxName.TextPlaceholder = Language.Placeholder_Optional;
+
+		// ComboBox
+		ComboBoxTypes[0].Content = Language.Types_Custom;
+		ComboBoxTypes[1].Content = Language.Types_Video;
+		ComboBoxTypes[2].Content = Language.Types_Audio;
+		ComboBoxTypes[3].Content = Language.Types_Convert;
+
+		textBlockLink.Text = Language.Label_Link;
+		textBlockFormat.Text = Language.Label_Format;
+		textBlockName.Text = Language.Label_Name;
+		textBlockType.Text = Language.Label_Type;
+		
 	}
 }

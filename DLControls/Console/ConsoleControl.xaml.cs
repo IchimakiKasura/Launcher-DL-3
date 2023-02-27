@@ -5,6 +5,8 @@ public partial class ConsoleControl : UserControl
 	public ConsoleControl()
 	{
 		InitializeComponent();
+
+		UserRichTextBox.TextChanged += this.ScrollEndEvent;
 	}
 
 	public double ConsoleHeight

@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					x:Class="DLControls.MainResource">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="/graphics;component/Buttons/TopButtons.xaml"/>
@@ -25,17 +26,6 @@
 
 	<DropShadowEffect x:Key="ExitDSE" Color="#FFAD0000" Opacity="0" ShadowDepth="0" Direction="0" BlurRadius="5" RenderingBias="Performance"/>
 	<DropShadowEffect x:Key="MinDSE" Color="#FFC19F9F" Opacity="0" ShadowDepth="0" Direction="0" BlurRadius="5" RenderingBias="Performance"/>
-
-	<Style x:Key="TextBlockResource" TargetType="TextBlock">
-		<Setter Property="FontSize" Value="24"/>
-		<Setter Property="FontWeight" Value="Bold"/>
-		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="Effect">
-			<Setter.Value>
-				<DropShadowEffect ShadowDepth="2" Direction="0" BlurRadius="0" RenderingBias="Performance"/>
-			</Setter.Value>
-		</Setter>
-	</Style>
 
 	<Style TargetType="TextBox">
 		<Setter Property="ContextMenu" Value="{StaticResource TextBoxMenu}" />

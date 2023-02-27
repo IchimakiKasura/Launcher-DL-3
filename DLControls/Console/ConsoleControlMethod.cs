@@ -14,13 +14,13 @@ public partial class ConsoleControl
 		tr.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color));
 	}
 
-	///<inheritdoc cref="AddFormattedText(string, bool)"/>
+	///<inheritdoc cref="AddFormattedText(string, bool, bool)"/>
 	public void AddFormattedText(string Input)
 	{
 		AddFormattedText(Input, false, false);
 	}
 
-	///<inheritdoc cref="AddFormattedText(string, bool)"/>
+	///<inheritdoc cref="AddFormattedText(string, bool, bool)"/>
 	public void AddFormattedText(string Input, bool isItalic)
 	{
 		AddFormattedText(Input,isItalic, false);

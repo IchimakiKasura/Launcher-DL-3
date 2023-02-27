@@ -170,6 +170,6 @@
 			
         </Canvas.Resources>
 
-		<ComboBox x:Name="UserComboBox" Height="35" Style="{StaticResource CB}"/>
+		<ComboBox x:Name="UserComboBox" Height="35" Style="{StaticResource CB}" MinWidth="100" Width="{Binding Width,ElementName=root}"/>
 	</Canvas>
 </UserControl>

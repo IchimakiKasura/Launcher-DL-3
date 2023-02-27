@@ -11,7 +11,7 @@
     <Compile Update="ProgressBar\ProgressBarControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="TextBox\TextBoxControl.xaml.cs">
+    <Compile Update="TextBlock\TextBlockControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -28,7 +28,7 @@
     <Page Update="ProgressBar\ProgressBarControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="TextBox\TextBoxControl.xaml">
+    <Page Update="TextBlock\TextBlockControl.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

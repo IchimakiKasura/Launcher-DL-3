@@ -50,17 +50,17 @@ public partial class TextBoxControl : UserControl
 
 	private void ContentLoaded(object sender, RoutedEventArgs e)
 	{
-		Grid UserGrid = (Grid)UserTextBox.Template.FindName("UserTextBoxGRID",UserTextBox);
+		Grid UserGrid = GetTemplateResource<Grid>("UserTextBoxGRID", UserTextBox);
 
 		Placeholder = new()
 		{
-			IsHitTestVisible = false,
-			Text = TextPlaceholder,
-			VerticalAlignment = VerticalAlignment.Center,
-			HorizontalAlignment = TextPlaceholderAlignment,
-			Margin = TextPlaceholderMargin,
+			Foreground = Brushes.DimGray,
 			FontSize = 20,
-			Foreground = Brushes.DimGray
+			HorizontalAlignment = TextPlaceholderAlignment,
+			IsHitTestVisible = false,
+			Margin = TextPlaceholderMargin,
+			Text = TextPlaceholder,
+			VerticalAlignment = VerticalAlignment.Center
 		};
 
 		UserGrid.Children.Add(Placeholder);

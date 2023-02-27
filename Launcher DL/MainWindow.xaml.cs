@@ -2,13 +2,15 @@
 
 // TODO:
 //	Refactor the configuration.cs because it did look bad.
-//	Clean the ComboBoxControl code.
+//	Clean the TextBlockControl elements on the mainwindow xaml
+//	Fix button font size on hover animation  
+//
 //  Implement the YDL.cs based on the old script from v6	
 //
 //  After implementing YDL, please just don't over use the TASK method again
 //  to avoid that "Cannot re-enter paragraph" error Try using background task.
 //
-// TOFIX:
+// wa:
 //	nothing, just clean the code idk.
 //	Take more time. (what)
 
@@ -50,6 +52,11 @@ public partial class MainWindow : Window
 		buttonUpdate.Click += delegate
 		{
 			WindowsComponents.FreezeComponents(true);
+		};
+
+		buttonOpenFile.Click += delegate
+		{
+			console.AddFormattedText("<%20>Test");
 		};
 	}
 }
