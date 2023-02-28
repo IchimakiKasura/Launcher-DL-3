@@ -8,11 +8,10 @@ internal class ConsoleOutputMethod
 		console.Break("Gray");
 
 		console.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
-		if (config.ShowSystemOutput) console.AddFormattedText($"<#a85192%14>[SYSTEM] <Gray%14>Changed TYPE to W.I.P"); //\"{((ComboBoxItem)Input_Type.SelectedItem).Content}\"
 
-#if !DEBUG
-		InitiateTheWindow.InitiateMePlease = "Initiate";
-#endif
+		#if !DEBUG
+			//InitiateTheWindow.InitiateMePlease = "Initiate";
+		#endif
 	}
 
 	public async static void ConfigOutputComment(int IsSuccess, string error = default, string Name = default)

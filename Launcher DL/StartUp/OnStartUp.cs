@@ -2,8 +2,6 @@
 
 class OnStartUp
 {
-	static List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
-
 	// Initializes all the values for XAML
 	// (Avoiding too much shit on the XAML to look the clean)
 	public static void Initialize()

@@ -18,8 +18,6 @@ public class DefaultConfig
 
 	public int DefaultFileTypeOnStartUp  = 0;
 	public LanguageName Language  = 0;
-	
-	public bool ConfigReadFinished = false;
 }
 
 public class Config
@@ -33,7 +31,6 @@ public class Config
 		IniData Data = parser.ReadFile(Name);
 
 		string LanguageCheck = Data["App"]["Language"];
-		
 
 		switch(LanguageCheck.ToLower())
 		{
@@ -73,7 +70,6 @@ public class Config
 				ConsoleDebug.LoadConfigDone(true);
 			#endif
 		}
-		DefaultConfiguration.ConfigReadFinished = true;
 		return DefaultConfiguration;
 	}
 

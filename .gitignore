@@ -1,6 +1,7 @@
 .ionide
 .vs
 .vscode
+buildAPP.cpp
 bin
 obj
 FodyWeavers.xsd

@@ -1,9 +1,5 @@
 ﻿<Project InitialTarget="Build">
 
-    <PropertyGroup>
-        <WarningLevels>0</WarningLevels>
-    </PropertyGroup>
-
     <Target Name="Build">
         <ItemGroup>
             <!-- I don't know? It sometimes change like what? -->
@@ -41,25 +37,19 @@
         <Message Importance="High" Text="Build Done!"/>
 
         <Message Importance="High" Text="Copying files to their respected folders..."/>
-        <Exec Command="ping -n 6 127.0.0.1 > nul"/>
         <Message Importance="High" Text="Launcher%20DL/bin/release/net7.0-windows/*.* -> RELEASE " Condition="$(Configuration) == Release"/>
         <Message Importance="High" Text="Launcher%20DL/bin/debug/net7.0-windows/*.* -> DEBUG "  Condition="$(Configuration) == Debug"/>
         
 
-        <!-- HELP SOMETIMES IT COPIES SOMETIMES IT DOES NOT LIKE HOW THE FUCK? -->
-        <Copy SourceFiles="@(ReleaseFiles)" DestinationFolder="./RELEASE/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="@(DebugFiles)" DestinationFolder="./DEBUG/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Images/background.jpg" DestinationFolder="./RELEASE/Images/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Images/Icon.ico" DestinationFolder="./RELEASE/Images/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Images/background.jpg" DestinationFolder="./DEBUG/Images/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Images/Icon.ico" DestinationFolder="./DEBUG/Images/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
-        <Exec Command="ping -n 6 127.0.0.1 > nul"/>
+        <!--  ̶H̶E̶L̶P̶ ̶S̶O̶M̶E̶T̶I̶M̶E̶S̶ ̶I̶T̶ ̶C̶O̶P̶I̶E̶S̶ ̶S̶O̶M̶E̶T̶I̶M̶E̶S̶ ̶I̶T̶ ̶D̶O̶E̶S̶ ̶N̶O̶T̶ ̶L̶I̶K̶E̶ ̶H̶O̶W̶ ̶T̶H̶E̶ ̶F̶U̶C̶K̶?̶ -->
+        <!-- Welp time to manually copy them one by one -->
+        <MSBuild Projects=".\CopyFiles.msbuild" Properties="Configuration=$(Configuration)" />
         <Message Importance="High" Text="Copy Done!"/>
 
         <Message Importance="High" Text="[1/2] Finalizing..."/>
         <Exec Command="ping -n 3 127.0.0.1 > nul"/>
-        <Exec Command="cd RELEASE &amp;&amp; del *.pdb &amp;&amp; del *.deps.json &amp;&amp; del background.jpg &amp;&amp; attrib +s +h &quot;*.runtimeconfig.json&quot;" EchoOff="true" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        <Exec Command="cd DEBUG &amp;&amp; del *.pdb &amp;&amp; del *.deps.json &amp;&amp; del background.jpg &amp;&amp; attrib +s +h &quot;*.runtimeconfig.json&quot;" EchoOff="true" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
+        <Exec Command="cd RELEASE &amp;&amp; attrib +s +h &quot;*.runtimeconfig.json&quot;" EchoOff="true" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
+        <Exec Command="cd DEBUG &amp;&amp; attrib +s +h &quot;*.runtimeconfig.json&quot;" EchoOff="true" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
         <Message Importance="High" Text="[2/2] Finalizing...(Clearing/Removing BIN and OBJ folders)"/>
         <Exec Command="ping -n 3 127.0.0.1 > nul"/>
         <RemoveDir Directories="../Launcher%20DL/bin"/>

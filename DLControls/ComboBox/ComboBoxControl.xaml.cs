@@ -78,8 +78,17 @@ namespace DLControls
 					ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
 			}
 		}
+		public RoutedEventHandler OnItemChange;
 		public bool isTextFocused { get; set; }
 		public static Style comboBoxStyle;
+		private TextBox TextBoxTemplate = new()
+		{
+			Background = Brushes.Transparent,
+			Focusable = true,
+			Margin = new(3, 3, 23, 3),
+			HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+			VerticalScrollBarVisibility = ScrollBarVisibility.Disabled,
+		};
 		public TextBox MainText;
 		TextBox Placeholder;
 
@@ -119,15 +128,31 @@ namespace DLControls
 
 			IsEnabledChanged += delegate
 			{
-				UserComboBox.Foreground = Brushes.White;
-				Placeholder.Foreground = Brushes.DimGray;
-				Placeholder.Text = PlaceholderText;
-
-				if(!IsEnabled)
+				UserComboBox.Foreground = Brushes.Red;
+				
+				/// This fixes the Font color being darker than the others
+				/// when the control is disabled
+				if(TextEditable)
 				{
-					UserComboBox.Foreground =
-					Placeholder.Foreground = Brushes.Red;
-					Placeholder.Text = PlaceholderUnavailable;
+					comboBoxGRID.Children.Remove(Placeholder);
+					comboBoxGRID.Children.Remove(MainText);
+					Content.Visibility = Visibility.Visible;
+					Content.Content = PlaceholderUnavailable;
+					Content.HorizontalAlignment = HorizontalAlignment.Center;
+				}
+
+				if(IsEnabled)
+				{
+					UserComboBox.Foreground = Brushes.White;
+
+					if(TextEditable)
+					{
+						comboBoxGRID.Children.Add(Placeholder);
+						comboBoxGRID.Children.Add(MainText);
+						Content.Visibility = Visibility.Hidden;
+						Content.HorizontalAlignment = HorizontalAlignment.Left;
+						Content.Content = string.Empty;
+					}
 				}
 			};
 
@@ -135,40 +160,31 @@ namespace DLControls
 
 		private void SetupTextBox()
 		{
-
-			Placeholder = new()
-			{
-				Foreground = Brushes.DimGray,
-				Background = Brushes.Transparent,
-				BorderBrush = Brushes.Transparent,
-				Focusable = true,
-				Margin = new(3, 3, 23, 3),
-				Text = PlaceholderText,
-				IsHitTestVisible = false,
-				HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
-				VerticalScrollBarVisibility = ScrollBarVisibility.Disabled,
-			};
-
-			MainText = new()
-			{
-				Foreground = Brushes.White,
-				BorderThickness = new(0),
-				Margin = new(3, 3, 23, 3),
-				Focusable = true,
-				Background = Brushes.Transparent,
-				SelectionBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C"),
-				CaretBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C"),
-				Width = root.Width,
-				ContextMenu = (ContextMenu)root.FindResource("TextBoxMenu"),
-				HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
-				VerticalScrollBarVisibility = ScrollBarVisibility.Disabled,
-			};
-
+			// Placeholder
+			Placeholder = TextBoxTemplate;
+			Placeholder.Foreground = Brushes.DimGray;
+			Placeholder.BorderBrush = Brushes.Transparent;
+			Placeholder.Focusable = true;
+			Placeholder.Margin = new(3, 3, 23, 3);
+			Placeholder.Text = PlaceholderText;
+			Placeholder.IsHitTestVisible = false;
+			
+			// MainText
+			MainText = TextBoxTemplate;
+			MainText.Foreground = Brushes.White;
+			MainText.BorderThickness = new(0);
+			MainText.SelectionBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C");
+			MainText.CaretBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C");
+			MainText.Width = root.Width;
+			MainText.ContextMenu = (ContextMenu)root.FindResource("TextBoxMenu");
 		}
 
 
 		private void SetBorderStoryboard()
 		{
+			ColorAnimation BorderBrush;
+			Storyboard STYB_BorderBrush = new();
+
 			ToggleButton TB = GetTemplateResource<ToggleButton>("ToggleButton", UserComboBox);
 			Border border = GetTemplateResource<Border>("ToggleButtonBorder", TB);
 
@@ -177,24 +193,41 @@ namespace DLControls
 
 			void setStoryboard(bool IsEnter)
 			{
-				ColorAnimation BorderBrush;
-				Storyboard STYB_BorderBrush = new();
-
+				BorderBrush = new((Color)ColorConverter.ConvertFromString("#FF011F4C"), TimeSpan.FromMilliseconds(100));
+				
 				if (IsEnter)
-				{
 					BorderBrush = new(Colors.Blue, TimeSpan.FromMilliseconds(100));
-				}
-				else BorderBrush = new((Color)ColorConverter.ConvertFromString("#FF011F4C"), TimeSpan.FromMilliseconds(100));
 
-				Storyboard.SetTargetProperty(BorderBrush, new("(Control.BorderBrush).(SolidColorBrush.Color)"));
-				Storyboard.SetTarget(BorderBrush, border);
+				SetStoryboardAuto(BorderBrush, border, new("(Control.BorderBrush).(SolidColorBrush.Color)"));
+				
 				STYB_BorderBrush.Children.Add(BorderBrush);
 				STYB_BorderBrush.Begin();
 
 			}
+			SetMouseEnterLeave(UserComboBox, ()=>setStoryboard(true), ()=>setStoryboard(false));
+		}
 
-			UserComboBox.MouseEnter += delegate { setStoryboard(true); };
-			UserComboBox.MouseLeave += delegate { setStoryboard(false); };
+		public string GetItemContent(List<ComboBoxItem> Items)
+		{
+			int index = UserComboBox.SelectedIndex;
+			if (!TextEditable && index == -1) index = ItemIndex;
+			return Items[index].Content as String;
+		}
+
+		protected virtual void OnChange(RoutedEventArgs e)
+		{
+			RoutedEventHandler eh = OnItemChange;
+			if (eh != null)
+			{
+				if (e == null) return; 
+				eh(this, e);
+			}
+		}
+
+		private void OnSelectChange(object s, RoutedEventArgs e)
+		{
+			OnChange(e);
+			GC.Collect();
 		}
 	}
 }

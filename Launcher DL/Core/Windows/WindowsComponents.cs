@@ -23,7 +23,10 @@ class WindowsComponents
 			WindowAnimation = new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
 			Focus();
 			GC.Collect();
+
+			#if DEBUG
 			ConsoleDebug.WindowFocused(true);
+			#endif
 		};
 
 		MainWindowStatic.Deactivated += delegate
@@ -31,8 +34,10 @@ class WindowsComponents
 			WindowOpacity = new(0, TimeSpan.FromMilliseconds(100));
 			WindowAnimation = new(Colors.Black, TimeSpan.FromMilliseconds(100));
 			Focus();
-			//Keyboard.ClearFocus();
+			
+			#if DEBUG
 			ConsoleDebug.WindowFocused(false);
+			#endif
 		};
 
 	}

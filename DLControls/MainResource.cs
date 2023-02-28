@@ -6,4 +6,17 @@ public partial class MainResource
     {
         return (T)TemplatedParent.Template.FindName(Name, TemplatedParent);
     }
+
+    public static void SetStoryboardAuto(DependencyObject element, DependencyObject value, PropertyPath path)
+    {
+        Storyboard.SetTargetProperty(element, path);
+        Storyboard.SetTarget(element, value);
+    }
+
+    public static void SetMouseEnterLeave(UIElement Control, Action Enter, Action Leave)
+    {
+        Control.MouseEnter += delegate { Enter(); };
+        Control.MouseLeave += delegate { Leave(); };
+        GC.Collect();
+    }
 }
