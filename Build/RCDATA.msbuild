@@ -1,0 +1,17 @@
+<Project InitialTarget="rc">
+    <Target Name="rc">
+        <Message Importance="High" Text="   Changing OriginalFileName"/>
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; cd Release &amp;&amp; cd net7.0-windows &amp;&amp; &quot;../../../../Build/rc&quot; uVad.exe --set-version-string OriginalFilename &quot;Launcher DL.exe&quot; &amp;&amp; ( echo GOOD ) || ( echo BAD )" EchoOff="True" Condition="$(Configuration) == Release"/>
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; cd Debug &amp;&amp; cd net7.0-windows &amp;&amp; &quot;../../../../Build/rc&quot; uVad.exe --set-version-string OriginalFilename &quot;Launcher DL.exe&quot; &amp;&amp; ( echo GOOD ) || ( echo BAD )" EchoOff="True" Condition="$(Configuration) == Debug"/>
+        
+    
+        <Message Importance="High" Text="   Changing FileDescription"/>
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; cd Release &amp;&amp; cd net7.0-windows &amp;&amp; &quot;../../../../Build/rc&quot; uVad.exe --set-version-string FileDescription &quot;Launcher DL&quot; &amp;&amp; ( echo GOOD ) || ( echo BAD )" EchoOff="True" Condition="$(Configuration) == Release"/>
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; cd Debug &amp;&amp; cd net7.0-windows &amp;&amp; &quot;../../../../Build/rc&quot; uVad.exe --set-version-string FileDescription &quot;Launcher DL&quot; &amp;&amp; ( echo GOOD ) || ( echo BAD )" EchoOff="True" Condition="$(Configuration) == Debug"/>
+
+        <Message Importance="High" Text="   Changing ProductVersion"/>
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; cd Release &amp;&amp; cd net7.0-windows &amp;&amp; &quot;../../../../Build/rc&quot; uVad.exe --set-version-string ProductVersion &quot;7.0.0.0&quot; &amp;&amp; ( echo GOOD ) || ( echo BAD )" EchoOff="True" Condition="$(Configuration) == Release"/>
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; cd Debug &amp;&amp; cd net7.0-windows &amp;&amp; &quot;../../../../Build/rc&quot; uVad.exe --set-version-string ProductVersion &quot;7.0.0.0&quot; &amp;&amp; ( echo GOOD ) || ( echo BAD )" EchoOff="True" Condition="$(Configuration) == Debug"/>
+
+    </Target>
+</Project>

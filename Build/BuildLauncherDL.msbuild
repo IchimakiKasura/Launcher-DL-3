@@ -46,18 +46,28 @@
         <MSBuild Projects=".\CopyFiles.msbuild" Properties="Configuration=$(Configuration)" />
         <Message Importance="High" Text="Copy Done!"/>
 
-        <Message Importance="High" Text="[1/2] Finalizing..."/>
-        <Exec Command="ping -n 3 127.0.0.1 > nul"/>
-        <Exec Command="cd RELEASE &amp;&amp; attrib +s +h &quot;*.runtimeconfig.json&quot;" EchoOff="true" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        <Exec Command="cd DEBUG &amp;&amp; attrib +s +h &quot;*.runtimeconfig.json&quot;" EchoOff="true" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
-        <Message Importance="High" Text="[2/2] Finalizing...(Clearing/Removing BIN and OBJ folders)"/>
+        <Message Importance="High" Text="[1/3] Finalizing...(Configuring RCDATA)"/>
+        <MSBuild Projects=".\RCDATA.msbuild" Properties="Configuration=$(Configuration)"/>
+
+        <Message Importance="High" Text="[2/3] Finalizing...(Setting Up Single EXE)"/>
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; md &quot;Release/net7.0-windows&quot; &amp;&amp; cd Release/net7.0-windows &amp;&amp; echo none > uVad.exe &amp;&amp; echo json > uVad.runtimeconfig.json &amp;&amp; exit" EchoOff="True" Condition="$(Configuration) == Debug" />
+        <Exec Command="cd.. &amp;&amp; cd Launcher DL &amp;&amp; cd bin &amp;&amp; md &quot;Debug/net7.0-windows&quot; &amp;&amp; cd Debug/net7.0-windows &amp;&amp; echo none > uVad.exe &amp;&amp; echo json > uVad.runtimeconfig.json &amp;&amp; exit" EchoOff="True" Condition="$(Configuration) == Release" />
+        <MSBuild Projects=".\SelfLauncher.msbuild" Properties="Configuration=$(Configuration)"/>
+
+        <Message Importance="High" Text="[3/3] Finalizing...(Clearing/Removing BIN and OBJ folders and Closing Dotnets)"/>
         <Exec Command="ping -n 3 127.0.0.1 > nul"/>
         <RemoveDir Directories="../Launcher%20DL/bin"/>
         <RemoveDir Directories="../DLControls/bin"/>
         <RemoveDir Directories="../Languages/bin"/>
+        <RemoveDir Directories="../SelfLauncher/bin"/>
+
         <RemoveDir Directories="../Launcher%20DL/obj"/>
         <RemoveDir Directories="../DLControls/obj"/>
         <RemoveDir Directories="../Languages/obj"/>
+        <RemoveDir Directories="../SelfLauncher/obj"/>
+
+        <!-- they keep stacking up whenever i run dotnet lmao -->
+        <Exec Command="taskkill /F /IM dotnet.exe" EchoOff="true"/>
     </Target>
 
 </Project>

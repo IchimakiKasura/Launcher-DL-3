@@ -81,14 +81,6 @@ namespace DLControls
 		public RoutedEventHandler OnItemChange;
 		public bool isTextFocused { get; set; }
 		public static Style comboBoxStyle;
-		private TextBox TextBoxTemplate = new()
-		{
-			Background = Brushes.Transparent,
-			Focusable = true,
-			Margin = new(3, 3, 23, 3),
-			HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
-			VerticalScrollBarVisibility = ScrollBarVisibility.Disabled,
-		};
 		public TextBox MainText;
 		TextBox Placeholder;
 
@@ -96,6 +88,7 @@ namespace DLControls
 		{
 			InitializeComponent();
 
+			SetupTextBox();
 			comboBoxStyle = (Style)UserComboBox.FindResource("DownloadType");
 		}
 
@@ -106,7 +99,6 @@ namespace DLControls
 
 		private void ContentLoad(object s, RoutedEventArgs e)
 		{
-			SetupTextBox();
 			SetBorderStoryboard();
 
 			ContentPresenter Content = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
@@ -160,23 +152,34 @@ namespace DLControls
 
 		private void SetupTextBox()
 		{
-			// Placeholder
-			Placeholder = TextBoxTemplate;
-			Placeholder.Foreground = Brushes.DimGray;
-			Placeholder.BorderBrush = Brushes.Transparent;
-			Placeholder.Focusable = true;
-			Placeholder.Margin = new(3, 3, 23, 3);
-			Placeholder.Text = PlaceholderText;
-			Placeholder.IsHitTestVisible = false;
-			
-			// MainText
-			MainText = TextBoxTemplate;
-			MainText.Foreground = Brushes.White;
-			MainText.BorderThickness = new(0);
-			MainText.SelectionBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C");
-			MainText.CaretBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C");
-			MainText.Width = root.Width;
-			MainText.ContextMenu = (ContextMenu)root.FindResource("TextBoxMenu");
+			Placeholder = new()
+			{
+				Foreground = Brushes.DimGray,
+				BorderBrush = Brushes.Transparent,
+				Focusable = true,
+				Text = PlaceholderText,
+				IsHitTestVisible = false,
+			};
+
+			MainText = new()
+			{
+				Foreground = Brushes.White,
+				BorderThickness = new(0),
+				Focusable = true,
+				SelectionBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C"),
+				CaretBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C"),
+				Width = root.Width,
+				ContextMenu = (ContextMenu)root.FindResource("TextBoxMenu"),
+			};
+
+			Placeholder.HorizontalScrollBarVisibility = 
+			Placeholder.VerticalScrollBarVisibility =
+			MainText.HorizontalScrollBarVisibility = 
+			MainText.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+
+			Placeholder.Background = MainText.Background = Brushes.Transparent;
+
+			Placeholder.Margin = MainText.Margin = new(3, 3, 23, 3);
 		}
 
 

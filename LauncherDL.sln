@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLControls", "DLControls\DL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Languages", "Languages\Languages.csproj", "{95478B96-BF5F-4FDB-A305-1B5EB754DBD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfLauncher", "SelfLauncher\SelfLauncher.csproj", "{ECA96A04-9B9A-401E-9F64-9D84846C0E80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,14 @@ Global
 		{95478B96-BF5F-4FDB-A305-1B5EB754DBD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95478B96-BF5F-4FDB-A305-1B5EB754DBD7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{95478B96-BF5F-4FDB-A305-1B5EB754DBD7}.Release|x64.ActiveCfg = Release|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Debug|x64.Build.0 = Debug|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Release|x64.ActiveCfg = Release|Any CPU
+		{ECA96A04-9B9A-401E-9F64-9D84846C0E80}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

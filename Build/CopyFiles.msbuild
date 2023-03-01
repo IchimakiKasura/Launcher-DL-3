@@ -1,19 +1,17 @@
 <Project InitialTarget="Copy">
+
+    <!-- Yes I manually copy them instead the *.* because it wont work like it will work for few build and wont copy unless i did weird things -->
+
     <Target Name="Copy">
         <Copy SourceFiles="../Launcher%20DL/bin/Release/net7.0-windows/uVad.dll" DestinationFolder="./RELEASE/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Launcher%20DL/bin/Release/net7.0-windows/uVad.runtimeconfig.json" DestinationFolder="./RELEASE/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
         <Copy SourceFiles="../Launcher%20DL/bin/Release/net7.0-windows/Config.ini" DestinationFolder="./RELEASE/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
         <Copy SourceFiles="../Launcher%20DL/bin/Release/net7.0-windows/Languages.dll" DestinationFolder="./RELEASE/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
         <Copy SourceFiles="../Launcher%20DL/bin/Release/net7.0-windows/graphics.dll" DestinationFolder="./RELEASE/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Launcher%20DL/bin/Release/net7.0-windows/uVad.exe" DestinationFolder="./RELEASE/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
-        
 
         <Copy SourceFiles="../Launcher%20DL/bin/Debug/net7.0-windows/uVad.dll" DestinationFolder="./DEBUG/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Launcher%20DL/bin/Debug/net7.0-windows/uVad.runtimeconfig.json" DestinationFolder="./DEBUG/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
         <Copy SourceFiles="../Launcher%20DL/bin/Debug/net7.0-windows/Config.ini" DestinationFolder="./DEBUG/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
         <Copy SourceFiles="../Launcher%20DL/bin/Debug/net7.0-windows/Languages.dll" DestinationFolder="./DEBUG/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
         <Copy SourceFiles="../Launcher%20DL/bin/Debug/net7.0-windows/graphics.dll" DestinationFolder="./DEBUG/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
-        <Copy SourceFiles="../Launcher%20DL/bin/Debug/net7.0-windows/uVad.exe" DestinationFolder="./DEBUG/" Condition="$(Configuration) == Debug" ContinueOnError="WarnAndContinue"/>
         
         <Copy SourceFiles="../Images/background.jpg" DestinationFolder="./RELEASE/Images/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>
         <Copy SourceFiles="../Images/Icon.ico" DestinationFolder="./RELEASE/Images/" Condition="$(Configuration) == Release" ContinueOnError="WarnAndContinue"/>

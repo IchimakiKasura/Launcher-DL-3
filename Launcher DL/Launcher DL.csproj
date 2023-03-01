@@ -22,10 +22,34 @@
 
   <PropertyGroup>
     <Authors>Ichimaki Kasura</Authors>
-    <PackageId>Launcher DL [Development]</PackageId>
-    <Product>Launcher DL [Development]</Product>
     <Copyright>Copyright © 2023</Copyright>
     <AssemblyVersion>7.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration) == Release">
+    <PackageId>Launcher DL</PackageId>
+    <Product>Launcher DL</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration) == Debug">
+    <PackageId>Launcher DL [Development]</PackageId>
+    <Product>Launcher DL [Development]</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
