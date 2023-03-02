@@ -72,29 +72,25 @@ class WindowsComponents
 		}
 	}
 
-	// why does the Format combobox doesnt turn to bright red its just a dim
-	// unlike the others.
 	public static void FreezeComponents(bool Freeze)
 	{
-		buttonFileFormat.IsEnabled = true;
-		buttonDownload.IsEnabled = true;
-		buttonUpdate.IsEnabled = true;
-		buttonOpenFile.IsEnabled = true;
-		textBoxLink.IsEnabled = true;
-		textBoxName.IsEnabled = true;
-		comboBoxType.IsEnabled = true;
-		comboBoxFormat.IsEnabled = true;
-
-		if(Freeze)
+		UIElement[] ControlLists = 
 		{
-			buttonFileFormat.IsEnabled = false;
-			buttonDownload.IsEnabled = false;
-			buttonUpdate.IsEnabled = false;
-			buttonOpenFile.IsEnabled = false;
-			textBoxLink.IsEnabled = false;
-			textBoxName.IsEnabled = false;
-			comboBoxType.IsEnabled = false;
-			comboBoxFormat.IsEnabled = false;
-		}
+			buttonFileFormat,
+			buttonDownload,
+			buttonUpdate,
+			buttonOpenFile,
+			textBoxLink,
+			textBoxName,
+			comboBoxType,
+			comboBoxFormat
+		};
+
+		foreach(UIElement CL in ControlLists)
+			CL.IsEnabled = true;
+		
+		if(Freeze)
+			foreach(UIElement CL in ControlLists)
+				CL.IsEnabled = false;
 	}
 }

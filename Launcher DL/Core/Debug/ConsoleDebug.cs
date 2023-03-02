@@ -33,18 +33,13 @@ class ConsoleDebug
 	}
 
 	// goddamn it  I got lazy naming these parameters
-	public static void LoadingConfig(dynamic a, dynamic b, string c)
+	public static void LoadingConfig<T>(T a, dynamic b, string c)
 	{
 		Console.Write($"Loading {c}");
 		try
 		{
-			switch(a.GetType().ToString())
-			{
-				case "System.String": a = b; break;
-				case "System.Int32": a = int.Parse(b); break;
-				case "System.Windows.Media.Color": a = ClrConv(b); break;
-				case "System.Boolean": a = bool.Parse(b); break;
-			}
+			if(a.GetType().ToString().Contains("System.Windows.Media.Color")) a = ClrConv(b);
+			else a = b;
 			Console.SetCursorPosition(34,4 + count);
 			Console.Write($"\x1b[32mLOADED! = {b}\x1b[0m\n");
 		} catch

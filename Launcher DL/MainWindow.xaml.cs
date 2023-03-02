@@ -56,7 +56,8 @@ public partial class MainWindow : Window
 
 		buttonOpenFile.Click += delegate
 		{
-			console.AddFormattedText("<%20>Test");
+			WindowsComponents.FreezeComponents(false);
+			console.AddFormattedText("<%20>UNFREEZE!");
 		};
 	}
 }
