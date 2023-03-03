@@ -83,11 +83,7 @@ class OnStartUp
 		comboBoxType.ContentAlignment = HorizontalAlignment.Center;
 		comboBoxType.ShowVerticalScrollbar = false;
 
-		foreach (var (value, index) in ComboBoxTypes.Select((value, i) => (value, i)))
-		{
-			ComboBoxTypes[index].Style = ComboBoxControl.comboBoxStyle;
-			comboBoxType.ItemsAdd(ComboBoxTypes[index]);
-		}
+		comboBoxType.ItemsAdd();
 	}
 
 	private static void InitializeLanguage()
@@ -106,10 +102,10 @@ class OnStartUp
 		textBoxName.TextPlaceholder = Language.Placeholder_Optional;
 
 		// ComboBox
-		ComboBoxTypes[0].Content = Language.Types_Custom;
-		ComboBoxTypes[1].Content = Language.Types_Video;
-		ComboBoxTypes[2].Content = Language.Types_Audio;
-		ComboBoxTypes[3].Content = Language.Types_Convert;
+		comboBoxType.ComboBoxTypes[0].Content = Language.Types_Custom;
+		comboBoxType.ComboBoxTypes[1].Content = Language.Types_Video;
+		comboBoxType.ComboBoxTypes[2].Content = Language.Types_Audio;
+		comboBoxType.ComboBoxTypes[3].Content = Language.Types_Convert;
 
 		textBlockLink.Text = Language.Label_Link;
 		textBlockFormat.Text = Language.Label_Format;

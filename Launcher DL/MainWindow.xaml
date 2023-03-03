@@ -1,11 +1,8 @@
 ﻿<Window x:Class="Launcher_DL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Launcher_DL"
 		xmlns:DLControl="clr-namespace:DLControls;assembly=graphics"
-        mc:Ignorable="d"
 		ResizeMode="CanMinimize"
 		WindowStartupLocation="CenterScreen"
 		WindowStyle="None"
@@ -42,7 +39,7 @@
 					<Grid>
 
 						<Image IsHitTestVisible="False" Source="{Binding Source={x:Static DLControl:DLStrings.Icon}}" Margin="8,0,801,0"/>
-						<TextBlock Text="Launcher DL" Foreground="White" FontWeight="Medium"  FontSize="14" Padding="34,9,0,0" IsHitTestVisible="False"/>
+						<TextBlock Text="Launcher DL" Foreground="White" FontWeight="Medium"  FontSize="14" Padding="34,6.5,0,0" IsHitTestVisible="False"/>
 
 						<Button x:Name="CloseButton"
 										Content="✕"
@@ -57,6 +54,7 @@
 					</Grid>
 				</Border>
 
+				<!-- Texbox w/ Text labels -->
 				<DLControl:TextBlockControl x:Name="textBlockLink" Canvas.Top="69" Canvas.Left="310" Text="Link" Width="90" HorizontalAlignment="Left"/>
 				<DLControl:TextBoxControl x:Name="textBoxLink" Width="387" Canvas.Top="67" Canvas.Left="415"/>
 				<DLControl:TextBlockControl x:Name="textBlockFormat" Canvas.Top="122" Canvas.Left="310" Text="Format" Width="90" HorizontalAlignment="Left"/>
@@ -64,13 +62,16 @@
 				<DLControl:TextBlockControl x:Name="textBlockName" Canvas.Top="173" Canvas.Left="310" Text="Name" Width="90" HorizontalAlignment="Left"/>
 				<DLControl:TextBoxControl x:Name="textBoxName" Width="387" Canvas.Top="171" Canvas.Left="415"/>
 
+				<!-- Buttons -->
 				<DLControl:ButtonControl x:Name="buttonFileFormat" Margin="24,155,556,261"/>
 				<DLControl:ButtonControl x:Name="buttonDownload" Margin="24,231,556,183"/>
 				<DLControl:ButtonControl x:Name="buttonUpdate" Margin="24,309,556,105"/>
 				<DLControl:ButtonControl x:Name="buttonOpenFile" Margin="24,387,556,29"/>
 
+				<!-- Console -->
 				<DLControl:ConsoleControl ConsoleHeight="192" ConsoleWidth="502" x:Name="console" Margin="300,231,27,57"/>
 
+				<!-- Type -->
 				<DLControl:TextBlockControl x:Name="textBlockType" Canvas.Top="50" Canvas.Left="70" Text="Download Type" Width="157" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				<DLControl:ComboBoxControl x:Name="comboBoxType" Canvas.Left="66" Canvas.Top="84" Width="166" TextEditable="False"/>
 			</Canvas>

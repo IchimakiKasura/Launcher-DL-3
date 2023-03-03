@@ -33,7 +33,7 @@ public partial class MainWindow : Window
 		InitiateStaticComponents(this);
 
 		#if DEBUG
-		ConsoleDebug.InitiateConsoleDebug();
+			ConsoleDebug.InitiateConsoleDebug();
 		#endif
 
 		config = Config.ReadConfigINI();

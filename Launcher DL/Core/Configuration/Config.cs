@@ -24,13 +24,11 @@ public class DefaultConfig
 public class Config
 {
 	static bool error = false;
-	static DefaultConfig DefaultConfiguration;
+	static DefaultConfig DefaultConfiguration = new();
 	public static DefaultConfig ReadConfigINI()
 	{
 		string ConfigString = File.ReadAllText(CONFIG_NAME);
-		IniDataParser parser = new();
-		DefaultConfiguration = new();
-		IniData Data = parser.Parse(ConfigString);
+		IniData Data = new IniDataParser().Parse(ConfigString);
 
 		string LanguageCheck = Data[CONFIG_SECTION_APP][CONFIG_LANGUAGE];
 
@@ -80,6 +78,11 @@ public class Config
 
 		try
 		{
+			// lmao
+			if(a.GetType() == typeof(int))
+				if(b > 3) 
+					throw new Exception("Default File type is above 3!");
+
 			if(a.GetType().ToString().Contains(CONFIG_COLOR_CONTAINS)) a = ClrConv(b);
 			else a = b;
 		} catch(Exception e)
