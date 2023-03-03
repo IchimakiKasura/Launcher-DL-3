@@ -71,30 +71,39 @@ namespace DLControls
 			set
 			{
 				SetValue(ShowVerticalScrollbarProperty, value);
-				
 				ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Disabled);
-
-				if(value)
-					ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
+				if(value) ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
+			}
+		}
+		public string GetItemContent
+		{
+			get
+			{
+				int index = UserComboBox.SelectedIndex;
+				if (!TextEditable && index == -1) index = ItemIndex;
+				return ComboBoxTypes[index].Content as String;
 			}
 		}
 		public RoutedEventHandler OnItemChange;
 		public bool isTextFocused { get; set; }
-		public static Style comboBoxStyle;
 		public TextBox MainText;
 		TextBox Placeholder;
+		public List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
 
 		public ComboBoxControl()
 		{
 			InitializeComponent();
-
 			SetupTextBox();
-			comboBoxStyle = (Style)UserComboBox.FindResource("DownloadType");
 		}
 
-		public void ItemsAdd(object Element)
+		public void ItemsAdd()
 		{
-			UserComboBox.Items.Add(Element);
+			foreach (var (value, index) in ComboBoxTypes.Select((value, i) => (value, i)))
+			{
+				ComboBoxTypes[index].Style = (Style)UserComboBox.FindResource("DownloadType");
+				UserComboBox.Items.Add(ComboBoxTypes[index]);
+			}
+
 		}
 
 		private void ContentLoad(object s, RoutedEventArgs e)
@@ -106,8 +115,7 @@ namespace DLControls
 
 			if (TextEditable)
 			{
-				comboBoxGRID.Children.Add(Placeholder);
-				comboBoxGRID.Children.Add(MainText);
+				AddChildGRID(comboBoxGRID, true);
 				Content.Visibility = Visibility.Hidden;
 			}
 
@@ -120,31 +128,31 @@ namespace DLControls
 
 			IsEnabledChanged += delegate
 			{
-				UserComboBox.Foreground = Brushes.Red;
-				
-				/// This fixes the Font color being darker than the others
-				/// when the control is disabled
-				if(TextEditable)
+				switch(IsEnabled)
 				{
-					comboBoxGRID.Children.Remove(Placeholder);
-					comboBoxGRID.Children.Remove(MainText);
-					Content.Visibility = Visibility.Visible;
-					Content.Content = PlaceholderUnavailable;
-					Content.HorizontalAlignment = HorizontalAlignment.Center;
-				}
+					case true:
+						UserComboBox.Foreground = Brushes.White;
+						if(TextEditable)
+						{
+							AddChildGRID(comboBoxGRID, true);
+							Content.Visibility = Visibility.Hidden;
+							Content.HorizontalAlignment = HorizontalAlignment.Left;
+							Content.Content = string.Empty;
+							if(MainText.Text != null)
+								comboBoxGRID.Children.Remove(Placeholder);
+						}
+					break;
 
-				if(IsEnabled)
-				{
-					UserComboBox.Foreground = Brushes.White;
-
-					if(TextEditable)
-					{
-						comboBoxGRID.Children.Add(Placeholder);
-						comboBoxGRID.Children.Add(MainText);
-						Content.Visibility = Visibility.Hidden;
-						Content.HorizontalAlignment = HorizontalAlignment.Left;
-						Content.Content = string.Empty;
-					}
+					case false:
+						UserComboBox.Foreground = Brushes.Red;
+						if(TextEditable)
+						{
+							AddChildGRID(comboBoxGRID, false);
+							Content.Visibility = Visibility.Visible;
+							Content.Content = PlaceholderUnavailable;
+							Content.HorizontalAlignment = HorizontalAlignment.Center;
+						}
+					break;
 				}
 			};
 
@@ -182,6 +190,21 @@ namespace DLControls
 			Placeholder.Margin = MainText.Margin = new(3, 3, 23, 3);
 		}
 
+		public void AddChildGRID(Grid grid, bool Add)
+		{
+			switch(Add)
+			{
+				case true: 
+					grid.Children.Add(Placeholder);
+					grid.Children.Add(MainText);
+				break;
+
+				case false:
+					grid.Children.Remove(Placeholder);
+					grid.Children.Remove(MainText);
+				break;
+			}
+		}
 
 		private void SetBorderStoryboard()
 		{
@@ -208,13 +231,6 @@ namespace DLControls
 
 			}
 			SetMouseEnterLeave(UserComboBox, ()=>setStoryboard(true), ()=>setStoryboard(false));
-		}
-
-		public string GetItemContent(List<ComboBoxItem> Items)
-		{
-			int index = UserComboBox.SelectedIndex;
-			if (!TextEditable && index == -1) index = ItemIndex;
-			return Items[index].Content as String;
 		}
 
 		protected virtual void OnChange(RoutedEventArgs e)
