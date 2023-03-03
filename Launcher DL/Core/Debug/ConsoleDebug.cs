@@ -2,6 +2,9 @@
 
 /// <summary>
 /// This script is automatically discarded on release build.
+/// <br/>
+/// So saying "Uh JUSt uSe DeBug" nah i'll pass
+/// I got used to doing this.
 /// </summary>
 class ConsoleDebug
 {
@@ -38,6 +41,10 @@ class ConsoleDebug
 		Console.Write($"Loading {c}");
 		try
 		{
+			if(a.GetType() == typeof(int))
+				if(b > 3) 
+					throw new Exception("Default File type is above 3!");
+
 			if(a.GetType().ToString().Contains("System.Windows.Media.Color")) a = ClrConv(b);
 			else a = b;
 			Console.SetCursorPosition(34,4 + count);
