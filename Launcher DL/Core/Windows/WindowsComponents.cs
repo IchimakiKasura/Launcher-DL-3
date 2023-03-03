@@ -86,11 +86,11 @@ class WindowsComponents
 			comboBoxFormat
 		};
 
-		foreach(UIElement CL in ControlLists)
+		foreach(var CL in ControlLists)
 			CL.IsEnabled = true;
 		
 		if(Freeze)
-			foreach(UIElement CL in ControlLists)
+			foreach(var CL in ControlLists)
 				CL.IsEnabled = false;
 	}
 }
