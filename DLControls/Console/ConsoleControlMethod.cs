@@ -15,16 +15,10 @@ public partial class ConsoleControl
 	}
 
 	///<inheritdoc cref="AddFormattedText(string, bool, bool)"/>
-	public void AddFormattedText(string Input)
-	{
-		AddFormattedText(Input, false, false);
-	}
+	public void AddFormattedText(string Input) => AddFormattedText(Input, false, false);
 
 	///<inheritdoc cref="AddFormattedText(string, bool, bool)"/>
-	public void AddFormattedText(string Input, bool isItalic)
-	{
-		AddFormattedText(Input,isItalic, false);
-	}
+	public void AddFormattedText(string Input, bool isItalic) => AddFormattedText(Input,isItalic, false);
 
 	/// <summary id="1" >
 	/// Append a Text with Format.<br/>
@@ -91,11 +85,8 @@ public partial class ConsoleControl
 		}
 	}
 
-	///<inheritdoc cref="SaveText(string)"/>
-	public MemoryStream SaveText()
-	{
-		return SaveText(default);
-	}
+    ///<inheritdoc cref="SaveText(string)"/>
+    public MemoryStream SaveText() => SaveText(default);
 
 	/// <summary>
 	/// Save text to <see cref="MemoryStream"/>
@@ -118,10 +109,7 @@ public partial class ConsoleControl
 	}
 
 	/// <summary>Load text</summary>
-	public void LoadText(MemoryStream Stream)
-	{
-		LoadText(Stream, default);
-	}
+	public void LoadText(MemoryStream Stream) => LoadText(Stream, default);
 
 	/// <summary>Load text</summary>
 	public void LoadText(MemoryStream Stream, string format)
@@ -135,10 +123,7 @@ public partial class ConsoleControl
 	}
 
 	///<inheritdoc cref="Break(string)"/>
-	public void Break()
-	{
-		Break("White");
-	}
+	public void Break() => Break("White");
 
 	/// <summary>
 	/// Add line "==========================================="
@@ -154,18 +139,9 @@ public partial class ConsoleControl
 	/// <summary>
 	/// Scroll To End alternative
 	/// </summary>
-	/// <param name="rt"></param>
 	public void ScrollEndEvent(object s, EventArgs e)
 	{
 		if (!UserRichTextBox.IsInitialized) return;
-
-		try
-		{
-			UserRichTextBox.ScrollToEnd();
-		}
-		catch
-		{
-			return;
-		}
+		UserRichTextBox.ScrollToEnd();
 	}
 }

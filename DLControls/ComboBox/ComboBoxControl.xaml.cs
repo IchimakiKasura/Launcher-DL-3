@@ -18,8 +18,6 @@ namespace DLControls
 			DependencyProperty.Register("PlaceholderAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
 		readonly static DependencyProperty ContentAlignmentProperty =
 			DependencyProperty.Register("ContentAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
-		readonly static DependencyProperty ItemIndexProperty =
-			DependencyProperty.Register("ItemIndex", typeof(int), typeof(ComboBoxControl));
 		readonly static DependencyProperty ShowVerticalScrollbarProperty =
 			DependencyProperty.Register("ShowVerticalScrollbar", typeof(bool), typeof(ComboBoxControl));
 
@@ -58,12 +56,9 @@ namespace DLControls
 		}
 		public int ItemIndex
 		{
-			get => (int)GetValue(ItemIndexProperty);
-			set
-			{
-				SetValue(ItemIndexProperty, value);
-				UserComboBox.SelectedIndex = value;
-			}
+			get => UserComboBox.SelectedIndex;
+			set => UserComboBox.SelectedIndex = value;
+			
 		}
 		public bool ShowVerticalScrollbar
 		{
@@ -89,6 +84,8 @@ namespace DLControls
 		public TextBox MainText;
 		TextBox Placeholder;
 		public List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
+		public ContentPresenter Contents;
+		public Grid comboBoxGRID;
 
 		public ComboBoxControl()
 		{
@@ -106,17 +103,32 @@ namespace DLControls
 
 		}
 
+		public void RefreshEditable()
+		{
+			if(!IsLoaded) return;
+			if (!TextEditable)
+			{
+				AddChildGRID(comboBoxGRID, false);
+				Contents.Visibility = Visibility.Visible;
+			}
+			else
+			{
+				AddChildGRID(comboBoxGRID, true);
+				Contents.Visibility = Visibility.Hidden;
+			}
+		}
+
 		private void ContentLoad(object s, RoutedEventArgs e)
 		{
 			SetBorderStoryboard();
 
-			ContentPresenter Content = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
-			Grid comboBoxGRID = GetTemplateResource<Grid>("ComboBoxGRID", UserComboBox);
+			Contents = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
+			comboBoxGRID = GetTemplateResource<Grid>("ComboBoxGRID", UserComboBox);
 
 			if (TextEditable)
 			{
 				AddChildGRID(comboBoxGRID, true);
-				Content.Visibility = Visibility.Hidden;
+				Contents.Visibility = Visibility.Hidden;
 			}
 
 			MainText.TextChanged += delegate
@@ -135,9 +147,9 @@ namespace DLControls
 						if(TextEditable)
 						{
 							AddChildGRID(comboBoxGRID, true);
-							Content.Visibility = Visibility.Hidden;
-							Content.HorizontalAlignment = HorizontalAlignment.Left;
-							Content.Content = string.Empty;
+							Contents.Visibility = Visibility.Hidden;
+							Contents.HorizontalAlignment = HorizontalAlignment.Left;
+							Contents.Content = string.Empty;
 							if(MainText.Text != null)
 								comboBoxGRID.Children.Remove(Placeholder);
 						}
@@ -148,14 +160,13 @@ namespace DLControls
 						if(TextEditable)
 						{
 							AddChildGRID(comboBoxGRID, false);
-							Content.Visibility = Visibility.Visible;
-							Content.Content = PlaceholderUnavailable;
-							Content.HorizontalAlignment = HorizontalAlignment.Center;
+							Contents.Visibility = Visibility.Visible;
+							Contents.Content = PlaceholderUnavailable;
+							Contents.HorizontalAlignment = HorizontalAlignment.Center;
 						}
 					break;
 				}
 			};
-
 		}
 
 		private void SetupTextBox()

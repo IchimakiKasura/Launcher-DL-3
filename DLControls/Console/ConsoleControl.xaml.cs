@@ -32,4 +32,6 @@ public partial class ConsoleControl : UserControl
 			UserRichTextBox.Width = value;
 		}
 	}
+
+	public void manualScrollToEnd() => UserRichTextBox.ScrollToEnd();
 }
