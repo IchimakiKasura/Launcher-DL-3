@@ -51,9 +51,10 @@ class WindowsComponents
 	{
 		switch(State)
 		{
-			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar);console.ConsoleHeight = 200; break;
+			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar);console.ConsoleHeight = 217; break;
 			case ProgressBarState.Show: windowCanvas.Children.Add(progressBar);console.ConsoleHeight = 190; break;
 		}
+		console.manualScrollToEnd();
 	}
 
 	public static async Task WindowAwaitLoad(bool a)
@@ -72,14 +73,13 @@ class WindowsComponents
 		}
 	}
 
-	public static void FreezeComponents(bool Freeze)
+	public static void FreezeComponents()
 	{
 		UIElement[] ControlLists = 
 		{
 			buttonFileFormat,
-			buttonDownload,
+			//buttonDownload,
 			buttonUpdate,
-			buttonOpenFile,
 			textBoxLink,
 			textBoxName,
 			comboBoxType,
@@ -87,10 +87,11 @@ class WindowsComponents
 		};
 
 		foreach(var CL in ControlLists)
-			CL.IsEnabled = true;
+			CL.IsEnabled = !CL.IsEnabled;
 		
-		if(Freeze)
-			foreach(var CL in ControlLists)
-				CL.IsEnabled = false;
+		// if(buttonOpenFile)
+
+		if(!buttonFileFormat.IsEnabled)WindowProgressBar(ProgressBarState.Show);
+			else WindowProgressBar(ProgressBarState.Hide);
 	}
 }

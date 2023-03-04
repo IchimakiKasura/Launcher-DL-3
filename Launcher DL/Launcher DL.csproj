@@ -100,10 +100,13 @@
     <Using Include="Launcher_DL.StartUp" />
 
     <Using Include="Launcher_DL.Core" />
-    <Using Include="Launcher_DL.Core.Configuration" />
     <Using Include="Launcher_DL.Core.Windows" />
     <Using Include="Launcher_DL.Core.Buttons" />
+    <Using Include="Launcher_DL.Core.ComboBoxDL" />
+    <Using Include="Launcher_DL.Core.Configuration" />
+    <Using Include="Launcher_DL.Core.Event_Handlers" />
     <Using Include="Launcher_DL.Core.Console_Output_Comment_Method" />
+    <Using Include="Launcher_DL.Core.Console_Output_Comment_Method.CONSOLEOUTPUTMETHOD_STR" Static="true"/>
     
     <Using Include="Launcher_DL.Core.Global" Static="true" />
 

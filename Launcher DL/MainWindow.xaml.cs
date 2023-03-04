@@ -2,6 +2,9 @@
 
 // TODO:
 //
+//	Add error if the selected/typed language is invalid
+//
+//
 //  Implement the YDL.cs based on the old script from v6	
 //
 //  After implementing YDL, please just don't over use the TASK method again
@@ -35,26 +38,5 @@ public partial class MainWindow : Window
 
 		config = Config.ReadConfigINI();
 		OnStartUp.Initialize();
-
-		buttonFileFormat.Click += delegate
-		{
-			WindowsComponents.WindowProgressBar(ProgressBarState.Show);
-		};
-
-		buttonDownload.Click += delegate
-		{
-			WindowsComponents.WindowProgressBar(ProgressBarState.Hide);
-		};
-
-		buttonUpdate.Click += delegate
-		{
-			WindowsComponents.FreezeComponents(true);
-		};
-
-		buttonOpenFile.Click += delegate
-		{
-			WindowsComponents.FreezeComponents(false);
-			console.AddFormattedText("<%20>UNFREEZE!");
-		};
 	}
 }

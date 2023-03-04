@@ -23,7 +23,7 @@ public class Config
 			case "bruh": DefaultConfiguration.Language = LanguageName.bruh; break;
 		}
 
-		// I am pleased on this
+		#region Check Error part
 		CheckError(ref DefaultConfiguration.background, 				Data[CONFIG_SECTION_BACKROUND][0],	CONFIG_BACKGROUND_NAME);
 		CheckError(ref DefaultConfiguration.backgroundColor, 			Data[CONFIG_SECTION_BACKROUND][1],	CONFIG_BACKGROUND_COLOR);
 		CheckError(ref DefaultConfiguration.backgroundGlow, 			Data[CONFIG_SECTION_BACKROUND][2],	CONFIG_BACKGROUND_GLOW);
@@ -34,10 +34,12 @@ public class Config
 		CheckError(ref DefaultConfiguration.DefaultFileTypeOnStartUp, 	Data[CONFIG_SECTION_DROPDOWN][0],	CONFIG_FILE_TYPE);
 		CheckError(ref DefaultConfiguration.EnablePlaylist, 			Data[CONFIG_SECTION_PLAYLIST][0],	CONFIG_ENABLE_PLAYLIST);
 		CheckError(ref DefaultConfiguration.EpicAnimations, 			Data[CONFIG_SECTION_GRAPHICS][0],	CONFIG_ANIMATIONS);
+		#endregion
 
 		if(!error)
 		{
 			ConsoleOutputMethod.ConfigOutputComment(0);
+			
 			#if DEBUG
 				ConsoleDebug.LoadConfigDone(false);
 			#endif
@@ -45,10 +47,12 @@ public class Config
 		else 
 		{
 			ConsoleOutputMethod.ConfigOutputComment(2);
+
 			#if DEBUG
 				ConsoleDebug.LoadConfigDone(true);
 			#endif
 		}
+
 		return DefaultConfiguration;
 	}
 
@@ -60,7 +64,6 @@ public class Config
 
 		try
 		{
-			// lmao
 			if(c == CONFIG_FILE_TYPE)
 				if(b > 3) throw new Exception("Default File type is above 3!");
 

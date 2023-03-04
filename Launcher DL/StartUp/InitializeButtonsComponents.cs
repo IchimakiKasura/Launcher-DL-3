@@ -32,5 +32,6 @@ partial class OnStartUp
 		buttonDownload.IsAnimationOn =
 		buttonUpdate.IsAnimationOn =
 		buttonOpenFile.IsAnimationOn = config.EpicAnimations;
+
 	}
 }
