@@ -51,8 +51,8 @@ class WindowsComponents
 	{
 		switch(State)
 		{
-			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar); break;
-			case ProgressBarState.Show: windowCanvas.Children.Add(progressBar); break;
+			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar);console.ConsoleHeight = 200; break;
+			case ProgressBarState.Show: windowCanvas.Children.Add(progressBar);console.ConsoleHeight = 190; break;
 		}
 	}
 

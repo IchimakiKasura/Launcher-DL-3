@@ -3,24 +3,6 @@ using static Launcher_DL.Core.Configuration.CONFIG_STR;
 
 namespace Launcher_DL.Core.Configuration;
 
-public class DefaultConfig
-{
-	public string background = CONFIG_DEFAULT_BACKGROUND;
-	public string DefaultOutput = CONFIG_DEFAULT_OUTPUT;
-	public string BrowserCookie = CONFIG_DEFAULT_COOKIE;
-
-	public Color backgroundColor = ClrConv(CONFIG_DEFAULT_BACKGROUND_COLOR);
-	public Color backgroundGlow = ClrConv(CONFIG_DEFAULT_BACKGROUND_GLOW);
-
-	public bool ShowSystemOutput = CONFIG_DEFAULT_SYSTEM_OUTPUT;
-	public bool EnablePlaylist = CONFIG_DEFAULT_PLAYLIST;
-	public bool EpicAnimations = CONFIG_DEFAULT_ANIMATIONS;
-	public bool AllowCookies = CONFIG_DEFAULT_COOKIES;
-
-	public int DefaultFileTypeOnStartUp = CONFIG_DEFAULT_FILE_TYPE;
-	public LanguageName Language  = 0;
-}
-
 public class Config
 {
 	static bool error = false;
@@ -79,9 +61,11 @@ public class Config
 		try
 		{
 			// lmao
-			if(a.GetType() == typeof(int))
-				if(b > 3) 
-					throw new Exception("Default File type is above 3!");
+			if(c == CONFIG_FILE_TYPE)
+				if(b > 3) throw new Exception("Default File type is above 3!");
+
+			if(c == CONFIG_BACKGROUND_NAME)
+				if(!File.Exists($@"./Images/{b}")) throw new Exception("Background image not found!");
 
 			if(a.GetType().ToString().Contains(CONFIG_COLOR_CONTAINS)) a = ClrConv(b);
 			else a = b;

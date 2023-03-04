@@ -69,7 +69,7 @@
 				<DLControl:ButtonControl x:Name="buttonOpenFile" Margin="24,387,556,29"/>
 
 				<!-- Console -->
-				<DLControl:ConsoleControl ConsoleHeight="192" ConsoleWidth="502" x:Name="console" Margin="300,231,27,57"/>
+				<DLControl:ConsoleControl x:Name="console" ConsoleHeight="210" ConsoleWidth="502" Margin="300,231,27,57"/>
 
 				<!-- Type -->
 				<DLControl:TextBlockControl x:Name="textBlockType" Canvas.Top="50" Canvas.Left="70" Text="Download Type" Width="157" HorizontalAlignment="Center" VerticalAlignment="Center"/>

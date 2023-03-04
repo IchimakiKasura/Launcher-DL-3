@@ -3,7 +3,7 @@ namespace Launcher_DL.Core.Configuration;
 public abstract class CONFIG_STR
 {
     //DefaultConfig
-    public const string CONFIG_DEFAULT_BACKGROUND = "background.png";
+    public const string CONFIG_DEFAULT_BACKGROUND = "background.jpg";
     public const string CONFIG_DEFAULT_OUTPUT = "output";
     public const string CONFIG_DEFAULT_COOKIE = "chrome";
     public const string CONFIG_DEFAULT_BACKGROUND_COLOR = "#FF161438";

@@ -22,7 +22,7 @@ public partial class ButtonControl
 		new("(Effect).Opacity"),                            // 0
         new("Width"),                                       // 1
         new("Height"),                                      // 2
-        new("Width"),										// 3
+        new("(Button.FontSize)"),							// 3
         new("Background.(Brush.Opacity)"),                  // 4
         new("Margin"),                                      // 5
         new("(Button.Foreground).(SolidColorBrush.Color)"), // 6
@@ -39,7 +39,7 @@ public partial class ButtonControl
                     new(1, AnimationDuration),         // ButtonOpacity
                     new(260, AnimationDuration),       // ButtonWidth
                     new(67.5, AnimationDuration),      // ButtonHeight
-                    new(TextSize+15, AnimationDuration),// ButtonText
+                    new(TextSize+2, AnimationDuration),// ButtonText
                     new(0.85, AnimationDuration)       // ButtonImageOpacity
                 };
                 ButtonMargin = new(new(-5,-1.5,0,0), AnimationDuration);

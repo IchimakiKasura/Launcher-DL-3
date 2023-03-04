@@ -1,9 +1,6 @@
 ﻿namespace Launcher_DL;
 
 // TODO:
-//	Refactor the configuration.cs because it did look bad.
-//	Clean the TextBlockControl elements on the mainwindow xaml
-//	Fix button font size on hover animation  
 //
 //  Implement the YDL.cs based on the old script from v6	
 //

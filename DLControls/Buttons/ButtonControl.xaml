@@ -33,24 +33,14 @@
 
 									<Grid>
 										<Image Source="{Binding Icon, ElementName=root}"  Height="{Binding IconHeight, ElementName=root}" Width="{Binding IconWidth, ElementName=root}" Margin="11,8,189,7"/>
-										
-										<Viewbox x:Name="UserButtonViewbox"
-												 StretchDirection="Both"
-												 Stretch="Uniform"
-												 Margin="40,10,0,15"
-												 HorizontalAlignment="center"
-												 VerticalAlignment="Center"
-												 Width="150"
-												 Height="36">
-											
-											<ContentPresenter x:Name="Button"
-												Content="{Binding Path=Text, ElementName=root}"
+
+										<ContentPresenter x:Name="Button"
+												Content="{Binding Text, ElementName=root}"
 												HorizontalAlignment="Center" 
 												VerticalAlignment="Center"
-												Effect="{StaticResource ContentPresenterEffect}"/>
-											
-										</Viewbox>
-										
+												Effect="{StaticResource ContentPresenterEffect}"
+												Margin="40,0,0,0"/>
+
 									</Grid>
 
 									<Border.Background>

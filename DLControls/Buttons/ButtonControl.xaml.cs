@@ -16,7 +16,7 @@ public partial class ButtonControl : UserControl
     readonly static DependencyProperty IconWidthProperty =
         DependencyProperty.Register("IconWidth", typeof(int), typeof(ButtonControl), new(50));
 	readonly static DependencyProperty TextSizeProperty =
-	DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(150));
+	DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(20));
     readonly static DependencyProperty IsAnimationOnProperty = 
     DependencyProperty.Register("IsAnimationOn", typeof(bool), typeof(ButtonControl), new(true));
 
@@ -68,13 +68,13 @@ public partial class ButtonControl : UserControl
 
     private void ContentLoaded(object s, RoutedEventArgs e)
     {
-        Border UserButtonMainTemplate = GetTemplateResource<Border>("UserButtonMainBorder", UserButton);
-		Viewbox UserButtonViewbox = GetTemplateResource<Viewbox>("UserButtonViewbox", UserButton);
+		TextBlock ContentTextMain = GetTemplateResource<TextBlock>("ContentTextMain", UserButton);
+		Border UserButtonMainTemplate = GetTemplateResource<Border>("UserButtonMainBorder", UserButton);
 
-        TimeSpan AnimationDuration = TimeSpan.Zero;
+		TimeSpan AnimationDuration = TimeSpan.Zero;
         TimeSpan AnimationDurationLeave = TimeSpan.Zero;
 
-        if(IsAnimationOn)
+		if (IsAnimationOn)
         {
             AnimationDuration = TimeSpan.FromMilliseconds(100);
             AnimationDurationLeave = TimeSpan.FromMilliseconds(50);
@@ -88,7 +88,6 @@ public partial class ButtonControl : UserControl
             {
                 DependencyObject TargetElement = UserButton;
                 if(index == 4 || index == 7) TargetElement = UserButtonMainTemplate;
-				if(index == 3 )TargetElement = UserButtonViewbox;
 
                 SetStoryboardAuto(STYB, TargetElement, ControlPaths[index]);
 

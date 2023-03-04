@@ -16,10 +16,10 @@ namespace SelfLauncher
 			deleteLeftOvers();
 
 #if DEBUG
-			File.WriteAllBytes("temp.exe", Debug.uVad);
+			File.WriteAllBytes("_temp.exe", Debug.uVad);
 			File.WriteAllBytes("uVad.runtimeconfig.json", Debug.uVad_runtimeconfig);
 #else
-			File.WriteAllBytes("temp.exe", Release.uVad);
+			File.WriteAllBytes("_temp.exe", Release.uVad);
 			File.WriteAllBytes("uVad.runtimeconfig.json", Release.uVad_runtimeconfig);
 #endif
 
@@ -28,8 +28,7 @@ namespace SelfLauncher
 			SetAttribs();
 
 			// start
-			var process = Process.Start("temp.exe");
-			SetAttribs();
+			var process = Process.Start("_temp.exe");
 
 			// waits for the app to close or idk
 			process.WaitForExit();
@@ -44,7 +43,7 @@ namespace SelfLauncher
 			Process cmd = new Process();
 			ProcessStartInfo SI = new ProcessStartInfo();
 			SI.FileName = "cmd.exe";
-			SI.Arguments = "/C attrib +s +h temp.exe && attrib +s +h uvad.runtimeconfig.json && exit";
+			SI.Arguments = "/C attrib +s +h _temp.exe && attrib +s +h uvad.runtimeconfig.json && exit";
 			SI.WindowStyle = ProcessWindowStyle.Hidden;
 			cmd.StartInfo = SI;
 			cmd.Start();
@@ -52,7 +51,7 @@ namespace SelfLauncher
 
 		private static void deleteLeftOvers()
 		{
-			File.Delete("temp.exe");
+			File.Delete("_temp.exe");
 			File.Delete("uVad.runtimeconfig.json");
 		}
 	}

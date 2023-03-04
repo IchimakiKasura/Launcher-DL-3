@@ -41,11 +41,13 @@ class ConsoleDebug
 		Console.Write($"Loading {c}");
 		try
 		{
-			if(a.GetType() == typeof(int))
-				if(b > 3) 
-					throw new Exception("Default File type is above 3!");
+			if(c == CONFIG_STR.CONFIG_FILE_TYPE)
+				if(b > 3) throw new Exception("Default File type is above 3!");
 
-			if(a.GetType().ToString().Contains("System.Windows.Media.Color")) a = ClrConv(b);
+			if(c == CONFIG_STR.CONFIG_BACKGROUND_NAME)
+				if(!File.Exists($@"./Images/{b}")) throw new Exception("Background image not found!");
+
+			if(a.GetType().ToString().Contains(CONFIG_STR.CONFIG_COLOR_CONTAINS)) a = ClrConv(b);
 			else a = b;
 			Console.SetCursorPosition(34,4 + count);
 			Console.Write($"\x1b[32mLOADED! = {b}\x1b[0m\n");
