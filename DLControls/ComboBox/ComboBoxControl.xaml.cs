@@ -95,10 +95,13 @@ namespace DLControls
 
 		public void ItemsAdd()
 		{
-			foreach (var (value, index) in ComboBoxTypes.Select((value, i) => (value, i)))
+			// Fixes the error "Already a child of another" because it doubles and i don't know why.
+			UserComboBox.Items.Clear();
+
+			foreach (var CBT in ComboBoxTypes)
 			{
-				ComboBoxTypes[index].Style = (Style)UserComboBox.FindResource("DownloadType");
-				UserComboBox.Items.Add(ComboBoxTypes[index]);
+				CBT.Style = (Style)UserComboBox.FindResource("DownloadType");
+				UserComboBox.Items.Add(CBT);
 			}
 
 		}
@@ -203,17 +206,13 @@ namespace DLControls
 
 		public void AddChildGRID(Grid grid, bool Add)
 		{
-			switch(Add)
-			{
-				case true: 
-					grid.Children.Add(Placeholder);
-					grid.Children.Add(MainText);
-				break;
+			grid.Children.Remove(Placeholder);
+			grid.Children.Remove(MainText);
 
-				case false:
-					grid.Children.Remove(Placeholder);
-					grid.Children.Remove(MainText);
-				break;
+			if(Add)
+			{
+				grid.Children.Add(Placeholder);
+				grid.Children.Add(MainText);
 			}
 		}
 
