@@ -60,6 +60,14 @@ class ConsoleDebug
 		count++;
 	}
 
+	public static void LoadingFFmpeg(bool a, string c)
+	{
+		if(a)
+		{
+			Console.Write($"\x1b[32m{c}\x1b[0m\n");
+		} else Console.Write($"\x1b[31m{c}\x1b[0m\n");
+	}
+
 	public static void WindowFocused(bool isFocused)
 	{
 		if (isFocused) Console.WriteLine("Window is Focused!");

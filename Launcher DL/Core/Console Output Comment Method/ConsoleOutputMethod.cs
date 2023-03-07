@@ -33,11 +33,33 @@ internal static class ConsoleOutputMethod
 				break;
 
 				case 1:
-					console.DLAddConsole(CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>Error on loading [ {Name} ]");
+					console.DLAddConsole(CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: loading [ {Name} ]");
 					console.AddFormattedText($"<DimGray%12>ERROR: {error}", true);
 				break;
 
 				case 2: console.DLAddConsole(CONSOLE_SYSTEM_STRING,"<Red%14>FAILED <Gray%14>Default Config loaded");
+				break;
+			}
+		}
+	}
+
+	public async static void FFmpegOutputComment(int IsSuccess, string Filename = default)
+	{
+		await WindowsComponents.WindowAwaitLoad(console.IsLoaded);
+
+		if(config.ShowSystemOutput)
+		{
+			switch(IsSuccess)
+			{
+				case 0: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>FFmpeg is Available");
+				break;
+
+				case 1:
+					console.DLAddConsole(CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: Some files are missing!");
+					console.AddFormattedText($"<DimGray%12>ERROR: {Filename}", true);
+				break;
+
+				case 2: console.DLAddConsole(CONSOLE_SYSTEM_STRING,"<Red%14>FAILED <Gray%14>FFmpeg is Unavailable");
 				break;
 			}
 		}
