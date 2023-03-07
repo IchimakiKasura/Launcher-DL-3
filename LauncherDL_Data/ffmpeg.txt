@@ -1,2 +1,0 @@
-Download the ffmpeg on:
-https://github.com/yt-dlp/FFmpeg-Builds/releases

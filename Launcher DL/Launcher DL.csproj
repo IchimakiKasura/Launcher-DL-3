@@ -100,6 +100,7 @@
     <Using Include="Launcher_DL.StartUp" />
 
     <Using Include="Launcher_DL.Core" />
+    <Using Include="Launcher_DL.Core.FFmpeg" />
     <Using Include="Launcher_DL.Core.Windows" />
     <Using Include="Launcher_DL.Core.Buttons" />
     <Using Include="Launcher_DL.Core.ComboBoxDL" />

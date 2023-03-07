@@ -37,6 +37,7 @@ public partial class MainWindow : Window
 		#endif
 
 		config = Config.ReadConfigINI();
+		FFmpegFiles.CheckFiles();
 		OnStartUp.Initialize();
 	}
 }
