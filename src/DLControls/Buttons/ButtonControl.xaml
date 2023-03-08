@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="DLControls.ButtonControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 x:Name="root"
+			 Loaded="ContentLoaded">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/graphics;component/MainResource.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<Canvas CacheMode="BitmapCache" RenderOptions.BitmapScalingMode="LowQuality">
+		<Canvas.Resources>
+			<Style x:Key="UserButtonMain" TargetType="Button">
+				<Setter Property="Background" Value="{StaticResource ButtonBG}"/>
+				<Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+				<Setter Property="FontSize" Value="{Binding TextSize, ElementName=root}"/>
+				<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+				<Setter Property="FontWeight" Value="UltraBold"/>
+				<Setter Property="Focusable" Value="False"/>
+				<Setter Property="Height" Value="65"/>
+				<Setter Property="Width" Value="250"/>
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="Button">
+							<Border Background="{TemplateBinding Background}"
+							CornerRadius="10"
+							Cursor="Hand">
+								<Border CornerRadius="10" x:Name="UserButtonMainBorder">
+
+									<Grid>
+										<Image Source="{Binding Icon, ElementName=root}"  Height="{Binding IconHeight, ElementName=root}" Width="{Binding IconWidth, ElementName=root}" Margin="11,8,189,7"/>
+
+										<ContentPresenter x:Name="Button"
+												Content="{Binding Text, ElementName=root}"
+												HorizontalAlignment="Center" 
+												VerticalAlignment="Center"
+												Effect="{StaticResource ContentPresenterEffect}"
+												Margin="40,0,0,0"/>
+
+									</Grid>
+
+									<Border.Background>
+										<ImageBrush x:Name="b_Image"
+											ImageSource="{Binding Image, ElementName=root}"
+											Stretch="UniformToFill"
+											Viewport="-0.3,0,1.5,1.8"
+											Opacity="0"/>
+									</Border.Background>
+								</Border>
+							</Border>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+
+				<Setter Property="Effect">
+					<Setter.Value>
+						<DropShadowEffect Color="{Binding BorderEffect, ElementName=root}" BlurRadius="8" ShadowDepth="0" Opacity="0" RenderingBias="Performance"/>
+					</Setter.Value>
+				</Setter>
+
+				<Style.Triggers>
+					<Trigger Property="IsEnabled" Value="false">
+						<Setter Property="Foreground" Value="Red"/>
+						<Setter Property="Background" Value="{StaticResource ButtonBGDisabled}"/>
+					</Trigger>
+				</Style.Triggers>
+
+			</Style>
+		</Canvas.Resources>
+
+		<Button x:Name="UserButton" Style="{StaticResource UserButtonMain}" Click="Button_Click"/>
+	</Canvas>
+</UserControl>
