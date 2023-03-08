@@ -4,8 +4,6 @@
 buildAPP.cpp
 bin
 obj
-FodyWeavers.xsd
-LauncherDL Profiler Debug
 ydl.cs
 Build/DEBUG
 Build/RELEASE
