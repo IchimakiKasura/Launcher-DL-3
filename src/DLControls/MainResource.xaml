@@ -3,9 +3,9 @@
 					x:Class="DLControls.MainResource">
 
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="/graphics;component/Buttons/TopButtons.xaml"/>
-		<ResourceDictionary Source="/graphics;component/ScrollViewResource.xaml"/>
-		<ResourceDictionary Source="/graphics;component/ContextMenuResource.xaml"/>
+		<ResourceDictionary Source="/guicomp;component/Buttons/TopButtons.xaml"/>
+		<ResourceDictionary Source="/guicomp;component/ScrollViewResource.xaml"/>
+		<ResourceDictionary Source="/guicomp;component/ContextMenuResource.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 	
 	<SolidColorBrush x:Key="ButtonBG" Color="#CCFBC2C2"/>
@@ -13,7 +13,7 @@
 	<SolidColorBrush x:Key="DefaultBorderBrush" Color="#FF011F4C"/>
 	<SolidColorBrush x:Key="74000000" Color="#74000000"/>
 	<SolidColorBrush x:Key="DF900000" Color="#DF900000"/>
-	<FontFamily x:Key="DefaultFont">/graphics;component/Fonts/#Noto Sans JP</FontFamily>
+	<FontFamily x:Key="DefaultFont">/guicomp;component/Fonts/#Noto Sans JP</FontFamily>
 
 	<Color x:Key="GradientOne">#0E102F8E</Color>
 	<Color x:Key="GradientTwo">#FF0A2167</Color>

@@ -6,28 +6,28 @@
 	<ContextMenu x:Key="TextBoxMenu">
 		<MenuItem Command="Paste">
 			<MenuItem.Icon>
-				<Image Source="/graphics;component/Images/ContextMenu/Paste.png"/>
+				<Image Source="/guicomp;component/Images/ContextMenu/Paste.png"/>
 			</MenuItem.Icon>
 		</MenuItem>
 		<MenuItem Command="Copy">
 			<MenuItem.Icon>
-				<Image Source="/graphics;component/Images/ContextMenu/Copy.png"/>
+				<Image Source="/guicomp;component/Images/ContextMenu/Copy.png"/>
 			</MenuItem.Icon>
 		</MenuItem>
 		<MenuItem Command="Cut">
 			<MenuItem.Icon>
-				<Image Source="/graphics;component/Images/ContextMenu/Cut.png"/>
+				<Image Source="/guicomp;component/Images/ContextMenu/Cut.png"/>
 			</MenuItem.Icon>
 		</MenuItem>
 		<MenuItem Header="Clear" Click="ClearText">
 			<MenuItem.Icon>
-				<Image Source="/graphics;component/Images/ContextMenu/clean.png"/>
+				<Image Source="/guicomp;component/Images/ContextMenu/clean.png"/>
 			</MenuItem.Icon>
 		</MenuItem>
 		<Separator/>
 		<MenuItem Header="Created by Kasura" IsHitTestVisible="False" Focusable="False">
 			<MenuItem.Icon>
-				<Image Source="/graphics;component/Images/ContextMenu/pin.png"/>
+				<Image Source="/guicomp;component/Images/ContextMenu/pin.png"/>
 			</MenuItem.Icon>
 		</MenuItem>
 		<Separator/>

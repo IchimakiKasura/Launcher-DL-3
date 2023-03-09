@@ -118,23 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AkiraImage" xml:space="preserve">
-    <value>/graphics;component/Images/akira.jpg</value>
+    <value>/guicomp;component/Images/akira.jpg</value>
     <comment>Akira Image</comment>
   </data>
   <data name="AppIcon" xml:space="preserve">
-    <value>/graphics;component/Images/Icon.ico</value>
+    <value>/guicomp;component/Images/Icon.ico</value>
     <comment>App Icon</comment>
   </data>
   <data name="AstolfoImage" xml:space="preserve">
-    <value>/graphics;component/Images/asutorufo.jpg</value>
+    <value>/guicomp;component/Images/asutorufo.jpg</value>
     <comment>Astolfo Image</comment>
   </data>
   <data name="DownloadIcon" xml:space="preserve">
-    <value>/graphics;component/Images/ButtonIcons/download.png</value>
+    <value>/guicomp;component/Images/ButtonIcons/download.png</value>
     <comment>Download Icon</comment>
   </data>
   <data name="FileFormatIcon" xml:space="preserve">
-    <value>/graphics;component/Images/ButtonIcons/file format.png</value>
+    <value>/guicomp;component/Images/ButtonIcons/file format.png</value>
     <comment>File format Icon</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -142,19 +142,19 @@
     <value>..\Images\Icon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MeguminImage" xml:space="preserve">
-    <value>/graphics;component/Images/megumin.jpg</value>
+    <value>/guicomp;component/Images/megumin.jpg</value>
     <comment>My Wife</comment>
   </data>
   <data name="OpenFileIcon" xml:space="preserve">
-    <value>/graphics;component/Images/ButtonIcons/open file.png</value>
+    <value>/guicomp;component/Images/ButtonIcons/open file.png</value>
     <comment>Open file Icon</comment>
   </data>
   <data name="UpdateIcon" xml:space="preserve">
-    <value>/graphics;component/Images/ButtonIcons/update.png</value>
+    <value>/guicomp;component/Images/ButtonIcons/update.png</value>
     <comment>Update Icon</comment>
   </data>
   <data name="VentiImage" xml:space="preserve">
-    <value>/graphics;component/Images/venti.jpg</value>
+    <value>/guicomp;component/Images/venti.jpg</value>
     <comment>Venti Image</comment>
   </data>
 </root>

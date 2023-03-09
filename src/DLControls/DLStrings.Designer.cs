@@ -61,7 +61,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/akira.jpg.
+        ///   Looks up a localized string similar to /guicomp;component/Images/akira.jpg.
         /// </summary>
         public static string AkiraImage {
             get {
@@ -70,7 +70,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/Icon.ico.
+        ///   Looks up a localized string similar to /guicomp;component/Images/Icon.ico.
         /// </summary>
         public static string AppIcon {
             get {
@@ -79,7 +79,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/asutorufo.jpg.
+        ///   Looks up a localized string similar to /guicomp;component/Images/asutorufo.jpg.
         /// </summary>
         public static string AstolfoImage {
             get {
@@ -88,7 +88,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/ButtonIcons/download.png.
+        ///   Looks up a localized string similar to /guicomp;component/Images/ButtonIcons/download.png.
         /// </summary>
         public static string DownloadIcon {
             get {
@@ -97,7 +97,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/ButtonIcons/file format.png.
+        ///   Looks up a localized string similar to /guicomp;component/Images/ButtonIcons/file format.png.
         /// </summary>
         public static string FileFormatIcon {
             get {
@@ -116,7 +116,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/megumin.jpg.
+        ///   Looks up a localized string similar to /guicomp;component/Images/megumin.jpg.
         /// </summary>
         public static string MeguminImage {
             get {
@@ -125,7 +125,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/ButtonIcons/open file.png.
+        ///   Looks up a localized string similar to /guicomp;component/Images/ButtonIcons/open file.png.
         /// </summary>
         public static string OpenFileIcon {
             get {
@@ -134,7 +134,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/ButtonIcons/update.png.
+        ///   Looks up a localized string similar to /guicomp;component/Images/ButtonIcons/update.png.
         /// </summary>
         public static string UpdateIcon {
             get {
@@ -143,7 +143,7 @@ namespace DLControls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /graphics;component/Images/venti.jpg.
+        ///   Looks up a localized string similar to /guicomp;component/Images/venti.jpg.
         /// </summary>
         public static string VentiImage {
             get {

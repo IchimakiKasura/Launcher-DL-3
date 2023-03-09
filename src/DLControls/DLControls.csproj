@@ -1,12 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>graphics</AssemblyName>
+    <Authors>Ichimaki Kasura</Authors>
+    <AssemblyName>guicomp</AssemblyName>
     <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>DLControls</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <NoWarn>NU1701,CS8981,NU1503</NoWarn>
+    <Version>7.0.0</Version>
+    <AssemblyVersion>7.0.0</AssemblyVersion>
+    <FileVersion>7.0.0</FileVersion>
+    <Description>Provide all the Component to LauncherDL app</Description>
   </PropertyGroup>
 
   <ItemGroup>
