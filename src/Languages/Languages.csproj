@@ -1,12 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Languages</AssemblyName>
+    <Authors>Ichimaki Kasura</Authors>
+    <AssemblyName>Lang</AssemblyName>
     <TargetFramework>net7.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>DLLanguages</RootNamespace>
     <Nullable>enable</Nullable>
     <NoWarn>NU1701,CS8981,NU1503</NoWarn>
+    <Version>7.0.0</Version>
+    <AssemblyVersion>7.0.0</AssemblyVersion>
+    <FileVersion>7.0.0</FileVersion>
+    <Description>Provide Languages for LauncherDL app</Description>
   </PropertyGroup>
 
   <ItemGroup>
