@@ -4,7 +4,17 @@ public class DownloadButton
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {
-        WindowsComponents.FreezeComponents();
-        BodyButton.CheckURL();
+        e.Handled = true;
+
+        // Checks if the button is set to Convert
+        if(comboBoxType.ItemIndex == 3) 
+            ButtonConvertClicked();
+            
+        BodyButton.CheckLinkValidation();
+    }
+
+    public static void ButtonConvertClicked()
+    {
+
     }
 }

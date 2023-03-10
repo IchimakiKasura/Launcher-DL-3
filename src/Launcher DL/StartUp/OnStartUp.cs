@@ -1,4 +1,6 @@
-﻿namespace Launcher_DL.StartUp;
+﻿using System.Windows.Controls;
+
+namespace Launcher_DL.StartUp;
 partial class OnStartUp
 {
 	// Initializes all the values for XAML
@@ -20,6 +22,7 @@ partial class OnStartUp
 
 		ConsoleOutputMethod.StartUpOutputComments();
 
+		progressBar = new() { Width = 502 };
 		Canvas.SetLeft(progressBar, 300);
 		Canvas.SetTop(progressBar, 434);
 

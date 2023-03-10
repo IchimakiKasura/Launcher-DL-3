@@ -78,7 +78,7 @@ class WindowsComponents
 		UIElement[] ControlLists = 
 		{
 			buttonFileFormat,
-			//buttonDownload,
+			buttonDownload,
 			buttonUpdate,
 			textBoxLink,
 			textBoxName,

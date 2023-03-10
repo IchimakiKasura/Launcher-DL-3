@@ -30,8 +30,10 @@ partial class OnStartUp
 		textBlockType.Text = Language.Label_Type;
 	}
 
-	private static void AdjustFontSize()
+	private static async void AdjustFontSize()
 	{
+		await WindowsComponents.WindowAwaitLoad(buttonFileFormat.IsLoaded);
+		
 		switch(config.Language)
 		{
 			case DLLanguages.Pick.LanguageName.Default:

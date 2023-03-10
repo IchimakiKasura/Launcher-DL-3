@@ -55,15 +55,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Properties\**" />
-    <EmbeddedResource Remove="Properties\**" />
-    <None Remove="Properties\**" />
-    <Page Remove="Properties\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="IniParser">
-      <HintPath>./ini-parser [modified]/IniParser.dll</HintPath>
+      <HintPath>../ini-parser [modified]/IniParser.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -80,6 +73,7 @@
     <Using Include="System" />
     <Using Include="System.IO" />
     <Using Include="System.Windows" />
+    <Using Include="Microsoft.Win32" />
     <Using Include="System.Reflection" />
     <Using Include="System.Diagnostics" />
     <Using Include="System.Windows.Input" />
@@ -94,6 +88,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="IniParser" />
+    
     <Using Include="Launcher_DL.StartUp" />
 
     <Using Include="Launcher_DL.Core" />
@@ -110,10 +106,6 @@
     <Using Include="DLControls" />
     <Using Include="DLControls.DLStrings" Static="true" />
     <Using Include="DLControls.CONSOLEOUTPUTMETHOD_STR" Static="true" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Using Include="IniParser" />
   </ItemGroup>
 
   <ItemGroup>

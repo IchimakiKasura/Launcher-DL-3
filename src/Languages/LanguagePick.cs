@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DLLanguages.Pick
+﻿namespace DLLanguages.Pick
 {
 	public enum LanguageName
 	{
@@ -56,11 +48,11 @@ namespace DLLanguages.Pick
 		{
 			switch (language)
 			{
-				case LanguageName.Default: _Default(); break;
-				case LanguageName.English: _English(); break;
-				case LanguageName.Japanese: _Japanese(); break;
-				case LanguageName.Tagalog: _Tagalog(); break;
-				case LanguageName.bruh: _Bruh(); break;
+				case LanguageName.Default:	_Default();		break;
+				case LanguageName.English:	_English();		break;
+				case LanguageName.Japanese:	_Japanese();	break;
+				case LanguageName.Tagalog:	_Tagalog();		break;
+				case LanguageName.bruh:		_Bruh();		break;
 			}
 		}
 

@@ -8,7 +8,7 @@ public sealed class InitiateTheWindow
 		get { return "Lmao"; }
 		set
 		{
-			//throw sheesh;
+			throw sheesh;
 		}
 	}
 

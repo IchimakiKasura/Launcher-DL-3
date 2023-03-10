@@ -23,7 +23,13 @@ public partial class TextBoxControl : UserControl
 	public string TextPlaceholder
 	{
 		get => (string)GetValue(TextPlaceholderProperty);
-		set => SetValue(TextPlaceholderProperty, value);
+		set
+		{
+			SetValue(TextPlaceholderProperty, value);
+
+			if (IsLoaded)
+				Placeholder.Text = TextPlaceholder;
+		}
 	}
 
 	public HorizontalAlignment TextPlaceholderAlignment

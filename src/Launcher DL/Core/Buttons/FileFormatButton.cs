@@ -4,8 +4,9 @@ public abstract class FileFormatButton
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {
-        WindowsComponents.FreezeComponents();
-        BodyButton.CheckURL();
+        e.Handled = true;
+
+        BodyButton.CheckLinkValidation();
     }
 
 }
