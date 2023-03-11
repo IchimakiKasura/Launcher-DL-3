@@ -5,6 +5,7 @@
     /// </summary>
     public partial class App : Application
     {
+		private static System.Threading.Mutex _mutex = null;
 		const uint ENABLE_QUICK_EDIT = 0x0040;
 		#region DLL imports
 		[DllImport("user32.dll")]
@@ -25,11 +26,27 @@
 		static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
 		#endregion
 
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			string appName = Assembly.GetExecutingAssembly().GetName().Name;
+			bool createdNew;
+
+			_mutex = new(true, appName, out createdNew);
+
+			if (!createdNew)
+				if (MessageBox.Show("Only one instance at a time!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning) == MessageBoxResult.OK)
+					Application.Current.Shutdown();		
+
+			App_Startup(null,e);
+		}    
+
 		private void App_Startup(object s, StartupEventArgs e)
 		{
 			PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
 			Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.BelowNormal;
 			ContextMenuAdjust();
+
+			var Update = new Update.Updater();
 
 			#if !DEBUG
 				DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
@@ -43,6 +60,14 @@
 				GetConsoleMode(consoleHandle, out uint consoleMode);
 				consoleMode &= ~ENABLE_QUICK_EDIT;
 				SetConsoleMode(consoleHandle, consoleMode);
+
+				Console.WriteLine(
+@$"============================
+=   Version Update Check   =
+============================
+Current Version: {Update.CurrentVersion}
+Latest Version: {Update.NewVersion}
+				");
 			#endif
 		}
 
@@ -66,20 +91,6 @@
 			setAlignmentValue();
 
 			SystemParameters.StaticPropertyChanged += (sender, e) => setAlignmentValue();
-		}
-
-		private void OneInstanceOnly()
-		{
-			string appName = Assembly.GetExecutingAssembly().GetName().Name;
-			bool createdNew;
-
-			var _mutex = new System.Threading.Mutex(true, appName, out createdNew);
-
-			//app is already running! Exiting the application
-			if (!createdNew)
-				if (MessageBox.Show(MainWindow, "Only one instance at a time!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning) == MessageBoxResult.OK)
-					Application.Current.Shutdown();
-			
 		}
 
 		private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

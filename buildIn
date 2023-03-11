@@ -1,0 +1,5 @@
+#/!bin/bash
+
+# only build the debug inside the src only!
+cd src
+dotnet build

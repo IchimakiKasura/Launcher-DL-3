@@ -58,6 +58,9 @@
     <Reference Include="IniParser">
       <HintPath>../ini-parser [modified]/IniParser.dll</HintPath>
     </Reference>
+    <Reference Include="kasuNhentaiCS.Json">
+      <HintPath>../KasuJson/kasuNhentaiCS.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
