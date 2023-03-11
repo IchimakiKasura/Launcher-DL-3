@@ -3,7 +3,9 @@
 public class StoryboardApplier
 {
 	Storyboard _Storyboard;
-	public StoryboardApplier(DependencyObject Element, DependencyObject Value, PropertyPath Path)
+	public StoryboardApplier(DependencyObject Element,
+							 DependencyObject Value,
+							 PropertyPath Path)
 	{
 		_Storyboard = new();
 

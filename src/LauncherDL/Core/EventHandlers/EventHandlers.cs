@@ -8,7 +8,7 @@ internal class EventHandlers
 		MainWindowStatic.Loaded 	+= WindowsComponents.WindowLoaded;
 
 		windowDrag.MouseDown		+= WindowsComponents.WindowDrag;
-		windowInnerBG.MouseDown 	+= delegate { Keyboard.ClearFocus(); };
+		windowInnerBG.MouseDown 	+= (s,e) => Keyboard.ClearFocus();
 		#endregion
 
 		#region Buttons

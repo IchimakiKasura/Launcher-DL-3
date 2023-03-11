@@ -1,5 +1,10 @@
 ﻿namespace LauncherDL.Core;
 
+/// <summary>
+/// Here lies where single variable can be shared to all.<br/>
+/// and also long arrays or list are also here because 
+/// it eats up all the space from the method.
+/// </summary>
 public partial class Global
 {
 	/// <summary>MainWindow but in <see langword="static"/></summary>
@@ -11,25 +16,33 @@ public partial class Global
 	/// <summary>ColorConverter shortcut</summary>
 	public static Func<string, Color> ClrConv = (string color) => (Color)ColorConverter.ConvertFromString(color);
 
-	/// <summary>Window focus animations</summary>
-	public static DoubleAnimation WindowOpacity;
-	public static ColorAnimation WindowAnimation;
-
 	/// <summary>Languages</summary>
-	public static DLLanguages.Pick.LanguagePick Language; 
-
-	#region File Formats
+	public static DLLanguages.Pick.LanguagePick Language;
+	
 	/// <summary>for Renaming Process</summary>
-	public static List<string> ext = new() { "mp4", "mkv", "webm", "mp3", "m4a", "3gp", "flv" };
-	/// <summary>Video Type Formats</summary>
-	public static List<string> VideoType = new() { "mp4", "mkv", "webm", "flv", "auto" };
-	/// <summary>Audio Type Formats</summary>
-	public static List<string> AudioType = new() { "mp3", "webm", "m4a", "mp4", "wav", "auto" };
-	/// <summary>Convert Type Formats</summary>
-	public static List<string> ConvertType = new() { "mp4", "mp3", "flv", "webm", "m4a", "mkv", "avi", "wmv", "wma", "ogg", "aac", "wav" };
-	#endregion
+	public static List<string> FileExtensions = new()
+	{
+		"mp4",
+		"mkv",
+		"webm",
+		"mp3",
+		"m4a",
+		"3gp",
+		"flv"
+	};
+
+	/// <summary>For <see cref="WindowsComponents.FreezeComponents"/></summary>
+	public static UIElement[] ControlLists = 
+	{
+		buttonFileFormat,
+		buttonDownload,
+		buttonUpdate,
+		textBoxLink,
+		textBoxName,
+		comboBoxType,
+		comboBoxFormat
+	};
 
 	public enum ProgressBarState{Hide,Show}
-
 }
 

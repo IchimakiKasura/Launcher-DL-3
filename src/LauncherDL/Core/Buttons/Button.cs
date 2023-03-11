@@ -9,7 +9,7 @@ public abstract class BodyButton
         // Check if link missing
         if (string.IsNullOrEmpty(textBoxLink.Text))
         {
-            console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, " <%14>No link provided!");
+            ConsoleOutputMethod.NoLinkOutputComment();
             IsFailed = true;
         }
         else // Checks if link is valid
@@ -20,7 +20,7 @@ public abstract class BodyButton
 
             if(!result)
             {
-                console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, " <%14>Link is invalid!");
+                ConsoleOutputMethod.NoLinkOutputComment();
                 IsFailed = true;
             }
         }

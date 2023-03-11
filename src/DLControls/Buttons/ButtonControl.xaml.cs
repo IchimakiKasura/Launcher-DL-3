@@ -16,9 +16,9 @@ public partial class ButtonControl : UserControl
     readonly static DependencyProperty IconWidthProperty =
         DependencyProperty.Register("IconWidth", typeof(int), typeof(ButtonControl), new(50));
 	readonly static DependencyProperty TextSizeProperty =
-	DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(20));
+	    DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(20));
     readonly static DependencyProperty IsAnimationOnProperty = 
-    DependencyProperty.Register("IsAnimationOn", typeof(bool), typeof(ButtonControl), new(true));
+        DependencyProperty.Register("IsAnimationOn", typeof(bool), typeof(ButtonControl), new(true));
 
 	public string Image
     {
@@ -64,6 +64,8 @@ public partial class ButtonControl : UserControl
 	public ButtonControl()
     {
         InitializeComponent();
+
+        UserButton.Click += (s,e) => OnClicked(e);
 	}
 
     private void ContentLoaded(object s, RoutedEventArgs e)
@@ -115,11 +117,4 @@ public partial class ButtonControl : UserControl
             eh(this, e);
         }
     }
-
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        OnClicked(e);
-		GC.Collect();
-    }
-
 }

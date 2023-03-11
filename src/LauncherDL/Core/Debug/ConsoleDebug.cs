@@ -50,11 +50,11 @@ class ConsoleDebug
 			if(a.GetType().ToString().Contains(CONFIG_STR.CONFIG_COLOR_CONTAINS)) a = ClrConv(b);
 			else a = b;
 
-			Console.SetCursorPosition(34,8 + count);
+			Console.SetCursorPosition(34,10 + count);
 			Console.Write($"\x1b[32mLOADED! = {b}\x1b[0m\n");
 		} catch
 		{
-			Console.SetCursorPosition(34,8 + count);
+			Console.SetCursorPosition(34,10 + count);
 			Console.Write($"\x1b[31mFAILED! = {b}\x1b[0m\n");
 		};
 		count++;

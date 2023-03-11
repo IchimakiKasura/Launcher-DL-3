@@ -2,17 +2,18 @@
 
 class WindowsComponents
 {
-	public static void WindowLoaded(object sender, RoutedEventArgs e)
-	{
+	static DoubleAnimation WindowOpacity;
+	static ColorAnimation WindowAnimation;
+
+	public static void WindowLoaded(object sender, RoutedEventArgs e) =>
 		new TransparencyConverter(MainWindowStatic).MakeTransparent();
-	}
 
 	public static void WindowFocusAnimation()
 	{
 		void Focus()
 		{
-			_ = new StoryboardApplier(WindowOpacity, MainWindowStatic, new("(Window.Effect).Opacity"));
-			_ = new StoryboardApplier(WindowAnimation, windowInnerBG, new("(Control.Background).(SolidColorBrush.Color)"));
+			new StoryboardApplier(WindowOpacity, MainWindowStatic, new("(Window.Effect).Opacity"));
+			new StoryboardApplier(WindowAnimation, windowInnerBG, new("(Control.Background).(SolidColorBrush.Color)"));
 		}
 
 		MainWindowStatic.Activated += delegate
@@ -25,7 +26,7 @@ class WindowsComponents
 			GC.Collect();
 
 			#if DEBUG
-			ConsoleDebug.WindowFocused(true);
+				ConsoleDebug.WindowFocused(true);
 			#endif
 		};
 
@@ -36,7 +37,7 @@ class WindowsComponents
 			Focus();
 			
 			#if DEBUG
-			ConsoleDebug.WindowFocused(false);
+				ConsoleDebug.WindowFocused(false);
 			#endif
 		};
 
@@ -51,47 +52,28 @@ class WindowsComponents
 	{
 		switch(State)
 		{
-			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar);console.ConsoleHeight = 217; break;
-			case ProgressBarState.Show: windowCanvas.Children.Add(progressBar);console.ConsoleHeight = 190; break;
+			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar);	console.ConsoleHeight = 217; break;
+			case ProgressBarState.Show: windowCanvas.Children.Add(progressBar);		console.ConsoleHeight = 190; break;
 		}
 		console.manualScrollToEnd();
 	}
 
 	public static async Task WindowAwaitLoad(bool a)
 	{
-		if(!a)
-		{
-			await Task.Run(()=>{
-				MainWindowStatic.Dispatcher.Invoke(async()=>
-				{
-					while(!a)
-					{
-						await Task.Delay(200);
-					}
-				});
-			});
-		}
+		// holy shit, compare it to the old one lmao
+		if(!a) await Task.Run(()=> MainWindowStatic.Dispatcher.Invoke(async()=>{ while(!a) await Task.Delay(200); }));
 	}
 
+	// Is it bad to just call it without parameters to know if its freezed or not?
+	// nah its my code and I know when to call the method but yeah it does look bad practice
 	public static void FreezeComponents()
 	{
-		UIElement[] ControlLists = 
-		{
-			buttonFileFormat,
-			buttonDownload,
-			buttonUpdate,
-			textBoxLink,
-			textBoxName,
-			comboBoxType,
-			comboBoxFormat
-		};
-
 		foreach(var CL in ControlLists)
 			CL.IsEnabled = !CL.IsEnabled;
 		
 		// if(buttonOpenFile)
 
-		if(!buttonFileFormat.IsEnabled)WindowProgressBar(ProgressBarState.Show);
+		if(!buttonFileFormat.IsEnabled) WindowProgressBar(ProgressBarState.Show);
 			else WindowProgressBar(ProgressBarState.Hide);
 	}
 }
