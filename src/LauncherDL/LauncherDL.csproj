@@ -1,0 +1,128 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup Condition="$(Configuration) == Release">
+    <Compile Remove="Core/Debug/*.*" />
+  </ItemGroup>
+  <ItemGroup Condition="$(Configuration) == Debug">
+    <Using Include="LauncherDL.Core.Debug" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>LauncherDL</RootNamespace>
+    <LangVersion>Latest</LangVersion>
+    <OutputType>WinExe</OutputType>
+    <Platforms>x64;AnyCPU</Platforms>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>..\Images\Icon.ico</ApplicationIcon>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <NoWarn>NU1701,CS8981,NU1503</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Ichimaki Kasura</Authors>
+    <Copyright>Copyright © 2023</Copyright>
+    <AssemblyVersion>7.0.0</AssemblyVersion>
+    <RepositoryUrl>https://github.com/IchimakiKasura/Launcher-DL-3</RepositoryUrl>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageIcon>Icon.ico</PackageIcon>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    <PublishProtocol>FileSystem</PublishProtocol>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>True</PublishSingleFile>
+    <PublishReadyToRun>True</PublishReadyToRun>
+    <FileVersion>7.0.0</FileVersion>
+    <Version>7.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration) == Release">
+    <PublishDir>../../Build/RELEASE</PublishDir>
+    <AssemblyName>Launcher DL</AssemblyName>
+    <PackageId>Launcher DL</PackageId>
+    <Product>Launcher DL</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration) == Debug">
+    <PublishDir>../../Build/DEBUG</PublishDir>
+    <AssemblyName>Launcher DL [Development]</AssemblyName>
+    <PackageId>Launcher DL [Development]</PackageId>
+    <Product>Launcher DL [Development]</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="IniParser">
+      <HintPath>../ini-parser [modified]/IniParser.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DLControls\DLControls.csproj">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </ProjectReference>
+    <ProjectReference Include="..\Languages\Languages.csproj">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.IO" />
+    <Using Include="System.Windows" />
+    <Using Include="Microsoft.Win32" />
+    <Using Include="System.Reflection" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Windows.Input" />
+    <Using Include="System.Windows.Media" />
+    <Using Include="System.Windows.Interop" />
+    <Using Include="System.Threading.Tasks" />
+    <Using Include="System.Windows.Controls" />
+    <Using Include="System.Windows.Threading" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Runtime.InteropServices" />
+    <Using Include="System.Windows.Media.Animation" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="IniParser" />
+    
+    <Using Include="LauncherDL.StartUp" />
+
+    <Using Include="LauncherDL.Core" />
+    <Using Include="LauncherDL.Core.FFmpeg" />
+    <Using Include="LauncherDL.Core.Windows" />
+    <Using Include="LauncherDL.Core.Buttons" />
+    <Using Include="LauncherDL.Core.ComboBoxDL" />
+    <Using Include="LauncherDL.Core.Configuration" />
+    <Using Include="LauncherDL.Core.Event_Handlers" />
+    <Using Include="LauncherDL.Core.Console_Output_Comment_Method" />
+    
+    <Using Include="LauncherDL.Core.Global" Static="true" />
+
+    <Using Include="DLControls" />
+    <Using Include="DLControls.DLStrings" Static="true" />
+    <Using Include="DLControls.CONSOLEOUTPUTMETHOD_STR" Static="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <None Include="..\Images\background.jpg" Link="Images\background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Images\Icon.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
+</Project>
