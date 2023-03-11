@@ -12,6 +12,7 @@
     <AssemblyVersion>7.0.0</AssemblyVersion>
     <FileVersion>7.0.0</FileVersion>
     <Description>Provide Languages for LauncherDL app</Description>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

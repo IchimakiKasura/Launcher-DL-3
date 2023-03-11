@@ -12,6 +12,7 @@
     <AssemblyVersion>7.0.0</AssemblyVersion>
     <FileVersion>7.0.0</FileVersion>
     <Description>Provide all the Component to LauncherDL app</Description>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +27,7 @@
     <Using Include="System.Collections.Generic" />
     <Using Include="System.Text.RegularExpressions" />
     <Using Include="System.Windows.Media.Animation" />
-    <Using Include="System.Windows.Controls.Primitives"/>
+    <Using Include="System.Windows.Controls.Primitives" />
 
     <Using Include="DLControls.MainResource" Static="true" />
   </ItemGroup>
@@ -70,6 +71,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DLStrings.resx</DependentUpon>
     </Compile>
+    <Compile Update="MainResource.cs">
+      <CustomToolNamespace>DLControls</CustomToolNamespace>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -80,10 +84,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <Reference Include="Launcher_DL">
-      <HintPath>../Launcher DL/bin/Debug/net7.0-windows/uVad.dll</HintPath>
-    </Reference>
-  </ItemGroup>-->
+  <ItemGroup>
+    <Page Update="MainResource.xaml">
+      <CustomToolNamespace>DLControls</CustomToolNamespace>
+    </Page>
+  </ItemGroup>
   
 </Project>

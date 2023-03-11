@@ -2,7 +2,6 @@
 
 public partial class TextBoxControl : UserControl
 {
-
 	readonly static DependencyProperty TextPlaceholderProperty =
 		DependencyProperty.Register("TextPlaceholder", typeof(string), typeof(TextBoxControl), new("Placeholder"));
 

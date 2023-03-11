@@ -1,8 +1,5 @@
 ﻿namespace DLControls;
 
-/// <summary>
-/// Interaction logic for TextBlockControl.xaml
-/// </summary>
 public partial class TextBlockControl : UserControl
 {
 	readonly static DependencyProperty TextProperty =

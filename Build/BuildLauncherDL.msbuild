@@ -9,13 +9,13 @@
         <RemoveDir Directories="./RELEASE" Condition="$(Configuration) == Release"/>
 
         <Message Importance="High" Text="[2/5] Deleting Project's OBJ folders"/>
-        <RemoveDir Directories="../src/Launcher%20DL/obj"/>
+        <RemoveDir Directories="../src/LauncherDL/obj"/>
         <RemoveDir Directories="../src/DLControls/obj"/>
         <RemoveDir Directories="../src/Languages/obj"/>
         <Message Importance="High" Text="Deleted Done!"/>
 
         <Message Importance="High" Text="[3/5] ]Deleting Project's BIN folders"/>
-        <RemoveDir Directories="../src/Launcher%20DL/bin"/>
+        <RemoveDir Directories="../src/LauncherDL/bin"/>
         <RemoveDir Directories="../src/DLControls/bin"/>
         <RemoveDir Directories="../src/Languages/bin"/>
 
@@ -23,7 +23,7 @@
         <Exec Command="cd.. &amp;&amp; cd src &amp;&amp; dotnet restore" EchoOff="True"/>
 
         <Message Importance="High" Text="[5/5] Building the Project"/>
-        <MSBuild Projects="..\src\Launcher%20DL\Launcher%20DL.csproj" Targets="Publish" />
+        <MSBuild Projects="..\src\LauncherDL\LauncherDL.csproj" Targets="Publish" />
         <Delete Files="./DEBUG/Launcher DL [Development].dll.config"/>
         <Delete Files="./DEBUG/Launcher DL [Development].pdb"/>
         <Delete Files="./RELEASE/Launcher DL.dll.config"/>
@@ -32,11 +32,11 @@
 
         <Message Importance="High" Text="Finalizing...(Clearing/Removing BIN and OBJ folders and Closing Dotnets)"/>
         <Exec Command="ping -n 3 127.0.0.1 > nul"/>
-        <RemoveDir Directories="../src/Launcher%20DL/bin"/>
+        <RemoveDir Directories="../src/LauncherDL/bin"/>
         <RemoveDir Directories="../src/DLControls/bin"/>
         <RemoveDir Directories="../src/Languages/bin"/>
 
-        <RemoveDir Directories="../src/Launcher%20DL/obj"/>
+        <RemoveDir Directories="../src/LauncherDL/obj"/>
         <RemoveDir Directories="../src/DLControls/obj"/>
         <RemoveDir Directories="../src/Languages/obj"/>
 
