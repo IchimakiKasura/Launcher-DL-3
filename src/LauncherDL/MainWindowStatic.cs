@@ -11,31 +11,31 @@ public partial class MainWindow
 		/**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
 		////	
 
-		Global.Minimize = Minimize;
-		Global.CloseButton = CloseButton;
+		Global.Minimize				= 	Minimize;
+		Global.CloseButton 			= 	CloseButton;
 
-		Global.buttonFileFormat = buttonFileFormat;
-		Global.buttonDownload = buttonDownload;
-		Global.buttonUpdate = buttonUpdate;
-		Global.buttonOpenFile = buttonOpenFile;
+		Global.buttonFileFormat 	= 	buttonFileFormat;
+		Global.buttonDownload 		= 	buttonDownload;
+		Global.buttonUpdate 		= 	buttonUpdate;
+		Global.buttonOpenFile 		= 	buttonOpenFile;
 
-		Global.windowDrag = windowDrag;
-		Global.windowInnerBG = windowInnerBG;
+		Global.windowDrag 			= 	windowDrag;
+		Global.windowInnerBG 		= 	windowInnerBG;
 
-		Global.console = console;
+		Global.console 				= 	console;
 
-		Global.textBoxLink = textBoxLink;
-		Global.textBoxName= textBoxName;
+		Global.textBoxLink 			= 	textBoxLink;
+		Global.textBoxName			= 	textBoxName;
 
-		Global.windowCanvas = windowCanvas;
+		Global.windowCanvas 		= 	windowCanvas;
 
-		Global.comboBoxType = comboBoxType;
-		Global.comboBoxFormat = comboBoxFormat;
+		Global.comboBoxType 		= 	comboBoxType;
+		Global.comboBoxFormat 		= 	comboBoxFormat;
 
-		Global.textBlockLink = textBlockLink;
-		Global.textBlockFormat = textBlockFormat;
-		Global.textBlockName = textBlockName;
-		Global.textBlockType = textBlockType;
+		Global.textBlockLink 		= 	textBlockLink;
+		Global.textBlockFormat 		= 	textBlockFormat;
+		Global.textBlockName 		= 	textBlockName;
+		Global.textBlockType 		= 	textBlockType;
 	}
 
 }

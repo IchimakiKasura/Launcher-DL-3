@@ -25,21 +25,21 @@ public class TypeComboBox
 
     private static void DownloadToConvert(bool x)
     {
-        buttonOpenFile.IsEnabled = false;
-        buttonDownload.Text = Language.Button_Download;
-        textBoxLink.TextPlaceholder = Language.Placeholder_Link;
+        buttonOpenFile.IsEnabled            = false;
+        buttonDownload.Text                 = Language.Button_Download;
+        textBoxLink.TextPlaceholder         = Language.Placeholder_Link;
 
         if(x)
         {
-            buttonOpenFile.IsEnabled = true;
-            buttonDownload.Text = Language.Button_Convert;
-            textBoxLink.TextPlaceholder = Language.Placeholder_File;
+            buttonOpenFile.IsEnabled        = true;
+            buttonDownload.Text             = Language.Button_Convert;
+            textBoxLink.TextPlaceholder     = Language.Placeholder_File;
         }
     }
 
     private static void comboBoxFormatText(bool Editable)
     {
-        comboBoxFormat.TextEditable = Editable;
+        comboBoxFormat.TextEditable         = Editable;
         comboBoxFormat.RefreshEditable();
     }
 };

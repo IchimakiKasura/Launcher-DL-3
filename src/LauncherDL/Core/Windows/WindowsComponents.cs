@@ -12,16 +12,16 @@ class WindowsComponents
 	{
 		void Focus()
 		{
-			new StoryboardApplier(WindowOpacity, MainWindowStatic, new("(Window.Effect).Opacity"));
-			new StoryboardApplier(WindowAnimation, windowInnerBG, new("(Control.Background).(SolidColorBrush.Color)"));
+			new StoryboardApplier(WindowOpacity		,	MainWindowStatic	,	new(			"(Window.Effect).Opacity"		  )	);
+			new StoryboardApplier(WindowAnimation	,	windowInnerBG		,	new("(Control.Background).(SolidColorBrush.Color)")	);
 		}
 
-		MainWindowStatic.Activated += delegate
+		MainWindowStatic.Activated += (s,e)=>
 		{
 			//if (TaskBarThingy.ProgressValue == 1) TaskBarThingy.ProgressValue = 0;
 
-			WindowOpacity = new(1, TimeSpan.FromMilliseconds(100));
-			WindowAnimation = new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
+			WindowOpacity		= new(1, TimeSpan.FromMilliseconds(100));
+			WindowAnimation		= new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
 			Focus();
 			GC.Collect();
 
@@ -30,10 +30,10 @@ class WindowsComponents
 			#endif
 		};
 
-		MainWindowStatic.Deactivated += delegate
+		MainWindowStatic.Deactivated += (s,e)=>
 		{
-			WindowOpacity = new(0, TimeSpan.FromMilliseconds(100));
-			WindowAnimation = new(Colors.Black, TimeSpan.FromMilliseconds(100));
+			WindowOpacity		= new(0, TimeSpan.FromMilliseconds(100));
+			WindowAnimation		= new(Colors.Black, TimeSpan.FromMilliseconds(100));
 			Focus();
 			
 			#if DEBUG
@@ -52,8 +52,8 @@ class WindowsComponents
 	{
 		switch(State)
 		{
-			case ProgressBarState.Hide: windowCanvas.Children.Remove(progressBar);	console.ConsoleHeight = 217; break;
-			case ProgressBarState.Show: windowCanvas.Children.Add(progressBar);		console.ConsoleHeight = 190; break;
+			case ProgressBarState.Hide: windowCanvas.Children.Remove	(progressBar);	console.ConsoleHeight = 217; break;
+			case ProgressBarState.Show: windowCanvas.Children.Add		(progressBar);	console.ConsoleHeight = 190; break;
 		}
 		console.manualScrollToEnd();
 	}

@@ -28,8 +28,8 @@ public abstract class BodyButton
         // Checks on Name characters
         if(!string.IsNullOrEmpty(textBoxName.Text))
         {
-            string UnwantedChars = "\\/*:?\"<>|";
-			char[] arr = UnwantedChars.ToCharArray();
+            string UnwantedChars    = "\\/*:?\"<>|";
+			char[] arr              = UnwantedChars.ToCharArray();
 
 			foreach (char ch in arr)
 			{
