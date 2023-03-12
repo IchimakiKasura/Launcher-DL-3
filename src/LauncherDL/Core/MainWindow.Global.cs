@@ -7,8 +7,8 @@ public partial class Global
 	//	MainWindowStatic.
 	//}
 
-	public static 	Button					Minimize			{ get; set; }
-	public static 	Button					CloseButton			{ get; set; }
+	public static 	Button                  Minimize			{ get; set; }
+	public static 	Button                  CloseButton			{ get; set; }
 
 	public static 	ButtonControl			buttonFileFormat	{ get; set; }
 	public static 	ButtonControl			buttonDownload		{ get; set; }

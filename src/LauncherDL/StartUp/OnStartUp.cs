@@ -30,9 +30,9 @@ partial class OnStartUp
 
 	private static void InitiateContextMenu()
 	{
-		ContextMenuResource.Link	= 	textBoxLink;
-		ContextMenuResource.Format	= 	comboBoxFormat;
-		ContextMenuResource.Name	= 	textBoxName;
+		ContextMenuResource.Link    =   textBoxLink;
+		ContextMenuResource.Format  =   comboBoxFormat;
+		ContextMenuResource.Name    =   textBoxName;
 	}
 
 	private static void InitializeTextBoxComponents()

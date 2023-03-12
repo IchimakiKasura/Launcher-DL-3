@@ -12,60 +12,60 @@ internal static class ConsoleOutputMethod
 			console.AddFormattedText($"{Type} {FormattedText}", Italic, NoNL);
 	}
 
-	public static void 			StartUpOutputComments()
+	public static void          StartUpOutputComments()
 	{
-		console.AddFormattedText					(CONSOLE_START);
-		console.Break								("Gray");
+		console.AddFormattedText                    (CONSOLE_START);
+		console.Break                               ("Gray");
 
-		console.AddFormattedText					("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
+		console.AddFormattedText                    ("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
 
 		// we do a little troll
 		#if !DEBUG
-			InitiateTheWindow.InitiateMePlease		= "Initiate";
+			InitiateTheWindow.InitiateMePlease      = "Initiate";
 		#endif
 	}
 
-	public async static void	ConfigOutputComment(int IsSuccess, string error = default, string Name = default)
+	public async static void    ConfigOutputComment(int IsSuccess, string error = default, string Name = default)
 	{
-		await WindowsComponents.WindowAwaitLoad		(console.IsLoaded);
+		await WindowsComponents.WindowAwaitLoad     (console.IsLoaded);
 		
 		switch(IsSuccess)
 		{
-			case 0: console.DLAddConsole			(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>Config loaded");
+			case 0: console.DLAddConsole            (CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>Config loaded");
 			break;
 
 			case 1:
-				console.DLAddConsole				(CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: loading [ {Name} ]");
-				console.AddFormattedText			($"<DimGray%12>ERROR: {error}", true);
+				console.DLAddConsole                (CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: loading [ {Name} ]");
+				console.AddFormattedText            ($"<DimGray%12>ERROR: {error}", true);
 			break;
 
-			case 2: console.DLAddConsole			(CONSOLE_SYSTEM_STRING,"<Red%14>FAILED <Gray%14>Default Config loaded");
+			case 2: console.DLAddConsole            (CONSOLE_SYSTEM_STRING,"<Red%14>FAILED <Gray%14>Default Config loaded");
 			break;
 		}
 	}
 
-	public async static void	FFmpegOutputComment(int IsSuccess, string Filename = default)
+	public async static void    FFmpegOutputComment(int IsSuccess, string Filename = default)
 	{
-		await WindowsComponents.WindowAwaitLoad		(console.IsLoaded);
+		await WindowsComponents.WindowAwaitLoad     (console.IsLoaded);
 
 		switch(IsSuccess)
 		{
-			case 0: console.DLAddConsole			(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>FFmpeg is Available");
+			case 0: console.DLAddConsole            (CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>FFmpeg is Available");
 			break;
 
 			case 1:
-				console.DLAddConsole				(CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: Some files are missing!");
-				console.AddFormattedText			($"<DimGray%12>ERROR: {Filename}", true);
+				console.DLAddConsole                (CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: Some files are missing!");
+				console.AddFormattedText            ($"<DimGray%12>ERROR: {Filename}", true);
 			break;
 
-			case 2: console.DLAddConsole			(CONSOLE_SYSTEM_STRING,"<Red%14>FAILED <Gray%14>FFmpeg is Unavailable");
+			case 2: console.DLAddConsole            (CONSOLE_SYSTEM_STRING,"<Red%14>FAILED <Gray%14>FFmpeg is Unavailable");
 			break;
 		}
 	}
 
-	public static void			TypeChangedOutputComment() =>
-		console.DLAddConsole						(CONSOLE_SYSTEM_STRING,$"<Gray%14>Changed TYPE to {comboBoxType.GetItemContent}");
+	public static void          TypeChangedOutputComment() =>
+		console.DLAddConsole                       (CONSOLE_SYSTEM_STRING,$"<Gray%14>Changed TYPE to {comboBoxType.GetItemContent}");
 	
-	public static void			NoLinkOutputComment() =>
-        console.DLAddConsole						(CONSOLE_ERROR_SOFT_STRING, " <%14>No link provided!");
+	public static void          NoLinkOutputComment() =>
+        console.DLAddConsole                       (CONSOLE_ERROR_SOFT_STRING, " <%14>No link provided!");
 }
