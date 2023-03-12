@@ -122,7 +122,7 @@ public partial class ComboBoxControl : UserControl
 						Contents.Visibility = Visibility.Hidden;
 						Contents.HorizontalAlignment = HorizontalAlignment.Left;
 						Contents.Content = string.Empty;
-						if(MainText.Text != null)
+						if(!string.IsNullOrEmpty(MainText.Text))
 							comboBoxGRID.Children.Remove(Placeholder);
 					}
 				break;
@@ -182,6 +182,9 @@ public partial class ComboBoxControl : UserControl
 		{
 			grid.Children.Add(Placeholder);
 			grid.Children.Add(MainText);
+
+			if(!string.IsNullOrEmpty(MainText.Text))
+				comboBoxGRID.Children.Remove(Placeholder);
 		}
 	}
 

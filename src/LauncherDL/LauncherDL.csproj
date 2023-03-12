@@ -99,12 +99,15 @@
     <Using Include="LauncherDL.Core.FFmpeg" />
     <Using Include="LauncherDL.Core.Windows" />
     <Using Include="LauncherDL.Core.Buttons" />
+    <Using Include="LauncherDL.Core.ConsoleDL" />
     <Using Include="LauncherDL.Core.ComboBoxDL" />
     <Using Include="LauncherDL.Core.Configuration" />
     <Using Include="LauncherDL.Core.Event_Handlers" />
     <Using Include="LauncherDL.Core.Console_Output_Comment_Method" />
     
     <Using Include="LauncherDL.Core.Global" Static="true" />
+
+    <Using Include="LauncherDL.Core.YTDLP"/>
 
     <Using Include="DLControls" />
     <Using Include="DLControls.DLStrings" Static="true" />

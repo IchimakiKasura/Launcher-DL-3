@@ -2,10 +2,13 @@ namespace LauncherDL.Core.Buttons;
 
 public abstract class BodyButton
 {
-    private static bool IsFailed = false;
+    private static bool IsFailed;
 
-    public static void CheckLinkValidation()
+    public static bool CheckLinkValidation()
     {
+        // Resets the static variable
+        IsFailed = false;
+
         // Check if link missing
         if (string.IsNullOrEmpty(textBoxLink.Text))
         {
@@ -29,23 +32,26 @@ public abstract class BodyButton
         if(!string.IsNullOrEmpty(textBoxName.Text))
         {
             string UnwantedChars    = "\\/*:?\"<>|";
-			char[] arr              = UnwantedChars.ToCharArray();
+            char[] arr              = UnwantedChars.ToCharArray();
 
-			foreach (char ch in arr)
-			{
-				if (textBoxLink.Text.Contains(ch))
-				{
-					MessageBox.Show("File name cannot contain the following characters:"+
+            foreach (char ch in arr)
+            {
+                if (textBoxLink.Text.Contains(ch))
+                {
+                    MessageBox.Show("File name cannot contain the following characters:"+
                                     "\n                             \\ / * : ? \" < > |",
                                     "Error",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Error);
                     IsFailed = true;
-				}
-			}
+               }
+           }
         }
 
         if(!IsFailed)
+        {
             WindowsComponents.FreezeComponents();
+            return true;
+        } else return false;
     }
 };

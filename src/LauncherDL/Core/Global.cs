@@ -31,18 +31,12 @@ public partial class Global
 		"flv"
 	};
 
-	/// <summary>For <see cref="WindowsComponents.FreezeComponents"/></summary>
-	public static UIElement[] ControlLists = 
-	{
-		buttonFileFormat,
-		buttonDownload,
-		buttonUpdate,
-		textBoxLink,
-		textBoxName,
-		comboBoxType,
-		comboBoxFormat
-	};
+	public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
 
+	/// <summary>ProgressBar State</summary>
 	public enum ProgressBarState{Hide,Show}
+
+	/// <summary>Process Start</summary>
+	public static Process ProcessTaskVariable;
 }
 

@@ -3,6 +3,6 @@
 .vscode
 bin
 obj
-ydl.cs
+/ydl.cs
 Build/DEBUG
 Build/RELEASE

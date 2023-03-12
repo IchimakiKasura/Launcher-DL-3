@@ -6,7 +6,20 @@ public abstract class FileFormatButton
     {
         e.Handled = true;
 
-        BodyButton.CheckLinkValidation();
+        var IsSuccess = BodyButton.CheckLinkValidation();
+        if(!IsSuccess) return;
+
+		console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
+
+        YDLArguments Info = new()
+        {
+            Link = textBoxLink.Text,
+        };
+        
+        YDL YDLInfo = new(Info);
+        YDLInfo.IsFileFormat = true;
+
+        YDLInfo.FileFormatMethod();
     }
 
 }
