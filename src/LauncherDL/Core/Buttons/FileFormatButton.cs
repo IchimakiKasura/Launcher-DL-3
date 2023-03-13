@@ -9,7 +9,7 @@ public abstract class FileFormatButton
         var IsSuccess = BodyButton.CheckLinkValidation();
         if(!IsSuccess) return;
 
-		console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
+        console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
 
         YDLArguments Info = new()
         {

@@ -50,7 +50,7 @@ sealed class YDL
     public async void FileFormatMethod()
     {
         if (!IsFileFormat)
-            throw new FileFormatException();
+            throw new FileFormatMethodException();
 
         var Args = $"--compat-options format-sort -F {Link}";
 

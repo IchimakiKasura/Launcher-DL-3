@@ -18,6 +18,7 @@
     <ApplicationIcon>..\Images\Icon.ico</ApplicationIcon>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <NoWarn>NU1701,CS8981,NU1503</NoWarn>
+    <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
 
   <PropertyGroup>
