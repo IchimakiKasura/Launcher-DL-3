@@ -15,7 +15,7 @@ sealed class YDLArguments
     public TypeOfButton Type { get; set; }
 }
 
-sealed class YDL
+sealed partial class YDL
 {
     string Link;
     string Format;
@@ -33,48 +33,6 @@ sealed class YDL
 
     public void ValidateLink()
     {
-
-    }
-
-    public async void UpdateMethod()
-    {
-        if (!IsUpdate)
-            throw new UpdateMethodException();
-
-        var Args = "-U";
-
-        await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.UpdateLiveOutputComment);
-        WindowsComponents.FreezeComponents();
-    }
-
-    public async void FileFormatMethod()
-    {
-        if (!IsFileFormat)
-            throw new FileFormatMethodException();
-
-        var Args = $"--compat-options format-sort -F {Link}";
-
-        if (!config.EnablePlaylist) Args += " --no-playlist";
-        if (config.AllowCookies) Args += $" --cookies-from-browser {config.BrowserCookie}";
-
-        await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.FileFormatLiveOutputComment);
-    }
-
-    public async void DownloadMethod()
-    {
-        if (IsUpdate || IsFileFormat)
-            throw new DownloadMethodException();
-
-        var Args = Format;
-
-    }
-
-    public async void ConvertMethod()
-    {
-        if (IsUpdate || IsFileFormat)
-            throw new ConvertMethodException();
-
-        var Args = Format;
 
     }
 }

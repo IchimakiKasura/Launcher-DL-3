@@ -72,6 +72,8 @@ public partial class ComboBoxControl
 			UserComboBox.Items.Add(CBT);
 
         UserComboBox.SelectedIndex = 0;
+        Contents.HorizontalAlignment = HorizontalAlignment.Left;
+        Contents.Content = UserComboBox.SelectionBoxItem;
     }
 
     // Refresh the ComboBox content
