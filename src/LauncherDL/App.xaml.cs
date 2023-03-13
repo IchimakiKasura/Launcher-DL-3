@@ -52,5 +52,4 @@ Latest Version: {Update.NewVersion}
             ");
         #endif
     }
-
 }

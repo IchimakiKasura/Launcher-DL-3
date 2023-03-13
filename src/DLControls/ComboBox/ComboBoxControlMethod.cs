@@ -2,8 +2,8 @@ namespace DLControls;
 
 public partial class ComboBoxControl
 {
-	public List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
-	
+    public List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
+    
     #region Format ComboBox List
     public List<ComboBoxItem> ComboBoxAudioFormats = new List<ComboBoxItem>()
     {
@@ -13,7 +13,7 @@ public partial class ComboBoxControl
         new() { Content="wav" },
         new() { Content="auto" },
     };
-	public List<ComboBoxItem> ComboBoxVideoFormats = new List<ComboBoxItem>()
+    public List<ComboBoxItem> ComboBoxVideoFormats = new List<ComboBoxItem>()
     {
         new() { Content="mp4" },
         new() { Content="mkv" },
@@ -21,7 +21,7 @@ public partial class ComboBoxControl
         new() { Content="flv" },
         new() { Content="auto" },
     };
-	public List<ComboBoxItem> ComboBoxConvertFormats = new List<ComboBoxItem>()
+    public List<ComboBoxItem> ComboBoxConvertFormats = new List<ComboBoxItem>()
     {
         new() { Content="mp4" },
         new() { Content="mp3" },
@@ -37,24 +37,11 @@ public partial class ComboBoxControl
     };
     #endregion
 
-    public void ClearItems() => UserComboBox.Items.Clear();
-
-    // Adds Items to the ComboBoxList
-	public void ItemsAdd()
-	{
-        ClearItems();
-
-		foreach (var CBT in ComboBoxTypes)
-		{
-			CBT.Style = (Style)UserComboBox.FindResource("DownloadType");
-			UserComboBox.Items.Add(CBT);
-		}
-	}
-
-
-    public void AddAudioTypeList()      => AutoAdd(0);
-    public void AddVideoTypeList()      => AutoAdd(1);
-    public void AddConvertTypeList()    => AutoAdd(2);
+    public void ClearItems()            => UserComboBox.Items.Clear();
+    public void AddCustomTypeList()     => AutoAdd(0);
+    public void AddAudioTypeList()      => AutoAdd(1);
+    public void AddVideoTypeList()      => AutoAdd(2);
+    public void AddConvertTypeList()    => AutoAdd(3);
 
     private void AutoAdd(int x)
     {
@@ -63,31 +50,32 @@ public partial class ComboBoxControl
 
         switch(x)
         {
-            case 0: temp = ComboBoxAudioFormats;    break;
-            case 1: temp = ComboBoxVideoFormats;    break;
-            case 2: temp = ComboBoxConvertFormats;  break;
+            case 0: temp = ComboBoxTypes;           break;
+            case 1: temp = ComboBoxAudioFormats;    break;
+            case 2: temp = ComboBoxVideoFormats;    break;
+            case 3: temp = ComboBoxConvertFormats;  break;
         }
 
         foreach (var CBT in temp)
-			UserComboBox.Items.Add(CBT);
+            UserComboBox.Items.Add(CBT);
 
-        UserComboBox.SelectedIndex = 0;
-        Contents.HorizontalAlignment = HorizontalAlignment.Left;
-        Contents.Content = UserComboBox.SelectionBoxItem;
+        if(temp != ComboBoxTypes)
+            UserComboBox.SelectedIndex = 0;
+        
     }
 
     // Refresh the ComboBox content
-	public void RefreshEditable()
-	{
-		if(!IsLoaded) return;
+    public void RefreshEditable()
+    {
+        if(!IsLoaded) return;
 
         AddChildGRID(comboBoxGRID, true);
-		Contents.Visibility = Visibility.Hidden;
+        Contents.Visibility = Visibility.Hidden;
 
-		if (!TextEditable)
-		{
-			AddChildGRID(comboBoxGRID, false);
-			Contents.Visibility = Visibility.Visible;
-		}
-	}
+        if (!TextEditable)
+        {
+            AddChildGRID(comboBoxGRID, false);
+            Contents.Visibility = Visibility.Visible;
+        }
+    }
 }

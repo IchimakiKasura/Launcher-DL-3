@@ -46,8 +46,8 @@
                                   Focusable="false"
                                   IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                                   ClickMode="Press" />
-					
-                    <ContentPresenter x:Name="ContentSite"
+
+					<ContentPresenter x:Name="ContentSite"
                                       IsHitTestVisible="False"
                                       Content="{TemplateBinding SelectionBoxItem}"
                                       ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
@@ -57,12 +57,12 @@
                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									  Visibility="Visible"/>
 
-                    <Popup Name="Popup"
+						<Popup Name="Popup"
                            Placement="Bottom"
                            IsOpen="{TemplateBinding IsDropDownOpen}"
                            AllowsTransparency="True"
                            Focusable="False"
-                           PopupAnimation="Fade">
+                           PopupAnimation="Slide">
 						
                         <Grid Name="DropDown"
                               SnapsToDevicePixels="True"
@@ -90,11 +90,21 @@
 						<Setter TargetName="DropDownBorder" Property="CornerRadius" Value="5" />
 						<Setter TargetName="DropDownBorder" Property="Margin" Value="0,1,0,0" />
 					</Trigger>
+
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsEnabled" Value="False" />
+                            <Condition SourceName="ContentSite" Property="Uid" Value="Editable"/>
+                        </MultiTrigger.Conditions>
+                        <MultiTrigger.Setters>
+                            <Setter TargetName="ContentSite" Property="Content" Value="{Binding PlaceholderUnavailable, ElementName=root}" />
+                        </MultiTrigger.Setters>
+                    </MultiTrigger>
+
 				</ControlTemplate.Triggers>
             </ControlTemplate>
 			
             <ControlTemplate x:Key="ComboBoxFormatTemplate" TargetType="{x:Type ComboBoxItem}">
-				
                 <Border x:Name="FormatDropDown"
                         CornerRadius="4"
                         BorderThickness="0.5"
@@ -126,7 +136,7 @@
 				
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsHighlighted" Value="true">
-                        <Setter TargetName="FormatDropDown" Property="BorderBrush" Value="#FFE89595" />
+                        <Setter TargetName="FormatDropDown" Property="Background" Value="{StaticResource HighlightedBrush}" />
                     </Trigger>
                 </ControlTemplate.Triggers>
 				
@@ -138,12 +148,11 @@
                         CornerRadius="4"
                         SnapsToDevicePixels="False"
                         Background="Transparent">
-                    <ContentPresenter HorizontalAlignment="Center" />
+                    <ContentPresenter HorizontalAlignment="{Binding ContentAlignment, ElementName=root}" />
                 </Border>
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsHighlighted" Value="true">
-                        <Setter TargetName="Border" Property="BorderBrush" Value="#FFE89595" />
-                        <Setter TargetName="Border" Property="BorderThickness" Value="1" />
+                        <Setter TargetName="Border" Property="Background" Value="{StaticResource HighlightedBrush}" />
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
@@ -160,14 +169,22 @@
                 <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}" />
             </Style>
 			
-            <Style x:Key="DownloadType" TargetType="{x:Type ComboBoxItem}">
+            <Style TargetType="{x:Type ComboBoxItem}">
                 <Setter Property="SnapsToDevicePixels" Value="true" />
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="OverridesDefaultStyle" Value="true" />
                 <Setter Property="Cursor" Value="Hand" />
                 <Setter Property="Template" Value="{StaticResource ComboBoxTypeTemplate}" />
             </Style>
-			
+
+            <Style x:Key="FormatListType" TargetType="{x:Type ComboBoxItem}">
+                <Setter Property="SnapsToDevicePixels" Value="true" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Template" Value="{StaticResource ComboBoxFormatTemplate}" />
+            </Style>
+
         </Canvas.Resources>
 
 		<ComboBox x:Name="UserComboBox" Height="35" Style="{StaticResource CB}" MinWidth="100" Width="{Binding Width,ElementName=root}"

@@ -11,9 +11,10 @@
 	<SolidColorBrush x:Key="ButtonBG" Color="#CCFBC2C2"/>
 	<SolidColorBrush x:Key="ButtonBGDisabled" Color="#CC5D4949"/>
 	<SolidColorBrush x:Key="DefaultBorderBrush" Color="#FF011F4C"/>
+	<SolidColorBrush x:Key="HighlightedBrush" Color="#FF095CD9"/>
 	<SolidColorBrush x:Key="74000000" Color="#74000000"/>
 	<SolidColorBrush x:Key="DF900000" Color="#DF900000"/>
-	<FontFamily x:Key="DefaultFont">/guicomp;component/Fonts/#Noto Sans JP</FontFamily>
+	<FontFamily x:Key="DefaultFont">/guicomp;component/#Noto Sans JP</FontFamily>
 
 	<Color x:Key="GradientOne">#0E102F8E</Color>
 	<Color x:Key="GradientTwo">#FF0A2167</Color>

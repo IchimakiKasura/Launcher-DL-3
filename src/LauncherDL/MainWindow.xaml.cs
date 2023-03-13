@@ -2,10 +2,6 @@
 
 // TODO:
 //
-//	FIX COMBO BOX FORMAT
-//		After the control is enabled the content wont show the selected
-//		item on list when the text is Uneditable.
-//
 //  Implement the YDL.cs based on the old script from v6
 //
 //  After implementing YDL, please just don't over use the TASK method again
@@ -28,8 +24,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
 		InitializeComponent();
-
-		WindowStyle = WindowStyle.SingleBorderWindow;
 
 		InitiateStaticComponents(this);
 

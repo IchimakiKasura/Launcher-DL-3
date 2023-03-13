@@ -55,14 +55,7 @@
     <Resource Include="..\Images\venti.jpg" Link="Images\venti.jpg" />
     <Resource Include="..\Images\megumin.jpg" Link="Images\megumin.jpg" />
     
-    <Resource Include="..\Fonts\NotoSansJP-Medium.otf" Link="Fonts\NotoSansJP-Medium.otf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\ContextMenu\" />
-    <Folder Include="Images\FolderButtons\" />
-    <Folder Include="Images\ButtonIcons\" />
-    <Folder Include="Fonts\" />
+    <Resource Include="..\Fonts\NotoSansJP-Medium.otf"/>
   </ItemGroup>
 
   <ItemGroup>

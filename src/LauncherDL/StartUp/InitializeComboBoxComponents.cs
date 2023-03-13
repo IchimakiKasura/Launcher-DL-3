@@ -12,6 +12,6 @@ partial class OnStartUp
 		comboBoxType.ContentAlignment       =   HorizontalAlignment.Center;
 		comboBoxType.ShowVerticalScrollbar  =   false;
 
-		comboBoxType.ItemsAdd();
+		comboBoxType.AddCustomTypeList();
 	}
 }

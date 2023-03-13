@@ -122,10 +122,6 @@
     <None Include="..\..\LauncherDL_Data\ydl.bin" Link="LauncherDL_Data\ydl.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\" />
     <None Include="..\Images\background.jpg" Link="Images\background.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

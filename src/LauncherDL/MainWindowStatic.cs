@@ -11,31 +11,31 @@ public partial class MainWindow
 		/**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
 		////	
 
-		Global.Minimize             =   Minimize;
-		Global.CloseButton          =   CloseButton;
+		Global.Minimize             =   mainwindow.Minimize;
+		Global.CloseButton          =   mainwindow.CloseButton;
 
-		Global.buttonFileFormat     =   buttonFileFormat;
-		Global.buttonDownload       =   buttonDownload;
-		Global.buttonUpdate         =   buttonUpdate;
-		Global.buttonOpenFile       =   buttonOpenFile;
+		Global.buttonFileFormat     =   mainwindow.buttonFileFormat;
+		Global.buttonDownload       =   mainwindow.buttonDownload;
+		Global.buttonUpdate         =   mainwindow.buttonUpdate;
+		Global.buttonOpenFile       =   mainwindow.buttonOpenFile;
 
-		Global.windowDrag           =   windowDrag;
-		Global.windowInnerBG        =   windowInnerBG;
+		Global.windowDrag           =   mainwindow.windowDrag;
+		Global.windowInnerBG        =   mainwindow.windowInnerBG;
 
-		Global.console              =   console;
+		Global.console              =   mainwindow.console;
 
-		Global.textBoxLink          =   textBoxLink;
-		Global.textBoxName          =   textBoxName;
+		Global.textBoxLink          =   mainwindow.textBoxLink;
+		Global.textBoxName          =   mainwindow.textBoxName;
 
-		Global.windowCanvas         =   windowCanvas;
+		Global.windowCanvas         =   mainwindow.windowCanvas;
 
-		Global.comboBoxType         =   comboBoxType;
-		Global.comboBoxFormat       =   comboBoxFormat;
+		Global.comboBoxType         =   mainwindow.comboBoxType;
+		Global.comboBoxFormat       =   mainwindow.comboBoxFormat;
 
-		Global.textBlockLink        =   textBlockLink;
-		Global.textBlockFormat      =   textBlockFormat;
-		Global.textBlockName        =   textBlockName;
-		Global.textBlockType        =   textBlockType;
+		Global.textBlockLink        =   mainwindow.textBlockLink;
+		Global.textBlockFormat      =   mainwindow.textBlockFormat;
+		Global.textBlockName        =   mainwindow.textBlockName;
+		Global.textBlockType        =   mainwindow.textBlockType;
 	}
 
 }
