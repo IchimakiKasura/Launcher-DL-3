@@ -87,6 +87,7 @@
     <Using Include="System.Windows.Controls" />
     <Using Include="System.Windows.Threading" />
     <Using Include="System.Collections.Generic" />
+    <Using Include="System.Text.RegularExpressions" />
     <Using Include="System.Runtime.InteropServices" />
     <Using Include="System.Windows.Media.Animation" />
   </ItemGroup>
@@ -103,8 +104,10 @@
     <Using Include="LauncherDL.Core.ConsoleDL" />
     <Using Include="LauncherDL.Core.ComboBoxDL" />
     <Using Include="LauncherDL.Core.Configuration" />
+    <Using Include="LauncherDL.Core.RegexComponent" />
     <Using Include="LauncherDL.Core.Event_Handlers" />
     <Using Include="LauncherDL.Core.Console_Output_Comment_Method" />
+    
     
     <Using Include="LauncherDL.Core.Global" Static="true" />
 
