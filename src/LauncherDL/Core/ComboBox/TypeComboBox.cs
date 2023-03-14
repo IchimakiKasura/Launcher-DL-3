@@ -9,7 +9,13 @@ public class TypeComboBox
         comboBoxFormat.ClearItems();
 
         if(comboBoxType.ItemIndex == 0)
+        {
+            #if DEBUG
+                comboBoxFormat.AddFormatList();
+            #endif
+
             comboBoxFormatText(true);
+        }
         else  comboBoxFormatText(false);
 
         DownloadToConvert(comboBoxType.ItemIndex == 3);
@@ -28,13 +34,14 @@ public class TypeComboBox
         buttonOpenFile.IsEnabled            = false;
         buttonDownload.Text                 = Language.Button_Download;
         textBoxLink.TextPlaceholder         = Language.Placeholder_Link;
+        textBlockLink.Text                  = Language.Label_Link;
 
-        if(x)
-        {
-            buttonOpenFile.IsEnabled        = true;
-            buttonDownload.Text             = Language.Button_Convert;
-            textBoxLink.TextPlaceholder     = Language.Placeholder_File;
-        }
+        if(!x) return;
+        
+        buttonOpenFile.IsEnabled        = true;
+        buttonDownload.Text             = Language.Button_Convert;
+        textBoxLink.TextPlaceholder     = Language.Placeholder_File;
+        textBlockLink.Text              = Language.Label_File;
     }
 
     private static void comboBoxFormatText(bool Editable)

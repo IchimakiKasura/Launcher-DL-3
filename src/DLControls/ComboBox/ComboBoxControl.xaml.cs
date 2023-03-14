@@ -91,13 +91,11 @@ public partial class ComboBoxControl : UserControl
 
         Contents = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
         comboBoxGRID = GetTemplateResource<Grid>("ComboBoxGRID", UserComboBox);
-        Contents.Uid = "NotEditable";
 
         if (TextEditable)
         {
             AddChildGRID(comboBoxGRID, true);	 
             Contents.Visibility = Visibility.Hidden;
-            Contents.Uid = "Editable";
         }
 
         MainText.TextChanged += delegate
@@ -125,13 +123,11 @@ public partial class ComboBoxControl : UserControl
 
                 case false:
                     UserComboBox.Foreground = Brushes.Red;
-                    Contents.Uid = "NotEditable";
                     if(TextEditable)
                     {
                         AddChildGRID(comboBoxGRID, false);
                         Contents.Visibility = Visibility.Visible;
                         Contents.HorizontalAlignment = HorizontalAlignment.Center;
-                        Contents.Uid = "Editable";
                     }
                     break;
             }
