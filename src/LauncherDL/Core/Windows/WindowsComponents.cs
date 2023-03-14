@@ -84,8 +84,6 @@ class WindowsComponents
 
         foreach(var CL in ControlLists)
             CL.IsEnabled = !CL.IsEnabled;
-        
-        // if(buttonOpenFile)
 
         if(!buttonFileFormat.IsEnabled) WindowProgressBar(ProgressBarState.Show);
             else WindowProgressBar(ProgressBarState.Hide);

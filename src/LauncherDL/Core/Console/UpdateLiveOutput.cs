@@ -4,10 +4,10 @@ internal partial class ConsoleLive
 {
     public static void UpdateLiveOutputComment(object s, DataReceivedEventArgs e)
     {
-		string StringData = e.Data;
-		if (string.IsNullOrEmpty(StringData)) return;
+        string StringData = e.Data;
+        if (string.IsNullOrEmpty(StringData)) return;
 
-		MainWindowStatic.Dispatcher.Invoke(DispatcherPriority.Normal, ()=>Invoked(StringData));
+        MainWindowStatic.Dispatcher.Invoke(DispatcherPriority.Normal, ()=>Invoked(StringData));
     }
 
     static void Invoked(string StringData)

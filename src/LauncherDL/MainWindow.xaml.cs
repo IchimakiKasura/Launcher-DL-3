@@ -26,16 +26,16 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-		InitializeComponent();
+        InitializeComponent();
 
-		InitiateStaticComponents(this);
+        InitiateStaticComponents(this);
 
-		#if DEBUG
-			ConsoleDebug.InitiateConsoleDebug();
-		#endif
+        #if DEBUG
+            ConsoleDebug.InitiateConsoleDebug();
+        #endif
 
-		config = Config.ReadConfigINI();
-		FFmpegFiles.CheckFiles();
-		OnStartUp.Initialize();
-	}
+        config = Config.ReadConfigINI();
+        FFmpegFiles.CheckFiles();
+        OnStartUp.Initialize();
+    }
 }

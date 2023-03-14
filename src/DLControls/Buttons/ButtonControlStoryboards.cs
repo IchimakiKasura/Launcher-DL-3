@@ -2,13 +2,13 @@ namespace DLControls;
 
 public partial class ButtonControl
 {
-	List<DoubleAnimation> ControlDA;
-	ThicknessAnimation ButtonMargin;
-	ColorAnimation ButtonForeground;
-	RectAnimation ButtonImageViewport;
-	List<Storyboard> ControlsStoryboards = new List<Storyboard>()
-	{
-		new(),  // STYB_ButtonOpacity
+    List<DoubleAnimation> ControlDA;
+    ThicknessAnimation ButtonMargin;
+    ColorAnimation ButtonForeground;
+    RectAnimation ButtonImageViewport;
+    List<Storyboard> ControlsStoryboards = new List<Storyboard>()
+    {
+        new(),  // STYB_ButtonOpacity
         new(),  // STYB_ButtonWidth
         new(),  // STYB_ButtonHeight
         new(),  // STYB_ButtonText
@@ -17,12 +17,12 @@ public partial class ButtonControl
         new(),  // STYB_ButtonForeground
         new(),  // STYB_ButtonImageViewport
     };
-	List<PropertyPath> ControlPaths = new List<PropertyPath>()
-	{
-		new("(Effect).Opacity"),                            // 0
+    List<PropertyPath> ControlPaths = new List<PropertyPath>()
+    {
+        new("(Effect).Opacity"),                            // 0
         new("Width"),                                       // 1
         new("Height"),                                      // 2
-        new("(Button.FontSize)"),							// 3
+        new("(Button.FontSize)"),                           // 3
         new("Background.(Brush.Opacity)"),                  // 4
         new("Margin"),                                      // 5
         new("(Button.Foreground).(SolidColorBrush.Color)"), // 6

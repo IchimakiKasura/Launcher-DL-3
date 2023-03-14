@@ -1,5 +1,6 @@
 namespace LauncherDL.Core.YTDLP;
 
+#pragma warning disable CS1998  // Remove this after DownloadMethod and ConvertMethod has awaitables
 sealed partial class YDL
 {
     /// <summary>Update Method</summary>

@@ -15,16 +15,16 @@ public partial class ButtonControl : UserControl
         DependencyProperty.Register("IconHeight", typeof(int), typeof(ButtonControl), new(50));
     readonly static DependencyProperty IconWidthProperty =
         DependencyProperty.Register("IconWidth", typeof(int), typeof(ButtonControl), new(50));
-	readonly static DependencyProperty TextSizeProperty =
-	    DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(20));
+    readonly static DependencyProperty TextSizeProperty =
+        DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(20));
     readonly static DependencyProperty IsAnimationOnProperty = 
         DependencyProperty.Register("IsAnimationOn", typeof(bool), typeof(ButtonControl), new(true));
 
-	public string Image
+    public string Image
     {
-		get => (string)GetValue(ImageProperty);
-		set => SetValue(ImageProperty, value);
-	}
+        get => (string)GetValue(ImageProperty);
+        set => SetValue(ImageProperty, value);
+    }
     public Color BorderEffect
     {
         get => (Color)GetValue(BorderEffectProperty);
@@ -36,47 +36,47 @@ public partial class ButtonControl : UserControl
         set => SetValue(TextProperty, value);
     }
     public string Icon
-	{
-		get => (string)GetValue(IconProperty);
-		set => SetValue(IconProperty, value);
-	}
+    {
+        get => (string)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
     public int IconHeight
-	{
+    {
         get => (int)GetValue(IconHeightProperty);
         set => SetValue(IconHeightProperty, value);
-	}
+    }
     public int IconWidth
-	{
+    {
         get => (int)GetValue(IconWidthProperty);
         set => SetValue(IconWidthProperty, value);
-	}
-	public int TextSize
-	{
-		get => (int)GetValue(TextSizeProperty);
-		set => SetValue(TextSizeProperty, value);
-	}
+    }
+    public int TextSize
+    {
+        get => (int)GetValue(TextSizeProperty);
+        set => SetValue(TextSizeProperty, value);
+    }
     public bool IsAnimationOn
     {
         get => (bool)GetValue(IsAnimationOnProperty);
         set => SetValue(IsAnimationOnProperty, value);
     }
 
-	public ButtonControl()
+    public ButtonControl()
     {
         InitializeComponent();
 
         UserButton.Click += (s,e) => OnClicked(e);
-	}
+    }
 
     private void ContentLoaded(object s, RoutedEventArgs e)
     {
-		TextBlock ContentTextMain = GetTemplateResource<TextBlock>("ContentTextMain", UserButton);
-		Border UserButtonMainTemplate = GetTemplateResource<Border>("UserButtonMainBorder", UserButton);
+        TextBlock ContentTextMain = GetTemplateResource<TextBlock>("ContentTextMain", UserButton);
+        Border UserButtonMainTemplate = GetTemplateResource<Border>("UserButtonMainBorder", UserButton);
 
-		TimeSpan AnimationDuration = TimeSpan.Zero;
+        TimeSpan AnimationDuration = TimeSpan.Zero;
         TimeSpan AnimationDurationLeave = TimeSpan.Zero;
 
-		if (IsAnimationOn)
+        if (IsAnimationOn)
         {
             AnimationDuration = TimeSpan.FromMilliseconds(100);
             AnimationDurationLeave = TimeSpan.FromMilliseconds(50);
