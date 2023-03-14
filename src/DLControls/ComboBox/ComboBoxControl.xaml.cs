@@ -78,7 +78,7 @@ public partial class ComboBoxControl : UserControl
     TextBox Placeholder;
     public ContentPresenter Contents;
     public Grid comboBoxGRID;
-
+    
     public ComboBoxControl()
     {
         InitializeComponent();

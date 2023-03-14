@@ -10,9 +10,6 @@ public class TypeComboBox
 
         if(comboBoxType.ItemIndex == 0)
         {
-            #if DEBUG
-                comboBoxFormat.AddFormatList();
-            #endif
 
             comboBoxFormatText(true);
         }
@@ -48,5 +45,6 @@ public class TypeComboBox
     {
         comboBoxFormat.TextEditable         = Editable;
         comboBoxFormat.RefreshEditable();
+        comboBoxFormat.SetFormatListStyle(!Editable);
     }
 };

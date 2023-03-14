@@ -1,4 +1,3 @@
-using System.Net.Mime;
 namespace DLControls;
 
 public partial class ComboBoxControl
@@ -12,22 +11,22 @@ public partial class ComboBoxControl
         new() { Content="m4a" },
         new() { Content="mp4" },
         new() { Content="wav" },
-        new() { Content="auto" },
+        new() { Content="auto"},
     };
     public List<ComboBoxItem> ComboBoxVideoFormats = new List<ComboBoxItem>()
     {
         new() { Content="mp4" },
         new() { Content="mkv" },
-        new() { Content="webm" },
+        new() { Content="webm"},
         new() { Content="flv" },
-        new() { Content="auto" },
+        new() { Content="auto"},
     };
     public List<ComboBoxItem> ComboBoxConvertFormats = new List<ComboBoxItem>()
     {
         new() { Content="mp4" },
         new() { Content="mp3" },
         new() { Content="flv" },
-        new() { Content="webm" },
+        new() { Content="webm"},
         new() { Content="m4a" },
         new() { Content="avi" },
         new() { Content="wmv" },
@@ -43,6 +42,14 @@ public partial class ComboBoxControl
     public void AddAudioTypeList()            => AutoAdd(1);
     public void AddVideoTypeList()            => AutoAdd(2);
     public void AddConvertTypeList()          => AutoAdd(3);
+    public void AddFormatList(List<FormatList> FormatList)
+    {
+        foreach (var CBT in FormatList)
+            UserComboBox.Items.Add(CBT);
+        
+        UserComboBox.SelectionChanged += (s,e) =>
+            MainText.Text = ((FormatList)UserComboBox.SelectedItem).Name;
+    }
 
     private void AutoAdd(int x)
     {
@@ -61,51 +68,9 @@ public partial class ComboBoxControl
             UserComboBox.Items.Add(CBT);
 
         if(x != 0)
-        {
-            UserComboBox.ItemContainerStyle = default;
             UserComboBox.SelectedIndex = 0;
-        }
+        
     }
-
-    // WORK IN PROGRESS
-    // CHECK THE TODO OM MAINWINDOW.XAML.CS FOR MORE INFO
-    #if DEBUG
-        public void AddFormatList()
-        {
-            dynamic TestCustom = new
-            {
-                Name="ass",
-                ID="1",
-                FORMAT="mp4",
-                RESOLUTION="1920x1080",
-                SIZE="200mb",
-                BITRATE="20319kb",
-                FPS="999",
-            };
-            dynamic TestCustoms = new
-            {
-                Name="wtf",
-                ID="1",
-                FORMAT="mp4",
-                RESOLUTION="1920x1080",
-                SIZE="200mb",
-                BITRATE="20319kb",
-                FPS="999",
-            };
-            
-            DataTemplate DT = new();
-
-            FrameworkElementFactory TB = new(typeof(TextBlock));
-            TB.SetBinding(TextBlock.TextProperty, new System.Windows.Data.Binding("Name"));
-            DT.VisualTree = TB;
-
-            UserComboBox.ItemTemplate = DT;
-            UserComboBox.ItemContainerStyle = (Style)UserComboBox.FindResource("FormatListType");
-            UserComboBox.Items.Add(TestCustom);
-            UserComboBox.Items.Add(TestCustoms);
-        }
-    #endif
-
 
     // Refresh the ComboBox content
     public void RefreshEditable()
@@ -120,5 +85,11 @@ public partial class ComboBoxControl
             AddChildGRID(comboBoxGRID, false);
             Contents.Visibility = Visibility.Visible;
         }
+    }
+
+    public void SetFormatListStyle(bool clear)
+    {
+        UserComboBox.ItemContainerStyle = (Style)UserComboBox.FindResource("FormatListType");
+        if(clear)UserComboBox.ItemContainerStyle = default;
     }
 }

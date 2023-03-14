@@ -132,7 +132,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="69" />
                                     <!-- hehe -->
                                     <ColumnDefinition Width="60" />
@@ -169,27 +169,26 @@
                 <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}" />
             </Style>
             
-            <Style TargetType="{x:Type ComboBoxItem}">
+            <Style x:Key="BasedCB" TargetType="{x:Type ComboBoxItem}">
                 <Setter Property="SnapsToDevicePixels" Value="true" />
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="OverridesDefaultStyle" Value="true" />
                 <Setter Property="Cursor" Value="Hand" />
+            </Style>
+
+            <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource BasedCB}">
                 <Setter Property="Template" Value="{StaticResource ComboBoxTypeTemplate}" />
             </Style>
 
-            <Style x:Key="FormatListType" TargetType="{x:Type ComboBoxItem}">
-                <Setter Property="SnapsToDevicePixels" Value="true" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style x:Key="FormatListType" TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource BasedCB}">
                 <Setter Property="FontSize" Value="12" />
-                <Setter Property="Cursor" Value="Hand" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
                 <Setter Property="Template" Value="{StaticResource ComboBoxFormatTemplate}" />
             </Style>
 
         </Canvas.Resources>
 
-        <ComboBox x:Name="UserComboBox" Height="35" Style="{StaticResource CB}" MinWidth="100" Width="{Binding Width,ElementName=root}"
-                  SelectionChanged="OnSelectChange" IsEditable="{Binding TextEditable, ElementName=root}" TextSearch.TextPath="Name"/>
+		<ComboBox x:Name="UserComboBox" Height="35" Style="{StaticResource CB}" MinWidth="100" Width="{Binding Width,ElementName=root}"
+                  SelectionChanged="OnSelectChange" IsEditable="{Binding TextEditable, ElementName=root}"/>
     </Canvas>
 </UserControl>
