@@ -2,15 +2,16 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal partial class ConsoleLive
 {
+    
     public static void UpdateLiveOutputComment(object s, DataReceivedEventArgs e)
     {
         string StringData = e.Data;
         if (string.IsNullOrEmpty(StringData)) return;
 
-        MainWindowStatic.Dispatcher.Invoke(DispatcherPriority.Normal, ()=>Invoked(StringData));
+        DL_Dispatch.Invoke(()=>Update_Invoked(StringData));
     }
 
-    static void Invoked(string StringData)
+    static void Update_Invoked(string StringData)
     {
         if (StringData.Contains("yt-dlp is up to date"))
         {

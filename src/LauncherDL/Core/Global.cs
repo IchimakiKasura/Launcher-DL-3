@@ -31,6 +31,11 @@ public partial class Global
         "flv"
     };
 
+    public static List<FormatList> TemporaryList = new();
+    public static string[] TemporaryNAME;
+    public static string[] TemporaryID;
+
+
     public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
 
     /// <summary>ProgressBar State</summary>
@@ -38,5 +43,7 @@ public partial class Global
 
     /// <summary>Process Start</summary>
     public static Process ProcessTaskVariable;
+
+
 }
 
