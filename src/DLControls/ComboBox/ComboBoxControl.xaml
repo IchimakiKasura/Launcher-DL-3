@@ -76,7 +76,7 @@
         
                             <Grid x:Name="EditablePlaceHolder" Visibility="Hidden" Margin="0,0,-999,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="65" />
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="69" />
@@ -140,7 +140,7 @@
                         <ContentPresenter.Content>
                             <Grid Background="Transparent">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="65" />
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="69" />
