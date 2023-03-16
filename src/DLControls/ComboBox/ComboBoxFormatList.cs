@@ -9,6 +9,7 @@ public class FormatList
     public string SIZE              { get; set; }
     public string BITRATE           { get; set; }
     public string FPS               { get; set; }
+    public string VID_W_AUD         { get; set; }
 };
 
 public class FormatName

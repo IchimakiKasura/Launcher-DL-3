@@ -9,10 +9,6 @@ public partial class ComboBoxControl : UserControl
         DependencyProperty.Register("TextEditable", typeof(bool), typeof(ComboBoxControl));
     readonly static DependencyProperty PlaceholderTextProperty =
         DependencyProperty.Register("PlaceholderText", typeof(string), typeof(ComboBoxControl), new("default (Best)"));
-    readonly static DependencyProperty PlaceholderUnavailableProperty =
-        DependencyProperty.Register("PlaceholderUnavailable", typeof(string), typeof(ComboBoxControl), new("Unavailable"));
-    readonly static DependencyProperty PlaceholderAlignmentProperty =
-        DependencyProperty.Register("PlaceholderAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
     readonly static DependencyProperty ContentAlignmentProperty =
         DependencyProperty.Register("ContentAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
     readonly static DependencyProperty ShowVerticalScrollbarProperty =
@@ -28,34 +24,16 @@ public partial class ComboBoxControl : UserControl
         get => (string)GetValue(PlaceholderTextProperty);
         set => SetValue(PlaceholderTextProperty, value);
     }
-    public string PlaceholderUnavailable
-    {
-        get => (string)(GetValue(PlaceholderUnavailableProperty));
-        set => SetValue(PlaceholderUnavailableProperty, value);
-    }
-    public HorizontalAlignment PlaceholderAlignment
-    {
-        get => (HorizontalAlignment)(GetValue(PlaceholderAlignmentProperty));
-        set
-        {
-            SetValue(PlaceholderAlignmentProperty, value);
-            Placeholder.HorizontalContentAlignment = value;
-        }
-    }
     public HorizontalAlignment ContentAlignment
     {
         get => (HorizontalAlignment)(GetValue(ContentAlignmentProperty));
-        set
-        {
-            SetValue(ContentAlignmentProperty, value);
-            UserComboBox.HorizontalContentAlignment = value;
-        }
+        set => SetValue(ContentAlignmentProperty, UserComboBox.HorizontalContentAlignment = value);
+        
     }
     public int ItemIndex
     {
         get => UserComboBox.SelectedIndex;
         set => UserComboBox.SelectedIndex = value;
-        
     }
     public bool ShowVerticalScrollbar
     {
@@ -67,15 +45,13 @@ public partial class ComboBoxControl : UserControl
             if(value) ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
         }
     }
-    public string GetItemContent
-    {
-        get => ((ComboBoxItem)UserComboBox.SelectedItem).Content as String;
-    }
-
-    public bool isTextFocused { get; set; }
+    public string GetItemContent =>
+        ((ComboBoxItem)UserComboBox.SelectedItem).Content as String;
+    
+    public bool isTextFocused;
     public RoutedEventHandler OnItemChange;
     public TextBox MainText;
-    TextBox Placeholder;
+    TextBlock Placeholder;
     public ContentPresenter Contents;
     public Grid comboBoxGRID;
     
@@ -94,7 +70,8 @@ public partial class ComboBoxControl : UserControl
 
         if (TextEditable)
         {
-            AddChildGRID(comboBoxGRID, true);	 
+            comboBoxGRID.Children.Add(Placeholder);
+            comboBoxGRID.Children.Add(MainText); 
             Contents.Visibility = Visibility.Hidden;
         }
 
@@ -110,24 +87,32 @@ public partial class ComboBoxControl : UserControl
             switch(IsEnabled)
             {
                 case true:
+                    Placeholder.Foreground = Brushes.DimGray;
+                    MainText.Foreground =
                     UserComboBox.Foreground = Brushes.White;
+                    Placeholder.HorizontalAlignment = HorizontalAlignment.Left;
+
                     if(TextEditable)
                     {
-                        AddChildGRID(comboBoxGRID, true);
-                        Contents.Visibility = Visibility.Hidden;
-                        Contents.HorizontalAlignment = HorizontalAlignment.Left;
-                        if(!string.IsNullOrEmpty(MainText.Text))
-                            comboBoxGRID.Children.Remove(Placeholder);
+                        if(!comboBoxGRID.Children.Contains(MainText))
+                            comboBoxGRID.Children.Add(MainText);
+
+                        Placeholder.Text = PlaceholderText;
                     }
                     break;
 
                 case false:
+                    MainText.Foreground =
+                    Placeholder.Foreground =
                     UserComboBox.Foreground = Brushes.Red;
+                    Placeholder.HorizontalAlignment = HorizontalAlignment.Center;
+                    
                     if(TextEditable)
                     {
-                        AddChildGRID(comboBoxGRID, false);
-                        Contents.Visibility = Visibility.Visible;
-                        Contents.HorizontalAlignment = HorizontalAlignment.Center;
+                        if(string.IsNullOrEmpty(MainText.Text))
+                            comboBoxGRID.Children.Remove(MainText);
+                            
+                        Placeholder.Text = " Unavailable";
                     }
                     break;
             }
@@ -139,8 +124,7 @@ public partial class ComboBoxControl : UserControl
         Placeholder = new()
         {
             Foreground = Brushes.DimGray,
-            BorderBrush = Brushes.Transparent,
-            Focusable = true,
+            Focusable = false,
             Text = PlaceholderText,
             IsHitTestVisible = false,
         };
@@ -156,29 +140,12 @@ public partial class ComboBoxControl : UserControl
             ContextMenu = (ContextMenu)root.FindResource("TextBoxMenu"),
         };
 
-        Placeholder.HorizontalScrollBarVisibility = 
-        Placeholder.VerticalScrollBarVisibility =
         MainText.HorizontalScrollBarVisibility = 
         MainText.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
 
         Placeholder.Background = MainText.Background = Brushes.Transparent;
 
         Placeholder.Margin = MainText.Margin = new(3, 3, 23, 3);
-    }
-
-    public void AddChildGRID(Grid grid, bool Add)
-    {
-        grid.Children.Remove(Placeholder);
-        grid.Children.Remove(MainText);
-
-        if(Add)
-        {
-            grid.Children.Add(Placeholder);
-            grid.Children.Add(MainText);
-
-            if(!string.IsNullOrEmpty(MainText.Text))
-                comboBoxGRID.Children.Remove(Placeholder);
-        }
     }
 
     private void SetBorderStoryboard()
@@ -221,6 +188,10 @@ public partial class ComboBoxControl : UserControl
     private void OnSelectChange(object s, RoutedEventArgs e)
     {
         OnChange(e);
+
+        if(TextEditable && ((FormatList)UserComboBox.SelectedItem) != null)
+            MainText.Text = ((FormatList)UserComboBox.SelectedItem).Name;
+
         GC.Collect();
     }
 }

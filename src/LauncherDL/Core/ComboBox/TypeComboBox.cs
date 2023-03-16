@@ -10,7 +10,8 @@ public class TypeComboBox
 
         if(comboBoxType.ItemIndex == 0)
         {
-
+            if(TemporaryList.Count > 0)
+                comboBoxFormat.AddFormatList(TemporaryList);
             comboBoxFormatText(true);
         }
         else  comboBoxFormatText(false);

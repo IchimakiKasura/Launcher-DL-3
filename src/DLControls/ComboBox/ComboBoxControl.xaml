@@ -46,7 +46,7 @@
                                   Focusable="false"
                                   IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                                   ClickMode="Press" />
-
+                    
                     <ContentPresenter x:Name="ContentSite"
                                       IsHitTestVisible="False"
                                       Content="{TemplateBinding SelectionBoxItem}"
@@ -73,9 +73,24 @@
                                     Background="#B2000000"
                                     BorderThickness=".5"
                                     BorderBrush="{StaticResource DefaultBorderBrush}" />
-                            
-                            <ScrollViewer Margin="4,5,4,6" SnapsToDevicePixels="True">
-                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+        
+                            <Grid x:Name="EditablePlaceHolder" Visibility="Hidden" Margin="0,0,-999,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="69" />
+                                    <ColumnDefinition Width="60" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="12" Grid.Column="0" Text=" ID" />
+                                <TextBlock FontSize="12" Grid.Column="1" Text=" | FMT" />
+                                <TextBlock FontSize="12" Grid.Column="2" Text=" | RES" />
+                                <TextBlock FontSize="12" Grid.Column="3" Text=" | SIZE" />
+                                <TextBlock FontSize="12" Grid.Column="4" Text=" | BITRATE" />
+                            </Grid>
+
+                            <ScrollViewer x:Name="SV" Margin="4,5,4,6" SnapsToDevicePixels="True">
+                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
                             </ScrollViewer>
                             
                         </Grid>
@@ -91,15 +106,10 @@
                         <Setter TargetName="DropDownBorder" Property="Margin" Value="0,1,0,0" />
                     </Trigger>
 
-                    <MultiTrigger>
-                        <MultiTrigger.Conditions>
-                            <Condition Property="IsEnabled" Value="False"/>
-                            <Condition Property="IsEditable" Value="True"/>
-                        </MultiTrigger.Conditions>
-                        <MultiTrigger.Setters>
-                            <Setter TargetName="ContentSite" Property="Content" Value="{Binding PlaceholderUnavailable, ElementName=root}" />
-                        </MultiTrigger.Setters>
-                    </MultiTrigger>
+                    <Trigger Property="IsEditable" Value="True">
+                        <Setter TargetName="EditablePlaceHolder" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="SV" Property="Margin" Value="5,20,4,5" />
+                    </Trigger>
 
                 </ControlTemplate.Triggers>
             </ControlTemplate>
@@ -134,11 +144,10 @@
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="70" />
                                     <ColumnDefinition Width="69" />
-                                    <!-- hehe -->
                                     <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="0,0,5,0" Grid.Column="0" Text="{Binding ID}" />
+                                <TextBlock Grid.Column="0" Text="{Binding ID}" />
                                 <TextBlock Grid.Column="1" Text="{Binding FORMAT}" />
                                 <TextBlock Grid.Column="2" Text="{Binding RESOLUTION}" />
                                 <TextBlock Grid.Column="3" Text="{Binding SIZE}" />
@@ -157,6 +166,7 @@
                 
             </ControlTemplate>
         
+
             <Style x:Key="CB" TargetType="{x:Type ComboBox}">
                 <Setter Property="OverridesDefaultStyle" Value="true" />
                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />

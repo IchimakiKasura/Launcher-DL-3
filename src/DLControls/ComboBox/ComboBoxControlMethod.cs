@@ -42,13 +42,12 @@ public partial class ComboBoxControl
     public void AddAudioTypeList()            => AutoAdd(1);
     public void AddVideoTypeList()            => AutoAdd(2);
     public void AddConvertTypeList()          => AutoAdd(3);
-    public void AddFormatList(List<FormatList> FormatList)
+    public void AddFormatList(List<FormatList> FormatListArgs)
     {
-        foreach (var CBT in FormatList)
-            UserComboBox.Items.Add(CBT);
+        if(!TextEditable) return;
         
-        UserComboBox.SelectionChanged += (s,e) =>
-            MainText.Text = ((FormatList)UserComboBox.SelectedItem).Name;
+        foreach (var CBT in FormatListArgs)
+            UserComboBox.Items.Add(CBT);
     }
 
     private void AutoAdd(int x)
@@ -69,7 +68,6 @@ public partial class ComboBoxControl
 
         if(x != 0)
             UserComboBox.SelectedIndex = 0;
-        
     }
 
     // Refresh the ComboBox content
@@ -77,19 +75,31 @@ public partial class ComboBoxControl
     {
         if(!IsLoaded) return;
 
-        AddChildGRID(comboBoxGRID, true);
-        Contents.Visibility = Visibility.Hidden;
+        MainText.Text = "";
 
-        if (!TextEditable)
-        {
-            AddChildGRID(comboBoxGRID, false);
-            Contents.Visibility = Visibility.Visible;
-        }
+        comboBoxGRID.Children.Remove(MainText);
+        comboBoxGRID.Children.Remove(Placeholder);
+        Contents.Visibility = Visibility.Visible;
+
+        if (!TextEditable) return;
+    
+        comboBoxGRID.Children.Add(MainText);
+        comboBoxGRID.Children.Add(Placeholder);
+        Contents.Visibility = Visibility.Hidden;
     }
 
     public void SetFormatListStyle(bool clear)
     {
         UserComboBox.ItemContainerStyle = (Style)UserComboBox.FindResource("FormatListType");
         if(clear)UserComboBox.ItemContainerStyle = default;
+    }
+
+    public void ResetBox()
+    {
+        if(!TextEditable) return;
+
+        MainText.Text = "";
+        ItemIndex = -1;
+        ClearItems();
     }
 }

@@ -31,10 +31,8 @@ public partial class Global
         "flv"
     };
 
+    /// <summary>ComboBoxFormat Temporary list</summary>
     public static List<FormatList> TemporaryList = new();
-    public static string[] TemporaryNAME;
-    public static string[] TemporaryID;
-
 
     public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
 

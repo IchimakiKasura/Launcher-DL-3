@@ -16,6 +16,16 @@ public class DownloadButton
         var IsSuccess = BodyButton.CheckLinkValidation();
         if(!IsSuccess) return;
 
+        // To be removed
+        #if DEBUG
+            if(comboBoxFormat.ItemIndex > -1)
+            {
+                if(TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD != null)
+                    Console.WriteLine($"SELECTED ID: "+TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD);
+                else Console.WriteLine($"SELECTED ID (AUDIO ONLY): "+TemporaryList[comboBoxFormat.ItemIndex].ID);
+            }
+        #endif
+
         // Gets the info before downloading
         #region Info Setup
         var _format = comboBoxFormat.MainText.Text ?? comboBoxFormat.GetItemContent; 
@@ -36,6 +46,8 @@ public class DownloadButton
             Format = _format,
             Type = _type
         };
+
+        WindowsComponents.FreezeComponents();
     }
 
     public static void ButtonConvertClicked()
