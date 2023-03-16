@@ -15,7 +15,6 @@ partial class OnStartUp
 
         // Placeholders
         textBoxLink.TextPlaceholder             =   Language.Placeholder_Link;
-        comboBoxFormat.PlaceholderText          =   $"\"Best\"";
         textBoxName.TextPlaceholder             =   Language.Placeholder_Optional;
 
         // ComboBox

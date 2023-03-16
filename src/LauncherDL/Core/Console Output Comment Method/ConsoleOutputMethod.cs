@@ -72,4 +72,6 @@ internal static class ConsoleOutputMethod
     
     public static void          NoLinkOutputComment() =>
         console.DLAddConsole                       (CONSOLE_ERROR_SOFT_STRING, "<%14>No Link provided or Link is invalid");
+
+
 }

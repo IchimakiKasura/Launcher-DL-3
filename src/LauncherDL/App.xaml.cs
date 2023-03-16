@@ -30,7 +30,7 @@ public partial class App : Application
         var Update = new Update.Updater();
 
         #if !DEBUG
-            DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
+            DispatcherUnhandledException += AppDispatcherUnhandledException;
         #else
             DispatcherUnhandledException += AppDebugException;
             AllocConsole();

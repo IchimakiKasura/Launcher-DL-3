@@ -84,7 +84,7 @@
         </Canvas.Resources>
 
 
-        <RichTextBox x:Name="UserRichTextBox" Style="{StaticResource UserRichTextBoxMain}"/>
+        <RichTextBox x:Name="UserRichTextBox" Style="{StaticResource UserRichTextBoxMain}" TextChanged="ScrollEndEvent"/>
         
     </Canvas>
 </UserControl>

@@ -31,7 +31,8 @@ public partial class ConsoleControl
     /// <see langword="&quot;&lt;Red%10&gt;Hello &lt;Green%5&gt;World!&quot;"/> <br/><br/>
     /// For escape characters Do this:<br/>
     /// for "&lt;" do <see langword="$lt$"/><br/>for "&gt;" do <see langword="$gt$"/><br/>
-    /// for "%" do <see langword="$perc$"/><br/>for "|" than <see langword="$vbar$"/>
+    /// for "%" do <see langword="$perc$"/><br/>for "|" than <see langword="$vbar$"/><br/>
+    /// for "tabs" or "\t" do <see langword="$tab$"/><br/>for "new line" or "/n" do <see langword="$nl$"/>
     /// </summary>
     /// <param name="Input">Input Text</param>
     /// <param name="isItalic">add that sweet leaning type of shit</param>
@@ -68,6 +69,8 @@ public partial class ConsoleControl
             text = text.Replace("$gt$", ">");
             text = text.Replace("$perc$", "%");
             text = text.Replace("$vbar$", "|");
+            text = text.Replace("$tab$", "\t");
+            text = text.Replace("$nl$", "/n");
 
             try
             {

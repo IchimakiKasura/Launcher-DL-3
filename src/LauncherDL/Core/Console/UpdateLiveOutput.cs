@@ -3,13 +3,8 @@ namespace LauncherDL.Core.ConsoleDL;
 internal partial class ConsoleLive
 {
     
-    public static void UpdateLiveOutputComment(object s, DataReceivedEventArgs e)
-    {
-        string StringData = e.Data;
-        if (string.IsNullOrEmpty(StringData)) return;
-
-        DL_Dispatch.Invoke(()=>Update_Invoked(StringData));
-    }
+    public static void UpdateLiveOutputComment(object s, DataReceivedEventArgs e) =>
+        DL_Dispatch.Invoke(()=>Update_Invoked(e.Data),e.Data);
 
     static void Update_Invoked(string StringData)
     {

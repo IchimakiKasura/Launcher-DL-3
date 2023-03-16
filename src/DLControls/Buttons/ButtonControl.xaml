@@ -72,6 +72,6 @@
             </Style>
         </Canvas.Resources>
 
-        <Button x:Name="UserButton" Style="{StaticResource UserButtonMain}"/>
+        <Button x:Name="UserButton" Style="{StaticResource UserButtonMain}" Click="Clicked"/>
     </Canvas>
 </UserControl>

@@ -104,12 +104,12 @@
     <Using Include="LauncherDL.Core.ConsoleDL" />
     <Using Include="LauncherDL.Core.ComboBoxDL" />
     <Using Include="LauncherDL.Core.Configuration" />
-    <Using Include="LauncherDL.Core.RegexComponent" />
     <Using Include="LauncherDL.Core.Event_Handlers" />
     <Using Include="LauncherDL.Core.Console_Output_Comment_Method" />
     
     
     <Using Include="LauncherDL.Core.Global" Static="true" />
+    <Using Include="LauncherDL.Core.RegexComponent.RegexComponentList" Static="true" />
 
     <Using Include="LauncherDL.Core.YTDLP"/>
 

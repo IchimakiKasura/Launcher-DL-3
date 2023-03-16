@@ -13,8 +13,6 @@ public partial class ButtonControl : UserControl
         DependencyProperty.Register("Icon", typeof(string), typeof(ButtonControl));
     readonly static DependencyProperty IconHeightProperty =
         DependencyProperty.Register("IconHeight", typeof(int), typeof(ButtonControl), new(50));
-    readonly static DependencyProperty IconWidthProperty =
-        DependencyProperty.Register("IconWidth", typeof(int), typeof(ButtonControl), new(50));
     readonly static DependencyProperty TextSizeProperty =
         DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(20));
     readonly static DependencyProperty IsAnimationOnProperty = 
@@ -45,11 +43,6 @@ public partial class ButtonControl : UserControl
         get => (int)GetValue(IconHeightProperty);
         set => SetValue(IconHeightProperty, value);
     }
-    public int IconWidth
-    {
-        get => (int)GetValue(IconWidthProperty);
-        set => SetValue(IconWidthProperty, value);
-    }
     public int TextSize
     {
         get => (int)GetValue(TextSizeProperty);
@@ -61,12 +54,8 @@ public partial class ButtonControl : UserControl
         set => SetValue(IsAnimationOnProperty, value);
     }
 
-    public ButtonControl()
-    {
+    public ButtonControl() =>
         InitializeComponent();
-
-        UserButton.Click += (s,e) => OnClicked(e);
-    }
 
     private void ContentLoaded(object s, RoutedEventArgs e)
     {
@@ -117,4 +106,8 @@ public partial class ButtonControl : UserControl
             eh(this, e);
         }
     }
+
+    private void Clicked(object s, RoutedEventArgs e) =>
+        OnClicked(e);
+    
 }

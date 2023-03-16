@@ -2,7 +2,8 @@
 
 // TODO:
 //
-//  Add file format live console output.
+//  Finish adding Format Live console output
+//  Remove the code that has "To be Removed" comment
 //  Add Convert live console output.
 //
 //  Implement the YDL.cs based on the old script from v6
