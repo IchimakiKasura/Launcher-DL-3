@@ -5,7 +5,7 @@ internal static partial class FFmpegFiles
 {
     readonly static string FFmpegPath = "./LauncherDL_Data";
     static List<string> FileMissingOnly = new List<string>();
-    static bool ErrorOccured = false;
+    public static bool ErrorOccured = false;
     readonly static string[] FileNames =
     {
         "avcodec-60.dll",

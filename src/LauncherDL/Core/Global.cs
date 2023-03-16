@@ -35,6 +35,7 @@ public partial class Global
     public static List<FormatList> TemporaryList = new();
 
     public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
+    public readonly static string FFMPEG_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ffmpeg.exe"; 
 
     /// <summary>ProgressBar State</summary>
     public enum ProgressBarState{Hide,Show}

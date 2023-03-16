@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-public class DownloadButton
+public class DownloadButton : ConvertButton
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {
@@ -47,11 +47,6 @@ public class DownloadButton
             Type = _type
         };
 
-        WindowsComponents.FreezeComponents();
-    }
-
-    public static void ButtonConvertClicked()
-    {
         WindowsComponents.FreezeComponents();
     }
 }

@@ -49,9 +49,9 @@ public partial class ConsoleControl
 
         if (!DontAddNewline) Input += "\r";
         TextRange range;
-        FontStyle _FontStyle;
+        FontStyle _FontStyle = FontStyles.Normal;
 
-        foreach (Match textMatch in RTBregex.Matches(Input).Cast<Match>()) 
+        foreach (Match textMatch in RTBregex.Matches(Input)) 
         {
             range = new(UserRichTextBox.Document.ContentEnd, UserRichTextBox.Document.ContentEnd);
 
@@ -63,7 +63,6 @@ public partial class ConsoleControl
             string text = textMatch.Groups["text"].Value;
 
             if (isItalic) _FontStyle = FontStyles.Italic;
-            else _FontStyle = FontStyles.Normal;
 
             text = text.Replace("$lt$", "<");
             text = text.Replace("$gt$", ">");
@@ -72,19 +71,11 @@ public partial class ConsoleControl
             text = text.Replace("$tab$", "\t");
             text = text.Replace("$nl$", "/n");
 
-            try
-            {
-                range.Text = text;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
+            try { range.Text = text; } catch { throw new TextPropertyException(); };
             range.ApplyPropertyValue(Control.FontStyleProperty, _FontStyle);
-            try { range.ApplyPropertyValue(TextElement.ForegroundProperty   , new BrushConverter().ConvertFromString(color) ); } catch { throw new ForegroundPropertyException("The Entered Color or Hex are Invalid.");    };
-            try { range.ApplyPropertyValue(Control.FontSizeProperty         , size                                          ); } catch { throw new FontSizePropertyException("The Entered font size are Invalid.");         };
-            try { range.ApplyPropertyValue(Control.FontWeightProperty       , weight                                        ); } catch { throw new FontWeightPropertyException("The Entered font weight are Invalid.");     };
+            try { range.ApplyPropertyValue(TextElement.ForegroundProperty   , new BrushConverter().ConvertFromString(color) ); } catch { throw new ForegroundPropertyException();   };
+            try { range.ApplyPropertyValue(Control.FontSizeProperty         , size                                          ); } catch { throw new FontSizePropertyException();     };
+            try { range.ApplyPropertyValue(Control.FontWeightProperty       , weight                                        ); } catch { throw new FontWeightPropertyException();   };
         }
     }
 

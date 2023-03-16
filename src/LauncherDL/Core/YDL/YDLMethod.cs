@@ -10,7 +10,8 @@ sealed partial class YDL
             throw new UpdateMethodException();
 
         var Args = "-U";
-
+        
+        progressBar.Value = 99;
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.UpdateLiveOutputComment);
         WindowsComponents.FreezeComponents();
     }
@@ -25,13 +26,11 @@ sealed partial class YDL
 
         if (config.AllowCookies) Args += $" --cookies-from-browser {config.BrowserCookie}";
 
-        // To be removed
-        Console.WriteLine(Args);
-
         // Clear existing list on ComboBoxFormat and its Temporarylist
         TemporaryList.Clear();
         comboBoxFormat.ResetBox();
 
+        ConsoleLive.SelectedError = 0;
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.FileFormatLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
@@ -43,6 +42,7 @@ sealed partial class YDL
             throw new DownloadMethodException();
 
         var Args = Format;
+        ConsoleLive.SelectedError = 1;
     }
 
     /// <summary>Convert Method</summary>
@@ -51,6 +51,13 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new ConvertMethodException();
 
-        var Args = Format;
+        var Args = $"-i \"{Link}\" -q 0 \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
+        ConsoleLive.SelectedError = 2;
+
+		if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
+			Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
+
+        await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.ConvertLiveOutputComment);
+        TaskProcess.EndProcess.ProcessTaskEnded();
     }
 }

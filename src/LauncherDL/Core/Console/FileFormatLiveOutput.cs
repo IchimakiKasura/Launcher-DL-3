@@ -30,7 +30,7 @@ internal partial class ConsoleLive
                 FormatStrings.Add(match.Value.Trim());
 
         // Avoid video that has no Codec. It can cause weird issue when
-        // putting 2 formats together.
+        // merging 2 formats together.
         if(FormatStrings.Count != 7) return;
         
         string NameFormat = 
@@ -43,10 +43,10 @@ internal partial class ConsoleLive
         
         switch(FormatStrings[3].Length)
         {
-            case 1: if(FormatStrings[3].Contains("2")) FormatStrings[3] = "Stereo";         break;
-            case 2: FormatStrings[3] += " fps";                                             break;
-            case 4: FormatStrings[3] = FormatStrings[3].Replace("1","  fps");               break;
-            case 5: FormatStrings[3] = FormatStrings[3].Replace(" 2","fps"); HasAudio = true;  break;
+            case 1: if(FormatStrings[3].Contains("2")) FormatStrings[3] = "Stereo";             break;
+            case 2: FormatStrings[3] += " fps";                                                 break;
+            case 4: FormatStrings[3] = FormatStrings[3].Replace("1","  fps");                   break;
+            case 5: FormatStrings[3] = FormatStrings[3].Replace(" 2","fps"); HasAudio = true;   break;
         };
 
         if(FormatStrings[2].Contains("audio only"))
@@ -54,8 +54,8 @@ internal partial class ConsoleLive
             // Takes the latest Audio format ID
             switch(FormatStrings[1])
             {
-                case "m4a": AudioOnlyID_M4A  = FormatStrings[0]; break;
-                case "webm": AudioOnlyID_WEBM = FormatStrings[0]; break;
+                case "m4a": AudioOnlyID_M4A  = FormatStrings[0];                                break;
+                case "webm": AudioOnlyID_WEBM = FormatStrings[0];                               break;
             }
         }
         else
@@ -66,8 +66,8 @@ internal partial class ConsoleLive
             
             switch(FormatStrings[1])
             {
-                case "mp4": VID_AO  = $"{FormatStrings[0]}+{AudioOnlyID_M4A}";  break;
-                case "webm": VID_AO = $"{FormatStrings[0]}+{AudioOnlyID_WEBM}"; break;
+                case "mp4": VID_AO  = $"{FormatStrings[0]}+{AudioOnlyID_M4A}";                  break;
+                case "webm": VID_AO = $"{FormatStrings[0]}+{AudioOnlyID_WEBM}";                 break;
             }
         }
 
@@ -83,6 +83,6 @@ internal partial class ConsoleLive
             VID_W_AUD   =       VID_AO
         });
 
-        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%12>Added: {FormatStrings[2]}$tab$$vbar$    {FormatStrings[4]}");
+        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatStrings[2]}$tab$$vbar$    {FormatStrings[4]}");
     }
 }

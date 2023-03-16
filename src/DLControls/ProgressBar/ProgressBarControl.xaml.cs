@@ -6,11 +6,11 @@
 public partial class ProgressBarControl : UserControl
 {
     readonly static DependencyProperty ValueProperty =
-    DependencyProperty.Register("Value", typeof(int), typeof(ProgressBarControl), new(0));
+    DependencyProperty.Register("Value", typeof(double), typeof(ProgressBarControl));
 
-    public int Value
+    public double Value
     {
-        get => (int)GetValue(ValueProperty);
+        get => (double)GetValue(ValueProperty);
         set
         {
             SetValue(ValueProperty, value);

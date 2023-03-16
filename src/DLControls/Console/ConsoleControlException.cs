@@ -2,20 +2,22 @@ namespace DLControls;
 
 public class ForegroundPropertyException : Exception
 {
-    public ForegroundPropertyException() { }
-    public ForegroundPropertyException(string message)
-        : base(message) { }
+    public ForegroundPropertyException()
+        : base("The Entered Color or Hex are Invalid.") { }
 }
 
 public class FontSizePropertyException : Exception
 {
-    public FontSizePropertyException() { }
-    public FontSizePropertyException(string message)
-        : base(message) { }
+    public FontSizePropertyException()
+        : base("The Entered font size are Invalid.") { }
 }
 public class FontWeightPropertyException : Exception
 {
-    public FontWeightPropertyException() { }
-    public FontWeightPropertyException(string message)
-        : base(message) { }
+    public FontWeightPropertyException()
+        : base("The Entered font weight are Invalid.") { }
+}
+public class TextPropertyException : Exception
+{
+    public TextPropertyException()
+        : base("Entered text are invalid.") { }
 }

@@ -11,10 +11,13 @@ public abstract class FileFormatButton
 
         console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
 
-        YDLArguments Info = new()
-            { Link = textBoxLink.Text, };
+        YDL YDLInfo = new(
+            new()
+            {
+                Link = textBoxLink.Text
+            }
+        );
         
-        YDL YDLInfo = new(Info);
         YDLInfo.IsFileFormat = true;
 
         YDLInfo.FileFormatMethod();

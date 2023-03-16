@@ -2,9 +2,7 @@
 
 // TODO:
 //
-//  Finish adding Format Live console output
-//  Remove the code that has "To be Removed" comment
-//  Add Convert live console output.
+// Add Quality select on Convert
 //
 //  Implement the YDL.cs based on the old script from v6
 //
