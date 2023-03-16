@@ -59,11 +59,9 @@ class WindowsComponents
         console.manualScrollToEnd();
     }
 
-    public static async Task WindowAwaitLoad(bool a)
-    {
-        // holy shit, compare it to the old one lmao
-        if(!a) await Task.Run(()=>{ MainWindowStatic.Dispatcher.Invoke(async()=>{ while(!a) await Task.Delay(200); }); });
-    }
+    public static async Task WindowAwaitLoad(bool a) =>
+        await Task.Run(()=>{ MainWindowStatic.Dispatcher.Invoke(async()=>{ while(!a) await Task.Delay(100); }); });
+  
 
     // Is it bad to just call it without parameters to know if its freezed or not?
     // nah its my code and I know when to call the method but yeah it does look bad practice
@@ -77,7 +75,8 @@ class WindowsComponents
             textBoxLink,
             textBoxName,
             comboBoxType,
-            comboBoxFormat
+            comboBoxFormat,
+            comboBoxQuality
         };
 
         if(comboBoxType.ItemIndex == 3)
@@ -86,7 +85,7 @@ class WindowsComponents
         if(comboBoxType.ItemIndex != 0)
             buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
 
-        foreach(var CL in ControlLists)
+        foreach (var CL in ControlLists)
             CL.IsEnabled = !CL.IsEnabled;
 
         if(!comboBoxType.IsEnabled) WindowProgressBar(ProgressBarState.Show);

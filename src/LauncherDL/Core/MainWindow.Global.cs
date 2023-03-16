@@ -28,6 +28,7 @@ public partial class Global
 
     public static   ComboBoxControl         comboBoxType        { get; set; }
     public static   ComboBoxControl         comboBoxFormat      { get; set; }
+    public static   ComboBoxControl         comboBoxQuality     { get; set; }
 
     public static   TextBlockControl        textBlockLink       { get; set; }
     public static   TextBlockControl        textBlockFormat     { get; set; }

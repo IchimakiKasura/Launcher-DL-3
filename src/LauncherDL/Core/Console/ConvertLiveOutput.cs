@@ -20,5 +20,10 @@ internal partial class ConsoleLive
             CurrentTimeInt = (int)TimeSpan.Parse(CurrentTime).TotalSeconds;
             progressBar.Value = (double)((decimal)CurrentTimeInt / (decimal)TotalDuration) * 100;
         }
+
+        if(StringData.Contains("error"))
+        {
+            console.DLAddConsole(CONSOLE_ERROR_STRING, "<%14>Convert failed! please report it to the author");
+        }
     }
 }

@@ -21,13 +21,23 @@ public class TypeComboBox
             comboBoxFormatText(false);
         }
 
+        // Resets cbf width
+        comboBoxFormat.Width = 387;
+        if(windowCanvas.Children.Contains(comboBoxQuality))
+            windowCanvas.Children.Remove(comboBoxQuality);
+
         DownloadToConvert(comboBoxType.ItemIndex == 3);
-        
-        switch(comboBoxType.ItemIndex)
+
+        switch (comboBoxType.ItemIndex)
         {
             case 1: comboBoxFormat.AddVideoTypeList();      break;
             case 2: comboBoxFormat.AddAudioTypeList();      break;
-            case 3: comboBoxFormat.AddConvertTypeList();    break;
+            case 3:
+                //adjust cbf width for quality cb
+                comboBoxFormat.Width = 228;
+                windowCanvas.Children.Add(comboBoxQuality);
+                comboBoxFormat.AddConvertTypeList();
+            break;
         };
         
     }

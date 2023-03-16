@@ -2,38 +2,48 @@ namespace DLControls;
 
 public partial class ComboBoxControl
 {
-    public List<ComboBoxItem> ComboBoxTypes = new List<ComboBoxItem>() { new(),new(),new(),new() };
+    public List<ComboBoxItem> ComboBoxTypes = new() { new(),new(),new(),new() };
     
     #region Format ComboBox List
-    public List<ComboBoxItem> ComboBoxAudioFormats = new List<ComboBoxItem>()
+    public List<ComboBoxItem> ComboBoxAudioFormats = new()
     {
-        new() { Content="mp3" },
-        new() { Content="m4a" },
-        new() { Content="mp4" },
-        new() { Content="wav" },
-        new() { Content="auto"},
+        new() { Content="mp3"  },
+        new() { Content="m4a"  },
+        new() { Content="mp4"  },
+        new() { Content="wav"  },
+        new() { Content="auto" },
     };
-    public List<ComboBoxItem> ComboBoxVideoFormats = new List<ComboBoxItem>()
+    public List<ComboBoxItem> ComboBoxVideoFormats = new()
     {
-        new() { Content="mp4" },
-        new() { Content="mkv" },
-        new() { Content="webm"},
-        new() { Content="flv" },
-        new() { Content="auto"},
+        new() { Content="mp4"  },
+        new() { Content="mkv"  },
+        new() { Content="webm" },
+        new() { Content="flv"  },
+        new() { Content="auto" },
     };
-    public List<ComboBoxItem> ComboBoxConvertFormats = new List<ComboBoxItem>()
+    public List<ComboBoxItem> ComboBoxConvertFormats = new()
     {
-        new() { Content="mp4" },
-        new() { Content="mp3" },
-        new() { Content="flv" },
-        new() { Content="webm"},
-        new() { Content="m4a" },
-        new() { Content="avi" },
-        new() { Content="wmv" },
-        new() { Content="wma" },
-        new() { Content="ogg" },
-        new() { Content="aac" },
-        new() { Content="wav" },
+        new() { Content="mp4"  },
+        new() { Content="mp3"  },
+        new() { Content="flv"  },
+        new() { Content="webm" },
+        new() { Content="m4a"  },
+        new() { Content="avi"  },
+        new() { Content="wmv"  },
+        new() { Content="wma"  },
+        new() { Content="ogg"  },
+        new() { Content="aac"  },
+        new() { Content="wav"  },
+    };
+    public List<ComboBoxItem> ComboBoxFormatQuality = new()
+    {
+        new() { Content="Highest"	,	Uid="-crf 0  -preset slow	                 " },
+        new() { Content="High"		,	Uid="-crf 10 -preset slow      -profile main " },
+        new() { Content="Medium"	,	Uid="-crf 17 -preset slow      -profile main " },
+        new() { Content="Normal"	,	Uid="-crf 23 -preset medium    -profile main " },
+        new() { Content="Low"		,	Uid="-crf 30 -preset fast      -profile main " },
+        new() { Content="Lowest"	,	Uid="-crf 45 -preset veryfast  -profile main " },
+        new() { Content="Potato"	,	Uid="-crf 50 -preset ultrafast -profile main " },
     };
     #endregion
 
@@ -42,6 +52,7 @@ public partial class ComboBoxControl
     public void AddAudioTypeList()            => AutoAdd(1);
     public void AddVideoTypeList()            => AutoAdd(2);
     public void AddConvertTypeList()          => AutoAdd(3);
+    public void AddQualityTypeList()          => AutoAdd(4);
     public void AddFormatList(List<FormatList> FormatListArgs)
     {
         if(!TextEditable) return;
@@ -61,6 +72,7 @@ public partial class ComboBoxControl
             case 1: temp = ComboBoxAudioFormats;    break;
             case 2: temp = ComboBoxVideoFormats;    break;
             case 3: temp = ComboBoxConvertFormats;  break;
+            case 4: temp = ComboBoxFormatQuality;	break;
         }
 
         foreach (var CBT in temp)
@@ -68,6 +80,10 @@ public partial class ComboBoxControl
 
         if(x != 0)
             UserComboBox.SelectedIndex = 0;
+
+        if(x == 4)
+            UserComboBox.SelectedIndex = 3;
+
     }
 
     // Refresh the ComboBox content

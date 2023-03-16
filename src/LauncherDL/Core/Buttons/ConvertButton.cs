@@ -22,6 +22,12 @@ public class ConvertButton
             return;
         }
 
+        if(File.Exists($"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}"))
+        {
+            console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "<%14>File already Exist! or File name are the same!");
+            return;
+        }
+
         console.AddFormattedText("<#83fa57%14>[PROCESSING] <%14>Please wait until the conversion is finished.");
 
         YDL YDLInfo = new(

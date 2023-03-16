@@ -2,6 +2,12 @@
 
 public partial class MainWindow
 {
+    public ComboBoxControl comboBoxQuality = new()
+    {
+        Width = 154,
+        TextEditable = false,
+    };
+
     void InitiateStaticComponents(MainWindow mainwindow)
     {
         MainWindowStatic = mainwindow;
@@ -31,6 +37,7 @@ public partial class MainWindow
 
         Global.comboBoxType         =   mainwindow.comboBoxType;
         Global.comboBoxFormat       =   mainwindow.comboBoxFormat;
+        Global.comboBoxQuality      =   mainwindow.comboBoxQuality;
 
         Global.textBlockLink        =   mainwindow.textBlockLink;
         Global.textBlockFormat      =   mainwindow.textBlockFormat;

@@ -51,11 +51,15 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new ConvertMethodException();
 
-        var Args = $"-i \"{Link}\" -q 0 \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
+        var FFMPEG_STRINGS =
+        "-metadata description=\"Converted on LauncherDL\" " +
+        "-metadata comment=\"Converted on LauncherDL\" ";
+
+        var Args = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
         ConsoleLive.SelectedError = 2;
 
-		if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
-			Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
+        if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
+            Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
 
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.ConvertLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();

@@ -58,8 +58,8 @@
                 <DLControl:TextBlockControl x:Name="textBlockLink" Canvas.Top="69" Canvas.Left="310" Text="Link" Width="90" HorizontalAlignment="Left"/>
                 <DLControl:TextBoxControl x:Name="textBoxLink" Width="387" Canvas.Top="67" Canvas.Left="415"/>
                 <DLControl:TextBlockControl x:Name="textBlockFormat" Canvas.Top="122" Canvas.Left="310" Text="Format" Width="90" HorizontalAlignment="Left"/>
-				<DLControl:ComboBoxControl x:Name="comboBoxFormat" Canvas.Top="117" Canvas.Left="415" Width="387" TextEditable="True" TextSearch.TextPath="Name"/>
-				<DLControl:TextBlockControl x:Name="textBlockName" Canvas.Top="173" Canvas.Left="310" Text="Name" Width="90" HorizontalAlignment="Left"/>
+                <DLControl:ComboBoxControl x:Name="comboBoxFormat" Canvas.Top="117" Canvas.Left="415" Width="387" TextEditable="True"/>
+                <DLControl:TextBlockControl x:Name="textBlockName" Canvas.Top="173" Canvas.Left="310" Text="Name" Width="90" HorizontalAlignment="Left"/>
                 <DLControl:TextBoxControl x:Name="textBoxName" Width="387" Canvas.Top="171" Canvas.Left="415"/>
 
                 <!-- Buttons -->
