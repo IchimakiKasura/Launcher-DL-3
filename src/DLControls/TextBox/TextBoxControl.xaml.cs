@@ -48,10 +48,9 @@ public partial class TextBoxControl : UserControl
 
     private TextBlock Placeholder;
 
-    public TextBoxControl()
-    {
+    public TextBoxControl() =>
         InitializeComponent();
-    }
+    
 
     private void ContentLoaded(object sender, RoutedEventArgs e)
     {

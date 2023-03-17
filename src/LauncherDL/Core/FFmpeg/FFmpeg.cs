@@ -1,3 +1,4 @@
+using static LauncherDL.Core.Console_Output_Comment_Method.ConsoleOutputCheck;
 namespace LauncherDL.Core.FFmpeg;
 
 // ahaha
@@ -23,7 +24,6 @@ internal static partial class FFmpegFiles
     public static void CheckFiles()
     {
         foreach(var Files in FileNames)
-        {
             if(File.Exists($"{FFmpegPath}/{Files}"))
             {
                 #if DEBUG
@@ -39,19 +39,16 @@ internal static partial class FFmpegFiles
                     ConsoleDebug.LoadingFFmpeg(false, Files);
                 #endif
             }
-        }
-
+        
         if(ErrorOccured)
         {
-            var Filenames = "";
+            var FilesMissing = "";
 
-            foreach(var names in FileMissingOnly)
-            {
-                Filenames += $"{names}";
-            }
-
-            ConsoleOutputMethod.FFmpegOutputComment(1, Filenames);
-            ConsoleOutputMethod.FFmpegOutputComment(2);
-        } else ConsoleOutputMethod.FFmpegOutputComment(0);
+            foreach(var Names in FileMissingOnly)
+                FilesMissing += $"{Names}";
+            
+            ConsoleOutputMethod.FFmpegOutputComment(FAILED_MESSAGE, FilesMissing);
+            ConsoleOutputMethod.FFmpegOutputComment(FAILED);
+        } else ConsoleOutputMethod.FFmpegOutputComment(SUCCESS);
     }
 }

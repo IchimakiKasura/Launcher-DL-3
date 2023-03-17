@@ -1,5 +1,8 @@
 namespace LauncherDL.Core.TaskProcess;
 
+/// <summary>
+/// Where Download or Convert Task ended
+/// </summary>
 abstract class EndProcess
 {
     public static void ProcessTaskEnded()
@@ -8,11 +11,17 @@ abstract class EndProcess
 
         switch(ConsoleLive.SelectedError)
         {
-            case 2:
-                console.DLAddConsole(CONSOLE_YEY_STRING, $"<%14>File converted: \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}\"");
-            break;
+            case 1: DownloadTaskEnded(); break;
+            case 2: ConvertTaskEnded();  break;
         }
 
         WindowsComponents.FreezeComponents();
+    }
+    static void ConvertTaskEnded() =>
+        console.DLAddConsole(CONSOLE_YEY_STRING, $"<%14>File converted: \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}\"");
+    
+    static void DownloadTaskEnded()
+    {
+
     }
 }

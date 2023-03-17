@@ -8,16 +8,18 @@ internal partial class ConsoleLive
 
     static void Update_Invoked(string StringData)
     {
-        if (StringData.Contains("yt-dlp is up to date"))
-        {
-            console.DLAddConsole(CONSOLE_YEY_STRING, "<%14>File is up to date!");
-            return;
-        }
+        Console.WriteLine(StringData);
 
-        if (!StringData.Contains("yt-dlp to version"))
+        switch(StringData)
         {
-            console.DLAddConsole(CONSOLE_SYSTEM_STRING , $"<Gray%14>{StringData}");
+            case string when StringData.Contains("yt-dlp is up to date"):
+                console.DLAddConsole(CONSOLE_YEY_STRING, "<%14>File is up to date!");
+            break;
+
+            case string when StringData.Contains("yt-dlp to version"):
+                console.DLAddConsole(CONSOLE_SYSTEM_STRING , $"<Gray%14>{StringData}");
+                console.DLAddConsole(CONSOLE_YEY_STRING, "Updated!");
+            break;
         }
-        else console.DLAddConsole(CONSOLE_YEY_STRING, "Updated!");
     }
 }

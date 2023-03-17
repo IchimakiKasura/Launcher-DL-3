@@ -39,4 +39,16 @@ public abstract class CONFIG_STR
     public const string CONFIG_SECTION_GRAPHICS             = "graphics";
 
     public const string CONFIG_COLOR_CONTAINS               = "System.Windows.Media.Color";
+
+    // they called me a madman
+    public const int    CONFIG_PROPERTY_BACKGROUND_NAME     = 0;
+    public const int    CONFIG_PROPERTY_BACKGROUND_COLOR    = 1;
+    public const int    CONFIG_PROPERTY_BACKGROUND_GLOW     = 2;
+    public const int    CONFIG_PROPERTY_ALLOW_COOKIES       = 0;
+    public const int    CONFIG_PROPERTY_BROWSER_COOKIES     = 1;
+    public const int    CONFIG_PROPERTY_OUTPUT              = 0;
+    public const int    CONFIG_PROPERTY_SYSTEM_OUTPUT       = 0;
+    public const int    CONFIG_PROPERTY_FILE_TYPE           = 0;
+    public const int    CONFIG_PROPERTY_ENABLE_PLAYLIST     = 0;
+    public const int    CONFIG_PROPERTY_ANMATIONS           = 0;
 }

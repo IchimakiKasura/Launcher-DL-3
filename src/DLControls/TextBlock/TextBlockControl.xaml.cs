@@ -11,8 +11,6 @@ public partial class TextBlockControl : UserControl
         set => SetValue(TextProperty, value);
     }
 
-    public TextBlockControl()
-    {
+    public TextBlockControl() =>
         InitializeComponent();
-    }
 }

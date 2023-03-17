@@ -1,5 +1,6 @@
 using DLLanguages.Pick;
 using static LauncherDL.Core.Configuration.CONFIG_STR;
+using static LauncherDL.Core.Console_Output_Comment_Method.ConsoleOutputCheck;
 
 namespace LauncherDL.Core.Configuration;
 
@@ -11,9 +12,9 @@ public class Config
     
     public static DefaultConfig ReadConfigINI()
     {
-        string ConfigString     =   File.ReadAllText(CONFIG_NAME);
+        string  ConfigString    =   File.ReadAllText(CONFIG_NAME);
         IniData Data            =   new IniDataParser().Parse(ConfigString);
-        string LanguageCheck    =   Data[CONFIG_SECTION_APP][CONFIG_LANGUAGE];
+        string  LanguageCheck   =   Data[CONFIG_SECTION_APP][CONFIG_LANGUAGE];
 
         switch(LanguageCheck.ToLower())
         {
@@ -25,21 +26,21 @@ public class Config
         }
 
         #region Check Error part
-        CheckError(ref DefaultConfiguration.background               ,  Data[CONFIG_SECTION_BACKROUND] [0], CONFIG_BACKGROUND_NAME  );
-        CheckError(ref DefaultConfiguration.backgroundColor          ,  Data[CONFIG_SECTION_BACKROUND] [1], CONFIG_BACKGROUND_COLOR );
-        CheckError(ref DefaultConfiguration.backgroundGlow           ,  Data[CONFIG_SECTION_BACKROUND] [2], CONFIG_BACKGROUND_GLOW  );
-        CheckError(ref DefaultConfiguration.AllowCookies             ,  Data[CONFIG_SECTION_COOKIES  ] [0], CONFIG_ALLOW_COOKIES    );
-        CheckError(ref DefaultConfiguration.BrowserCookie            ,  Data[CONFIG_SECTION_COOKIES	 ] [1], CONFIG_BROWSER_COOKIES  );
-        CheckError(ref DefaultConfiguration.DefaultOutput            ,  Data[CONFIG_SECTION_FILE     ] [0], CONFIG_OUTPUT           );
-        CheckError(ref DefaultConfiguration.ShowSystemOutput         ,  Data[CONFIG_SECTION_CONSOLE  ] [0], CONFIG_SYSTEM_OUTPUT    );
-        CheckError(ref DefaultConfiguration.DefaultFileTypeOnStartUp ,  Data[CONFIG_SECTION_DROPDOWN ] [0], CONFIG_FILE_TYPE        );
-        CheckError(ref DefaultConfiguration.EnablePlaylist           ,  Data[CONFIG_SECTION_PLAYLIST ] [0], CONFIG_ENABLE_PLAYLIST  );
-        CheckError(ref DefaultConfiguration.EpicAnimations           ,  Data[CONFIG_SECTION_GRAPHICS ] [0], CONFIG_ANIMATIONS       );
+        CheckError(ref DefaultConfiguration.background               ,  Data[CONFIG_SECTION_BACKROUND][CONFIG_PROPERTY_BACKGROUND_NAME ], CONFIG_BACKGROUND_NAME  );
+        CheckError(ref DefaultConfiguration.backgroundColor          ,  Data[CONFIG_SECTION_BACKROUND][CONFIG_PROPERTY_BACKGROUND_COLOR], CONFIG_BACKGROUND_COLOR );
+        CheckError(ref DefaultConfiguration.backgroundGlow           ,  Data[CONFIG_SECTION_BACKROUND][CONFIG_PROPERTY_BACKGROUND_GLOW ], CONFIG_BACKGROUND_GLOW  );
+        CheckError(ref DefaultConfiguration.AllowCookies             ,  Data[CONFIG_SECTION_COOKIES  ][CONFIG_PROPERTY_ALLOW_COOKIES   ], CONFIG_ALLOW_COOKIES    );
+        CheckError(ref DefaultConfiguration.BrowserCookie            ,  Data[CONFIG_SECTION_COOKIES	 ][CONFIG_PROPERTY_BROWSER_COOKIES ], CONFIG_BROWSER_COOKIES  );
+        CheckError(ref DefaultConfiguration.DefaultOutput            ,  Data[CONFIG_SECTION_FILE     ][CONFIG_PROPERTY_OUTPUT          ], CONFIG_OUTPUT           );
+        CheckError(ref DefaultConfiguration.ShowSystemOutput         ,  Data[CONFIG_SECTION_CONSOLE  ][CONFIG_PROPERTY_SYSTEM_OUTPUT   ], CONFIG_SYSTEM_OUTPUT    );
+        CheckError(ref DefaultConfiguration.DefaultFileTypeOnStartUp ,  Data[CONFIG_SECTION_DROPDOWN ][CONFIG_PROPERTY_FILE_TYPE       ], CONFIG_FILE_TYPE        );
+        CheckError(ref DefaultConfiguration.EnablePlaylist           ,  Data[CONFIG_SECTION_PLAYLIST ][CONFIG_PROPERTY_ENABLE_PLAYLIST ], CONFIG_ENABLE_PLAYLIST  );
+        CheckError(ref DefaultConfiguration.EpicAnimations           ,  Data[CONFIG_SECTION_GRAPHICS ][CONFIG_PROPERTY_ANMATIONS       ], CONFIG_ANIMATIONS       );
         #endregion
 
         if(!error)
         {
-            ConsoleOutputMethod.ConfigOutputComment(0);
+            ConsoleOutputMethod.ConfigOutputComment(SUCCESS);
             
             #if DEBUG
                 ConsoleDebug.LoadConfigDone(false);
@@ -47,7 +48,7 @@ public class Config
         }
         else 
         {
-            ConsoleOutputMethod.ConfigOutputComment(2);
+            ConsoleOutputMethod.ConfigOutputComment(FAILED);
 
             #if DEBUG
                 ConsoleDebug.LoadConfigDone(true);
@@ -76,7 +77,7 @@ public class Config
         } catch(Exception e)
         {
             error = true;
-            ConsoleOutputMethod.ConfigOutputComment(1, e.Message, c);
+            ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, e.Message, c);
         }
     } 
 }

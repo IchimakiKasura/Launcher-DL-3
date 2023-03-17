@@ -78,12 +78,12 @@ public partial class ComboBoxControl
         foreach (var CBT in temp)
             UserComboBox.Items.Add(CBT);
 
-        if(x != 0)
-            UserComboBox.SelectedIndex = 0;
-
-        if(x == 4)
-            UserComboBox.SelectedIndex = 3;
-
+        UserComboBox.SelectedIndex = x switch
+        {
+            int when x != 0 => 0,
+            int when x == 4 => 3,
+            _ => 0
+        };
     }
 
     // Refresh the ComboBox content
