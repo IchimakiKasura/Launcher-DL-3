@@ -4,13 +4,13 @@ internal partial class ConsoleLive
 {
     static int TotalDuration;
     public static void ConvertLiveOutputComment(object s, DataReceivedEventArgs e) =>
-        DL_Dispatch.Invoke(()=>Concert_Invoked(e.Data),e.Data);
+        DL_Dispatch.Invoke(()=>Convert_Invoked(e.Data),e.Data);
 
-    static void Concert_Invoked(string StringData)
+    static void Convert_Invoked(string StringData)
     {
+        int CurrentTimeInt;
         string TotalTime = ConvertTotal.Match(StringData).Groups["TotalTime"].Value.Trim();
         string CurrentTime = ConvertCurrent.Match(StringData).Groups["CurrentTime"].Value.Trim();
-        int CurrentTimeInt;
 
         if (!string.IsNullOrEmpty(TotalTime))
             TotalDuration = (int)TimeSpan.Parse(TotalTime).TotalSeconds;
@@ -22,8 +22,6 @@ internal partial class ConsoleLive
         }
 
         if(StringData.Contains("error"))
-        {
-            console.DLAddConsole(CONSOLE_ERROR_STRING, "<%14>Convert failed! please report it to the author");
-        }
+            Error_Invoked();
     }
 }

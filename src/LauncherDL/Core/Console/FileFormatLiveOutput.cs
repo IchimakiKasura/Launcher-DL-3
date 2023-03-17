@@ -4,8 +4,8 @@ namespace LauncherDL.Core.ConsoleDL;
 internal partial class ConsoleLive
 {
     /// <summary>
-    /// 0 = id          <br/>
-    /// 1 = format      <br/>
+    /// 0 = Id          <br/>
+    /// 1 = Format      <br/>
     /// 2 = Resolution  <br/>
     /// 3 = FPS         <br/>
     /// 4 = Size        <br/>
@@ -54,7 +54,7 @@ internal partial class ConsoleLive
             // Takes the latest Audio format ID
             switch(FormatStrings[1])
             {
-                case "m4a": AudioOnlyID_M4A  = FormatStrings[0];                                break;
+                case "m4a" : AudioOnlyID_M4A  = FormatStrings[0];                               break;
                 case "webm": AudioOnlyID_WEBM = FormatStrings[0];                               break;
             }
         }
@@ -66,7 +66,7 @@ internal partial class ConsoleLive
             
             switch(FormatStrings[1])
             {
-                case "mp4": VID_AO  = $"{FormatStrings[0]}+{AudioOnlyID_M4A}";                  break;
+                case "mp4" : VID_AO = $"{FormatStrings[0]}+{AudioOnlyID_M4A}";                  break;
                 case "webm": VID_AO = $"{FormatStrings[0]}+{AudioOnlyID_WEBM}";                 break;
             }
         }
