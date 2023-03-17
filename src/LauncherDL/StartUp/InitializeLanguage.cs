@@ -8,25 +8,25 @@ partial class OnStartUp
         AdjustFontSize();
 
         // Buttons
-        buttonFileFormat.Text                   =   Language.Button_Format;
-        buttonDownload.Text                     =   Language.Button_Download;
-        buttonUpdate.Text                       =   Language.Button_Update;
-        buttonOpenFile.Text                     =   Language.Button_OpenFile;
+        buttonFileFormat.Text                                       =   Language.Button_Format;
+        buttonDownload.Text                                         =   Language.Button_Download;
+        buttonUpdate.Text                                           =   Language.Button_Update;
+        buttonOpenFile.Text                                         =   Language.Button_OpenFile;
 
         // Placeholders
-        textBoxLink.TextPlaceholder             =   Language.Placeholder_Link;
-        textBoxName.TextPlaceholder             =   Language.Placeholder_Optional;
+        textBoxLink.TextPlaceholder                                 =   Language.Placeholder_Link;
+        textBoxName.TextPlaceholder                                 =   Language.Placeholder_Optional;
 
         // ComboBox
-        comboBoxType.ComboBoxTypes[0].Content   =   Language.Types_Custom;
-        comboBoxType.ComboBoxTypes[1].Content   =   Language.Types_Video;
-        comboBoxType.ComboBoxTypes[2].Content   =   Language.Types_Audio;
-        comboBoxType.ComboBoxTypes[3].Content   =   Language.Types_Convert;
+        ComboBoxList.ComboBoxTypes[TypeList.CustomType ].Content    =   Language.Types_Custom;
+        ComboBoxList.ComboBoxTypes[TypeList.VideoType  ].Content    =   Language.Types_Video;
+        ComboBoxList.ComboBoxTypes[TypeList.AudioType  ].Content    =   Language.Types_Audio;
+        ComboBoxList.ComboBoxTypes[TypeList.ConvertType].Content    =   Language.Types_Convert;
 
-        textBlockLink.Text                      =   Language.Label_Link;
-        textBlockFormat.Text                    =   Language.Label_Format;
-        textBlockName.Text                      =   Language.Label_Name;
-        textBlockType.Text                      =   Language.Label_Type;
+        textBlockLink.Text                                          =   Language.Label_Link;
+        textBlockFormat.Text                                        =   Language.Label_Format;
+        textBlockName.Text                                          =   Language.Label_Name;
+        textBlockType.Text                                          =   Language.Label_Type;
     }
 
     private static async void AdjustFontSize()

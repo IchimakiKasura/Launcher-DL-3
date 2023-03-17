@@ -26,6 +26,8 @@ internal class EventHandlers
         #endregion
 
         comboBoxType.OnItemChange   +=      TypeComboBox.ItemChanged;
+        comboBoxFormat.OnItemChange +=      FormatComboBox.ItemChanged;
+        comboBoxQuality.OnItemChange+=      QualityComboBox.ItemChanged;
     }
 }
 

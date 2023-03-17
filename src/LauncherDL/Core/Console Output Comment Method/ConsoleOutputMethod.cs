@@ -1,15 +1,21 @@
 ﻿namespace LauncherDL.Core.Console_Output_Comment_Method;
 
-// They call me a madman
+public enum ConsoleOutputCheck
+{
+    SUCCESS,
+    FAILED_MESSAGE,
+    FAILED
+}
+
 internal static partial class ConsoleOutputMethod
 {
+    public const int TYPE = 0, FORMAT = 1, QUALITY = 2;
+
     /// <summary>
     /// extend ConsoleControl
     /// </summary>
     public static void DLAddConsole(this ConsoleControl console,string TypeString, string FormattedText, bool Italic = false, bool NoNL = false)
     {
-        // Check if its a "SYSTEM" and systemoutput is enabled
-
         switch(TypeString)
         {
             case string when TypeString.Contains(CONSOLE_SYSTEM_STRING) && config.ShowSystemOutput:
@@ -22,67 +28,66 @@ internal static partial class ConsoleOutputMethod
         };
     }
 
-    public static void          StartUpOutputComments()
+    public static void StartUpOutputComments()
     {
-        console.AddFormattedText                                    (CONSOLE_START);
-        console.Break                                               ("Gray");
+        console.AddFormattedText(CONSOLE_START);
+        console.Break("Gray");
 
-        console.AddFormattedText                                    ("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
+        console.AddFormattedText("<>welcome, <#ff4747%20|ExtraBlack>Hutao <>here!");
 
         // we do a little troll
         #if !DEBUG
-            InitiateTheWindow.InitiateMePlease                      = "Initiate";
+            InitiateTheWindow.InitiateMePlease = "Initiate";
         #endif
     }
 
-    public async static void    ConfigOutputComment(ConsoleOutputCheck IsSuccess, string error = default, string Name = default)
+    public async static void ConfigOutputComment(ConsoleOutputCheck IsSuccess, string error = default, string Name = default)
     {
-        await WindowsComponents.WindowAwaitLoad                     (console.IsLoaded);
+        await WindowsComponents.WindowAwaitLoad(console.IsLoaded);
         
         switch(IsSuccess)
         {
-            case ConsoleOutputCheck.SUCCESS: console.DLAddConsole   (CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>Config loaded");
+            case ConsoleOutputCheck.SUCCESS: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>Config loaded");
             break;
 
             case ConsoleOutputCheck.FAILED_MESSAGE:
-                console.DLAddConsole                                (CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: loading [ {Name} ]");
-                console.AddFormattedText                            ($"<DimGray%12>ERROR: {error}", true);
+                console.DLAddConsole(CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: loading [ {Name} ]");
+                console.AddFormattedText($"<DimGray%12>ERROR: {error}", true);
             break;
 
-            case ConsoleOutputCheck.FAILED: console.DLAddConsole    (CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>Default Config loaded");
+            case ConsoleOutputCheck.FAILED: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>Default Config loaded");
             break;
         }
     }
 
-    public async static void    FFmpegOutputComment(ConsoleOutputCheck IsSuccess, string Filename = default)
+    public async static void FFmpegOutputComment(ConsoleOutputCheck IsSuccess, string Filename = default)
     {
-        await WindowsComponents.WindowAwaitLoad                     (console.IsLoaded);
+        await WindowsComponents.WindowAwaitLoad(console.IsLoaded);
 
         switch(IsSuccess)
         {
-            case ConsoleOutputCheck.SUCCESS: console.DLAddConsole   (CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>FFmpeg is Available");
+            case ConsoleOutputCheck.SUCCESS: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>FFmpeg is Available");
             break;
 
             case ConsoleOutputCheck.FAILED_MESSAGE:
-                console.DLAddConsole                                (CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: Some files are missing!");
-                console.AddFormattedText                            ($"<DimGray%12>ERROR: {Filename}", true);
+                console.DLAddConsole(CONSOLE_SYSTEM_STRING, $"<Red%14>FAILED <Gray%14>ERROR: Some files are missing!");
+                console.AddFormattedText($"<DimGray%12>ERROR: {Filename}", true);
             break;
 
-            case ConsoleOutputCheck.FAILED: console.DLAddConsole    (CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>FFmpeg is Unavailable");
+            case ConsoleOutputCheck.FAILED: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>FFmpeg is Unavailable");
             break;
         }
     }
 
-    public static void          TypeChangedOutputComment() =>
-        console.DLAddConsole                                        (CONSOLE_SYSTEM_STRING, $"<Gray%14>Changed TYPE to {comboBoxType.GetItemContent}");
-    
-    public static void          NoLinkOutputComment() =>
-        console.DLAddConsole                                        (CONSOLE_ERROR_SOFT_STRING, "<%14>No Link provided or Link is invalid");
-}
+    public static void NoLinkOutputComment() =>
+        console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "<%14>No Link provided or Link is invalid");
 
-public enum ConsoleOutputCheck
-{
-    SUCCESS,
-    FAILED_MESSAGE,
-    FAILED
+    public static void ComboBoxChangedOutputComment(int ComboBoxControlType) =>
+        console.DLAddConsole(CONSOLE_SYSTEM_STRING, ComboBoxControlType switch
+        {
+            TYPE    => $"<Gray%14>Changed TYPE to {comboBoxType.GetItemContent}",
+            FORMAT  => $"<Gray%14>Changed FORMAT to {comboBoxFormat.GetItemContent}",
+            QUALITY => $"<Gray%14>Changed QUALITY to {comboBoxQuality.GetItemContent}",
+            _       => null
+        });
 }

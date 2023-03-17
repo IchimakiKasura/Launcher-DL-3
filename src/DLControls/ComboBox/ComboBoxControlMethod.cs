@@ -1,58 +1,14 @@
 namespace DLControls;
 
-public partial class ComboBoxControl
-{
-    public List<ComboBoxItem> ComboBoxTypes = new() { new(),new(),new(),new() };
-    
-    #region Format ComboBox List
-    public List<ComboBoxItem> ComboBoxAudioFormats = new()
-    {
-        new() { Content="mp3"  },
-        new() { Content="m4a"  },
-        new() { Content="mp4"  },
-        new() { Content="wav"  },
-        new() { Content="auto" },
-    };
-    public List<ComboBoxItem> ComboBoxVideoFormats = new()
-    {
-        new() { Content="mp4"  },
-        new() { Content="mkv"  },
-        new() { Content="webm" },
-        new() { Content="flv"  },
-        new() { Content="auto" },
-    };
-    public List<ComboBoxItem> ComboBoxConvertFormats = new()
-    {
-        new() { Content="mp4"  },
-        new() { Content="mp3"  },
-        new() { Content="flv"  },
-        new() { Content="webm" },
-        new() { Content="m4a"  },
-        new() { Content="avi"  },
-        new() { Content="wmv"  },
-        new() { Content="wma"  },
-        new() { Content="ogg"  },
-        new() { Content="aac"  },
-        new() { Content="wav"  },
-    };
-    public List<ComboBoxItem> ComboBoxFormatQuality = new()
-    {
-        new() { Content="Highest"	,	Uid="-crf 0  -preset slow	                 " },
-        new() { Content="High"		,	Uid="-crf 10 -preset slow      -profile main " },
-        new() { Content="Medium"	,	Uid="-crf 17 -preset slow      -profile main " },
-        new() { Content="Normal"	,	Uid="-crf 23 -preset medium    -profile main " },
-        new() { Content="Low"		,	Uid="-crf 30 -preset fast      -profile main " },
-        new() { Content="Lowest"	,	Uid="-crf 45 -preset veryfast  -profile main " },
-        new() { Content="Potato"	,	Uid="-crf 50 -preset ultrafast -profile main " },
-    };
-    #endregion
 
+public partial class ComboBoxControl
+{    
     public void ClearItems()                  => UserComboBox.Items.Clear();
-    public void AddCustomTypeList()           => AutoAdd(0);
-    public void AddAudioTypeList()            => AutoAdd(1);
-    public void AddVideoTypeList()            => AutoAdd(2);
-    public void AddConvertTypeList()          => AutoAdd(3);
-    public void AddQualityTypeList()          => AutoAdd(4);
+    public void AddCustomTypeList()           => AutoAdd(TypeList.CustomType );
+    public void AddVideoTypeList()            => AutoAdd(TypeList.VideoType  );
+    public void AddAudioTypeList()            => AutoAdd(TypeList.AudioType  );
+    public void AddConvertTypeList()          => AutoAdd(TypeList.ConvertType);
+    public void AddQualityTypeList()          => AutoAdd(TypeList.QualityType);
     public void AddFormatList(List<FormatList> FormatListArgs)
     {
         if(!TextEditable) return;
@@ -68,11 +24,11 @@ public partial class ComboBoxControl
         
         switch(x)
         {
-            case 0: temp = ComboBoxTypes;           break;
-            case 1: temp = ComboBoxAudioFormats;    break;
-            case 2: temp = ComboBoxVideoFormats;    break;
-            case 3: temp = ComboBoxConvertFormats;  break;
-            case 4: temp = ComboBoxFormatQuality;	break;
+            case 0: temp = ComboBoxList.ComboBoxTypes;           break;
+            case 1: temp = ComboBoxList.ComboBoxVideoFormats;    break;
+            case 2: temp = ComboBoxList.ComboBoxAudioFormats;    break;
+            case 3: temp = ComboBoxList.ComboBoxConvertFormats;  break;
+            case 4: temp = ComboBoxList.ComboBoxFormatQuality;	break;
         }
 
         foreach (var CBT in temp)

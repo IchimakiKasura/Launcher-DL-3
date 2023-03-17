@@ -51,6 +51,9 @@ public partial class ComboBoxControl : UserControl
     public string GetItemUID =>
         ((ComboBoxItem)UserComboBox.SelectedItem).Uid as String;
 
+    public bool HasItems =>
+        UserComboBox.HasItems;
+
     public bool isTextFocused;
     public RoutedEventHandler OnItemChange;
     public TextBox MainText;

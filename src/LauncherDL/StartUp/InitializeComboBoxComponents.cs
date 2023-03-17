@@ -10,11 +10,12 @@ partial class OnStartUp
 
         await WindowsComponents.WindowAwaitLoad(comboBoxType.IsLoaded);
 
+        comboBoxQuality.AddQualityTypeList();
+        comboBoxType.AddCustomTypeList();
+
         comboBoxType.ItemIndex              =   config.DefaultFileTypeOnStartUp;
         comboBoxType.ContentAlignment       =   HorizontalAlignment.Center;
         comboBoxType.ShowVerticalScrollbar  =   false;
-
-        comboBoxQuality.AddQualityTypeList();
-        comboBoxType.AddCustomTypeList();
+        comboBoxQuality.ItemIndex           =   3;
     }
 }

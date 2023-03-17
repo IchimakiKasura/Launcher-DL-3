@@ -4,7 +4,7 @@ public class TypeComboBox
 {
     public static void ItemChanged(object s, RoutedEventArgs e)
     {
-        ConsoleOutputMethod.TypeChangedOutputComment();
+        ConsoleOutputMethod.ComboBoxChangedOutputComment(ConsoleOutputMethod.TYPE);
         
         comboBoxFormat.ClearItems();
 

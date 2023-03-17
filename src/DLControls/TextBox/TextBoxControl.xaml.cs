@@ -51,7 +51,6 @@ public partial class TextBoxControl : UserControl
     public TextBoxControl() =>
         InitializeComponent();
     
-
     private void ContentLoaded(object sender, RoutedEventArgs e)
     {
         Grid UserGrid = GetTemplateResource<Grid>("UserTextBoxGRID", UserTextBox);

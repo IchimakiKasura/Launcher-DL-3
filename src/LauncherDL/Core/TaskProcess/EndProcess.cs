@@ -15,6 +15,12 @@ abstract class EndProcess
             case 2: ConvertTaskEnded();  break;
         }
 
+		if (MainWindowStatic.IsActive)
+		{
+			TaskbarProgressBar.ProgressValue = 0;
+			WindowsComponents.WindowTaskBarFlash();
+		}
+
         WindowsComponents.FreezeComponents();
     }
     static void ConvertTaskEnded() =>
