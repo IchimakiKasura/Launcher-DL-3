@@ -18,7 +18,9 @@ internal partial class ConsoleLive
         if (!string.IsNullOrEmpty(CurrentTime))
         {
             CurrentTimeInt = (int)TimeSpan.Parse(CurrentTime).TotalSeconds;
-            progressBar.Value = (double)((decimal)CurrentTimeInt / (decimal)TotalDuration) * 100;
+            double ProgressValue = (double)((decimal)CurrentTimeInt / (decimal)TotalDuration) * 100;
+            TaskbarProgressBar.ProgressValue = ProgressValue;
+            progressBar.Value = ProgressValue;
         }
 
         if(StringData.Contains("error"))

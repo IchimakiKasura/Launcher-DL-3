@@ -13,6 +13,10 @@
         Effect="{StaticResource WindowDropShadow}"
         FontFamily="{StaticResource DefaultFont}">
 
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="TaskbarProgressBar" ProgressState="Normal" />
+    </Window.TaskbarItemInfo>
+
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0"
                                     CornerRadius="0"

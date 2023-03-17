@@ -5,9 +5,11 @@ class WindowsComponents
     static DoubleAnimation WindowOpacity;
     static ColorAnimation WindowAnimation;
 
+    // Onload Event
     public static void WindowLoaded(object sender, RoutedEventArgs e) =>
         new TransparencyConverter(MainWindowStatic).MakeTransparent();
 
+    // Window Focus or unfocused
     public static void WindowFocusAnimation()
     {
         void Focus()
@@ -59,6 +61,21 @@ class WindowsComponents
         console.manualScrollToEnd();
     }
 
+    // Windows Taskbar flash
+    public static bool WindowTaskBarFlash()
+    {
+        IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(MainWindowStatic).Handle;
+        FLASHWINFO fInfo = new FLASHWINFO();
+
+        fInfo.cbSize = Convert.ToUInt32(Marshal.SizeOf(fInfo));
+        fInfo.hwnd = hWnd;
+        fInfo.dwFlags = FLASHW_ALL | FLASHW_TIMERNOFG;
+        fInfo.uCount = uint.MaxValue;
+        fInfo.dwTimeout = 0;
+
+        return FlashWindowEx(ref fInfo);
+    }
+
     public static async Task WindowAwaitLoad(bool a) =>
         await Task.Run(()=>{ MainWindowStatic.Dispatcher.Invoke(async()=>{ while(!a) await Task.Delay(100); }); });
   
@@ -79,16 +96,34 @@ class WindowsComponents
             comboBoxQuality
         };
 
-        if(comboBoxType.ItemIndex == 3)
-            buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
-
-        if(comboBoxType.ItemIndex != 0)
-            buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
-
         foreach (var CL in ControlLists)
             CL.IsEnabled = !CL.IsEnabled;
 
-        if(!comboBoxType.IsEnabled) WindowProgressBar(ProgressBarState.Show);
-            else WindowProgressBar(ProgressBarState.Hide);
+        // Old
+        // if(comboBoxType.ItemIndex == 3)
+        //     buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
+
+        // if(comboBoxType.ItemIndex != 0)
+        //     buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
+
+        // if(!comboBoxType.IsEnabled) WindowProgressBar(ProgressBarState.Show);
+        //     else WindowProgressBar(ProgressBarState.Hide);
+
+        // New
+        switch(comboBoxType)
+        {
+            default:
+                if(!comboBoxType.IsEnabled) WindowProgressBar(ProgressBarState.Show);
+                    else WindowProgressBar(ProgressBarState.Hide);
+            break;
+
+            case ComboBoxControl when comboBoxType.ItemIndex == 3:
+                buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
+            break;
+
+            case ComboBoxControl when comboBoxType.ItemIndex != 0:
+                buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
+            break;
+        };
     }
 }

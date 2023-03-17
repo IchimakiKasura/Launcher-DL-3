@@ -56,26 +56,25 @@ internal partial class ConsoleLive
             }
         else
         {
-            // Puts the latest Audio format ID to the video that has no 
-            // Audio
+            // Puts the latest Audio format ID to the video that has no Audio
             if(HasAudio) return;
             
-            // new  (it works but i'll leave it commented out)
-            // VID_AO = FormatNames[FORMAT] switch
-            // {
-            //     string when FormatNames[FORMAT].Contains("mp4") =>
-            //         $"{FormatNames[ID]}+{AudioOnlyID_M4A}",
-            //     string when FormatNames[FORMAT].Contains("webm")=>
-            //         $"{FormatNames[ID]}+{AudioOnlyID_WEBM}",
-            //     _ => null
-            // };
-
-            // old
-            switch(FormatNames[FORMAT])
+            // New
+            VID_AO = FormatNames[FORMAT] switch
             {
-                case "mp4" : VID_AO = $"{FormatNames[ID]}+{AudioOnlyID_M4A}";                   break;
-                case "webm": VID_AO = $"{FormatNames[ID]}+{AudioOnlyID_WEBM}";                  break;
-            }
+                string when FormatNames[FORMAT].Contains("mp4") =>
+                    $"{FormatNames[ID]}+{AudioOnlyID_M4A}",
+                string when FormatNames[FORMAT].Contains("webm")=>
+                    $"{FormatNames[ID]}+{AudioOnlyID_WEBM}",
+                _ => null
+            };
+
+            // Old
+            // switch(FormatNames[FORMAT])
+            // {
+            //     case "mp4" : VID_AO = $"{FormatNames[ID]}+{AudioOnlyID_M4A}";                   break;
+            //     case "webm": VID_AO = $"{FormatNames[ID]}+{AudioOnlyID_WEBM}";                  break;
+            // }
         }
 
         TemporaryList.Add(new()

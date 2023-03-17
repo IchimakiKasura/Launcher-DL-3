@@ -43,6 +43,8 @@ public partial class MainWindow
         Global.textBlockFormat      =   mainwindow.textBlockFormat;
         Global.textBlockName        =   mainwindow.textBlockName;
         Global.textBlockType        =   mainwindow.textBlockType;
+
+        Global.TaskbarProgressBar   =   mainwindow.TaskbarProgressBar;
     }
 
 }

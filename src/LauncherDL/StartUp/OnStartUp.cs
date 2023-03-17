@@ -18,11 +18,11 @@ partial class OnStartUp
 
         InitiateContextMenu();
 
+        InitiateProgressBar();
+
         ConsoleOutputMethod.StartUpOutputComments();
 
-        progressBar = new() { Width = 502 };
-        Canvas.SetLeft(progressBar, 300);
-        Canvas.SetTop(progressBar, 434);
+        WindowsComponents.WindowTaskBarFlash();
 
         GC.Collect();
         

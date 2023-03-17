@@ -81,6 +81,7 @@
     <Using Include="System.Reflection" />
     <Using Include="System.Diagnostics" />
     <Using Include="System.Windows.Input" />
+    <Using Include="System.Windows.Shell" />
     <Using Include="System.Windows.Media" />
     <Using Include="System.Windows.Interop" />
     <Using Include="System.Threading.Tasks" />

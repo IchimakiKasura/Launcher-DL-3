@@ -43,6 +43,23 @@ public partial class Global
     /// <summary>Process Start</summary>
     public static Process ProcessTaskVariable;
 
+    #region Window Flash
+    [DllImport("user32.dll", CallingConvention = CallingConvention.Cdecl)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
+    public const uint FLASHW_ALL = 3;
+    public const uint FLASHW_TIMERNOFG = 12;
+    [StructLayout(LayoutKind.Sequential)]
+    /// <summary>Window Flashing</summary>
+    public struct FLASHWINFO
+    {
+        public uint cbSize;
+        public IntPtr hwnd;
+        public uint dwFlags;
+        public uint uCount;
+        public uint dwTimeout;
+    }
+    #endregion
 
 }
 
