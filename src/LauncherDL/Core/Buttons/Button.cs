@@ -35,7 +35,6 @@ public abstract class BodyButton
             char[] arr              = UnwantedChars.ToCharArray();
 
             foreach (char ch in arr)
-            {
                 if (textBoxLink.Text.Contains(ch))
                 {
                     MessageBox.Show("File name cannot contain the following characters:"+
@@ -45,7 +44,6 @@ public abstract class BodyButton
                                     MessageBoxImage.Error);
                     IsFailed = true;
                }
-           }
         }
 
         if(!IsFailed)
