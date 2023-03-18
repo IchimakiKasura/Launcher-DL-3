@@ -9,6 +9,9 @@ public abstract class FileFormatButton
         var IsSuccess = BodyButton.CheckLinkValidation();
         if(!IsSuccess) return;
 
+        // Resets Metadata
+        Old_Title = Old_Album = Old_Album_Artist = Old_Year = Old_Genre = null;
+
         console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
 
         YDL YDLInfo = new(

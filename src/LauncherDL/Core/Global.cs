@@ -62,5 +62,14 @@ public partial class Global
     }
     #endregion
 
+    #region Metadata
+    public static string
+    Old_Title,
+    Old_Album,
+    Old_Album_Artist,
+    Old_Year,
+    Old_Genre;
+    #endregion
+
 }
 
