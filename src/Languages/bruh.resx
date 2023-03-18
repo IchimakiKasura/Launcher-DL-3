@@ -126,6 +126,9 @@
   <data name="Button_Format" xml:space="preserve">
     <value>U gonna format Akira?</value>
   </data>
+  <data name="Button_Metadata" xml:space="preserve">
+    <value>Meta Facebook</value>
+  </data>
   <data name="Button_OpenFile" xml:space="preserve">
     <value>Open File?</value>
   </data>

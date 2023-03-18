@@ -120,12 +120,12 @@ public partial class ConsoleControl
     public void Break() => Break("White");
 
     /// <summary>
-    /// Add line "==========================================="
+    /// Add line "==============================================="
     /// </summary>
     /// <param name="color">color</param>
     public void Break(string color)
     {
-        TextRange tr = new(UserRichTextBox.Document.ContentEnd, UserRichTextBox.Document.ContentEnd) { Text = "===========================================\r" };
+        TextRange tr = new(UserRichTextBox.Document.ContentEnd, UserRichTextBox.Document.ContentEnd) { Text = "===============================================\r" };
         tr.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color));
         //tr.ApplyPropertyValue(Control.FontSizeProperty, size);
     }

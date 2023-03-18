@@ -12,9 +12,10 @@ partial class OnStartUp
         buttonDownload.Text                                         =   Language.Button_Download;
         buttonUpdate.Text                                           =   Language.Button_Update;
         buttonOpenFile.Text                                         =   Language.Button_OpenFile;
+        buttonMetadata.Text                                         =   Language.Button_Metadata;
 
-        // Placeholders
-        textBoxLink.TextPlaceholder                                 =   Language.Placeholder_Link;
+		// Placeholders
+		textBoxLink.TextPlaceholder                                 =   Language.Placeholder_Link;
         textBoxName.TextPlaceholder                                 =   Language.Placeholder_Optional;
 
         // ComboBox

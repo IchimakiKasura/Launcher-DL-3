@@ -126,6 +126,9 @@
   <data name="Button_Format" xml:space="preserve">
     <value>Pormat ng File</value>
   </data>
+  <data name="Button_Metadata" xml:space="preserve">
+    <value>I-edit ang Metadata</value>
+  </data>
   <data name="Button_OpenFile" xml:space="preserve">
     <value>Buksan ang File</value>
   </data>

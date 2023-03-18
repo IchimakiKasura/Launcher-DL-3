@@ -22,6 +22,7 @@ internal class EventHandlers
         buttonDownload.Click        +=      DownloadButton.ButtonClicked;
         buttonUpdate.Click          +=      UpdateButton.ButtonClicked;
         buttonOpenFile.Click        +=      FileButton.ButtonClicked;
+        buttonMetadata.Click        +=      MetadataButton.ButtonClicked;
 
         #endregion
 

@@ -10,6 +10,7 @@ public partial class Global
     public static   ButtonControl           buttonDownload      { get; set; }
     public static   ButtonControl           buttonUpdate        { get; set; }
     public static   ButtonControl           buttonOpenFile      { get; set; }
+    public static   ButtonControl           buttonMetadata      { get; set; }
     #endregion
 
     public static   Border                  windowDrag          { get; set; }

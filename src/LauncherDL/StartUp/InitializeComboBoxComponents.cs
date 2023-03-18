@@ -17,5 +17,7 @@ partial class OnStartUp
         comboBoxType.ContentAlignment       =   HorizontalAlignment.Center;
         comboBoxType.ShowVerticalScrollbar  =   false;
         comboBoxQuality.ItemIndex           =   3;
+        comboBoxQuality.Width               =   207;
+
     }
 }

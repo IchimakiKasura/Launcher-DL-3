@@ -17,6 +17,7 @@
 		public string? Button_OpenFile { get; set; }
 		public string? Button_OpenFolder { get; set; }
 		public string? Button_Update { get; set; }
+		public string? Button_Metadata { get; set; }
 		public string? Formats_3gp { get; set; }
 		public string? Formats_flv { get; set; }
 		public string? Formats_m4a { get; set; }
@@ -64,6 +65,7 @@
 			Button_OpenFile = Default.Button_OpenFile;
 			Button_OpenFolder = Default.Button_OpenFolder;
 			Button_Update = Default.Button_Update;
+			Button_Metadata = Default.Button_Metadata;
 			Formats_3gp = Default.Formats_3gp;
 			Formats_flv = Default.Formats_flv;
 			Formats_m4a = Default.Formats_m4a;
@@ -99,6 +101,7 @@
 			Button_OpenFile = Japanese.Button_OpenFile;
 			Button_OpenFolder = Japanese.Button_OpenFolder;
 			Button_Update = Japanese.Button_Update;
+			Button_Metadata = Japanese.Button_Metadata;
 			Formats_3gp = Japanese.Formats_3gp;
 			Formats_flv = Japanese.Formats_flv;
 			Formats_m4a = Japanese.Formats_m4a;
@@ -134,6 +137,7 @@
 			Button_OpenFile = English.Button_OpenFile;
 			Button_OpenFolder = English.Button_OpenFolder;
 			Button_Update = English.Button_Update;
+			Button_Metadata = English.Button_Metadata;
 			Formats_3gp = English.Formats_3gp;
 			Formats_flv = English.Formats_flv;
 			Formats_m4a = English.Formats_m4a;
@@ -169,6 +173,7 @@
 			Button_OpenFile = Tagalog.Button_OpenFile;
 			Button_OpenFolder = Tagalog.Button_OpenFolder;
 			Button_Update = Tagalog.Button_Update;
+			Button_Metadata = Tagalog.Button_Metadata;
 			Formats_3gp = Tagalog.Formats_3gp;
 			Formats_flv = Tagalog.Formats_flv;
 			Formats_m4a = Tagalog.Formats_m4a;
@@ -204,6 +209,7 @@
 			Button_OpenFile = bruh.Button_OpenFile;
 			Button_OpenFolder = bruh.Button_OpenFolder;
 			Button_Update = bruh.Button_Update;
+			Button_Metadata = bruh.Button_Metadata;
 			Formats_3gp = bruh.Formats_3gp;
 			Formats_flv = bruh.Formats_flv;
 			Formats_m4a = bruh.Formats_m4a;

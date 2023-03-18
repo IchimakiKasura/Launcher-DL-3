@@ -106,6 +106,15 @@ namespace DLControls {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /guicomp;component/Images/hime.jpg.
+        /// </summary>
+        public static string HimeImage {
+            get {
+                return ResourceManager.GetString("HimeImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] Icon {
@@ -121,6 +130,15 @@ namespace DLControls {
         public static string MeguminImage {
             get {
                 return ResourceManager.GetString("MeguminImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /guicomp;component/Images/ButtonIcons/metadata.png.
+        /// </summary>
+        public static string MetadataIcon {
+            get {
+                return ResourceManager.GetString("MetadataIcon", resourceCulture);
             }
         }
         

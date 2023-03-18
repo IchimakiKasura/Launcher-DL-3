@@ -88,6 +88,15 @@ namespace DLLanguages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Metadata.
+        /// </summary>
+        public static string Button_Metadata {
+            get {
+                return ResourceManager.GetString("Button_Metadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open File.
         /// </summary>
         public static string Button_OpenFile {

@@ -22,7 +22,7 @@ public class TypeComboBox
         }
 
         // Resets cbf width
-        comboBoxFormat.Width = 387;
+        comboBoxFormat.Width = 440;
         if(windowCanvas.Children.Contains(comboBoxQuality))
             windowCanvas.Children.Remove(comboBoxQuality);
 

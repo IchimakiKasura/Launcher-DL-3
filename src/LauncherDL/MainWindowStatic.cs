@@ -24,6 +24,7 @@ public partial class MainWindow
         Global.buttonDownload       =   mainwindow.buttonDownload;
         Global.buttonUpdate         =   mainwindow.buttonUpdate;
         Global.buttonOpenFile       =   mainwindow.buttonOpenFile;
+        Global.buttonMetadata       =   mainwindow.buttonMetadata;
 
         Global.windowDrag           =   mainwindow.windowDrag;
         Global.windowInnerBG        =   mainwindow.windowInnerBG;

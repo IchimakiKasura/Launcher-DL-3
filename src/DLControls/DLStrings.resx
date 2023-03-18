@@ -137,6 +137,10 @@
     <value>/guicomp;component/Images/ButtonIcons/file format.png</value>
     <comment>File format Icon</comment>
   </data>
+  <data name="HimeImage" xml:space="preserve">
+    <value>/guicomp;component/Images/hime.jpg</value>
+    <comment>Hime Image</comment>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\Icon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -144,6 +148,10 @@
   <data name="MeguminImage" xml:space="preserve">
     <value>/guicomp;component/Images/megumin.jpg</value>
     <comment>My Wife</comment>
+  </data>
+  <data name="MetadataIcon" xml:space="preserve">
+    <value>/guicomp;component/Images/ButtonIcons/metadata.png</value>
+    <comment>Metadata Icon</comment>
   </data>
   <data name="OpenFileIcon" xml:space="preserve">
     <value>/guicomp;component/Images/ButtonIcons/open file.png</value>

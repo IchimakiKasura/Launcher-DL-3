@@ -8,8 +8,8 @@
         WindowStyle="None"
         Background="Transparent"
         Title="Launcher DL"
-        Height="500"
-        Width="850"
+        Height="560"
+        Width="900"
         Effect="{StaticResource WindowDropShadow}"
         FontFamily="{StaticResource DefaultFont}">
 
@@ -39,41 +39,42 @@
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Images/background.jpg" Opacity="0.5"/>
             </Border.Background>
             <Canvas x:Name="windowCanvas" CacheMode="BitmapCache" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased">
-                <Border Background="#A34F002F" CornerRadius="10,10,0,0" Height="35" Opacity="1" x:Name="windowDrag" Width="830">
+                <Border Background="#A34F002F" CornerRadius="10,10,0,0" Height="35" Opacity="1" x:Name="windowDrag" Width="880">
                     <Grid>
 
-                        <Image IsHitTestVisible="False" Source="{Binding Source={x:Static DLControl:DLStrings.Icon}}" Margin="8,0,801,0"/>
+                        <Image IsHitTestVisible="False" Source="{Binding Source={x:Static DLControl:DLStrings.Icon}}" Margin="8,0,851,0"/>
                         <TextBlock Text="Launcher DL" Foreground="White" FontWeight="Medium"  FontSize="14" Padding="34,6.5,0,0" IsHitTestVisible="False"/>
 
                         <Button x:Name="CloseButton"
                                         Content="✕"
                                         Style="{StaticResource ExitButtonAlt}"
-                                        Margin="780,0,0,0" />
+                                        Margin="830,0,0,0" />
 
                         <Button x:Name="Minimize"
                                         Content="—"
                                         Style="{StaticResource MinimizeButtonAlt}"
-                                        Margin="730,0,50,0" />
+                                        Margin="780,0,50,0" />
 
                     </Grid>
                 </Border>
 
                 <!-- Texbox w/ Text labels -->
                 <DLControl:TextBlockControl x:Name="textBlockLink" Canvas.Top="69" Canvas.Left="310" Text="Link" Width="90" HorizontalAlignment="Left"/>
-                <DLControl:TextBoxControl x:Name="textBoxLink" Width="387" Canvas.Top="67" Canvas.Left="415"/>
+                <DLControl:TextBoxControl x:Name="textBoxLink" Width="440" Canvas.Top="67" Canvas.Left="415" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <DLControl:TextBlockControl x:Name="textBlockFormat" Canvas.Top="122" Canvas.Left="310" Text="Format" Width="90" HorizontalAlignment="Left"/>
-                <DLControl:ComboBoxControl x:Name="comboBoxFormat" Canvas.Top="117" Canvas.Left="415" Width="387" TextEditable="True"/>
+                <DLControl:ComboBoxControl x:Name="comboBoxFormat" Canvas.Top="117" Canvas.Left="415" Width="440" TextEditable="True"/>
                 <DLControl:TextBlockControl x:Name="textBlockName" Canvas.Top="173" Canvas.Left="310" Text="Name" Width="90" HorizontalAlignment="Left"/>
-                <DLControl:TextBoxControl x:Name="textBoxName" Width="387" Canvas.Top="171" Canvas.Left="415"/>
+                <DLControl:TextBoxControl x:Name="textBoxName" Width="440" Canvas.Top="171" Canvas.Left="415"/>
 
                 <!-- Buttons -->
-                <DLControl:ButtonControl x:Name="buttonFileFormat" Margin="24,155,556,261"/>
-                <DLControl:ButtonControl x:Name="buttonDownload" Margin="24,231,556,183"/>
-                <DLControl:ButtonControl x:Name="buttonUpdate" Margin="24,309,556,105"/>
-                <DLControl:ButtonControl x:Name="buttonOpenFile" Margin="24,387,556,29"/>
+                <DLControl:ButtonControl x:Name="buttonFileFormat" Margin="24,140,556,261"/>
+                <DLControl:ButtonControl x:Name="buttonDownload" Margin="24,216,556,183"/>
+                <DLControl:ButtonControl x:Name="buttonUpdate" Margin="24,294,556,105"/>
+                <DLControl:ButtonControl x:Name="buttonOpenFile" Margin="24,372,556,29"/>
+                <DLControl:ButtonControl x:Name="buttonMetadata" Margin="24,450,556,29"/>
 
                 <!-- Console -->
-                <DLControl:ConsoleControl x:Name="console" ConsoleHeight="217" ConsoleWidth="502" Margin="300,231,27,57"/>
+                <DLControl:ConsoleControl x:Name="console" ConsoleHeight="273" ConsoleWidth="555" Margin="300,231,27,57"/>
 
                 <!-- Type -->
                 <DLControl:TextBlockControl x:Name="textBlockType" Canvas.Top="50" Canvas.Left="70" Text="Download Type" Width="157" HorizontalAlignment="Center" VerticalAlignment="Center"/>

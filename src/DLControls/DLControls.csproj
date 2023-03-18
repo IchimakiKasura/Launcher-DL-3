@@ -48,12 +48,14 @@
     <Resource Include="..\Images\ButtonIcons\file format.png" Link="Images\ButtonIcons\file format.png" />
     <Resource Include="..\Images\ButtonIcons\update.png" Link="Images\ButtonIcons\update.png" />
     <Resource Include="..\Images\ButtonIcons\open file.png" Link="Images\ButtonIcons\open file.png" />
+    <Resource Include="..\Images\ButtonIcons\metadata.png" Link="Images\ButtonIcons\metadata.png" />
 
     <Resource Include="..\Images\Icon.ico" Link="Images\Icon.ico" />
     <Resource Include="..\Images\akira.jpg" Link="Images\akira.jpg" />
     <Resource Include="..\Images\asutorufo.jpg" Link="Images\asutorufo.jpg" />
     <Resource Include="..\Images\venti.jpg" Link="Images\venti.jpg" />
     <Resource Include="..\Images\megumin.jpg" Link="Images\megumin.jpg" />
+    <Resource Include="..\Images\hime.jpg" Link="Images\hime.jpg" />
     
     <Resource Include="..\Fonts\NotoSansJP-Medium.otf"/>
   </ItemGroup>
