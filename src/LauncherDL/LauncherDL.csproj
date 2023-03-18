@@ -102,6 +102,7 @@
     <Using Include="LauncherDL.Core.FFmpeg" />
     <Using Include="LauncherDL.Core.Windows" />
     <Using Include="LauncherDL.Core.Buttons" />
+    <Using Include="LauncherDL.Core.Metadata" />
     <Using Include="LauncherDL.Core.ConsoleDL" />
     <Using Include="LauncherDL.Core.ComboBoxDL" />
     <Using Include="LauncherDL.Core.Configuration" />

@@ -6,6 +6,9 @@ public class DownloadButton : ConvertButton
     {
         e.Handled = true;
 
+        // To be removed
+        MetadataWindowStatic = new();
+
         // Checks if the button is set to Convert
         if(comboBoxType.ItemIndex == 3) 
         {

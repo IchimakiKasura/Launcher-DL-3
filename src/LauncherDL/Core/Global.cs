@@ -9,6 +9,7 @@ public partial class Global
 {
     /// <summary>MainWindow but in <see langword="static"/></summary>
     public static MainWindow MainWindowStatic;
+    public static MetadataWindow MetadataWindowStatic;
 
     /// <summary>Config</summary>
     public static DefaultConfig config;

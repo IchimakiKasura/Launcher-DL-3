@@ -3,7 +3,7 @@
 // TODO:
 //
 //  Add download method functionality
-//  Add Metadata option when downloading Audio type format
+//  Add Metadata Functionality
 // 
 //  Implement the YDL.cs based on the old script from v6
 //
