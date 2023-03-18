@@ -78,15 +78,17 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80" />
                                     <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="69" />
                                     <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock FontSize="12" Grid.Column="0" Text=" ID" />
                                 <TextBlock FontSize="12" Grid.Column="1" Text=" | FMT" />
                                 <TextBlock FontSize="12" Grid.Column="2" Text=" | RES" />
                                 <TextBlock FontSize="12" Grid.Column="3" Text=" | SIZE" />
                                 <TextBlock FontSize="12" Grid.Column="4" Text=" | BITRATE" />
+                                <TextBlock FontSize="12" Grid.Column="5" Text=" | MISC" />
                             </Grid>
 
                             <ScrollViewer x:Name="SV" Margin="4,5,4,6" SnapsToDevicePixels="True">
@@ -142,7 +144,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80" />
                                     <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="69" />
                                     <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="*" />

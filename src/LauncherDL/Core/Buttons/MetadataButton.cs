@@ -4,6 +4,7 @@ public abstract class MetadataButton
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {
-        MetadataWindowStatic = new();
+        if(new MetadataWindow().OpenDialog == MetadataWindow.MetadataClicked.Set)
+            ConsoleOutputMethod.MetadataOutputComment();
     }
 }

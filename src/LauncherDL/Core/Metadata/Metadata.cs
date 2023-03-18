@@ -55,12 +55,8 @@ public partial class MetadataWindow
 
         // Adds the Controls to canvas
         SetupControls();
-
-        MetadataWidowInitialized();
-
-        // Show window as a dialog so
-        // the MainWindow is untouchable or idk
-        ShowDialog();
+        
+        EventHandlers();
     }
 
     private void SetupControls()
@@ -84,8 +80,6 @@ public partial class MetadataWindow
 
         Button_Set      = new() { Content = "Set"    , Height = 25, Width = 100};
         Button_Cancel   = new() { Content = "Cancel" , Height = 25, Width = 100};
-        Button_Set.Click    += MetadataSet;
-        Button_Cancel.Click += (s,e) => Close();
 
         SetCanvasPlacement();
 
@@ -137,4 +131,15 @@ public partial class MetadataWindow
 
     void AddToCanvas(UIElement Element) =>
         MetadataWindowCanvas.Children.Add(Element);
+
+    void EventHandlers()
+    {
+        Button_Set.Click        += MetadataSet;
+        Button_Cancel.Click     += (s,e) => Close();
+    }
+
+    protected override void OnClosing(System.ComponentModel.CancelEventArgs e) =>
+        IsWindowOpen = false;
+    
+    
 }

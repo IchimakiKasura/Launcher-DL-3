@@ -8,6 +8,8 @@ public partial class ProgressBarControl : UserControl
     readonly static DependencyProperty ValueProperty =
     DependencyProperty.Register("Value", typeof(double), typeof(ProgressBarControl));
 
+    public enum ProgressBarState{Hide,Show}
+
     public double Value
     {
         get => (double)GetValue(ValueProperty);

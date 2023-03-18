@@ -9,13 +9,12 @@ public partial class Global
 {
     /// <summary>MainWindow but in <see langword="static"/></summary>
     public static MainWindow MainWindowStatic;
-    public static MetadataWindow MetadataWindowStatic;
 
     /// <summary>Config</summary>
     public static DefaultConfig config;
 
     /// <summary>ColorConverter shortcut</summary>
-    public static Func<string, Color> ClrConv = (string color) => (Color)ColorConverter.ConvertFromString(color);
+    public static Color ClrConv(string color) => (Color)ColorConverter.ConvertFromString(color);
 
     /// <summary>Languages</summary>
     public static DLLanguages.Pick.LanguagePick Language;
@@ -35,14 +34,13 @@ public partial class Global
     /// <summary>ComboBoxFormat Temporary list</summary>
     public static List<FormatList> TemporaryList = new();
 
-    public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
-    public readonly static string FFMPEG_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ffmpeg.exe"; 
-
-    /// <summary>ProgressBar State</summary>
-    public enum ProgressBarState{Hide,Show}
-
     /// <summary>Process Start</summary>
     public static Process ProcessTaskVariable;
+
+    #region Path variables
+    public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
+    public readonly static string FFMPEG_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ffmpeg.exe";
+    #endregion
 
     #region Window Flash
     [DllImport("user32.dll", CallingConvention = CallingConvention.Cdecl)]

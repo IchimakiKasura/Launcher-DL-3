@@ -21,8 +21,8 @@ public class DownloadButton : ConvertButton
             if(comboBoxFormat.ItemIndex > -1)
             {
                 if(TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD != null)
-                    Console.WriteLine($"SELECTED ID: "+TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD);
-                else Console.WriteLine($"SELECTED ID (AUDIO ONLY): "+TemporaryList[comboBoxFormat.ItemIndex].ID);
+                    ConsoleDebug.Log($"SELECTED ID: "+TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD);
+                else ConsoleDebug.Log($"SELECTED ID (AUDIO ONLY): "+TemporaryList[comboBoxFormat.ItemIndex].ID);
             }
         #endif
 

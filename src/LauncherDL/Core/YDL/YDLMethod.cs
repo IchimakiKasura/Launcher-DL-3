@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.YTDLP;
 
-#pragma warning disable CS1998  // Remove this after DownloadMethod and ConvertMethod has awaitables
+#pragma warning disable CS1998  // Remove this after DownloadMetho has awaitables
 sealed partial class YDL
 {
     /// <summary>Update Method</summary>
@@ -29,20 +29,13 @@ sealed partial class YDL
         // Clear existing list on ComboBoxFormat and its Temporarylist
         TemporaryList.Clear();
         comboBoxFormat.ResetBox();
+        
+        // Clear metadata values
+        MetadataWindow.MetadataClear();
 
         ConsoleLive.SelectedError = 0;
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.FileFormatLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
-    }
-
-    /// <summary>Download Method</summary>
-    public async void DownloadMethod()
-    {
-        if (IsUpdate || IsFileFormat)
-            throw new DownloadMethodException();
-
-        var Args = Format;
-        ConsoleLive.SelectedError = 1;
     }
 
     /// <summary>Convert Method</summary>
@@ -63,5 +56,15 @@ sealed partial class YDL
 
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.ConvertLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
+    }
+
+    /// <summary>Download Method</summary>
+    public async void DownloadMethod()
+    {
+        if (IsUpdate || IsFileFormat)
+            throw new DownloadMethodException();
+
+        var Args = Format;
+        ConsoleLive.SelectedError = 1;
     }
 }

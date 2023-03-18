@@ -7,7 +7,7 @@ public enum ConsoleOutputCheck
     FAILED
 }
 
-internal static partial class ConsoleOutputMethod
+internal static class ConsoleOutputMethod
 {
     public const int TYPE = 0, FORMAT = 1, QUALITY = 2;
 
@@ -27,7 +27,7 @@ internal static partial class ConsoleOutputMethod
             break;
         };
     }
-
+    
     public static void StartUpOutputComments()
     {
         console.AddFormattedText(CONSOLE_START);
@@ -37,7 +37,7 @@ internal static partial class ConsoleOutputMethod
 
         // we do a little troll
         #if !DEBUG
-            InitiateTheWindow.InitiateMePlease = "Initiate";
+            //InitiateTheWindow.InitiateMePlease = "Initiate";
         #endif
     }
 
@@ -90,4 +90,18 @@ internal static partial class ConsoleOutputMethod
             QUALITY => $"<Gray%14>Changed QUALITY to {comboBoxQuality.GetItemContent}",
             _       => null
         });
+
+    public static void MetadataOutputComment()
+    {
+        if(Old_Title == null) return;
+        console.DLAddConsole(CONSOLE_INFO_STRING, "<%14> Metadata has been set!");
+        console.AddFormattedText("<Gray%12>"+
+            $"{CONSOLE_METADATA_TITLE}"         +   $"{Old_Title        ?? "N\\A"} $nl$"    +      
+            $"{CONSOLE_METADATA_ALBUM}"         +   $"{Old_Album        ?? "N\\A"} $nl$"    +
+            $"{CONSOLE_METADATA_ALBUM_ARTIST}"  +   $"{Old_Album_Artist ?? "N\\A"} $nl$"    +
+            $"{CONSOLE_METADATA_YEAR}"          +   $"{Old_Year         ?? "N\\A"} $nl$"    +
+            $"{CONSOLE_METADATA_GENRE}"         +   $"{Old_Genre        ?? "N\\A"}"
+        );
+    }
+
 }

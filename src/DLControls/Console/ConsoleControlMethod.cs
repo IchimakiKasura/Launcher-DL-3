@@ -69,7 +69,7 @@ public partial class ConsoleControl
             text = text.Replace("$perc$", "%");
             text = text.Replace("$vbar$", "|");
             text = text.Replace("$tab$", "\t");
-            text = text.Replace("$nl$", "/n");
+            text = text.Replace("$nl$", "\r");
 
             try { range.Text = text; } catch { throw new TextPropertyException(); };
             range.ApplyPropertyValue(Control.FontStyleProperty, _FontStyle);

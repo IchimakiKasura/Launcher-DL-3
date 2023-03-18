@@ -8,8 +8,6 @@ internal partial class ConsoleLive
 
     static void Update_Invoked(string StringData)
     {
-        Console.WriteLine(StringData);
-
         switch(StringData)
         {
             case string when StringData.Contains("yt-dlp is up to date"):

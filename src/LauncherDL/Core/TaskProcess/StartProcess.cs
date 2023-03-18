@@ -4,37 +4,38 @@ abstract class StartProcess
 {
     public static async Task ProcessTask(string Args, DataReceivedEventHandler e)
     {;
+        ProcessTaskVariable = new();
+
+        bool isConvert = ConsoleLive.SelectedError == 2;
+
+        ProcessTaskVariable.StartInfo = new(isConvert ? FFMPEG_Path : YDL_Path, Args)
+        {
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true
+        };
+
+        ProcessTaskVariable.ErrorDataReceived += e;
+
+        if(!isConvert)
+        {
+            ProcessTaskVariable.ErrorDataReceived -= e;
+            ProcessTaskVariable.ErrorDataReceived += ConsoleLive.ErrorOutputComment;
+            ProcessTaskVariable.OutputDataReceived += e;
+        }
+
         // UI freezes when starting up like wth
-        await Task.Run(async()=>{
-            ProcessTaskVariable = new();
+        await ProcessTaskVariable.StartAsync();
+        
+        ProcessTaskVariable.BeginOutputReadLine();
+        ProcessTaskVariable.BeginErrorReadLine();
 
-            var StartInfo = new ProcessStartInfo();
-            var FileName = YDL_Path;
-            var isConvert = ConsoleLive.SelectedError == 2;
-
-            if(isConvert)
-                FileName = FFMPEG_Path;
-
-            StartInfo.FileName = FileName;
-            StartInfo.Arguments = Args;
-            StartInfo.RedirectStandardOutput = true;
-            StartInfo.RedirectStandardError = true;
-            StartInfo.CreateNoWindow = false;
-
-            ProcessTaskVariable.StartInfo = StartInfo;
-
-            ProcessTaskVariable.ErrorDataReceived += e;
-            if(!isConvert)
-            {
-                ProcessTaskVariable.ErrorDataReceived -= e;
-                ProcessTaskVariable.ErrorDataReceived += ConsoleLive.ErrorOutputComment;
-                ProcessTaskVariable.OutputDataReceived += e;
-            }
-            ProcessTaskVariable.Start();
-            ProcessTaskVariable.BeginOutputReadLine();
-            ProcessTaskVariable.BeginErrorReadLine();
-
-            await ProcessTaskVariable.WaitForExitAsync();
-        });
+        await ProcessTaskVariable.WaitForExitAsync();
     }
+}
+
+public static class ExtendProcess
+{
+    public static async Task StartAsync(this Process _proc) =>
+        await Task.Run(()=>_proc.Start());
 }

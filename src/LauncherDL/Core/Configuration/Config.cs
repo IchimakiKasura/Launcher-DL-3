@@ -63,18 +63,28 @@ public class Config
         #if DEBUG
             ConsoleDebug.LoadingConfig(a,b,c);
         #endif
+        string ThrowError = null;
 
         try
         {
-            if(c == CONFIG_FILE_TYPE)
-                if(b > 3) throw new Exception("Default File type is above 3!");
+            switch(c)
+            {
+                case CONFIG_FILE_TYPE:
+                    if(b > 3) ThrowError = "Default File type is above 3!";
+                break;
 
-            if(c == CONFIG_BACKGROUND_NAME)
-                if(!File.Exists($@"./Images/{b}")) throw new Exception("Background image not found!");
+                case CONFIG_BACKGROUND_NAME:
+                    if(!File.Exists($@"./Images/{b}")) ThrowError = "Background image not found!";
+                break;
+            }
+
+            if(ThrowError != null) throw new Exception(ThrowError);
 
             if(a.GetType().ToString().Contains(CONFIG_COLOR_CONTAINS)) a = ClrConv(b);
             else a = b;
-        } catch(Exception e)
+
+        } 
+        catch(Exception e)
         {
             error = true;
             ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, e.Message, c);

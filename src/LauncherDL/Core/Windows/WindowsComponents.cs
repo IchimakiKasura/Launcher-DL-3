@@ -1,4 +1,5 @@
-﻿namespace LauncherDL.Core.Windows;
+﻿using static DLControls.ProgressBarControl;
+namespace LauncherDL.Core.Windows;
 
 class WindowsComponents
 {
@@ -18,9 +19,12 @@ class WindowsComponents
             new StoryboardApplier(WindowAnimation   ,   windowInnerBG       ,   new("(Control.Background).(SolidColorBrush.Color)") );
         }
 
-        MainWindowStatic.Activated += (s,e)=>
+        MainWindowStatic.Activated += (s,e) =>
         {
-            //if (TaskBarThingy.ProgressValue == 1) TaskBarThingy.ProgressValue = 0;
+            if(MetadataWindow.IsWindowOpen) return;
+            
+            if (TaskbarProgressBar.ProgressValue == 1)
+                TaskbarProgressBar.ProgressValue  = 0;
 
             WindowOpacity       = new(1, TimeSpan.FromMilliseconds(100));
             WindowAnimation     = new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
@@ -32,7 +36,7 @@ class WindowsComponents
             #endif
         };
 
-        MainWindowStatic.Deactivated += (s,e)=>
+        MainWindowStatic.Deactivated += (s,e) =>
         {
             WindowOpacity       = new(0, TimeSpan.FromMilliseconds(100));
             WindowAnimation     = new(Colors.Black, TimeSpan.FromMilliseconds(100));
@@ -54,8 +58,8 @@ class WindowsComponents
     {
         switch(State)
         {
-            case ProgressBarState.Hide: windowCanvas.Children.Remove    (progressBar);  console.ConsoleHeight = 217; break;
-            case ProgressBarState.Show: windowCanvas.Children.Add       (progressBar);  console.ConsoleHeight = 190; break;
+            case ProgressBarState.Hide: windowCanvas.Children.Remove    (progressBar);  console.ConsoleHeight = 273; break;
+            case ProgressBarState.Show: windowCanvas.Children.Add       (progressBar);  console.ConsoleHeight = 245; break;
         }
         if(progressBar.Value > 0) progressBar.Value = 0;
         console.manualScrollToEnd();
@@ -89,6 +93,7 @@ class WindowsComponents
             buttonFileFormat,
             buttonDownload,
             buttonUpdate,
+            buttonMetadata,
             textBoxLink,
             textBoxName,
             comboBoxType,
@@ -99,31 +104,15 @@ class WindowsComponents
         foreach (var CL in ControlLists)
             CL.IsEnabled = !CL.IsEnabled;
 
-        // Old
-        // if(comboBoxType.ItemIndex == 3)
-        //     buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
-
-        // if(comboBoxType.ItemIndex != 0)
-        //     buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
-
-        // if(!comboBoxType.IsEnabled) WindowProgressBar(ProgressBarState.Show);
-        //     else WindowProgressBar(ProgressBarState.Hide);
-
-        // New
-        switch(comboBoxType)
+        _ = comboBoxType switch
         {
-            default:
-                if(!comboBoxType.IsEnabled) WindowProgressBar(ProgressBarState.Show);
-                    else WindowProgressBar(ProgressBarState.Hide);
-            break;
-
-            case ComboBoxControl when comboBoxType.ItemIndex == 3:
-                buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
-            break;
-
-            case ComboBoxControl when comboBoxType.ItemIndex != 0:
-                buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
-            break;
+            _ when comboBoxType.ItemIndex == 3 =>
+                buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled,
+            _ when comboBoxType.ItemIndex != 0 =>
+                buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled,
+            _ => default
         };
+
+        WindowProgressBar(comboBoxType.IsEnabled ? ProgressBarState.Hide : ProgressBarState.Show);
     }
 }

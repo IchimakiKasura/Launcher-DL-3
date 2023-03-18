@@ -43,7 +43,7 @@ public partial class App : Application
             consoleMode &= ~ENABLE_QUICK_EDIT;
             SetConsoleMode(consoleHandle, consoleMode);
 
-            Console.WriteLine(
+            ConsoleDebug.Log(
 @$"============================
 =   Version Update Check   =
 ============================
