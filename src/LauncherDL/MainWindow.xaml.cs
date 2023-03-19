@@ -21,11 +21,12 @@
 //=========================================================//
 public partial class MainWindow : Window
 {
+
     public MainWindow()
     {
         InitializeComponent();
-
-        InitiateStaticComponents(this);
+        
+        SetAttributes.Add(this);
 
         #if DEBUG
             ConsoleDebug.InitiateConsoleDebug();
