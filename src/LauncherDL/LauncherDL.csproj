@@ -111,8 +111,8 @@
     <Using Include="LauncherDL.Core.Console_Output_Comment_Method" />
     
     
+    <Using Include="LauncherDL.MainWindow" Static="true" />
     <Using Include="LauncherDL.Core.Global" Static="true" />
-    <Using Include="LauncherDL.Core.MainWindowStaticControls" Static="true" />
     <Using Include="LauncherDL.Core.RegexComponent.RegexComponentList" Static="true" />
 
     <Using Include="LauncherDL.Core.YTDLP"/>

@@ -1,52 +1,52 @@
-namespace LauncherDL.Core;
+﻿namespace LauncherDL;
 
-public class MainWindowStaticControls
+public partial class MainWindow
 {
-    [MainWindowStaticMember(MainWindowElement.Minimize)]
+    [MainWindowStaticMember]
     public static   Button                          Minimize            { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.CloseButton)]
+    [MainWindowStaticMember]
     public static   Button                          CloseButton         { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.buttonFileFormat)]
+    [MainWindowStaticMember]
     public static   ButtonControl                   buttonFileFormat    { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.buttonDownload)]
+    [MainWindowStaticMember]
     public static   ButtonControl                   buttonDownload      { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.buttonUpdate)]
+    [MainWindowStaticMember]
     public static   ButtonControl                   buttonUpdate        { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.buttonOpenFile)]
+    [MainWindowStaticMember]
     public static   ButtonControl                   buttonOpenFile      { get; set; }
     
-    [MainWindowStaticMember(MainWindowElement.buttonMetadata)]
+    [MainWindowStaticMember]
     public static   ButtonControl                   buttonMetadata      { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.windowDrag)]
+    [MainWindowStaticMember]
     public static   Border                          windowDrag          { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.windowInnerBG)]
+    [MainWindowStaticMember]
     public static   Border                          windowInnerBG       { get; set; }
 
     public static   ProgressBarControl              progressBar         { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.console)]
+    [MainWindowStaticMember]
     public static   ConsoleControl                  console             { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.textBoxLink)]
+    [MainWindowStaticMember]
     public static   TextBoxControl                  textBoxLink         { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.textBoxName)]
+    [MainWindowStaticMember]
     public static   TextBoxControl                  textBoxName         { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.windowCanvas)]
+    [MainWindowStaticMember]
     public static   Canvas                          windowCanvas        { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.comboBoxType)]
+    [MainWindowStaticMember]
     public static   ComboBoxControl                 comboBoxType        { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.comboBoxFormat)]
+    [MainWindowStaticMember]
     public static   ComboBoxControl                 comboBoxFormat      { get; set; }
 
     public static   ComboBoxControl                 comboBoxQuality     { get; set; } = new()
@@ -55,19 +55,44 @@ public class MainWindowStaticControls
         TextEditable = false,
     };
 
-    [MainWindowStaticMember(MainWindowElement.textBlockLink)]
+    [MainWindowStaticMember]
     public static   TextBlockControl                textBlockLink       { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.textBlockFormat)]
+    [MainWindowStaticMember]
     public static   TextBlockControl                textBlockFormat     { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.textBlockName)]
+    [MainWindowStaticMember]
     public static   TextBlockControl                textBlockName       { get; set; }
 
-    [MainWindowStaticMember(MainWindowElement.textBlockType)]
+    [MainWindowStaticMember]
     public static   TextBlockControl                textBlockType       { get; set; }
     
-    [MainWindowStaticMember(MainWindowElement.TaskbarProgressBar)]
+    [MainWindowStaticMember]
     public static   TaskbarItemInfo                 TaskbarProgressBar  { get; set; }
+
+    void InitiateStaticComponents(MainWindow _)
+    {
+        MainWindowStatic = _;
+
+        //// Idk about these
+        /**/VisualBitmapScalingMode = BitmapScalingMode.LowQuality;
+        /**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
+        ////
+
+        BindingFlags MainWindowFieldFlags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
+
+        foreach(var MainWindowField in typeof(MainWindow).GetMembers())
+        {
+            var MainWindowStaticAttribute = MainWindowField.GetCustomAttribute<MainWindowStaticMemberAttribute>();
+            
+            if(MainWindowStaticAttribute is null) continue;
+            
+            var Property = MainWindowStaticAttribute.GetProperty<MainWindow>($"_{MainWindowField.Name}", MainWindowFieldFlags);
+
+            if(!Property.HasValue) continue;
+
+            MainWindowStaticAttribute.SetValue<MainWindow>(MainWindowField, Property.Value);
+        }
+    }
 
 }

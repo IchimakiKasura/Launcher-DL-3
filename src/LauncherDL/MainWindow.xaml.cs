@@ -25,8 +25,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        
-        SetAttributes.Add(this);
+
+        InitiateStaticComponents(this);
 
         #if DEBUG
             ConsoleDebug.InitiateConsoleDebug();
