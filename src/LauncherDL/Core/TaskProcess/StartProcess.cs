@@ -6,7 +6,7 @@ abstract class StartProcess
     {;
         ProcessTaskVariable = new();
 
-        bool isConvert = ConsoleLive.SelectedError == 2;
+        bool isConvert = ConsoleLive.SelectedError is 2;
 
         ProcessTaskVariable.StartInfo = new(isConvert ? FFMPEG_Path : YDL_Path, Args)
         {

@@ -40,7 +40,7 @@ public partial class App
         if (CustomMessage != string.Empty)
             errorMessage = $"It Appears the the application encounters an Error!\n\n{CustomMessage}";			
 
-        if (MessageBox.Show(MainWindow, errorMessage, "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+        if (MessageBox.Show(MainWindow, errorMessage, "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Error) is MessageBoxResult.OK)
             Application.Current.Shutdown();
 
         e.Handled = true;
@@ -58,7 +58,7 @@ public partial class App
 
             File.WriteAllText($"DEBUG_ErrorDumpTrace_{CurrentDate}.txt", Message );
 
-            if (MessageBox.Show(MainWindow, "Encountered some Error on debug,\nPlease check the DEBUG_ErrorDumpTrace", "Oops", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+            if (MessageBox.Show(MainWindow, "Encountered some Error on debug,\nPlease check the DEBUG_ErrorDumpTrace", "Oops", MessageBoxButton.OK, MessageBoxImage.Error) is MessageBoxResult.OK)
                 Application.Current.Shutdown();
 
             e.Handled = true;

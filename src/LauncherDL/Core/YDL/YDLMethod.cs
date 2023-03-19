@@ -3,7 +3,9 @@ namespace LauncherDL.Core.YTDLP;
 #pragma warning disable CS1998  // Remove this after DownloadMetho has awaitables
 sealed partial class YDL
 {
-    /// <summary>Update Method</summary>
+    /// <summary>
+    /// Update Method
+    /// </summary>
     public async void UpdateMethod()
     {
         if (!IsUpdate)
@@ -16,7 +18,9 @@ sealed partial class YDL
         WindowsComponents.FreezeComponents();
     }
 
-    /// <summary>FileFormat Method</summary>
+    /// <summary>
+    /// FileFormat Method
+    /// </summary>
     public async void FileFormatMethod()
     {
         if (!IsFileFormat)
@@ -38,7 +42,9 @@ sealed partial class YDL
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
-    /// <summary>Convert Method</summary>
+    /// <summary>
+    /// Convert Method
+    /// </summary>
     public async void ConvertMethod()
     {
         if (IsUpdate || IsFileFormat)
@@ -58,7 +64,9 @@ sealed partial class YDL
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
-    /// <summary>Download Method</summary>
+    /// <summary>
+    /// Download Method
+    /// </summary>
     public async void DownloadMethod()
     {
         if (IsUpdate || IsFileFormat)

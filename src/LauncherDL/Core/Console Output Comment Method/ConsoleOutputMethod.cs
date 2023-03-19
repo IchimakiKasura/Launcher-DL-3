@@ -93,14 +93,14 @@ internal static class ConsoleOutputMethod
 
     public static void MetadataOutputComment()
     {
-        if(Old_Title == null) return;
+        if(Old_Title is null) return;
         console.DLAddConsole(CONSOLE_INFO_STRING, "<%14> Metadata has been set!");
         console.AddFormattedText("<Gray%12>"+
-            $"{CONSOLE_METADATA_TITLE}"         +   $"{Old_Title        ?? "N\\A"} $nl$"    +      
-            $"{CONSOLE_METADATA_ALBUM}"         +   $"{Old_Album        ?? "N\\A"} $nl$"    +
-            $"{CONSOLE_METADATA_ALBUM_ARTIST}"  +   $"{Old_Album_Artist ?? "N\\A"} $nl$"    +
-            $"{CONSOLE_METADATA_YEAR}"          +   $"{Old_Year         ?? "N\\A"} $nl$"    +
-            $"{CONSOLE_METADATA_GENRE}"         +   $"{Old_Genre        ?? "N\\A"}"
+            $"{CONSOLE_METADATA_TITLE       }"  +  $"{Old_Title        ?? "N\\A"} $nl$"  +      
+            $"{CONSOLE_METADATA_ALBUM       }"  +  $"{Old_Album        ?? "N\\A"} $nl$"  +
+            $"{CONSOLE_METADATA_ALBUM_ARTIST}"  +  $"{Old_Album_Artist ?? "N\\A"} $nl$"  +
+            $"{CONSOLE_METADATA_YEAR        }"  +  $"{Old_Year         ?? "N\\A"} $nl$"  +
+            $"{CONSOLE_METADATA_GENRE       }"  +  $"{Old_Genre        ?? "N\\A"}"
         );
     }
 

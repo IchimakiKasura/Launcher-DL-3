@@ -78,7 +78,7 @@ public partial class ButtonControl : UserControl
             foreach(var (STYB, index) in ControlsStoryboards.Select((value, i) => (value,i)))
             {
                 DependencyObject TargetElement = UserButton;
-                if(index == 4 || index == 7) TargetElement = UserButtonMainTemplate;
+                if(index is 4 || index is 7) TargetElement = UserButtonMainTemplate;
 
                 SetStoryboardAuto(STYB, TargetElement, ControlPaths[index]);
 
@@ -100,9 +100,9 @@ public partial class ButtonControl : UserControl
     protected virtual void OnClicked(RoutedEventArgs e)
     {
         RoutedEventHandler eh = Click;
-        if (eh != null)
+        if (eh is not null)
         {
-            if (e == null) return; 
+            if (e is null) return; 
             eh(this, e);
         }
     }

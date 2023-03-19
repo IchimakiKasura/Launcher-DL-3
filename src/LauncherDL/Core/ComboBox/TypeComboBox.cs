@@ -8,7 +8,7 @@ public class TypeComboBox
         
         comboBoxFormat.ClearItems();
 
-        if(comboBoxType.ItemIndex == 0)
+        if(comboBoxType.ItemIndex is 0)
         {
             buttonFileFormat.IsEnabled = true;
             if(TemporaryList.Count > 0)
@@ -26,7 +26,7 @@ public class TypeComboBox
         if(windowCanvas.Children.Contains(comboBoxQuality))
             windowCanvas.Children.Remove(comboBoxQuality);
 
-        DownloadToConvert(comboBoxType.ItemIndex == 3);
+        DownloadToConvert(comboBoxType.ItemIndex is 3);
 
         switch (comboBoxType.ItemIndex)
         {
@@ -51,10 +51,10 @@ public class TypeComboBox
 
         if(!x) return;
         
-        buttonOpenFile.IsEnabled        = true;
-        buttonDownload.Text             = Language.Button_Convert;
-        textBoxLink.TextPlaceholder     = Language.Placeholder_File;
-        textBlockLink.Text              = Language.Label_File;
+        buttonOpenFile.IsEnabled            = true;
+        buttonDownload.Text                 = Language.Button_Convert;
+        textBoxLink.TextPlaceholder         = Language.Placeholder_File;
+        textBlockLink.Text                  = Language.Label_File;
     }
 
     private static void comboBoxFormatText(bool Editable)

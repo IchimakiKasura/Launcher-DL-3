@@ -45,10 +45,10 @@ public static class ConsoleDebug
         Console.Write($"Loading {c}");
         try
         {
-            if(c == CONFIG_STR.CONFIG_FILE_TYPE)
+            if(c is CONFIG_STR.CONFIG_FILE_TYPE)
                 if(b > 3) throw new Exception("Default File type is above 3!");
 
-            if(c == CONFIG_STR.CONFIG_BACKGROUND_NAME)
+            if(c is CONFIG_STR.CONFIG_BACKGROUND_NAME)
                 if(!File.Exists($@"./Images/{b}")) throw new Exception("Background image not found!");
 
             if(a.GetType().ToString().Contains(CONFIG_STR.CONFIG_COLOR_CONTAINS)) a = ClrConv(b);

@@ -1,6 +1,5 @@
 namespace DLControls;
 
-
 public partial class ComboBoxControl
 {    
     public void ClearItems()                  => UserComboBox.Items.Clear();
@@ -36,8 +35,9 @@ public partial class ComboBoxControl
 
         UserComboBox.SelectedIndex = x switch
         {
-            int when x != 0 => 0,
-            int when x == 4 => 3,
+            // ☠️☠️
+            int when x is not 0 => 0,
+            int when x is     4 => 3,
             _ => 0
         };
     }

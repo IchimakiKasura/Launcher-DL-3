@@ -7,9 +7,9 @@ public partial class ConsoleControl
     readonly private static Regex RTBregex = MyRegex();
 
     // I don't know why I even add this cuz I know I only used he AddFormatedText cuz I can add colours lol
-    public void AddText(string text, string color = default)
+    public void AddText(string text, string color = null)
     {
-        if (color == default) color = "White";
+        if (color is "" or null) color = "White";
         TextRange tr = new(UserRichTextBox.Document.ContentEnd, UserRichTextBox.Document.ContentEnd) {Text = text + "\r"};
         tr.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color));
     }

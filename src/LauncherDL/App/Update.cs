@@ -21,7 +21,7 @@ class Updater
             if (MessageBox.Show(message,
                                 "Update Notification",
                                 MessageBoxButton.OKCancel,
-                                MessageBoxImage.Information) == MessageBoxResult.OK)
+                                MessageBoxImage.Information) is MessageBoxResult.OK)
                                 Process.Start("explorer", Visit);
     }
 

@@ -184,9 +184,9 @@ public partial class ComboBoxControl : UserControl
     protected virtual void OnChange(RoutedEventArgs e)
     {
         RoutedEventHandler eh = OnItemChange;
-        if (eh != null)
+        if (eh is not null)
         {
-            if (e == null) return; 
+            if (e is null) return; 
             eh(this, e);
         }
     }
@@ -195,7 +195,7 @@ public partial class ComboBoxControl : UserControl
     {
         OnChange(e);
 
-        if(TextEditable && ((FormatList)UserComboBox.SelectedItem) != null)
+        if(TextEditable && ((FormatList)UserComboBox.SelectedItem) is not null)
             MainText.Text = ((FormatList)UserComboBox.SelectedItem).Name;
 
         GC.Collect();

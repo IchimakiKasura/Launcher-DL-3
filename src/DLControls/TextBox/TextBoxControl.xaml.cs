@@ -13,7 +13,7 @@ public partial class TextBoxControl : UserControl
     {
         get
         {
-            if (TextPlaceholderAlignment == HorizontalAlignment.Left)
+            if (TextPlaceholderAlignment is HorizontalAlignment.Left)
                 return new(10, 2, 0, 0);
             else return new(0, 2, 0, 0);
         }
@@ -70,7 +70,7 @@ public partial class TextBoxControl : UserControl
 
         UserTextBox.TextChanged += delegate
         {
-            if (Text == "")
+            if (Text is "" or null)
             {
                 UserGrid.Children.Remove(Placeholder);
                 UserGrid.Children.Add(Placeholder);

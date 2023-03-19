@@ -15,7 +15,7 @@ public partial class App : Application
         if (!createdNew)
             if (MessageBox.Show("Only one instance at a time!", "Warning",
                                 MessageBoxButton.OK,
-                                MessageBoxImage.Warning) == MessageBoxResult.OK)
+                                MessageBoxImage.Warning) is MessageBoxResult.OK)
                 Environment.Exit(0);
 
         App_Startup(null,e);

@@ -23,7 +23,7 @@ class WindowsComponents
         {
             if(MetadataWindow.IsWindowOpen) return;
             
-            if (TaskbarProgressBar.ProgressValue == 1)
+            if (TaskbarProgressBar.ProgressValue is 1)
                 TaskbarProgressBar.ProgressValue  = 0;
 
             WindowOpacity       = new(1, TimeSpan.FromMilliseconds(100));
@@ -51,7 +51,7 @@ class WindowsComponents
 
     public static void WindowDrag(object sender, MouseButtonEventArgs e)
     {
-        if (e.ChangedButton == MouseButton.Left) MainWindowStatic.DragMove();
+        if (e.ChangedButton is MouseButton.Left) MainWindowStatic.DragMove();
     }
 
     public static void WindowProgressBar(ProgressBarState State)
@@ -106,13 +106,18 @@ class WindowsComponents
 
         _ = comboBoxType switch
         {
-            _ when comboBoxType.ItemIndex == 3 =>
+            _ when comboBoxType.ItemIndex is 3 =>
                 buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled,
-            _ when comboBoxType.ItemIndex != 0 =>
+            _ when comboBoxType.ItemIndex is not 0 =>
                 buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled,
             _ => default
         };
 
         WindowProgressBar(comboBoxType.IsEnabled ? ProgressBarState.Hide : ProgressBarState.Show);
+    }
+
+    public static void WindowHoverTooltip()
+    {
+
     }
 }
