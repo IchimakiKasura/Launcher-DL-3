@@ -14,6 +14,7 @@ public class TypeComboBox
             if(TemporaryList.Count > 0)
                 comboBoxFormat.AddFormatList(TemporaryList);
             comboBoxFormatText(true);
+            buttonDownload.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Download");
         }
         else
         {
@@ -37,6 +38,7 @@ public class TypeComboBox
                 comboBoxFormat.Width = 228;
                 windowCanvas.Children.Add(comboBoxQuality);
                 comboBoxFormat.AddConvertTypeList();
+                buttonDownload.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Convert");
             break;
         };
         

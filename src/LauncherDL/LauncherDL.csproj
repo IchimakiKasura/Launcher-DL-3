@@ -105,6 +105,7 @@
     <Using Include="LauncherDL.Core.Buttons" />
     <Using Include="LauncherDL.Core.Metadata" />
     <Using Include="LauncherDL.Core.ConsoleDL" />
+    <Using Include="LauncherDL.Core.Attributes" />
     <Using Include="LauncherDL.Core.ComboBoxDL" />
     <Using Include="LauncherDL.Core.Configuration" />
     <Using Include="LauncherDL.Core.Event_Handlers" />

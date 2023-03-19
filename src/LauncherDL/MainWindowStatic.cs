@@ -3,24 +3,31 @@
 public partial class MainWindow
 {
     [MainWindowStaticMember]
+    [ToolTipTexts("Minimize Window")]
     public static   Button                          Minimize            { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Close Window")]
     public static   Button                          CloseButton         { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Fetch File Formats")]
     public static   ButtonControl                   buttonFileFormat    { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Download")]
     public static   ButtonControl                   buttonDownload      { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Update yt-dlp")]
     public static   ButtonControl                   buttonUpdate        { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Open File")]
     public static   ButtonControl                   buttonOpenFile      { get; set; }
     
     [MainWindowStaticMember]
+    [ToolTipTexts("Edit Metadata")]
     public static   ButtonControl                   buttonMetadata      { get; set; }
 
     [MainWindowStaticMember]
@@ -32,23 +39,29 @@ public partial class MainWindow
     public static   ProgressBarControl              progressBar         { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Console Output")]
     public static   ConsoleControl                  console             { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Input Link")]
     public static   TextBoxControl                  textBoxLink         { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Input Name")]
     public static   TextBoxControl                  textBoxName         { get; set; }
 
     [MainWindowStaticMember]
     public static   Canvas                          windowCanvas        { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Select a type of download")]
     public static   ComboBoxControl                 comboBoxType        { get; set; }
 
     [MainWindowStaticMember]
+    [ToolTipTexts("Select or Input Format")]
     public static   ComboBoxControl                 comboBoxFormat      { get; set; }
 
+    [ToolTipTexts("Select Quality")]
     public static   ComboBoxControl                 comboBoxQuality     { get; set; } = new()
     {
         Width = 154,
@@ -84,14 +97,18 @@ public partial class MainWindow
         foreach(var MainWindowField in typeof(MainWindow).GetMembers())
         {
             var MainWindowStaticAttribute = MainWindowField.GetCustomAttribute<MainWindowStaticMemberAttribute>();
-            
-            if(MainWindowStaticAttribute is null) continue;
-            
-            var Property = MainWindowStaticAttribute.GetProperty<MainWindow>($"_{MainWindowField.Name}", MainWindowFieldFlags);
+            var ToolTipTextAttribute = MainWindowField.GetCustomAttribute<ToolTipTextsAttribute>();
+            var Name = MainWindowField.Name;
 
-            if(!Property.HasValue) continue;
+            // Sets all static properties
+            if(MainWindowStaticAttribute is not null)
+                MainWindowStaticAttribute.SetValue<MainWindow>(MainWindowField,
+                MainWindowStaticAttribute.GetProperty<MainWindow>(Name, MainWindowFieldFlags));
 
-            MainWindowStaticAttribute.SetValue<MainWindow>(MainWindowField, Property.Value);
+            // Sets all Tooltips
+            if(ToolTipTextAttribute is not null)
+                ToolTipTextAttribute.SetToolTipText<MainWindow>(ToolTipTextAttribute.Description, Name, MainWindowFieldFlags);
+
         }
     }
 
