@@ -29,7 +29,12 @@
                             BorderThickness="1"
                             CornerRadius="5"
                             Effect="{StaticResource CB_RTB_BM_Effect}">
-                                <Grid x:Name="UserTextBoxGRID" CacheMode="BitmapCache">
+                                <Grid x:Name="UserTextBoxGRID">
+                                    <Grid.CacheMode>
+                                        <BitmapCache EnableClearType="False" 
+                                                    RenderAtScale="1" 
+                                                    SnapsToDevicePixels="False"/>
+                                    </Grid.CacheMode>
                                     <TextBox Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,RelativeSource={RelativeSource TemplatedParent}}"
                                      Background="Transparent"
                                      BorderBrush="Transparent"

@@ -44,9 +44,13 @@ public partial class TextBoxControl : UserControl
         set => UserTextBox.Text = value;
     }
 
+    public UIElement UICanvas =>
+        UserTextBox;
+
     public bool isTextBoxFocused { get; set; }
 
     private TextBlock Placeholder;
+
 
     public TextBoxControl() =>
         InitializeComponent();

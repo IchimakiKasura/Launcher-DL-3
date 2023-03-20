@@ -4,6 +4,8 @@
 //
 //  Add download method functionality
 //  Add Metadata Functionality
+//
+//  Try to use Attributes for easy coding
 // 
 //  Implement the YDL.cs based on the old script from v6
 //

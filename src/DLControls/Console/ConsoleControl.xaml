@@ -7,8 +7,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Canvas CacheMode="BitmapCache" RenderOptions.BitmapScalingMode="Fant">
-
+    <Canvas CacheMode="BitmapCache">
         <Canvas.Resources>
 
             <Style TargetType="RichTextBox" x:Key="UserRichTextBoxMain">

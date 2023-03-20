@@ -11,10 +11,13 @@ public class TypeComboBox
         if(comboBoxType.ItemIndex is 0)
         {
             buttonFileFormat.IsEnabled = true;
+
             if(TemporaryList.Count > 0)
                 comboBoxFormat.AddFormatList(TemporaryList);
+
             comboBoxFormatText(true);
-            buttonDownload.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Download");
+
+            buttonDownload.UICanvas.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Download");
         }
         else
         {
@@ -38,7 +41,7 @@ public class TypeComboBox
                 comboBoxFormat.Width = 228;
                 windowCanvas.Children.Add(comboBoxQuality);
                 comboBoxFormat.AddConvertTypeList();
-                buttonDownload.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Convert");
+                buttonDownload.UICanvas.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Convert");
             break;
         };
         

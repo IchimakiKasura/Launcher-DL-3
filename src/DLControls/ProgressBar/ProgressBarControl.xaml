@@ -11,7 +11,12 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid CacheMode="BitmapCache">
+    <Grid>
+        <Grid.CacheMode>
+            <BitmapCache EnableClearType="False" 
+                         RenderAtScale="0.9" 
+                         SnapsToDevicePixels="False"  />
+        </Grid.CacheMode>
         <Grid.Resources>
             
             <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" StartPoint="0,0" EndPoint="1,0">

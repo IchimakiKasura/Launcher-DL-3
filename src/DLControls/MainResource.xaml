@@ -38,6 +38,7 @@
 	<Style TargetType="ToolTip">
         <Setter Property="ToolTipService.InitialShowDelay" Value="3000"/>
         <Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+        <Setter Property="ToolTipService.BetweenShowDelay" Value="5000"/>
 		<Setter Property="OverridesDefaultStyle" Value="true" />
 		<Setter Property="HasDropShadow" Value="True" />
 		<Setter Property="FontSize" Value="15" />

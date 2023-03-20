@@ -45,6 +45,10 @@ public partial class ComboBoxControl : UserControl
             if(value) ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
         }
     }
+
+    public UIElement UICanvas =>
+        UserComboBox;
+
     public string GetItemContent =>
         ((ComboBoxItem)UserComboBox.SelectedItem).Content as String;
 

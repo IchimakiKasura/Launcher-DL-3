@@ -1,4 +1,5 @@
-﻿namespace LauncherDL.Core.Event_Handlers;
+﻿using static LauncherDL.Core.Attributes.ToolTipTextsAttribute;
+namespace LauncherDL.Core.Event_Handlers;
 
 internal class EventHandlers
 {
@@ -29,6 +30,12 @@ internal class EventHandlers
         comboBoxType.OnItemChange   +=      TypeComboBox.ItemChanged;
         comboBoxFormat.OnItemChange +=      FormatComboBox.ItemChanged;
         comboBoxQuality.OnItemChange+=      QualityComboBox.ItemChanged;
+
+        // ComboBox Tooltip list
+        foreach(var ComboBoxTypeList in ComboBoxList.ComboBoxTypes)
+            ComboBoxTypeList.MouseMove += (s,e) => Follow(s,e, ComboBoxTypeList.Content.ToString());
+
+        foreach(var ComboBoxTypeList in ComboBoxList.ComboBoxFormatQuality)
+            ComboBoxTypeList.MouseMove += (s,e) => Follow(s,e, ComboBoxTypeList.Content.ToString());
     }
 }
-

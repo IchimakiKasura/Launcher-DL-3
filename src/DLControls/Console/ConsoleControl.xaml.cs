@@ -13,7 +13,10 @@ public partial class ConsoleControl : UserControl
         get => UserRichTextBox.Width;
         set => UserRichTextBox.Width = value;
     }
-    
+
+    public UIElement UICanvas =>
+        UserRichTextBox;
+
     public ConsoleControl() =>
         InitializeComponent();
         

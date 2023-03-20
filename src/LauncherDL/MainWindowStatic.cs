@@ -68,6 +68,7 @@ public partial class MainWindow
         TextEditable = false,
     };
 
+
     [MainWindowStaticMember]
     public static   TextBlockControl                textBlockLink       { get; set; }
 
@@ -102,14 +103,11 @@ public partial class MainWindow
 
             // Sets all static properties
             if(MainWindowStaticAttribute is not null)
-                MainWindowStaticAttribute.SetValue<MainWindow>(MainWindowField,
-                MainWindowStaticAttribute.GetProperty<MainWindow>(Name, MainWindowFieldFlags));
+                MainWindowStaticAttribute.SetValue(Name, MainWindowFieldFlags, MainWindowField);
 
             // Sets all Tooltips
             if(ToolTipTextAttribute is not null)
-                ToolTipTextAttribute.SetToolTipText<MainWindow>(ToolTipTextAttribute.Description, Name, MainWindowFieldFlags);
-
+                ToolTipTextAttribute.SetToolTipText(Name, ToolTipTextAttribute.Description, MainWindowFieldFlags);
         }
     }
-
 }

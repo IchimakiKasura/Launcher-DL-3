@@ -54,6 +54,8 @@ public partial class ButtonControl : UserControl
         set => SetValue(IsAnimationOnProperty, value);
     }
 
+    public UIElement UICanvas => UserButton;
+        
     public ButtonControl() =>
         InitializeComponent();
 
@@ -94,7 +96,7 @@ public partial class ButtonControl : UserControl
             }
             
         }
-        SetMouseEnterLeave(UserButton, ()=>SetStoryboard(true), ()=>SetStoryboard(false));
+        SetMouseEnterLeave(UserButton,()=>SetStoryboard(true),()=>SetStoryboard(false));
     }
     
     protected virtual void OnClicked(RoutedEventArgs e)

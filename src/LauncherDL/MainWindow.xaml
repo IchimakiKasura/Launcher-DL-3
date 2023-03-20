@@ -38,7 +38,7 @@
             <Border.Background>
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Images/background.jpg" Opacity="0.5"/>
             </Border.Background>
-            <Canvas x:Name="_windowCanvas" CacheMode="BitmapCache" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased">
+            <Canvas x:Name="_windowCanvas" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased">
                 <Border Background="#A34F002F" CornerRadius="10,10,0,0" Height="35" Opacity="1" x:Name="_windowDrag" Width="880">
                     <Grid>
 
