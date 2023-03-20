@@ -46,6 +46,7 @@
     <AssemblyName>Launcher DL</AssemblyName>
     <PackageId>Launcher DL</PackageId>
     <Product>Launcher DL</Product>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(Configuration) == Debug">

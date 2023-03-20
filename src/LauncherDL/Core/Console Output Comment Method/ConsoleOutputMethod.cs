@@ -7,6 +7,11 @@ public enum ConsoleOutputCheck
     FAILED
 }
 
+/// <summary>
+/// Where string are repeatedly called so<br/>
+/// made it into a class which a single call<br/>
+/// can output multiple comment
+/// </summary>
 internal static class ConsoleOutputMethod
 {
     public const int TYPE = 0, FORMAT = 1, QUALITY = 2;
@@ -63,7 +68,7 @@ internal static class ConsoleOutputMethod
     }
 
     public static void NoLinkOutputComment() =>
-        console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "<%14>No Link provided or Link is invalid");
+        console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "No Link provided or Link is invalid");
 
     public static void ComboBoxChangedOutputComment(int ComboBoxControlType) =>
         console.DLAddConsole(CONSOLE_SYSTEM_STRING, ComboBoxControlType switch
@@ -77,7 +82,7 @@ internal static class ConsoleOutputMethod
     public static void MetadataOutputComment()
     {
         if(Old_Title is null) return;
-        console.DLAddConsole(CONSOLE_INFO_STRING, "<%14> Metadata has been set!");
+        console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been set!");
         console.AddFormattedText("<Gray%12>"+
             $"{CONSOLE_METADATA_TITLE       }"  +  $"{Old_Title        ?? "N\\A"} $nl$"  +      
             $"{CONSOLE_METADATA_ALBUM       }"  +  $"{Old_Album        ?? "N\\A"} $nl$"  +

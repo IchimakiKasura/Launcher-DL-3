@@ -11,7 +11,7 @@ internal partial class ConsoleLive
         switch(StringData)
         {
             case string when StringData.Contains("yt-dlp is up to date"):
-                console.DLAddConsole(CONSOLE_YEY_STRING, "<%14>File is up to date!");
+                console.DLAddConsole(CONSOLE_YEY_STRING, "File is up to date!");
             break;
 
             case string when StringData.Contains("yt-dlp to version"):

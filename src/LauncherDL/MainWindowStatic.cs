@@ -95,6 +95,9 @@ public partial class MainWindow
 			TextEditable = false,
 		};
 
+        // "None" style has no minimize animation
+        WindowStyle = WindowStyle.SingleBorderWindow;
+
 		BindingFlags MainWindowFieldFlags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
 
         foreach(var MainWindowField in typeof(MainWindow).GetMembers())

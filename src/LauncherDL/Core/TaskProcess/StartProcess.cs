@@ -8,12 +8,13 @@ abstract class StartProcess
 
         bool isConvert = ConsoleLive.SelectedError is 2;
 
-        ProcessTaskVariable.StartInfo = new(isConvert ? FFMPEG_Path : YDL_Path, Args)
-        {
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            CreateNoWindow = true
-        };
+        ProcessTaskVariable.StartInfo =
+            new(isConvert ? FFMPEG_Path : YDL_Path, Args)
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
 
         ProcessTaskVariable.ErrorDataReceived += e;
 
@@ -32,10 +33,4 @@ abstract class StartProcess
 
         await ProcessTaskVariable.WaitForExitAsync();
     }
-}
-
-public static class ExtendProcess
-{
-    public static async Task StartAsync(this Process _proc) =>
-        await Task.Run(()=>_proc.Start());
 }

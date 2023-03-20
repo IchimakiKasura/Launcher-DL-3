@@ -49,17 +49,16 @@ internal partial class ConsoleLive
 
         if(FormatNames[RESOLUTION].Contains("audio only"))
             // Takes the latest Audio format ID
-            switch(FormatNames[1])
+            switch(FormatNames[FORMAT])
             {
                 case "m4a" : AudioOnlyID_M4A  = FormatNames[ID];                                break;
                 case "webm": AudioOnlyID_WEBM = FormatNames[ID];                                break;
             }
         else
         {
-            // Puts the latest Audio format ID to the video that has no Audio
             if(HasAudio) return;
-            
-            // New
+        
+            // Puts the latest Audio format ID to the video that has no Audio
             VID_AO = FormatNames[FORMAT] switch
             {
                 string when FormatNames[FORMAT].Contains("mp4") =>
@@ -68,13 +67,6 @@ internal partial class ConsoleLive
                     $"{FormatNames[ID]}+{AudioOnlyID_WEBM}",
                 _ => null
             };
-
-            // Old
-            // switch(FormatNames[FORMAT])
-            // {
-            //     case "mp4" : VID_AO = $"{FormatNames[ID]}+{AudioOnlyID_M4A}";                   break;
-            //     case "webm": VID_AO = $"{FormatNames[ID]}+{AudioOnlyID_WEBM}";                  break;
-            // }
         }
 
         TemporaryList.Add(new()

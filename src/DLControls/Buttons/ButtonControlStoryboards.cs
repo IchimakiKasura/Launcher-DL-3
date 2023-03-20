@@ -93,10 +93,10 @@ public partial class ButtonControl
 
             switch (index)
             {
-                default: STYB.Children.Add(ControlDA[index]); break;
-                case 5: STYB.Children.Add(ButtonMargin); break;
-                case 6: STYB.Children.Add(ButtonForeground); break;
-                case 7: STYB.Children.Add(ButtonImageViewport); break;
+                default: STYB.Add(ControlDA[index]); break;
+                case 5: STYB.Add(ButtonMargin); break;
+                case 6: STYB.Add(ButtonForeground); break;
+                case 7: STYB.Add(ButtonImageViewport); break;
             }
 
             STYB.Begin();

@@ -72,16 +72,16 @@ public partial class ComboBoxControl : UserControl
 
         if (TextEditable)
         {
-            ComboBoxTemplateGRID.Children.Add(Placeholder);
-            ComboBoxTemplateGRID.Children.Add(MainText); 
+            ComboBoxTemplateGRID.Add(Placeholder);
+            ComboBoxTemplateGRID.Add(MainText); 
             Contents.Visibility = Visibility.Hidden;
         }
 
         MainText.TextChanged += delegate
         {
             if (MainText.Text == string.Empty)
-                ComboBoxTemplateGRID.Children.Add(Placeholder);
-            else ComboBoxTemplateGRID.Children.Remove(Placeholder);
+                ComboBoxTemplateGRID.Add(Placeholder);
+            else ComboBoxTemplateGRID.Remove(Placeholder);
         };
         
         IsEnabledChanged += delegate
@@ -96,8 +96,8 @@ public partial class ComboBoxControl : UserControl
 
                     if(TextEditable)
                     {
-                        if(!ComboBoxTemplateGRID.Children.Contains(MainText))
-                            ComboBoxTemplateGRID.Children.Add(MainText);
+                        if(!ComboBoxTemplateGRID.Contains(MainText))
+                            ComboBoxTemplateGRID.Add(MainText);
 
                         Placeholder.Text = PlaceholderText;
                     }
@@ -112,7 +112,7 @@ public partial class ComboBoxControl : UserControl
                     if(TextEditable)
                     {
                         if(string.IsNullOrEmpty(MainText.Text))
-                            ComboBoxTemplateGRID.Children.Remove(MainText);
+                            ComboBoxTemplateGRID.Remove(MainText);
                             
                         Placeholder.Text = " Unavailable";
                     }
@@ -170,7 +170,7 @@ public partial class ComboBoxControl : UserControl
 
             SetStoryboardAuto(STYB_BorderBrush, border, new("(Control.BorderBrush).(SolidColorBrush.Color)"));
             
-            STYB_BorderBrush.Children.Add(BorderBrush);
+            STYB_BorderBrush.Add(BorderBrush);
             STYB_BorderBrush.Begin();
 
         }

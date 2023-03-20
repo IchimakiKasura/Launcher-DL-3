@@ -15,16 +15,13 @@ abstract class EndProcess
             case 2: ConvertTaskEnded();  break;
         }
 
-		if (MainWindowStatic.IsActive)
-		{
-			TaskbarProgressBar.ProgressValue = 0;
-			WindowsComponents.WindowTaskBarFlash();
-		}
-
+        if (!MainWindowStatic.IsActive)
+            WindowsComponents.WindowTaskBarFlash();
+        
         WindowsComponents.FreezeComponents();
     }
     static void ConvertTaskEnded() =>
-        console.DLAddConsole(CONSOLE_YEY_STRING, $"<%14>File converted: \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}\"");
+        console.DLAddConsole(CONSOLE_YEY_STRING, $"File converted: \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}\"");
     
     static void DownloadTaskEnded()
     {

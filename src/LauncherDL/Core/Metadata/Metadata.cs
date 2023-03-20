@@ -62,7 +62,7 @@ public partial class MetadataWindow : Window
 
     public static void MetadataClear()
     {
-        console.DLAddConsole(CONSOLE_INFO_STRING, "<%14> Metadata has been cleared!");
+        console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been cleared!");
 
         Old_Title           =
         Old_Album           =

@@ -11,14 +11,15 @@ internal partial class ConsoleLive                                              
         switch(SelectedError)                                                                                                               {
             case 0                                                                                                                          :
                 console.DLAddConsole(CONSOLE_ERROR_STRING,
-                $"<%14>1. Link is unavailable$nl$2. Link is invalid$nl$3. Check internet connection.")                                      ;
+                $"1. Link is unavailable$nl$2. Link is invalid$nl$3. Check internet connection.")                                      ;
             break                                                                                                                           ;
             
             case 1                                                                                                                          :
                 console.DLAddConsole(CONSOLE_ERROR_STRING,
-                $"<%14>Download failed! Please check your connection and retry again.")                                                     ;
+                $"Download failed! Please check your connection and retry again.")                                                     ;
             break                                                                                                                           ;
             
             case 2                                                                                                                          :
-                console.DLAddConsole(CONSOLE_ERROR_STRING, "<%14>Convert failed! please report it to the author")                           ;
+                console.DLAddConsole(CONSOLE_ERROR_STRING,
+                "Convert failed! please report it to the author")                           ;
             break                                                                                                                           ;}}}

@@ -70,15 +70,15 @@ public partial class TextBoxControl : UserControl
             VerticalAlignment = VerticalAlignment.Center
         };
 
-        UserGrid.Children.Add(Placeholder);
+        UserGrid.Add(Placeholder);
 
         UserTextBox.TextChanged += delegate
         {
             if (Text is "" or null)
             {
-                UserGrid.Children.Remove(Placeholder);
-                UserGrid.Children.Add(Placeholder);
-            } else UserGrid.Children.Remove(Placeholder);
+                UserGrid.Remove(Placeholder);
+                UserGrid.Add(Placeholder);
+            } else UserGrid.Remove(Placeholder);
         };
 
         UserTextBox.IsEnabledChanged += delegate

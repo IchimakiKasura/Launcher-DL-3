@@ -8,7 +8,7 @@ public class UpdateButton
         
         WindowsComponents.FreezeComponents();
 
-        console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Updating...");
+        console.DLAddConsole(CONSOLE_INFO_STRING, "Updating...");
 
         var YDLInfo = new YDL(new());
         YDLInfo.IsUpdate = true;

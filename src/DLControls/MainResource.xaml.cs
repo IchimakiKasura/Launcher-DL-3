@@ -14,7 +14,22 @@ public partial class MainResource
 
 	public static void SetMouseEnterLeave(UIElement Control, Action Enter, Action Leave)
     {
-        Control.MouseEnter += delegate { Enter(); };
-        Control.MouseLeave += delegate { Leave(); };
+        Control.MouseEnter += (s,e) => Enter();
+        Control.MouseLeave += (s,e) => Leave();
     }
+}
+
+internal static class _Extensions
+{
+    // Storyboard
+    public static void Add(this Storyboard storyboard, Timeline Element) =>
+        storyboard.Children.Add(Element);
+
+    // Grid
+    public static void Add(this Grid grid, UIElement Element) =>
+        grid.Children.Add(Element);
+    public static void Remove(this Grid grid, UIElement Element) =>
+        grid.Children.Remove(Element);
+    public static bool Contains(this Grid grid, UIElement Element) =>
+        grid.Children.Contains(Element);
 }
