@@ -1,21 +1,18 @@
 ﻿namespace LauncherDL.Core.Debug;
 
 /// <summary>
-/// This script is automatically discarded on release build.
-/// <br/>
-/// So saying "Uh JUSt uSe DeBug" nah i'll pass
-/// I got used to doing this.
+/// This script is automatically discarded on release build. <br/>
+/// So saying "Uh JUSt uSe DeBug" bish im using vscode and rarely use <br/>
+/// MSVC but I got used to doing this so its my habit.
 /// </summary>
 public static class ConsoleDebug
 {
-    static int count = 0;
-
     public static void Log(dynamic Any) =>
         Console.WriteLine(Any);
 
+    // Only shows when the OutputType is on "Exe" and not "WinExe"
     public static void InitiateConsoleDebug()
     {
-        // Only shows when the OutputType is on "Exe" and not "WinExe"
         System.Console.OutputEncoding = System.Text.Encoding.UTF8;
         Console.Title = "LauncherDL: ==== DEBUG ====";
         ConsoleDebug.Log("==== DEBUG ====\n");
@@ -31,18 +28,20 @@ public static class ConsoleDebug
         {
             ConsoleDebug.Log("-------------------------------------------------------------");
             ConsoleDebug.Log("Config Reading Success ✅");
+            ConsoleDebug.Log("-----------------------Loading FFMPEG------------------------");
             return;
         }
 
         ConsoleDebug.Log("-------------------------------------------------------------");
         ConsoleDebug.Log("Config Reading Failed ❌\n");
         ConsoleDebug.Log("Using Default Config");
+        ConsoleDebug.Log("-----------------------Loading FFMPEG------------------------");
     }
 
     // goddamn it  I got lazy naming these parameters
     public static void LoadingConfig<T>(T a, dynamic b, string c)
     {
-        Console.Write($"Loading {c}");
+        Console.Write($"[CONFIG] Loading {c}");
         try
         {
             if(c is CONFIG_STR.CONFIG_FILE_TYPE)
@@ -54,19 +53,25 @@ public static class ConsoleDebug
             if(a.GetType().ToString().Contains(CONFIG_STR.CONFIG_COLOR_CONTAINS)) a = ClrConv(b);
             else a = b;
 
-            Console.SetCursorPosition(34,10 + count);
+            Console.SetCursorPosition(40, Console.GetCursorPosition().Top);
             Console.Write($"\x1b[32mLOADED! = {b}\x1b[0m\n");
         } catch
         {
-            Console.SetCursorPosition(34,10 + count);
+            Console.SetCursorPosition(40, Console.GetCursorPosition().Top);
             Console.Write($"\x1b[31mFAILED! = {b}\x1b[0m\n");
         };
-        count++;
     }
 
-    public static void LoadingFFmpeg(bool a, string c) =>
-        Console.Write(a ? $"\x1b[32m{c}\x1b[0m\n" : $"\x1b[31m{c}\x1b[0m\n");
-    
+    public static void LoadingFFmpeg(bool a, string c)
+    {
+        Console.Write(a ? $"[FFMPEG] \x1b[32m{c}SUCCESS" : $"[FFMPEG] \x1b[31m{c}");
+        Console.SetCursorPosition(40, Console.GetCursorPosition().Top);
+        Console.Write(a ? $"FOUND\x1b[0m\n" : $"NOT FOUND\x1b[0m\n");
+    }
+    public static void LoadingFFmpegDone(bool a)
+    {
+        Console.Write(a ? $"[FFMPEG] \x1b[32mFFMPEG FILES LOADED \x1b[0m\n" : $"[FFMPEG] \x1b[31mFFMPEG FILES MISSING \x1b[0m\n");
+    }
 
     public static void WindowFocused(bool isFocused) =>
         ConsoleDebug.Log(isFocused ? "Window is Focused!" : "Window is Unfocused!");

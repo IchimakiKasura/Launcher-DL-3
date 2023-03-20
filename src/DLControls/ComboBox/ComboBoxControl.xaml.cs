@@ -7,22 +7,13 @@ public partial class ComboBoxControl : UserControl
 {
     readonly static DependencyProperty TextEditableProperty =
         DependencyProperty.Register("TextEditable", typeof(bool), typeof(ComboBoxControl));
-    readonly static DependencyProperty PlaceholderTextProperty =
-        DependencyProperty.Register("PlaceholderText", typeof(string), typeof(ComboBoxControl), new("default (Best)"));
     readonly static DependencyProperty ContentAlignmentProperty =
         DependencyProperty.Register("ContentAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
-    readonly static DependencyProperty ShowVerticalScrollbarProperty =
-        DependencyProperty.Register("ShowVerticalScrollbar", typeof(bool), typeof(ComboBoxControl));
 
     public bool TextEditable
     {
         get => (bool)GetValue(TextEditableProperty);
         set => SetValue(TextEditableProperty, value);
-    }
-    public string PlaceholderText
-    {
-        get => (string)GetValue(PlaceholderTextProperty);
-        set => SetValue(PlaceholderTextProperty, value);
     }
     public HorizontalAlignment ContentAlignment
     {
@@ -37,14 +28,15 @@ public partial class ComboBoxControl : UserControl
     }
     public bool ShowVerticalScrollbar
     {
-        get => (bool)GetValue(ShowVerticalScrollbarProperty);
+        get => ShowVerticalScrollbar;
         set
         {
-            SetValue(ShowVerticalScrollbarProperty, value);
             ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Disabled);
             if(value) ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
         }
     }
+
+    public string PlaceholderText { get; set; } = "default (Best)";
 
     public UIElement UICanvas =>
         UserComboBox;
@@ -58,12 +50,12 @@ public partial class ComboBoxControl : UserControl
     public bool HasItems =>
         UserComboBox.HasItems;
 
-    public bool isTextFocused;
+    public bool isTextFocused { get; set; }
     public RoutedEventHandler OnItemChange;
     public TextBox MainText;
     TextBlock Placeholder;
     public ContentPresenter Contents;
-    public Grid comboBoxGRID;
+    public Grid ComboBoxTemplateGRID;
     
     public ComboBoxControl()
     {
@@ -76,20 +68,20 @@ public partial class ComboBoxControl : UserControl
         SetBorderStoryboard();
 
         Contents = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
-        comboBoxGRID = GetTemplateResource<Grid>("ComboBoxGRID", UserComboBox);
+        ComboBoxTemplateGRID = GetTemplateResource<Grid>("ComboBoxTemplateGRID", UserComboBox);
 
         if (TextEditable)
         {
-            comboBoxGRID.Children.Add(Placeholder);
-            comboBoxGRID.Children.Add(MainText); 
+            ComboBoxTemplateGRID.Children.Add(Placeholder);
+            ComboBoxTemplateGRID.Children.Add(MainText); 
             Contents.Visibility = Visibility.Hidden;
         }
 
         MainText.TextChanged += delegate
         {
             if (MainText.Text == string.Empty)
-                comboBoxGRID.Children.Add(Placeholder);
-            else comboBoxGRID.Children.Remove(Placeholder);
+                ComboBoxTemplateGRID.Children.Add(Placeholder);
+            else ComboBoxTemplateGRID.Children.Remove(Placeholder);
         };
         
         IsEnabledChanged += delegate
@@ -104,8 +96,8 @@ public partial class ComboBoxControl : UserControl
 
                     if(TextEditable)
                     {
-                        if(!comboBoxGRID.Children.Contains(MainText))
-                            comboBoxGRID.Children.Add(MainText);
+                        if(!ComboBoxTemplateGRID.Children.Contains(MainText))
+                            ComboBoxTemplateGRID.Children.Add(MainText);
 
                         Placeholder.Text = PlaceholderText;
                     }
@@ -120,7 +112,7 @@ public partial class ComboBoxControl : UserControl
                     if(TextEditable)
                     {
                         if(string.IsNullOrEmpty(MainText.Text))
-                            comboBoxGRID.Children.Remove(MainText);
+                            ComboBoxTemplateGRID.Children.Remove(MainText);
                             
                         Placeholder.Text = " Unavailable";
                     }
@@ -176,7 +168,7 @@ public partial class ComboBoxControl : UserControl
             if (IsEnter)
                 BorderBrush = new(Colors.Blue, TimeSpan.FromMilliseconds(100));
 
-            SetStoryboardAuto(BorderBrush, border, new("(Control.BorderBrush).(SolidColorBrush.Color)"));
+            SetStoryboardAuto(STYB_BorderBrush, border, new("(Control.BorderBrush).(SolidColorBrush.Color)"));
             
             STYB_BorderBrush.Children.Add(BorderBrush);
             STYB_BorderBrush.Begin();
@@ -201,7 +193,5 @@ public partial class ComboBoxControl : UserControl
 
         if(TextEditable && ((FormatList)UserComboBox.SelectedItem) is not null)
             MainText.Text = ((FormatList)UserComboBox.SelectedItem).Name;
-
-        GC.Collect();
     }
 }

@@ -94,7 +94,7 @@ public partial class TextBoxControl : UserControl
             }
         };
 
-        UserTextBox.GotFocus += delegate { isTextBoxFocused = true; };
-        UserTextBox.LostFocus += delegate { isTextBoxFocused = false; };
+        UserTextBox.GotFocus +=(s,e)=> { isTextBoxFocused = true; };
+        UserTextBox.LostFocus +=(s,e)=> { isTextBoxFocused = false; };
     }
 }

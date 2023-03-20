@@ -39,6 +39,10 @@ internal static partial class FFmpegFiles
                     ConsoleDebug.LoadingFFmpeg(false, Files);
                 #endif
             }
+
+        #if DEBUG
+            ConsoleDebug.LoadingFFmpegDone(!ErrorOccured);
+        #endif
         
         if(ErrorOccured)
         {

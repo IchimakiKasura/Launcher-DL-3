@@ -62,11 +62,7 @@ public partial class MainWindow
     public static   ComboBoxControl                 comboBoxFormat      { get; set; }
 
     [ToolTipTexts("Select Quality")]
-    public static   ComboBoxControl                 comboBoxQuality     { get; set; } = new()
-    {
-        Width = 154,
-        TextEditable = false,
-    };
+    public static   ComboBoxControl                 comboBoxQuality     { get; set; }
 
 
     [MainWindowStaticMember]
@@ -91,9 +87,15 @@ public partial class MainWindow
         //// Idk about these
         /**/VisualBitmapScalingMode = BitmapScalingMode.LowQuality;
         /**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
-        ////
+		////
 
-        BindingFlags MainWindowFieldFlags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
+		comboBoxQuality = new()
+		{
+			Width = 154,
+			TextEditable = false,
+		};
+
+		BindingFlags MainWindowFieldFlags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
 
         foreach(var MainWindowField in typeof(MainWindow).GetMembers())
         {

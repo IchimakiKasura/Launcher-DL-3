@@ -28,6 +28,20 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
+        // To be remove
+        int i = 0;
+        var Test = new ProgressBar();
+        Test.Width = 500;
+        Test.Height = 50;
+        Test.Maximum = 1000;
+        _windowCanvas.Add(Test);
+        CompositionTarget.Rendering += delegate
+        {
+            Test.Value = i++;
+            if(i == 1000) i = 0;
+        };
+        ///////////////////////
+        
         InitiateStaticComponents(this);
 
         #if DEBUG

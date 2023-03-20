@@ -128,7 +128,7 @@ public partial class MetadataWindow
     }
 
     void AddToCanvas(UIElement Element) =>
-        MetadataWindowCanvas.Children.Add(Element);
+        MetadataWindowCanvas.Add(Element);
 
     void EventHandlers()
     {

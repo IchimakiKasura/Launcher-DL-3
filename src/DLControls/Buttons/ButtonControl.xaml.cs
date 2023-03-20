@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 namespace DLControls;
 
 public partial class ButtonControl : UserControl
@@ -15,8 +18,6 @@ public partial class ButtonControl : UserControl
         DependencyProperty.Register("IconHeight", typeof(int), typeof(ButtonControl), new(50));
     readonly static DependencyProperty TextSizeProperty =
         DependencyProperty.Register("TextSize", typeof(int), typeof(ButtonControl), new(20));
-    readonly static DependencyProperty IsAnimationOnProperty = 
-        DependencyProperty.Register("IsAnimationOn", typeof(bool), typeof(ButtonControl), new(true));
 
     public string Image
     {
@@ -48,65 +49,23 @@ public partial class ButtonControl : UserControl
         get => (int)GetValue(TextSizeProperty);
         set => SetValue(TextSizeProperty, value);
     }
-    public bool IsAnimationOn
-    {
-        get => (bool)GetValue(IsAnimationOnProperty);
-        set => SetValue(IsAnimationOnProperty, value);
-    }
+    public bool IsAnimationOn { get; set; }
 
     public UIElement UICanvas => UserButton;
         
     public ButtonControl() =>
         InitializeComponent();
 
-    private void ContentLoaded(object s, RoutedEventArgs e)
-    {
-        TextBlock ContentTextMain = GetTemplateResource<TextBlock>("ContentTextMain", UserButton);
-        Border UserButtonMainTemplate = GetTemplateResource<Border>("UserButtonMainBorder", UserButton);
-
-        TimeSpan AnimationDuration = TimeSpan.Zero;
-        TimeSpan AnimationDurationLeave = TimeSpan.Zero;
-
-        if (IsAnimationOn)
-        {
-            AnimationDuration = TimeSpan.FromMilliseconds(100);
-            AnimationDurationLeave = TimeSpan.FromMilliseconds(50);
-        }
-
-        void SetStoryboard(bool IsEnter)
-        {
-            SetAnimationsValues(IsEnter, AnimationDuration, AnimationDurationLeave);
-
-            foreach(var (STYB, index) in ControlsStoryboards.Select((value, i) => (value,i)))
-            {
-                DependencyObject TargetElement = UserButton;
-                if(index is 4 || index is 7) TargetElement = UserButtonMainTemplate;
-
-                SetStoryboardAuto(STYB, TargetElement, ControlPaths[index]);
-
-                switch(index)
-                {
-                    default: STYB.Children.Add(ControlDA[index]); break;
-                    case 5: STYB.Children.Add(ButtonMargin); break;
-                    case 6: STYB.Children.Add(ButtonForeground); break;
-                    case 7: STYB.Children.Add(ButtonImageViewport); break;
-                }
-
-                STYB.Begin();
-            }
-            
-        }
+    private void ContentLoaded(object s, RoutedEventArgs e) =>
         SetMouseEnterLeave(UserButton,()=>SetStoryboard(true),()=>SetStoryboard(false));
-    }
     
     protected virtual void OnClicked(RoutedEventArgs e)
     {
         RoutedEventHandler eh = Click;
+        // lmao
         if (eh is not null)
-        {
-            if (e is null) return; 
-            eh(this, e);
-        }
+            if (e is not null) 
+                eh(this, e);
     }
 
     private void Clicked(object s, RoutedEventArgs e) =>

@@ -11,23 +11,6 @@ internal static class ConsoleOutputMethod
 {
     public const int TYPE = 0, FORMAT = 1, QUALITY = 2;
 
-    /// <summary>
-    /// extend ConsoleControl
-    /// </summary>
-    public static void DLAddConsole(this ConsoleControl console,string TypeString, string FormattedText, bool Italic = false, bool NoNL = false)
-    {
-        switch(TypeString)
-        {
-            case string when TypeString.Contains(CONSOLE_SYSTEM_STRING) && config.ShowSystemOutput:
-                console.AddFormattedText($"{TypeString} {FormattedText}", Italic, NoNL);
-            break;
-
-            case string when !TypeString.Contains(CONSOLE_SYSTEM_STRING):
-                console.AddFormattedText($"{TypeString} {FormattedText}", Italic, NoNL);
-            break;
-        };
-    }
-    
     public static void StartUpOutputComments()
     {
         console.AddFormattedText(CONSOLE_START);

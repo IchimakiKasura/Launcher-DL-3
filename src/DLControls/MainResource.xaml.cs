@@ -10,12 +10,11 @@ public partial class MainResource
     {
         Storyboard.SetTargetProperty(element, path);
         Storyboard.SetTarget(element, value);
-    }
+	}
 
-    public static void SetMouseEnterLeave(UIElement Control, Action Enter, Action Leave)
+	public static void SetMouseEnterLeave(UIElement Control, Action Enter, Action Leave)
     {
         Control.MouseEnter += delegate { Enter(); };
         Control.MouseLeave += delegate { Leave(); };
-        GC.Collect();
     }
 }

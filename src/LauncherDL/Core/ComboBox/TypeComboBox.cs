@@ -27,8 +27,8 @@ public class TypeComboBox
 
         // Resets cbf width
         comboBoxFormat.Width = 440;
-        if(windowCanvas.Children.Contains(comboBoxQuality))
-            windowCanvas.Children.Remove(comboBoxQuality);
+        if(windowCanvas.Contains(comboBoxQuality))
+            windowCanvas.Remove(comboBoxQuality);
 
         DownloadToConvert(comboBoxType.ItemIndex is 3);
 
@@ -39,7 +39,7 @@ public class TypeComboBox
             case 3:
                 //adjust cbf width for quality cb
                 comboBoxFormat.Width = 228;
-                windowCanvas.Children.Add(comboBoxQuality);
+                windowCanvas.Add(comboBoxQuality);
                 comboBoxFormat.AddConvertTypeList();
                 buttonDownload.UICanvas.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Convert");
             break;

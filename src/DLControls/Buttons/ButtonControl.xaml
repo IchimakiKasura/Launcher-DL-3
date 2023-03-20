@@ -40,12 +40,10 @@
                                                 VerticalAlignment="Center"
                                                 Effect="{StaticResource ContentPresenterEffect}"
                                                 Margin="40,0,0,0"/>
-
                                     </Grid>
 
                                     <Border.Background>
-                                        <ImageBrush x:Name="b_Image"
-                                            ImageSource="{Binding Image, ElementName=root}"
+                                        <ImageBrush ImageSource="{Binding Image, ElementName=root}"
                                             Stretch="UniformToFill"
                                             Viewport="-0.3,0,1.5,1.8"
                                             Opacity="0"/>

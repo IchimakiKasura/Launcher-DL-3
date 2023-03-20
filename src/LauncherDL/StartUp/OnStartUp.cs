@@ -23,9 +23,6 @@ partial class OnStartUp
         ConsoleOutputMethod.StartUpOutputComments();
 
         WindowsComponents.WindowTaskBarFlash();
-
-        GC.Collect();
-        
     }
 
     private static void InitiateContextMenu()

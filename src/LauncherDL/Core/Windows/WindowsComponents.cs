@@ -29,7 +29,6 @@ class WindowsComponents
             WindowOpacity       = new(1, TimeSpan.FromMilliseconds(100));
             WindowAnimation     = new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
             Focus();
-            GC.Collect();
 
             #if DEBUG
                 ConsoleDebug.WindowFocused(true);
@@ -58,8 +57,8 @@ class WindowsComponents
     {
         switch(State)
         {
-            case ProgressBarState.Hide: windowCanvas.Children.Remove    (progressBar);  console.ConsoleHeight = 273; break;
-            case ProgressBarState.Show: windowCanvas.Children.Add       (progressBar);  console.ConsoleHeight = 245; break;
+            case ProgressBarState.Hide: windowCanvas.Remove    (progressBar);  console.ConsoleHeight = 273; break;
+            case ProgressBarState.Show: windowCanvas.Add       (progressBar);  console.ConsoleHeight = 245; break;
         }
         if(progressBar.Value > 0) progressBar.Value = 0;
         console.manualScrollToEnd();

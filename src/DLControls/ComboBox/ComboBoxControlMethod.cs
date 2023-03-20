@@ -49,14 +49,14 @@ public partial class ComboBoxControl
 
         MainText.Text = "";
 
-        comboBoxGRID.Children.Remove(MainText);
-        comboBoxGRID.Children.Remove(Placeholder);
+        ComboBoxTemplateGRID.Children.Remove(MainText);
+        ComboBoxTemplateGRID.Children.Remove(Placeholder);
         Contents.Visibility = Visibility.Visible;
 
         if (!TextEditable) return;
     
-        comboBoxGRID.Children.Add(MainText);
-        comboBoxGRID.Children.Add(Placeholder);
+        ComboBoxTemplateGRID.Children.Add(MainText);
+        ComboBoxTemplateGRID.Children.Add(Placeholder);
         Contents.Visibility = Visibility.Hidden;
     }
 
