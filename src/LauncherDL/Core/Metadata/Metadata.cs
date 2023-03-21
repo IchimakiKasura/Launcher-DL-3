@@ -7,20 +7,14 @@ public partial class MetadataWindow : Window
     public enum MetadataClicked { Set,Cancel }
     public MetadataWindow()
     {
-        MetadataWindowStatic = this;
-        
         InitializeComponent();
         InitializeBorderEffect();
-
-        IsWindowOpen = true;
 
         GetOldText(Old_Title, Metadata_Title);
         GetOldText(Old_Album, Metadata_Album);
         GetOldText(Old_Album_Artist, Metadata_Album_Artist);
         GetOldText(Old_Year, Metadata_Year);
         GetOldText(Old_Genre, Metadata_Genre);
-
-        new TransparencyConverter(this).MakeTransparent();
     }
 
     public MetadataClicked OpenDialog()
@@ -39,25 +33,6 @@ public partial class MetadataWindow : Window
 
         DefaultClicked = MetadataClicked.Set;
         Close();
-    }
-
-    private void GetOldText(string Old, TextBox Element)
-    {
-        if(Old is null) return;
-        
-        Element.Text = Old;
-
-        if(Element.Text == Element.Uid) return;
-        
-        Element.Foreground = Brushes.Black;
-        Element.FontStyle = default;
-    }
-
-    private void SetOldText(ref string Old, TextBox Element)
-    {
-        if(Element.Text != Element.Uid)
-            Old = Element.Text;
-        else Old = null;
     }
 
     public static void MetadataClear()

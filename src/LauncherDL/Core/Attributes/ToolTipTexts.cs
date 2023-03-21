@@ -10,33 +10,29 @@ public class ToolTipTextsAttribute : Attribute
         Description = _Description;
 
     // Initialize the Attribute
-    public static void InitiateAttribute<T>()
+    public static void InitiateAttribute<WindowType>()
     {
         IEnumerable<dynamic> _PropertyInfo;
 
         // Checks whether if the Type is from MainWindow
-        // Please refactor this future me!
-        if(typeof(T) == typeof(MainWindow))
-            _PropertyInfo = typeof(T).GetRuntimeProperties();
-        else _PropertyInfo = typeof(T).GetRuntimeFields();
+        // Please refactor this future me! if possible
+        if(typeof(WindowType) == typeof(MainWindow))
+            _PropertyInfo = typeof(WindowType).GetRuntimeProperties();
+        else _PropertyInfo = typeof(WindowType).GetRuntimeFields();
 
         foreach(var ToolTipField in _PropertyInfo)
         {
             var FieldAttribute = ((MemberInfo)ToolTipField).GetCustomAttribute<ToolTipTextsAttribute>();
             if(FieldAttribute is not null)
-                FieldAttribute.SetValue<T>(ToolTipField.Name, FieldAttribute.Description);
+                FieldAttribute.SetValue<WindowType>(ToolTipField.Name, FieldAttribute.Description, ToolTipField);
         }
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<T>(string Name, string PropertyDescription)
+    private void SetValue<WindowType>(string Name, string PropertyDescription, dynamic PropertyField)
     {
-        var Flags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
-
-        var PropertyField = typeof(T).GetField(Name, Flags) ?? typeof(T).GetField($"_{Name}", Flags);
-
-        dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<T>());
-
+        dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<WindowType>());
+        
         if(PropertyItem.GetType().Namespace is "DLControls")
             ((UIElement)PropertyItem.UICanvas).MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
         else ((UIElement)PropertyItem).MouseMove += (s,e) => Follow(s, e, PropertyDescription);

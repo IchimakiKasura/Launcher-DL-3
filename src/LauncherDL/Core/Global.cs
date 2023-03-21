@@ -17,9 +17,14 @@ public partial class Global
     /// <summary>Config</summary>
     public static DefaultConfig config;
 
-    /// <summary>ColorConverter shortcut</summary>
+    /// <summary>shortcuts</summary>
     public static Color ClrConv(string color) => (Color)ColorConverter.ConvertFromString(color);
     public static Brush BrhConv(string color) => (Brush)new BrushConverter().ConvertFromString(color);
+    public static void SetCanvas(UIElement Element, double Top, double Left)
+    {
+        Canvas.SetTop(Element, Top);
+        Canvas.SetLeft(Element, Left);
+    }
 
     /// <summary>Languages</summary>
     public static DLLanguages.Pick.LanguagePick Language;

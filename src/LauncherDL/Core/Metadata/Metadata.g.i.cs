@@ -47,13 +47,16 @@ public partial class MetadataWindow
             return;
 
         _contentLoad = true;
+        MetadataWindowStatic = this;
+        IsWindowOpen = true;
 
         // Background
-        var _Background = new ImageBrush(new BitmapImage(new Uri($@"pack://siteoforigin:,,,/Images/{config.background}", UriKind.Absolute)));
+        var _Background = new ImageBrush(new BitmapImage(new Uri(WINDOW_BACKGROUND, UriKind.Absolute)));
         _Background.Stretch = Stretch.Fill;
         _Background.Opacity = 0.5;
 
         #region Setup window
+
         Name                    = "MetadataRoot";
         Title                   = LABEL_WINDOW_TITLE;
         Height                  = 260;
@@ -61,12 +64,15 @@ public partial class MetadataWindow
         ResizeMode              = ResizeMode.CanMinimize;
         WindowStartupLocation   = WindowStartupLocation.CenterScreen;
         Background              = Brushes.Transparent;
-        Effect                  = (Effect)MainWindowStatic.FindResource("WindowDropShadow");;
+        Effect                  = (Effect)MainWindowStatic.FindResource(WINDOW_RESOURCE_DROP_SHADOW);
         Resources               = MainWindowStatic.Resources;
         new WindowInteropHelper(this).EnsureHandle();
+        new TransparencyConverter(this).MakeTransparent();
+
         #endregion
 
         #region Setup Top bar
+
         var _WindowChrome = new WindowChrome();
         _WindowChrome.GlassFrameThickness = new(0);
         _WindowChrome.CornerRadius = new(0);
@@ -74,8 +80,8 @@ public partial class MetadataWindow
         _WindowChrome.UseAeroCaptionButtons = false;
         _WindowChrome.ResizeBorderThickness = new(7);
         WindowChrome.SetWindowChrome(this, _WindowChrome);
-        #endregion
 
+        #endregion
 
         // Now thats what i call a group of childrens with their parents
         // sorry bad pun/joke idfk..
@@ -110,7 +116,7 @@ public partial class MetadataWindow
                         new Image()
                         {
                             IsHitTestVisible = false,
-                            Source = new BitmapImage(new($@"pack://application:,,,{DLStrings.AppIcon}", UriKind.Absolute)),
+                            Source = new BitmapImage(new(WINDOW_ICON, UriKind.Absolute)),
                             Margin = new(8,0,this.Width - 49,0)
                         },
                         // Title bar
@@ -132,7 +138,7 @@ public partial class MetadataWindow
             Button_Exit = new()
             {
                 Content = "✕",
-                Style = (Style)MainWindowStatic.FindResource("ExitButtonAlt"),
+                Style = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_EXIT_BUTTON),
                 Margin = new(this.Width - 70, 0,0,0)
             }
         );
@@ -158,6 +164,7 @@ public partial class MetadataWindow
         TEXTBOX_Color.Color = Colors.Black;
         TEXTBOX_Color.Opacity = 0.5;
 
+        // Add Textbox as iteration
         for(int i=0;i<5;i++)
             TEXTBOX_LIST.Add(new() {
                 Height = 22,
@@ -168,6 +175,7 @@ public partial class MetadataWindow
                 BorderBrush = BrhConv(DEFAULT_COLOR)
             });
 
+        // Did this for Placeholders
         #region Metadata
         Metadata_Title          = TEXTBOX_LIST[METADATA_TITLE];
         Metadata_Album          = TEXTBOX_LIST[METADATA_ALBUM];
@@ -235,16 +243,7 @@ public partial class MetadataWindow
         SetCanvas(Button_Cancel ,   196,320);
         #endregion
     }
-
-    void SetCanvas(UIElement Element, double Top, double Left)
-    {
-        Canvas.SetTop(Element, Top);
-        Canvas.SetLeft(Element, Left);
-    }
-
-    void AddToCanvas(UIElement Element) =>
-        MetadataWindowCanvas.Add(Element);
-
+    
     void EventHandlers()
     {
         Button_Set.Click                += MetadataSet;
@@ -257,34 +256,8 @@ public partial class MetadataWindow
         };
 
     }
-
-    void InitializeBorderEffect()
-    {
-        void Focus()
-        {
-            new StoryboardApplier(WindowOpacity     ,   this                ,   new(             "(Window.Effect).Opacity"        ) );
-            new StoryboardApplier(WindowAnimation   ,   MetadataRoundBorder ,   new("(Control.Background).(SolidColorBrush.Color)") );
-        }
-
-        Activated += (s,e) =>
-        {
-            WindowOpacity       = new(1, TimeSpan.FromMilliseconds(100));
-            WindowAnimation     = new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
-            Focus();
-        };
-
-        Deactivated += (s,e) =>
-        {
-            WindowOpacity       = new(0, TimeSpan.FromMilliseconds(100));
-            WindowAnimation     = new(Colors.Black, TimeSpan.FromMilliseconds(100));
-            Focus();
-        };
-    }
-
-    protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-    {
-        Focus();
+    
+    protected override void OnClosing(System.ComponentModel.CancelEventArgs e) =>
         IsWindowOpen = false;
-    }
 
 }

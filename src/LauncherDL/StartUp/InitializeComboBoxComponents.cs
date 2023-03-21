@@ -4,9 +4,7 @@ partial class OnStartUp
 {
     private static async void InitializeComboBoxComponents()
     {
-        Canvas.SetTop(comboBoxType, 89);
-        Canvas.SetTop(comboBoxQuality, 117);
-        Canvas.SetLeft(comboBoxQuality, 648);
+        SetCanvas(comboBoxQuality, 117, 648);
 
         await WindowsComponents.WindowAwaitLoad(comboBoxType.IsLoaded);
 
@@ -18,6 +16,5 @@ partial class OnStartUp
         comboBoxType.ShowVerticalScrollbar  =   false;
         comboBoxQuality.ItemIndex           =   3;
         comboBoxQuality.Width               =   207;
-
     }
 }

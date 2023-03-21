@@ -61,10 +61,8 @@ public partial class MainWindow
     [ToolTipTexts("Select or Input Format")]
     public static   ComboBoxControl                 comboBoxFormat      { get; set; }
 
-    [MainWindowStaticMember]
     [ToolTipTexts("Select Quality")]
     public static   ComboBoxControl                 comboBoxQuality     { get; set; }
-    private ComboBoxControl _comboBoxQuality; // for tooltip purposes and because its a field not property
 
 
     [MainWindowStaticMember]
@@ -91,7 +89,7 @@ public partial class MainWindow
         /**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
         ////
 
-        _comboBoxQuality = new()
+        comboBoxQuality = new()
         {
             Width = 154,
             TextEditable = false,

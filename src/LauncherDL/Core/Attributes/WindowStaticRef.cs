@@ -4,6 +4,7 @@ namespace LauncherDL.Core.Attributes;
 public class WindowStaticRefAttribute : Attribute
 {
     public WindowStaticRefAttribute() { }
+    
     public static dynamic InitiateAttribute<T>()
     {
         foreach(FieldInfo GlobalFields in typeof(Global).GetFields())
@@ -14,7 +15,6 @@ public class WindowStaticRefAttribute : Attribute
                 if(typeof(T) == GlobalFields.FieldType)
                     return GlobalFields.GetValue(new Global());
         }
-        
         return null;
     }
 }
