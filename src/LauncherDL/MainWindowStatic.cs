@@ -87,18 +87,18 @@ public partial class MainWindow
         //// Idk about these
         /**/VisualBitmapScalingMode = BitmapScalingMode.LowQuality;
         /**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
-		////
+        ////
 
-		comboBoxQuality = new()
-		{
-			Width = 154,
-			TextEditable = false,
-		};
+        comboBoxQuality = new()
+        {
+            Width = 154,
+            TextEditable = false,
+        };
 
         // "None" style has no minimize animation
         WindowStyle = WindowStyle.SingleBorderWindow;
 
-		BindingFlags MainWindowFieldFlags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
+        BindingFlags MainWindowFieldFlags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
 
         foreach(var MainWindowField in typeof(MainWindow).GetMembers())
         {
@@ -112,7 +112,7 @@ public partial class MainWindow
 
             // Sets all Tooltips
             if(ToolTipTextAttribute is not null)
-                ToolTipTextAttribute.SetToolTipText(Name, ToolTipTextAttribute.Description, MainWindowFieldFlags);
+                ToolTipTextAttribute.SetToolTipText<MainWindow>($"_{Name}", ToolTipTextAttribute.Description, MainWindowFieldFlags);
         }
     }
 }

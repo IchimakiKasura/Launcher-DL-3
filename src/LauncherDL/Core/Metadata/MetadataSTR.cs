@@ -26,5 +26,7 @@ public partial class MetadataWindow
     PLACEHOLDER_YEAR            = "Year (e.g: 2003, 2013, 2023 etc..) ",
     PLACEHOLDER_GENRE           = "Genre (e.g: JPOP, KPOP, ROCK etc..) ",
     BUTTON_SET                  = "Set",
-    BUTTON_CANCEL               = "Cancel";
+    BUTTON_CANCEL               = "Cancel",
+    DEFAULT_COLOR               = "#FF011F4C",
+    TOPBAR_COLOR                = "#A34F002F";
 }

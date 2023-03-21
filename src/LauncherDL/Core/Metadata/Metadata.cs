@@ -6,10 +6,16 @@ public partial class MetadataWindow : Window
     public static bool IsWindowOpen = false;
 
     public enum MetadataClicked { Set,Cancel }
+    public static MetadataWindow MetadataWindowStatic;
 
     public MetadataWindow()
     {
+        MetadataWindowStatic = this;
+        
         InitializeComponent();
+        InitializeBorderEffect();
+        SetupToolTips();
+
 
         IsWindowOpen = true;
 
@@ -18,6 +24,8 @@ public partial class MetadataWindow : Window
         GetOldText(Old_Album_Artist, Metadata_Album_Artist);
         GetOldText(Old_Year, Metadata_Year);
         GetOldText(Old_Genre, Metadata_Genre);
+
+        new TransparencyConverter(this).MakeTransparent();
     }
 
     public MetadataClicked OpenDialog

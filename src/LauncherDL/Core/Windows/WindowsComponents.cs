@@ -45,7 +45,6 @@ class WindowsComponents
                 ConsoleDebug.WindowFocused(false);
             #endif
         };
-
     }
 
     public static void WindowDrag(object sender, MouseButtonEventArgs e)

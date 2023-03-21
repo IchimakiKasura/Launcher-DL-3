@@ -9,7 +9,7 @@ public partial class MetadataWindow
         if(_textbox.Text == _textbox.Uid)
             _textbox.Text = "";
 
-        _textbox.Foreground = Brushes.Black;
+        _textbox.Foreground = Brushes.White;
         _textbox.FontStyle = default;
     }
 

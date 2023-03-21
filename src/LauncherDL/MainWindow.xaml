@@ -11,8 +11,7 @@
         Height="560"
         Width="900"
         Effect="{StaticResource WindowDropShadow}"
-        FontFamily="{StaticResource DefaultFont}"
-        x:Name="root">
+        FontFamily="{StaticResource DefaultFont}">
 
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo x:Name="_TaskbarProgressBar" ProgressState="Normal" />

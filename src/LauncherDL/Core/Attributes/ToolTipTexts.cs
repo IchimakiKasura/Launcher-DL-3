@@ -1,15 +1,15 @@
 namespace LauncherDL.Core.Attributes;
 
-[AttributeUsage(AttributeTargets.Property, Inherited = false)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false)]
 public class ToolTipTextsAttribute : Attribute
 {
     public string Description { get; private set; }
     public ToolTipTextsAttribute(string _Description) =>
         Description = _Description;
 
-    public void SetToolTipText(string Name, string _Desc, BindingFlags Flags)
+    public void SetToolTipText<T>(string Name, string _Desc, BindingFlags Flags)
     {
-        var _Field = typeof(MainWindow).GetField($"_{Name}", Flags);
+        var _Field = typeof(T).GetField(Name, Flags);
 
         if (_Field is null)
         {
@@ -17,12 +17,22 @@ public class ToolTipTextsAttribute : Attribute
             return;
         }
 
-        dynamic _Item = _Field.GetValue(MainWindowStatic);
+        object _Type;
+        if(typeof(T) == typeof(MetadataWindow))
+            _Type = MetadataWindow.MetadataWindowStatic;
+        else _Type = MainWindowStatic;
+
+        dynamic _Item = _Field.GetValue(_Type);
 
         // Fixes the ToolTip disappearing when mouse moved on CustomControls
-        if(_Item.Content.GetType() == typeof(Canvas))
-            ((UIElement)_Item.UICanvas).MouseMove += (s,e) => Follow(s,e, _Desc);
-        else ((UIElement)_Item).MouseMove += (s,e) => Follow(s, e, _Desc);
+        if(typeof(T) != typeof(MetadataWindow))
+        {
+            if(_Item.Content.GetType() == typeof(Canvas))
+                ((UIElement)_Item.UICanvas).MouseMove += (s,e) => Follow(s,e, _Desc);
+            else ((UIElement)_Item).MouseMove += (s,e) => Follow(s, e, _Desc);
+        }
+        else ((UIElement)_Item).MouseMove += (s,e) => Follow(s,e,_Desc);
+        
     }
 
     public static void Follow(object sender, MouseEventArgs eventargs, string Content)

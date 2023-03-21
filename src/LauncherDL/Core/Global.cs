@@ -15,6 +15,7 @@ public partial class Global
 
     /// <summary>ColorConverter shortcut</summary>
     public static Color ClrConv(string color) => (Color)ColorConverter.ConvertFromString(color);
+    public static Brush BrhConv(string color) => (Brush)new BrushConverter().ConvertFromString(color);
 
     /// <summary>Languages</summary>
     public static DLLanguages.Pick.LanguagePick Language;
