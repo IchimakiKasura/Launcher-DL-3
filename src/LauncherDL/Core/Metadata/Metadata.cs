@@ -4,27 +4,6 @@ public partial class MetadataWindow : Window
 {
     MetadataClicked DefaultClicked = MetadataClicked.Cancel;
     public static bool IsWindowOpen = false;
-
-    #region For Tooltips
-    [ToolTipTexts("Edit Title")]
-    internal static TextBox Metadata_Title         { get; set; }
-    [ToolTipTexts("Edit Album")]
-    internal static TextBox Metadata_Album         { get; set; }
-    [ToolTipTexts("Edit Artist")]
-    internal static TextBox Metadata_Album_Artist  { get; set; }
-    [ToolTipTexts("Set the Year")]
-    internal static TextBox Metadata_Year          { get; set; }
-    [ToolTipTexts("Edit Genre")]
-    internal static TextBox Metadata_Genre         { get; set; }
-
-    [ToolTipTexts("Set the Metadata")]
-    internal static Button Button_Set              { get; set; }
-    [ToolTipTexts("Cancel Metadata")]
-    internal static Button Button_Cancel           { get; set; }
-    [ToolTipTexts("Close Window")]
-    internal static Button Button_Exit             { get; set; }
-    #endregion
-
     public enum MetadataClicked { Set,Cancel }
     public MetadataWindow()
     {

@@ -13,14 +13,22 @@ public partial class MetadataWindow
     private ColorAnimation WindowAnimation;
     private DoubleAnimation  WindowOpacity;
 
-    private TextBox _Metadata_Title         ;
-    private TextBox _Metadata_Album         ;
-    private TextBox _Metadata_Album_Artist  ;
-    private TextBox _Metadata_Year          ;
-    private TextBox _Metadata_Genre         ;
-    private Button _Button_Set              ;
-    private Button _Button_Cancel           ;
-    private Button _Button_Exit             ;
+    [ToolTipTexts("Edit Title")]
+    private TextBox Metadata_Title;
+    [ToolTipTexts("Edit Album")]
+    private TextBox Metadata_Album;
+    [ToolTipTexts("Edit Artist")]
+    private TextBox Metadata_Album_Artist;
+    [ToolTipTexts("Set the Year")]
+    private TextBox Metadata_Year;
+    [ToolTipTexts("Edit Genre")]
+    private TextBox Metadata_Genre;
+    [ToolTipTexts("Set the Metadata")]
+    private Button Button_Set;
+    [ToolTipTexts("Cancel Metadata")]
+    private Button Button_Cancel;
+    [ToolTipTexts("Close Window")]
+    private Button Button_Exit;
 
     private List<TextBlock> LABEL_LIST = new()
     {
@@ -121,7 +129,7 @@ public partial class MetadataWindow
         );
 
         MetadataWindowGrid.Children.Add(
-            _Button_Exit = new()
+            Button_Exit = new()
             {
                 Content = "✕",
                 Style = (Style)MainWindowStatic.FindResource("ExitButtonAlt"),
@@ -161,26 +169,26 @@ public partial class MetadataWindow
             });
 
         #region Metadata
-        _Metadata_Title          = TEXTBOX_LIST[METADATA_TITLE];
-        _Metadata_Album          = TEXTBOX_LIST[METADATA_ALBUM];
-        _Metadata_Album_Artist   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
-        _Metadata_Year           = TEXTBOX_LIST[METADATA_YEAR];
-        _Metadata_Genre          = TEXTBOX_LIST[METADATA_GENRE];
+        Metadata_Title          = TEXTBOX_LIST[METADATA_TITLE];
+        Metadata_Album          = TEXTBOX_LIST[METADATA_ALBUM];
+        Metadata_Album_Artist   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
+        Metadata_Year           = TEXTBOX_LIST[METADATA_YEAR];
+        Metadata_Genre          = TEXTBOX_LIST[METADATA_GENRE];
 
-        _Metadata_Title.Uid          = PLACEHOLDER_TITLE;
-        _Metadata_Album.Uid          = PLACEHOLDER_ALBUM;
-        _Metadata_Album_Artist.Uid   = PLACEHOLDER_ALBUM_ARTIST;
-        _Metadata_Year.Uid           = PLACEHOLDER_YEAR;
-        _Metadata_Genre.Uid          = PLACEHOLDER_GENRE;
+        Metadata_Title.Uid          = PLACEHOLDER_TITLE;
+        Metadata_Album.Uid          = PLACEHOLDER_ALBUM;
+        Metadata_Album_Artist.Uid   = PLACEHOLDER_ALBUM_ARTIST;
+        Metadata_Year.Uid           = PLACEHOLDER_YEAR;
+        Metadata_Genre.Uid          = PLACEHOLDER_GENRE;
         #endregion
 
-        _Button_Set      = new() { Content = BUTTON_SET    , Height = 30, Width = 100};
-        _Button_Cancel   = new() { Content = BUTTON_CANCEL , Height = 30, Width = 100};
+        Button_Set      = new() { Content = BUTTON_SET    , Height = 30, Width = 100};
+        Button_Cancel   = new() { Content = BUTTON_CANCEL , Height = 30, Width = 100};
 
         SetCanvasPlacement();
 
-        AddToCanvas(_Button_Set);
-        AddToCanvas(_Button_Cancel);
+        AddToCanvas(Button_Set);
+        AddToCanvas(Button_Cancel);
 
         foreach(TextBlock Controls in LABEL_LIST)
         {
@@ -215,16 +223,16 @@ public partial class MetadataWindow
         #endregion
 
         #region Textbox Placements
-        SetCanvas(_Metadata_Title        ,   44, 155);
-        SetCanvas(_Metadata_Album        ,   72, 155);
-        SetCanvas(_Metadata_Album_Artist ,  100, 155);
-        SetCanvas(_Metadata_Year         ,  128, 155);
-        SetCanvas(_Metadata_Genre        ,  156, 155);
+        SetCanvas(Metadata_Title        ,   44, 155);
+        SetCanvas(Metadata_Album        ,   72, 155);
+        SetCanvas(Metadata_Album_Artist ,  100, 155);
+        SetCanvas(Metadata_Year         ,  128, 155);
+        SetCanvas(Metadata_Genre        ,  156, 155);
         #endregion
 
         #region Button Placements
-        SetCanvas(_Button_Set    ,   196,204);
-        SetCanvas(_Button_Cancel ,   196,320);
+        SetCanvas(Button_Set    ,   196,204);
+        SetCanvas(Button_Cancel ,   196,320);
         #endregion
     }
 
@@ -239,9 +247,9 @@ public partial class MetadataWindow
 
     void EventHandlers()
     {
-        _Button_Set.Click                += MetadataSet;
-        _Button_Exit.Click               += (s,e) => Close();
-        _Button_Cancel.Click             += (s,e) => Close();
+        Button_Set.Click                += MetadataSet;
+        Button_Exit.Click               += (s,e) => Close();
+        Button_Cancel.Click             += (s,e) => Close();
         MetadataDragBorder.MouseDown    += (s,e) =>
         {
             if (e.ChangedButton is MouseButton.Left)

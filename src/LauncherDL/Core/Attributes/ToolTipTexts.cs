@@ -1,6 +1,8 @@
+using System.Reflection;
+
 namespace LauncherDL.Core.Attributes;
 
-[AttributeUsage(AttributeTargets.Property, Inherited = false)]
+[AttributeUsage(AttributeTargets.Property|AttributeTargets.Field, Inherited = false)]
 public class ToolTipTextsAttribute : Attribute
 {
     public string Description { get; private set; }
@@ -10,9 +12,17 @@ public class ToolTipTextsAttribute : Attribute
     // Initialize the Attribute
     public static void InitiateAttribute<T>()
     {
-        foreach(var ToolTipField in typeof(T).GetRuntimeProperties())
+        IEnumerable<dynamic> _PropertyInfo;
+
+        // Checks whether if the Type is from MainWindow
+        // Please refactor this future me!
+        if(typeof(T) == typeof(MainWindow))
+            _PropertyInfo = typeof(T).GetRuntimeProperties();
+        else _PropertyInfo = typeof(T).GetRuntimeFields();
+
+        foreach(var ToolTipField in _PropertyInfo)
         {
-            var FieldAttribute = ToolTipField.GetCustomAttribute<ToolTipTextsAttribute>();
+            var FieldAttribute = ((MemberInfo)ToolTipField).GetCustomAttribute<ToolTipTextsAttribute>();
             if(FieldAttribute is not null)
                 FieldAttribute.SetValue<T>(ToolTipField.Name, FieldAttribute.Description);
         }
@@ -21,11 +31,12 @@ public class ToolTipTextsAttribute : Attribute
     // Sets the value on selected Attribute
     private void SetValue<T>(string Name, string PropertyDescription)
     {
-        var PropertyField = typeof(T).GetField($"_{Name}", BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic);
+        var Flags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
+
+        var PropertyField = typeof(T).GetField(Name, Flags) ?? typeof(T).GetField($"_{Name}", Flags);
 
         dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<T>());
 
-        // Checks whether the Element came from guicomp.dll or not
         if(PropertyItem.GetType().Namespace is "DLControls")
             ((UIElement)PropertyItem.UICanvas).MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
         else ((UIElement)PropertyItem).MouseMove += (s,e) => Follow(s, e, PropertyDescription);
