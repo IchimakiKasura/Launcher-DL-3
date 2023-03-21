@@ -1,38 +1,34 @@
 namespace LauncherDL.Core.Attributes;
 
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false)]
+[AttributeUsage(AttributeTargets.Property, Inherited = false)]
 public class ToolTipTextsAttribute : Attribute
 {
     public string Description { get; private set; }
     public ToolTipTextsAttribute(string _Description) =>
         Description = _Description;
 
-    public void SetToolTipText<T>(string Name, string _Desc, BindingFlags Flags)
+    // Initialize the Attribute
+    public static void InitiateAttribute<T>()
     {
-        var _Field = typeof(T).GetField(Name, Flags);
-
-        if (_Field is null)
+        foreach(var ToolTipField in typeof(T).GetRuntimeProperties())
         {
-            MainWindow.comboBoxQuality.MouseMove += (s,e) => Follow(s,e,_Desc);
-            return;
+            var FieldAttribute = ToolTipField.GetCustomAttribute<ToolTipTextsAttribute>();
+            if(FieldAttribute is not null)
+                FieldAttribute.SetValue<T>(ToolTipField.Name, FieldAttribute.Description);
         }
+    }
 
-        object _Type;
-        if(typeof(T) == typeof(MetadataWindow))
-            _Type = MetadataWindow.MetadataWindowStatic;
-        else _Type = MainWindowStatic;
+    // Sets the value on selected Attribute
+    private void SetValue<T>(string Name, string PropertyDescription)
+    {
+        var PropertyField = typeof(T).GetField($"_{Name}", BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic);
 
-        dynamic _Item = _Field.GetValue(_Type);
+        dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<T>());
 
-        // Fixes the ToolTip disappearing when mouse moved on CustomControls
-        if(typeof(T) != typeof(MetadataWindow))
-        {
-            if(_Item.Content.GetType() == typeof(Canvas))
-                ((UIElement)_Item.UICanvas).MouseMove += (s,e) => Follow(s,e, _Desc);
-            else ((UIElement)_Item).MouseMove += (s,e) => Follow(s, e, _Desc);
-        }
-        else ((UIElement)_Item).MouseMove += (s,e) => Follow(s,e,_Desc);
-        
+        // Checks whether the Element came from guicomp.dll or not
+        if(PropertyItem.GetType().Namespace is "DLControls")
+            ((UIElement)PropertyItem.UICanvas).MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
+        else ((UIElement)PropertyItem).MouseMove += (s,e) => Follow(s, e, PropertyDescription);
     }
 
     public static void Follow(object sender, MouseEventArgs eventargs, string Content)
@@ -42,7 +38,7 @@ public class ToolTipTextsAttribute : Attribute
         if (TooltipElement.ToolTip is null)
             TooltipElement.ToolTip = new ToolTip() { Placement = System.Windows.Controls.Primitives.PlacementMode.Relative };
             
-        var tip = (TooltipElement.ToolTip as ToolTip);
+        ToolTip tip = TooltipElement.ToolTip as ToolTip;
         tip.Content = Content;
         tip.HorizontalOffset = eventargs.GetPosition(TooltipElement).X + 10;
         tip.VerticalOffset = eventargs.GetPosition(TooltipElement).Y + 10;

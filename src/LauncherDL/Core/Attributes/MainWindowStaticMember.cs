@@ -4,13 +4,28 @@ namespace LauncherDL.Core.Attributes;
 public class MainWindowStaticMemberAttribute : Attribute
 {
     public MainWindowStaticMemberAttribute() { }
-    public void SetValue(string Name, BindingFlags Flags, MemberInfo obj)
-    {
-        var _Field = typeof(MainWindow).GetField($"_{Name}", Flags);
-        var _Item = _Field.GetValue(MainWindowStatic);
 
-        if (_Item is null) return;
-        
-        typeof(MainWindow).GetProperty(obj.Name).SetValue(obj, _Item);
+    // Initialize the Attribute
+    public static void InitiateAttribute<T>()
+    {
+        foreach(PropertyInfo MainWindowField in typeof(T).GetProperties())
+        {
+            var FieldAttribute = MainWindowField.GetCustomAttribute<MainWindowStaticMemberAttribute>();
+
+            if(FieldAttribute is not null)
+                FieldAttribute.SetValue<T>(MainWindowField);
+        }
     }
-}
+
+    // Sets the value on selected Attribute
+    private void SetValue<T>(PropertyInfo PropertyInfo)
+    {
+        var PropertyField = typeof(T).GetField($"_{PropertyInfo.Name}", BindingFlags.NonPublic|BindingFlags.Instance);
+
+        var PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<T>());
+
+        if (PropertyItem is null) return;
+        
+        typeof(T).GetProperty(PropertyInfo.Name).SetValue(PropertyInfo, PropertyItem);
+    }
+} 

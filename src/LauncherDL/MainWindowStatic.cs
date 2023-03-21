@@ -61,8 +61,10 @@ public partial class MainWindow
     [ToolTipTexts("Select or Input Format")]
     public static   ComboBoxControl                 comboBoxFormat      { get; set; }
 
+    [MainWindowStaticMember]
     [ToolTipTexts("Select Quality")]
     public static   ComboBoxControl                 comboBoxQuality     { get; set; }
+    private ComboBoxControl _comboBoxQuality; // for tooltip purposes and because its a field not property
 
 
     [MainWindowStaticMember]
@@ -89,7 +91,7 @@ public partial class MainWindow
         /**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
         ////
 
-        comboBoxQuality = new()
+        _comboBoxQuality = new()
         {
             Width = 154,
             TextEditable = false,
@@ -98,21 +100,7 @@ public partial class MainWindow
         // "None" style has no minimize animation
         WindowStyle = WindowStyle.SingleBorderWindow;
 
-        BindingFlags MainWindowFieldFlags = BindingFlags.Instance|BindingFlags.Public|BindingFlags.CreateInstance|BindingFlags.NonPublic;
-
-        foreach(var MainWindowField in typeof(MainWindow).GetMembers())
-        {
-            var MainWindowStaticAttribute = MainWindowField.GetCustomAttribute<MainWindowStaticMemberAttribute>();
-            var ToolTipTextAttribute = MainWindowField.GetCustomAttribute<ToolTipTextsAttribute>();
-            var Name = MainWindowField.Name;
-
-            // Sets all static properties
-            if(MainWindowStaticAttribute is not null)
-                MainWindowStaticAttribute.SetValue(Name, MainWindowFieldFlags, MainWindowField);
-
-            // Sets all Tooltips
-            if(ToolTipTextAttribute is not null)
-                ToolTipTextAttribute.SetToolTipText<MainWindow>($"_{Name}", ToolTipTextAttribute.Description, MainWindowFieldFlags);
-        }
+        MainWindowStaticMemberAttribute.InitiateAttribute<MainWindow>();
+        ToolTipTextsAttribute.InitiateAttribute<MainWindow>();
     }
 }

@@ -36,18 +36,17 @@
     </Style>
 
 	<Style TargetType="ToolTip">
-        <Setter Property="ToolTipService.InitialShowDelay" Value="3000"/>
-        <Setter Property="ToolTipService.ShowDuration" Value="20000"/>
-        <Setter Property="ToolTipService.BetweenShowDelay" Value="5000"/>
 		<Setter Property="OverridesDefaultStyle" Value="true" />
 		<Setter Property="HasDropShadow" Value="True" />
 		<Setter Property="FontSize" Value="15" />
 		<Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+        <Setter Property="FontStyle" Value="Normal"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToolTip">
 					<Border Background="{Binding Source={StaticResource 74000000}}"
-                    BorderBrush="{StaticResource DefaultBorderBrush}"
+                    BorderBrush="Blue"
                     BorderThickness="2"
                     CornerRadius="5">
 						<ContentPresenter Margin="4"/>

@@ -113,9 +113,4 @@ class WindowsComponents
 
         WindowProgressBar(comboBoxType.IsEnabled ? ProgressBarState.Hide : ProgressBarState.Show);
     }
-
-    public static void WindowHoverTooltip()
-    {
-
-    }
 }

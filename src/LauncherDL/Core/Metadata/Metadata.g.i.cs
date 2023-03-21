@@ -4,33 +4,25 @@ namespace LauncherDL.Core.Metadata;
 // I like it more chaotic
 public partial class MetadataWindow
 {
-    internal Border MetadataRoundBorder;
-    internal Border MetadataDragBorder;
-    internal Canvas MetadataWindowCanvas;
+    private Border MetadataRoundBorder;
+    private Border MetadataDragBorder;
+    private Canvas MetadataWindowCanvas;
 
-    internal Grid MetadataWindowGrid;
+    private Grid MetadataWindowGrid;
 
-    [ToolTipTexts("Edit Title")]
-    internal TextBox Metadata_Title;
-    [ToolTipTexts("Edit Album")]
-    internal TextBox Metadata_Album;
-    [ToolTipTexts("Edit Artist")]
-    internal TextBox Metadata_Album_Artist;
-    [ToolTipTexts("Set the Year")]
-    internal TextBox Metadata_Year;
-    [ToolTipTexts("Edit Genre")]
-    internal TextBox Metadata_Genre;
+    private ColorAnimation WindowAnimation;
+    private DoubleAnimation  WindowOpacity;
 
-    [ToolTipTexts("Set the Metadata")]
-    internal Button Button_Set;
-    [ToolTipTexts("Cancel Metadata")]
-    internal Button Button_Cancel;
-    [ToolTipTexts("Close Window")]
-    internal Button Button_Exit;
-    internal ColorAnimation WindowAnimation;
-    internal DoubleAnimation  WindowOpacity;
+    private TextBox _Metadata_Title         ;
+    private TextBox _Metadata_Album         ;
+    private TextBox _Metadata_Album_Artist  ;
+    private TextBox _Metadata_Year          ;
+    private TextBox _Metadata_Genre         ;
+    private Button _Button_Set              ;
+    private Button _Button_Cancel           ;
+    private Button _Button_Exit             ;
 
-    internal List<TextBlock> LABEL_LIST = new()
+    private List<TextBlock> LABEL_LIST = new()
     {
         new() { Text = LABEL_TITLE          },
         new() { Text = LABEL_ALBUM          },
@@ -39,7 +31,7 @@ public partial class MetadataWindow
         new() { Text = LABEL_GENRE          },
         new() { Text = LABEL_CREATOR        }
     };
-    internal List<TextBox> TEXTBOX_LIST = new();
+    private List<TextBox> TEXTBOX_LIST = new();
     private bool _contentLoad;
     public void InitializeComponent()
     {
@@ -129,7 +121,7 @@ public partial class MetadataWindow
         );
 
         MetadataWindowGrid.Children.Add(
-            Button_Exit = new()
+            _Button_Exit = new()
             {
                 Content = "✕",
                 Style = (Style)MainWindowStatic.FindResource("ExitButtonAlt"),
@@ -146,6 +138,9 @@ public partial class MetadataWindow
         
         // Setup the Events
         EventHandlers();
+
+        // Setup the Tooltips
+		ToolTipTextsAttribute.InitiateAttribute<MetadataWindow>();
     }
 
     private void SetupControls()
@@ -166,26 +161,26 @@ public partial class MetadataWindow
             });
 
         #region Metadata
-        Metadata_Title          = TEXTBOX_LIST[METADATA_TITLE];
-        Metadata_Album          = TEXTBOX_LIST[METADATA_ALBUM];
-        Metadata_Album_Artist   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
-        Metadata_Year           = TEXTBOX_LIST[METADATA_YEAR];
-        Metadata_Genre          = TEXTBOX_LIST[METADATA_GENRE];
+        _Metadata_Title          = TEXTBOX_LIST[METADATA_TITLE];
+        _Metadata_Album          = TEXTBOX_LIST[METADATA_ALBUM];
+        _Metadata_Album_Artist   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
+        _Metadata_Year           = TEXTBOX_LIST[METADATA_YEAR];
+        _Metadata_Genre          = TEXTBOX_LIST[METADATA_GENRE];
 
-        Metadata_Title.Uid          = PLACEHOLDER_TITLE;
-        Metadata_Album.Uid          = PLACEHOLDER_ALBUM;
-        Metadata_Album_Artist.Uid   = PLACEHOLDER_ALBUM_ARTIST;
-        Metadata_Year.Uid           = PLACEHOLDER_YEAR;
-        Metadata_Genre.Uid          = PLACEHOLDER_GENRE;
+        _Metadata_Title.Uid          = PLACEHOLDER_TITLE;
+        _Metadata_Album.Uid          = PLACEHOLDER_ALBUM;
+        _Metadata_Album_Artist.Uid   = PLACEHOLDER_ALBUM_ARTIST;
+        _Metadata_Year.Uid           = PLACEHOLDER_YEAR;
+        _Metadata_Genre.Uid          = PLACEHOLDER_GENRE;
         #endregion
 
-        Button_Set      = new() { Content = BUTTON_SET    , Height = 30, Width = 100};
-        Button_Cancel   = new() { Content = BUTTON_CANCEL , Height = 30, Width = 100};
+        _Button_Set      = new() { Content = BUTTON_SET    , Height = 30, Width = 100};
+        _Button_Cancel   = new() { Content = BUTTON_CANCEL , Height = 30, Width = 100};
 
         SetCanvasPlacement();
 
-        AddToCanvas(Button_Set);
-        AddToCanvas(Button_Cancel);
+        AddToCanvas(_Button_Set);
+        AddToCanvas(_Button_Cancel);
 
         foreach(TextBlock Controls in LABEL_LIST)
         {
@@ -220,16 +215,16 @@ public partial class MetadataWindow
         #endregion
 
         #region Textbox Placements
-        SetCanvas(Metadata_Title        ,   44, 155);
-        SetCanvas(Metadata_Album        ,   72, 155);
-        SetCanvas(Metadata_Album_Artist ,  100, 155);
-        SetCanvas(Metadata_Year         ,  128, 155);
-        SetCanvas(Metadata_Genre        ,  156, 155);
+        SetCanvas(_Metadata_Title        ,   44, 155);
+        SetCanvas(_Metadata_Album        ,   72, 155);
+        SetCanvas(_Metadata_Album_Artist ,  100, 155);
+        SetCanvas(_Metadata_Year         ,  128, 155);
+        SetCanvas(_Metadata_Genre        ,  156, 155);
         #endregion
 
         #region Button Placements
-        SetCanvas(Button_Set    ,   196,204);
-        SetCanvas(Button_Cancel ,   196,320);
+        SetCanvas(_Button_Set    ,   196,204);
+        SetCanvas(_Button_Cancel ,   196,320);
         #endregion
     }
 
@@ -244,9 +239,9 @@ public partial class MetadataWindow
 
     void EventHandlers()
     {
-        Button_Set.Click                += MetadataSet;
-        Button_Exit.Click               += (s,e) => Close();
-        Button_Cancel.Click             += (s,e) => Close();
+        _Button_Set.Click                += MetadataSet;
+        _Button_Exit.Click               += (s,e) => Close();
+        _Button_Cancel.Click             += (s,e) => Close();
         MetadataDragBorder.MouseDown    += (s,e) =>
         {
             if (e.ChangedButton is MouseButton.Left)

@@ -8,7 +8,11 @@
 public partial class Global
 {
     /// <summary>MainWindow but in <see langword="static"/></summary>
+    [WindowStaticRef]
     public static MainWindow MainWindowStatic;
+    /// <summary>MetadataWindow but in <see langword="static"/></summary>
+    [WindowStaticRef]
+    public static MetadataWindow MetadataWindowStatic;
 
     /// <summary>Config</summary>
     public static DefaultConfig config;

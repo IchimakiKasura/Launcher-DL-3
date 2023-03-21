@@ -10,6 +10,7 @@
 //
 //  Fix the ToolTip attribute and make it usable for every situation
 //  not single typed focused or idk selective
+//  [3/22/23] Have a temporary Tooltip fix but It needs to accept both Properties and Fields 
 //
 //  Try to use Attributes for easy coding
 // 
