@@ -2,24 +2,12 @@ namespace LauncherDL.Core.Metadata;
 
 public partial class MetadataWindow
 {
-    private void GetOldText(string Old, TextBox Element)
-    {
-        if(Old is null) return;
-        
+    private void GetOldText(string Old, TextBoxControl Element) =>
         Element.Text = Old;
 
-        if(Element.Text == Element.Uid) return;
-        
-        Element.Foreground = Brushes.White;
-        Element.FontStyle = default;
-    }
-
-    private void SetOldText(ref string Old, TextBox Element)
-    {
-        if(Element.Text != Element.Uid)
-            Old = Element.Text;
-        else Old = null;
-    }
+    private void SetOldText(ref string Old, TextBoxControl Element) =>
+        Old = Element.Text is "" ? null : Element.Text;
+    
 
     void AddToCanvas(UIElement Element) =>
         MetadataWindowCanvas.Add(Element);

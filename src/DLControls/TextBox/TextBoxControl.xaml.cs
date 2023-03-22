@@ -19,6 +19,8 @@ public partial class TextBoxControl : UserControl
         }
     }
 
+    public double TextPlaceholderFontSize { get; set; } = 20;
+
     public string TextPlaceholder
     {
         get => (string)GetValue(TextPlaceholderProperty);
@@ -62,7 +64,7 @@ public partial class TextBoxControl : UserControl
         Placeholder = new()
         {
             Foreground = Brushes.DimGray,
-            FontSize = 20,
+            FontSize = TextPlaceholderFontSize,
             HorizontalAlignment = TextPlaceholderAlignment,
             IsHitTestVisible = false,
             Margin = TextPlaceholderMargin,
@@ -70,15 +72,15 @@ public partial class TextBoxControl : UserControl
             VerticalAlignment = VerticalAlignment.Center
         };
 
-        UserGrid.Add(Placeholder);
+        // Prevents colusion with with the instatiated text
+        if(Text == "")
+            UserGrid.Add(Placeholder);
 
         UserTextBox.TextChanged += delegate
         {
-            if (Text is "" or null)
-            {
-                UserGrid.Remove(Placeholder);
+            if (Text is "" && !UserGrid.Contains(Placeholder))
                 UserGrid.Add(Placeholder);
-            } else UserGrid.Remove(Placeholder);
+            else UserGrid.Remove(Placeholder);
         };
 
         UserTextBox.IsEnabledChanged += delegate

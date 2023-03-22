@@ -30,7 +30,8 @@ public partial class MetadataWindow
     DEFAULT_COLOR               = "#FF011F4C",
     TOPBAR_COLOR                = "#A34F002F",
     WINDOW_RESOURCE_DROP_SHADOW = "WindowDropShadow",
-    WINDOW_RESOURCE_EXIT_BUTTON = "ExitButtonAlt";
+    WINDOW_RESOURCE_EXIT_BUTTON = "ExitButtonAlt",
+    WINDOW_RESOURCE_BUTTONS     = "MetadataButtons";
     
     string
     WINDOW_BACKGROUND           = $"pack://siteoforigin:,,,/Images/{config.background}",

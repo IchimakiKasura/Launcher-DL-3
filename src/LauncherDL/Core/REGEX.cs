@@ -9,7 +9,7 @@ public partial class RegexComponentList
 
     [GeneratedRegex(@"time=(?<CurrentTime>[\d\w:]{8})", RegexOptions.Compiled)]
     private static partial Regex _ConvertCurrent();
-       [GeneratedRegex(@"Duration:.*?(?<TotalTime>[\d\w:]{8})", RegexOptions.Compiled)]
+    [GeneratedRegex(@"Duration:.*?(?<TotalTime>[\d\w:]{8})", RegexOptions.Compiled)]
     private static partial Regex _ConvertTotal();
 
     /// <summary>

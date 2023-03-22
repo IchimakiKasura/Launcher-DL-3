@@ -4,31 +4,33 @@ namespace LauncherDL.Core.Metadata;
 // I like it more chaotic
 public partial class MetadataWindow
 {
+    #region Window fields
     private Border MetadataRoundBorder;
     private Border MetadataDragBorder;
     private Canvas MetadataWindowCanvas;
-
-    private Grid MetadataWindowGrid;
+    #endregion
 
     private ColorAnimation WindowAnimation;
     private DoubleAnimation  WindowOpacity;
 
+    #region Window Controls
     [ToolTipTexts("Edit Title")]
-    private TextBox Metadata_Title;
+    private TextBoxControl Metadata_Title;
     [ToolTipTexts("Edit Album")]
-    private TextBox Metadata_Album;
+    private TextBoxControl Metadata_Album;
     [ToolTipTexts("Edit Artist")]
-    private TextBox Metadata_Album_Artist;
+    private TextBoxControl Metadata_Album_Artist;
     [ToolTipTexts("Set the Year")]
-    private TextBox Metadata_Year;
+    private TextBoxControl Metadata_Year;
     [ToolTipTexts("Edit Genre")]
-    private TextBox Metadata_Genre;
+    private TextBoxControl Metadata_Genre;
     [ToolTipTexts("Set the Metadata")]
     private Button Button_Set;
     [ToolTipTexts("Cancel Metadata")]
     private Button Button_Cancel;
     [ToolTipTexts("Close Window")]
     private Button Button_Exit;
+    #endregion
 
     private List<TextBlock> LABEL_LIST = new()
     {
@@ -39,7 +41,8 @@ public partial class MetadataWindow
         new() { Text = LABEL_GENRE          },
         new() { Text = LABEL_CREATOR        }
     };
-    private List<TextBox> TEXTBOX_LIST = new();
+    private List<TextBoxControl> TEXTBOX_LIST = new();
+    
     private bool _contentLoad;
     public void InitializeComponent()
     {
@@ -49,11 +52,6 @@ public partial class MetadataWindow
         _contentLoad = true;
         MetadataWindowStatic = this;
         IsWindowOpen = true;
-
-        // Background
-        var _Background = new ImageBrush(new BitmapImage(new Uri(WINDOW_BACKGROUND, UriKind.Absolute)));
-        _Background.Stretch = Stretch.Fill;
-        _Background.Opacity = 0.5;
 
         #region Setup window
 
@@ -73,80 +71,19 @@ public partial class MetadataWindow
 
         #region Setup Top bar
 
-        var _WindowChrome = new WindowChrome();
-        _WindowChrome.GlassFrameThickness = new(0);
-        _WindowChrome.CornerRadius = new(0);
-        _WindowChrome.CaptionHeight = 0;
+        var _WindowChrome                   = new WindowChrome();
+        _WindowChrome.GlassFrameThickness   = new(0);
+        _WindowChrome.CornerRadius          = new(0);
+        _WindowChrome.CaptionHeight         = 0;
         _WindowChrome.UseAeroCaptionButtons = false;
         _WindowChrome.ResizeBorderThickness = new(7);
         WindowChrome.SetWindowChrome(this, _WindowChrome);
 
         #endregion
 
-        // Now thats what i call a group of childrens with their parents
-        // sorry bad pun/joke idfk..
-        #region Window Elements (Very nested shits)
-        // Rounded Border
-        MetadataRoundBorder = new()
-        {
-            Child = new Border()
-            {
-                CornerRadius = new(10),
-                Child = MetadataWindowCanvas = new(),
-                Background = _Background
-            },
-            CornerRadius = new(10),
-            Background = Brushes.Black,
-            Margin = new(10,10,10,10)
-        };
-
-        // Top Bar
-        AddToCanvas(
-            MetadataDragBorder = new()
-            {
-                CornerRadius = new(10,10,0,0),
-                Height = 35,
-                Width = this.Width - 20,
-                Background = BrhConv(TOPBAR_COLOR),
-                Child = MetadataWindowGrid = new()
-                {
-                    Children =
-                    {
-                        // Icon bar
-                        new Image()
-                        {
-                            IsHitTestVisible = false,
-                            Source = new BitmapImage(new(WINDOW_ICON, UriKind.Absolute)),
-                            Margin = new(8,0,this.Width - 49,0)
-                        },
-                        // Title bar
-                        new TextBlock()
-                        {
-                            IsHitTestVisible = false,
-                            Text = Title,
-                            Foreground = Brushes.White,
-                            FontWeight = FontWeights.Medium,
-                            FontSize = 14,
-                            Padding = new(34,6.5,0,0)
-                        }
-                    }
-                }
-            }
-        );
-
-        MetadataWindowGrid.Children.Add(
-            Button_Exit = new()
-            {
-                Content = "✕",
-                Style = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_EXIT_BUTTON),
-                Margin = new(this.Width - 70, 0,0,0)
-            }
-        );
-        #endregion
-
-        // Add Canvas
-        AddChild(MetadataRoundBorder);
-
+        // Creates the Elements and its children 👀
+        GenerateElements();
+        
         // Adds the Controls to canvas
         SetupControls();
         
@@ -166,32 +103,28 @@ public partial class MetadataWindow
 
         // Add Textbox as iteration
         for(int i=0;i<5;i++)
-            TEXTBOX_LIST.Add(new() {
-                Height = 22,
-                Width = 265,
-                Foreground = Brushes.Gray,
-                FontStyle = FontStyles.Italic,
-                Background = TEXTBOX_Color,
-                BorderBrush = BrhConv(DEFAULT_COLOR)
-            });
+            TEXTBOX_LIST.Add(new() { Height = 22, Width = 265, TextPlaceholderFontSize = 10, FontSize = 11});
 
         // Did this for Placeholders
         #region Metadata
-        Metadata_Title          = TEXTBOX_LIST[METADATA_TITLE];
-        Metadata_Album          = TEXTBOX_LIST[METADATA_ALBUM];
-        Metadata_Album_Artist   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
-        Metadata_Year           = TEXTBOX_LIST[METADATA_YEAR];
-        Metadata_Genre          = TEXTBOX_LIST[METADATA_GENRE];
+        Metadata_Title                          = TEXTBOX_LIST[METADATA_TITLE];
+        Metadata_Album                          = TEXTBOX_LIST[METADATA_ALBUM];
+        Metadata_Album_Artist                   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
+        Metadata_Year                           = TEXTBOX_LIST[METADATA_YEAR];
+        Metadata_Genre                          = TEXTBOX_LIST[METADATA_GENRE];
 
-        Metadata_Title.Uid          = PLACEHOLDER_TITLE;
-        Metadata_Album.Uid          = PLACEHOLDER_ALBUM;
-        Metadata_Album_Artist.Uid   = PLACEHOLDER_ALBUM_ARTIST;
-        Metadata_Year.Uid           = PLACEHOLDER_YEAR;
-        Metadata_Genre.Uid          = PLACEHOLDER_GENRE;
+        Metadata_Title.TextPlaceholder          = PLACEHOLDER_TITLE;
+        Metadata_Album.TextPlaceholder          = PLACEHOLDER_ALBUM;
+        Metadata_Album_Artist.TextPlaceholder   = PLACEHOLDER_ALBUM_ARTIST;
+        Metadata_Year.TextPlaceholder           = PLACEHOLDER_YEAR;
+        Metadata_Genre.TextPlaceholder          = PLACEHOLDER_GENRE;
         #endregion
 
-        Button_Set      = new() { Content = BUTTON_SET    , Height = 30, Width = 100};
-        Button_Cancel   = new() { Content = BUTTON_CANCEL , Height = 30, Width = 100};
+        Button_Set          = new() { Content = BUTTON_SET    , Style = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_BUTTONS)};
+        Button_Cancel       = new() { Content = BUTTON_CANCEL , Style = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_BUTTONS)};
+        Button_Exit.Content = "✕";
+        Button_Exit.Style   = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_EXIT_BUTTON);
+        Button_Exit.Margin  = new(this.Width - 70, 0,0,0);
 
         SetCanvasPlacement();
 
@@ -210,13 +143,9 @@ public partial class MetadataWindow
             AddToCanvas(Controls);
         }
 
-        foreach(TextBox Controls in TEXTBOX_LIST)
-        {
-            Controls.Text = Controls.Uid;
-            Controls.GotFocus += TextBoxFocused;
-            Controls.LostFocus += TextBoxUnFocused;
+        foreach(TextBoxControl Controls in TEXTBOX_LIST)
             AddToCanvas(Controls);
-        }
+        
     }
 
     private void SetCanvasPlacement()

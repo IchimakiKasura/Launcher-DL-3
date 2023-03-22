@@ -6,5 +6,8 @@ public abstract class MetadataButton
     {
         if(new MetadataWindow().OpenDialog() is MetadataWindow.MetadataClicked.Set)
             ConsoleOutputMethod.MetadataOutputComment();
+
+        // Remove the instance on static field
+        MetadataWindowStatic = null;
     }
 }

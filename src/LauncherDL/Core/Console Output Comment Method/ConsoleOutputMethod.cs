@@ -81,6 +81,27 @@ internal static class ConsoleOutputMethod
 
     public static void MetadataOutputComment()
     {
+        // FIXME: 
+            // bool AnyChanges = false;
+            // string[] Old_Temporary =
+            // {
+            //     Old_Title,
+            //     Old_Album,
+            //     Old_Album_Artist,
+            //     Old_Year,
+            //     Old_Genre
+            // };
+
+
+            // Fires the output comment if theres any
+            // slight changes on any strings.
+            // foreach(var strings in Old_Temporary)
+            //     if(strings is null)
+            //         AnyChanges = false;
+            //     else AnyChanges = true;
+            
+            // if(!AnyChanges) return;
+
         if(Old_Title is null) return;
         console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been set!");
         console.AddFormattedText("<Gray%12>"+

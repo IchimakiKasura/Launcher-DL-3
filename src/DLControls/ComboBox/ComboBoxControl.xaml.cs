@@ -79,7 +79,7 @@ public partial class ComboBoxControl : UserControl
 
         MainText.TextChanged += delegate
         {
-            if (MainText.Text == string.Empty)
+            if (MainText.Text is not null)
                 ComboBoxTemplateGRID.Add(Placeholder);
             else ComboBoxTemplateGRID.Remove(Placeholder);
         };

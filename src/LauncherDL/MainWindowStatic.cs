@@ -2,32 +2,25 @@
 
 public partial class MainWindow
 {
-    [MainWindowStaticMember]
-    [ToolTipTexts("Minimize Window")]
+    [MainWindowStaticMember, ToolTipTexts("Minimize Window")]
     public static   Button                          Minimize            { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Close Window")]
+    [MainWindowStaticMember, ToolTipTexts("Close Window")]
     public static   Button                          CloseButton         { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Fetch File Formats")]
+    [MainWindowStaticMember, ToolTipTexts("Fetch File Formats")]
     public static   ButtonControl                   buttonFileFormat    { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Download")]
+    [MainWindowStaticMember, ToolTipTexts("Download")]
     public static   ButtonControl                   buttonDownload      { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Update yt-dlp")]
+    [MainWindowStaticMember, ToolTipTexts("Update yt-dlp")]
     public static   ButtonControl                   buttonUpdate        { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Open File")]
+    [MainWindowStaticMember, ToolTipTexts("Open File")]
     public static   ButtonControl                   buttonOpenFile      { get; set; }
     
-    [MainWindowStaticMember]
-    [ToolTipTexts("Edit Metadata")]
+    [MainWindowStaticMember, ToolTipTexts("Edit Metadata")]
     public static   ButtonControl                   buttonMetadata      { get; set; }
 
     [MainWindowStaticMember]
@@ -38,27 +31,22 @@ public partial class MainWindow
 
     public static   ProgressBarControl              progressBar         { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Console Output")]
+    [MainWindowStaticMember, ToolTipTexts("Console Output")]
     public static   ConsoleControl                  console             { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Input Link")]
+    [MainWindowStaticMember, ToolTipTexts("Input Link")]
     public static   TextBoxControl                  textBoxLink         { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Input Name")]
+    [MainWindowStaticMember, ToolTipTexts("Input Name")]
     public static   TextBoxControl                  textBoxName         { get; set; }
 
     [MainWindowStaticMember]
     public static   Canvas                          windowCanvas        { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Select a type of download")]
+    [MainWindowStaticMember, ToolTipTexts("Select a type of download")]
     public static   ComboBoxControl                 comboBoxType        { get; set; }
 
-    [MainWindowStaticMember]
-    [ToolTipTexts("Select or Input Format")]
+    [MainWindowStaticMember, ToolTipTexts("Select or Input Format")]
     public static   ComboBoxControl                 comboBoxFormat      { get; set; }
 
     [ToolTipTexts("Select Quality")]
