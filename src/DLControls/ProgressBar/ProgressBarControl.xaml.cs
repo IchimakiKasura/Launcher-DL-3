@@ -13,7 +13,7 @@ public partial class ProgressBarControl : UserControl
     public double Value
     {
         get => (double)GetValue(ValueProperty);
-        set => SetValue(ValueProperty, UserProgressBar.Value = value);
+        set => SetValue(ValueProperty, value);
     }
 
     public ProgressBarControl() =>

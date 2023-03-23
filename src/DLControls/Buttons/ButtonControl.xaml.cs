@@ -1,6 +1,3 @@
-using System;
-using System.Threading.Tasks;
-
 namespace DLControls;
 
 public partial class ButtonControl : UserControl
@@ -51,7 +48,8 @@ public partial class ButtonControl : UserControl
     }
     public bool IsAnimationOn { get; set; }
 
-    public UIElement UICanvas => UserButton;
+    public UIElement UICanvas =>
+        UserButton;
         
     public ButtonControl() =>
         InitializeComponent();

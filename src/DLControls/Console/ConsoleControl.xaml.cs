@@ -2,16 +2,21 @@
 
 public partial class ConsoleControl : UserControl
 {
+    readonly static DependencyProperty ConsoleHeightProperty =
+        DependencyProperty.Register("ConsoleHeight", typeof(double), typeof(ConsoleControl));
+    readonly static DependencyProperty ConsoleWidthProperty =
+        DependencyProperty.Register("ConsoleWidth", typeof(double), typeof(ConsoleControl));
+
     public double ConsoleHeight
     {
-        get => UserRichTextBox.Height;
-        set => UserRichTextBox.Height = value;
+        get => (double)GetValue(ConsoleHeightProperty);
+        set => SetValue(ConsoleHeightProperty, value);
         
     }
     public double ConsoleWidth
     {
-        get => UserRichTextBox.Width;
-        set => UserRichTextBox.Width = value;
+        get => (double)GetValue(ConsoleWidthProperty);
+        set => SetValue(ConsoleWidthProperty, value);
     }
 
     public UIElement UICanvas =>

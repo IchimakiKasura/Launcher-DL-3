@@ -35,7 +35,7 @@
                                                     RenderAtScale="1" 
                                                     SnapsToDevicePixels="False"/>
                                     </Grid.CacheMode>
-                                    <TextBox Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,RelativeSource={RelativeSource TemplatedParent}}"
+                                    <TextBox Text="{Binding Text,ElementName=root,UpdateSourceTrigger=PropertyChanged}"
                                      Background="Transparent"
                                      BorderBrush="Transparent"
                                      BorderThickness="0"

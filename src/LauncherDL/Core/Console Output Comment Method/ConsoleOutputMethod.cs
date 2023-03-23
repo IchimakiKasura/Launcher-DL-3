@@ -79,30 +79,27 @@ internal static class ConsoleOutputMethod
             _       => null
         });
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    /// This is pain in the ass, please excuse this bad shit until i found a better way
     public static void MetadataOutputComment()
     {
-        // FIXME: 
-            // bool AnyChanges = false;
-            // string[] Old_Temporary =
-            // {
-            //     Old_Title,
-            //     Old_Album,
-            //     Old_Album_Artist,
-            //     Old_Year,
-            //     Old_Genre
-            // };
+        int i = 0;
+        string[] Old_Temporary =
+        {
+            Old_Title,
+            Old_Album,
+            Old_Album_Artist,
+            Old_Year,
+            Old_Genre
+        };
+        
+        // FIXME: It needs to only check the changed variables 
+        // If the textbox are the same values it should not fire the 
+        // comment output but how?
+        foreach (var strings in Old_Temporary)
+            if(strings is not null) i++;
 
-
-            // Fires the output comment if theres any
-            // slight changes on any strings.
-            // foreach(var strings in Old_Temporary)
-            //     if(strings is null)
-            //         AnyChanges = false;
-            //     else AnyChanges = true;
-            
-            // if(!AnyChanges) return;
-
-        if(Old_Title is null) return;
+        if(i is 0) return;
         console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been set!");
         console.AddFormattedText("<Gray%12>"+
             $"{CONSOLE_METADATA_TITLE       }"  +  $"{Old_Title        ?? "N\\A"} $nl$"  +      

@@ -4,9 +4,12 @@ public partial class TextBoxControl : UserControl
 {
     readonly static DependencyProperty TextPlaceholderProperty =
         DependencyProperty.Register("TextPlaceholder", typeof(string), typeof(TextBoxControl), new("Placeholder"));
-
     readonly static DependencyProperty TextPlaceholderAlignmentProperty =
         DependencyProperty.Register("TextPlaceholderAlignment", typeof(HorizontalAlignment), typeof(TextBoxControl), new(HorizontalAlignment.Left));
+    readonly static DependencyProperty TextProperty =
+        DependencyProperty.Register("Text", typeof(string), typeof(TextBoxControl), null);
+    readonly static DependencyProperty isTextBoxFocusedProperty =
+        DependencyProperty.Register("isTextBoxFocusedProperty", typeof(bool), typeof(TextBoxControl));
 
     [Browsable(false)]
     public Thickness TextPlaceholderMargin
@@ -19,40 +22,34 @@ public partial class TextBoxControl : UserControl
         }
     }
 
-    public double TextPlaceholderFontSize { get; set; } = 20;
+    public double TextPlaceholderFontSize = 20;
 
     public string TextPlaceholder
     {
         get => (string)GetValue(TextPlaceholderProperty);
-        set
-        {
-            SetValue(TextPlaceholderProperty, value);
-
-            if (IsLoaded)
-                Placeholder.Text = TextPlaceholder;
-        }
+        set => SetValue(TextPlaceholderProperty, value);
+        
     }
-
     public HorizontalAlignment TextPlaceholderAlignment
     {
         get => (HorizontalAlignment)GetValue(TextPlaceholderAlignmentProperty);
         set => SetValue(TextPlaceholderAlignmentProperty, value);
         
     }
-
     public string Text
     {
-        get => UserTextBox.Text;
-        set => UserTextBox.Text = value;
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
     }
+    public bool isTextBoxFocused
+    {
+        get => (bool)GetValue(isTextBoxFocusedProperty);
+        set => SetValue(isTextBoxFocusedProperty, value);
+    }
+
 
     public UIElement UICanvas =>
         UserTextBox;
-
-    public bool isTextBoxFocused { get; set; }
-
-    private TextBlock Placeholder;
-
 
     public TextBoxControl() =>
         InitializeComponent();
@@ -61,7 +58,7 @@ public partial class TextBoxControl : UserControl
     {
         Grid UserGrid = GetTemplateResource<Grid>("UserTextBoxGRID", UserTextBox);
 
-        Placeholder = new()
+        var Placeholder = new TextBlock()
         {
             Foreground = Brushes.DimGray,
             FontSize = TextPlaceholderFontSize,
@@ -73,7 +70,7 @@ public partial class TextBoxControl : UserControl
         };
 
         // Prevents colusion with with the instatiated text
-        if(Text == "")
+        if(Text is "" or null)
             UserGrid.Add(Placeholder);
 
         UserTextBox.TextChanged += delegate

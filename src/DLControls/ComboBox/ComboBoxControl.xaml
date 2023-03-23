@@ -54,7 +54,7 @@
                                       ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                       Margin="3,3,23,3"
                                       VerticalAlignment="Center"
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      HorizontalAlignment="{Binding ContentAlignment, ElementName=root}"
                                       Visibility="Visible"/>
 
                         <Popup Name="Popup"
@@ -171,7 +171,7 @@
 
             <Style x:Key="CB" TargetType="{x:Type ComboBox}">
                 <Setter Property="OverridesDefaultStyle" Value="true" />
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="{Binding ShowVerticalScrollbar, ElementName=root}" />
                 <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="FontSize" Value="20" />
@@ -201,6 +201,6 @@
         </Canvas.Resources>
 
 		<ComboBox x:Name="UserComboBox" Height="35" Style="{StaticResource CB}" MinWidth="100" Width="{Binding Width,ElementName=root}"
-                  SelectionChanged="OnSelectChange" IsEditable="{Binding TextEditable, ElementName=root}"/>
+                  SelectionChanged="OnSelectChange" IsEditable="{Binding TextEditable, ElementName=root}" SelectedIndex="{Binding ItemIndex, ElementName=root}"/>
     </Canvas>
 </UserControl>

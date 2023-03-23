@@ -13,7 +13,7 @@ partial class OnStartUp
 
         comboBoxType.ItemIndex              =   config.DefaultFileTypeOnStartUp;
         comboBoxType.ContentAlignment       =   HorizontalAlignment.Center;
-        comboBoxType.ShowVerticalScrollbar  =   false;
+        comboBoxType.ShowVerticalScrollbar  =   ScrollBarVisibility.Hidden;
         comboBoxQuality.ItemIndex           =   3;
         comboBoxQuality.Width               =   207;
     }

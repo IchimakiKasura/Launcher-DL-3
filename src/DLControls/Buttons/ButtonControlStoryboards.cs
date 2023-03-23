@@ -2,10 +2,6 @@ namespace DLControls;
 
 public partial class ButtonControl
 {
-    // Normal is default 100ms
-    // faster is 50ms
-    const int NORMAL_ANIMATION = 0, FASTER_ANIMATION = 1;
-
     List<DoubleAnimation> ControlDA;
     ThicknessAnimation ButtonMargin;
     ColorAnimation ButtonForeground;
@@ -13,14 +9,14 @@ public partial class ButtonControl
     List<Storyboard> ControlsStoryboards;
     List<PropertyPath> ControlPaths = new List<PropertyPath>()
     {
-        new("(Effect).Opacity"),                            // 0
-        new("Width"),                                       // 1
-        new("Height"),                                      // 2
-        new("(Button.FontSize)"),                           // 3
-        new("Background.(Brush.Opacity)"),                  // 4
-        new("Margin"),                                      // 5
-        new("(Button.Foreground).(SolidColorBrush.Color)"), // 6
-        new("Background.(ImageBrush.Viewport)"),            // 7
+        new(BUTTON_OPACITY),    // 0
+        new(BUTTON_WIDTH),      // 1
+        new(BUTTON_HEIGHT),     // 2
+        new(BUTTON_FONTSIZE),   // 3
+        new(IMAGE_OPACITY),     // 4
+        new(IMAGE_MARGIN),      // 5
+        new(BUTTON_FONTCOLOR),  // 6
+        new(IMAGE_VIEWPORT),    // 7
     };
     List<TimeSpan> AnimationDuration;
 
@@ -72,34 +68,34 @@ public partial class ButtonControl
         // goes down hard.
         ControlsStoryboards = new List<Storyboard>()
         {
-            new(),  // STYB_ButtonOpacity
-            new(),  // STYB_ButtonWidth
-            new(),  // STYB_ButtonHeight
-            new(),  // STYB_ButtonText
-            new(),  // STYB_ButtonImageOpacity
-            new(),  // STYB_ButtonMargin
-            new(),  // STYB_ButtonForeground
-            new(),  // STYB_ButtonImageViewport
+            new(),  // storyboard_ButtonOpacity
+            new(),  // storyboard_ButtonWidth
+            new(),  // storyboard_ButtonHeight
+            new(),  // storyboard_ButtonText
+            new(),  // storyboard_ButtonImageOpacity
+            new(),  // storyboard_ButtonMargin
+            new(),  // storyboard_ButtonForeground
+            new(),  // storyboard_ButtonImageViewport
         };
 
-        foreach (var (STYB, index) in ControlsStoryboards.Select((value, i) => (value, i)))
+        foreach (var (storyboard, index) in ControlsStoryboards.Select((value, index) => (value, index)))
         {
             DependencyObject TargetElement = UserButton;
 
             if (index is 4 || index is 7)
-                TargetElement = (Border)GetTemplateResource<Border>("UserButtonMainBorder", UserButton);
+                TargetElement = (Border)GetTemplateResource<Border>(BORDER_RESOURCE, TargetElement);
 
-            SetStoryboardAuto(STYB, TargetElement, ControlPaths[index]);
+            SetStoryboardAuto(storyboard, TargetElement, ControlPaths[index]);
 
             switch (index)
             {
-                default: STYB.Add(ControlDA[index]); break;
-                case 5: STYB.Add(ButtonMargin); break;
-                case 6: STYB.Add(ButtonForeground); break;
-                case 7: STYB.Add(ButtonImageViewport); break;
+                default: storyboard.Add(ControlDA[index]);      break;
+                case  5: storyboard.Add(ButtonMargin);          break;
+                case  6: storyboard.Add(ButtonForeground);      break;
+                case  7: storyboard.Add(ButtonImageViewport);   break;
             }
 
-            STYB.Begin();
+            storyboard.Begin();
         }
     }
 }

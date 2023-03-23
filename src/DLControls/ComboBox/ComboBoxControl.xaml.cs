@@ -9,6 +9,10 @@ public partial class ComboBoxControl : UserControl
         DependencyProperty.Register("TextEditable", typeof(bool), typeof(ComboBoxControl));
     readonly static DependencyProperty ContentAlignmentProperty =
         DependencyProperty.Register("ContentAlignment", typeof(HorizontalAlignment), typeof(ComboBoxControl));
+    readonly static DependencyProperty ItemIndexProperty =
+        DependencyProperty.Register("ItemIndex", typeof(int), typeof(ComboBoxControl));
+    readonly static DependencyProperty ShowVerticalScrollbarProperty =
+        DependencyProperty.Register("ShowVerticalScrollbar", typeof(ScrollBarVisibility), typeof(ComboBoxControl), new(ScrollBarVisibility.Visible));
 
     public bool TextEditable
     {
@@ -17,26 +21,23 @@ public partial class ComboBoxControl : UserControl
     }
     public HorizontalAlignment ContentAlignment
     {
-        get => (HorizontalAlignment)(GetValue(ContentAlignmentProperty));
-        set => SetValue(ContentAlignmentProperty, UserComboBox.HorizontalContentAlignment = value);
+        get => (HorizontalAlignment)GetValue(ContentAlignmentProperty);
+        set => SetValue(ContentAlignmentProperty, value);
         
     }
     public int ItemIndex
     {
-        get => UserComboBox.SelectedIndex;
-        set => UserComboBox.SelectedIndex = value;
-    }
-    public bool ShowVerticalScrollbar
-    {
-        get => ShowVerticalScrollbar;
-        set
-        {
-            ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Disabled);
-            if(value) ScrollViewer.SetVerticalScrollBarVisibility(UserComboBox, ScrollBarVisibility.Visible);
-        }
+        get => (int)GetValue(ItemIndexProperty);
+        set => SetValue(ItemIndexProperty, value);
     }
 
-    public string PlaceholderText { get; set; } = "default (Best)";
+    public ScrollBarVisibility ShowVerticalScrollbar
+    {
+        get => (ScrollBarVisibility)GetValue(ShowVerticalScrollbarProperty);
+        set => SetValue(ShowVerticalScrollbarProperty, value);
+    }
+
+    public string PlaceholderText = "default (Best)";
 
     public UIElement UICanvas =>
         UserComboBox;

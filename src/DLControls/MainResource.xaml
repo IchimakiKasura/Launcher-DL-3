@@ -69,6 +69,10 @@
                     <Border Background="{StaticResource ButtonBG}"
                             CornerRadius="5"
                             Cursor="Hand">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#CCFBC2C2" Opacity="1"
+                            ShadowDepth="0" Direction="0" BlurRadius="5"/>
+                        </Border.Effect>
                         <ContentPresenter x:Name="Button" 
                                           HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"/>

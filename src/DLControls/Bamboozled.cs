@@ -7,7 +7,6 @@ public sealed class InitiateTheWindow
     {
         get => "Lmao";
         set => throw sheesh;
-        
     }
 
 }
