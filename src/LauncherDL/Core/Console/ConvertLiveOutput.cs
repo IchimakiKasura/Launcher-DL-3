@@ -12,10 +12,10 @@ internal partial class ConsoleLive
         string TotalTime = ConvertTotal.Match(StringData).Groups["TotalTime"].Value.Trim();
         string CurrentTime = ConvertCurrent.Match(StringData).Groups["CurrentTime"].Value.Trim();
 
-        if (!string.IsNullOrEmpty(TotalTime))
+        if (TotalTime.IsEmpty())
             TotalDuration = (int)TimeSpan.Parse(TotalTime).TotalSeconds;
 
-        if (!string.IsNullOrEmpty(CurrentTime))
+        if (CurrentTime.IsEmpty())
         {
             CurrentTimeInt = (int)TimeSpan.Parse(CurrentTime).TotalSeconds;
             double ProgressValue = (double)((decimal)CurrentTimeInt / (decimal)TotalDuration) * 100;

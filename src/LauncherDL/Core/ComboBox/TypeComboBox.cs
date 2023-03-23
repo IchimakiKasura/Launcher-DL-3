@@ -42,6 +42,9 @@ public class TypeComboBox
                 windowCanvas.Add(comboBoxQuality);
                 comboBoxFormat.AddConvertTypeList();
                 buttonDownload.UICanvas.MouseMove += (s,e) => ToolTipTextsAttribute.Follow(s,e, "Convert");
+
+                // Warns the user that Convert will not able to use Metadata edit, Because I'm too lazy to implement it :P
+                console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata will be ignored on Convert Type!");
             break;
         };
         

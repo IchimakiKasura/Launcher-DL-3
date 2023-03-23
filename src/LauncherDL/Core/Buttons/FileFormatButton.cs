@@ -6,8 +6,8 @@ public abstract class FileFormatButton
     {
         e.Handled = true;
 
-        var IsSuccess = BodyButton.CheckLinkValidation();
-        if(!IsSuccess) return;
+        if(!BodyButton.CheckLinkValidation(false))
+            return;
 
         console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
 

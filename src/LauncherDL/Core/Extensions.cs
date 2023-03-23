@@ -31,4 +31,9 @@ internal static class _Core_Extensions
         };
     }
     #endregion
+
+    #region Strings
+    public static bool IsEmpty(this string str) =>
+        string.IsNullOrEmpty(str);
+    #endregion
 }

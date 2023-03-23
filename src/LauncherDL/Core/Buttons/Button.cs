@@ -4,13 +4,13 @@ public abstract class BodyButton
 {
     private static bool IsFailed;
 
-    public static bool CheckLinkValidation()
+    public static bool CheckLinkValidation(bool IsDownload)
     {
         // Resets the static variable
         IsFailed = false;
 
         // Check if link missing
-        if (string.IsNullOrEmpty(textBoxLink.Text))
+        if (textBoxLink.Text.IsEmpty())
         {
             ConsoleOutputMethod.NoLinkOutputComment();
             IsFailed = true;
@@ -29,7 +29,7 @@ public abstract class BodyButton
         }
 
         // Checks on Name characters
-        if(!string.IsNullOrEmpty(textBoxName.Text))
+        if(!textBoxName.Text.IsEmpty())
         {
             string UnwantedChars    = "\\/*:?\"<>|";
             char[] arr              = UnwantedChars.ToCharArray();
@@ -45,6 +45,24 @@ public abstract class BodyButton
                     IsFailed = true;
                }
         }
+
+        // Avoids being fired when the validation already failed
+        // because it'll take more time
+        if(!IsFailed && IsDownload)
+        {
+            console.DLAddConsole(CONSOLE_INFO_STRING, $"Fetching Link..$nl$<Gray%10>{textBoxLink.Text}");
+            var ValidateLink = new LauncherDL.Core.TaskProcess.LinkValidate(textBoxLink.Text).Validate();
+
+            if(!config.EnablePlaylist && ValidateLink.HasPlaylist)
+            {
+                console.DLAddConsole(CONSOLE_INFO_STRING, $"Playlist was found! please enable the playlist on th config!");
+                IsFailed = true;
+            }
+
+            if(!ValidateLink.IsValid)
+                IsFailed = true;
+        }
+        
 
         if(!IsFailed)
         {

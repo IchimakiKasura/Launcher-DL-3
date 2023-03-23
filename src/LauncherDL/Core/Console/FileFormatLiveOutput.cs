@@ -2,7 +2,7 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal partial class ConsoleLive
 {
-    #region Constants
+    #region Constants STR
     const int ID            = 0,
               FORMAT        = 1,
               RESOLUTION    = 2,
@@ -24,7 +24,7 @@ internal partial class ConsoleLive
         string VID_AO   = null;
 
         foreach(Group match in FileFormatInfo.Match(StringData).Groups)
-            if(!match.Name.Contains("0") && !string.IsNullOrEmpty(match.Value))
+            if(!match.Name.Contains("0") && !match.Value.IsEmpty())
                 FormatNames.Add(match.Value.Trim());
 
         // Avoid video that has no Codec. It can cause weird issue when

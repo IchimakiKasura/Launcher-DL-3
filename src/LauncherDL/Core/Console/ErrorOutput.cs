@@ -1,25 +1,32 @@
-namespace LauncherDL.Core.ConsoleDL                                                                                                         ;
+namespace LauncherDL                                                                                                                                .
+          Core                                                                                                                                      .
+          ConsoleDL                                                                                                                                 ;
 
-internal partial class ConsoleLive                                                                                                          {
+internal partial class ConsoleLive                                                                                                                  {/*
     
-    public static int SelectedError = 0                                                                                                     ;
+    0 = File format                                                                                                                         
+    1 = Download                                                                                                                            
+    2 = Convert                                                                                                                                    */
+    public static int SelectedError = 0                                                                                                             ;
     
-    public static void ErrorOutputComment(object s, DataReceivedEventArgs e)                                                                =>
-        DL_Dispatch.Invoke(()=>Error_Invoked(),e.Data)                                                                                      ;
+    public static void ErrorOutputComment(object s, DataReceivedEventArgs e)                                                                        =>
+        DL_Dispatch.Invoke(()=>Error_Invoked(),e.Data)                                                                                              ;
 
-    static void Error_Invoked()                                                                                                             {
-        switch(SelectedError)                                                                                                               {
-            case 0                                                                                                                          :
+    static void Error_Invoked()                                                                                                                     {
+        switch(SelectedError)                                                                                                                       {
+            case 0                                                                                                                                  :
                 console.DLAddConsole(CONSOLE_ERROR_STRING,
-                $"1. Link is unavailable$nl$2. Link is invalid$nl$3. Check internet connection.")                                           ;
-            break                                                                                                                           ;
+                "URL cannot be fetched!$nl$1. Link is unavailable$nl$2. Link is invalid$nl$3. Check internet connection.$nl$"                       +
+                "4.YT-DLP might be outdated please update it first! ")                                                                              ;
+            break                                                                                                                                   ;
             
-            case 1                                                                                                                          :
+            case 1                                                                                                                                  :
                 console.DLAddConsole(CONSOLE_ERROR_STRING,
-                $"Download failed! Please check your connection and retry again.")                                                          ;
-            break                                                                                                                           ;
+                "Download failed!$nl$$nl$1. Link is unavailable$nl$2. Link is invalid$nl$3. Check internet connection.$nl$"                         +
+                "4.YT-DLP might be outdated please update it first! ")                                                                              ;
+            break                                                                                                                                   ;
             
-            case 2                                                                                                                          :
+            case 2                                                                                                                                  :
                 console.DLAddConsole(CONSOLE_ERROR_STRING,
-                "Convert failed! please report it to the author")                                                                           ;
-            break                                                                                                                           ;}}}
+                "Convert failed! If error is consistent please report it to the author")                                                            ;
+            break                                                                                                                                   ;}}}

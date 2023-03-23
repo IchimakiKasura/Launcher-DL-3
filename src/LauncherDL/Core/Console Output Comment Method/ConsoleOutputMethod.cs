@@ -25,7 +25,7 @@ internal static class ConsoleOutputMethod
 
         // we do a little troll
         #if !DEBUG
-            //InitiateTheWindow.InitiateMePlease = "Initiate";
+            InitiateTheWindow.InitiateMePlease = "Initiate";
         #endif
     }
 
@@ -79,6 +79,15 @@ internal static class ConsoleOutputMethod
             _       => null
         });
 
+    public static void DownloadInfoOutputComment(dynamic ObjectListNames) =>
+        console.DLAddConsole(CONSOLE_INFO_STRING, "Downloading Please wait$nl$"+
+        $"<Gray%10>[]"+
+        $"<Gray%10>[]"+
+        $"<Gray%10>[]"+
+        $"<Gray%10>[]"+
+        $"<Gray%10>[]"+
+        $"<Gray%10>[]");
+
     ////////////////////////////////////////////////////////////////////////////////////
     /// This is pain in the ass, please excuse this bad shit until i found a better way
     public static void MetadataOutputComment()
@@ -97,7 +106,7 @@ internal static class ConsoleOutputMethod
         // If the textbox are the same values it should not fire the 
         // comment output but how?
         foreach (var strings in Old_Temporary)
-            if(strings is not null) i++;
+            if(!strings.IsEmpty()) i++;
 
         if(i is 0) return;
         console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been set!");

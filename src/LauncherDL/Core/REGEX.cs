@@ -2,15 +2,23 @@ namespace LauncherDL.Core.RegexComponent;
 
 public partial class RegexComponentList
 {
+    // File Format
     [GeneratedRegex(@"(?<id>.*?) .*(?<format>mp4.*?|webm.*?|3gp.*?|m4a.*?|mp3.*?).*(?:(?<Resolution> [0-9]*x[0-9]*)|(?<AO>audio only)).*?(?:(?<FPS>\d[0-9]?.*)).\|.*?(?<Size>.*)(?<Bitrate>\D[0-9]*k).*?\|.(?<Codec>(?:mp4v.*?|(?:avc1.*?|(?:vp9.*?|(?:audio only|)))))", RegexOptions.Compiled)]
     private static partial Regex _FileFormatInfo();
     [GeneratedRegex(@"\[.*\].*?(?<percent>.*?)% of (?<size>.*) at (?<speed>.*) ETA (?<time>.*)", RegexOptions.Compiled)]
     private static partial Regex _ProgressBarInfo();
 
+    // FFmpeg
     [GeneratedRegex(@"time=(?<CurrentTime>[\d\w:]{8})", RegexOptions.Compiled)]
     private static partial Regex _ConvertCurrent();
     [GeneratedRegex(@"Duration:.*?(?<TotalTime>[\d\w:]{8})", RegexOptions.Compiled)]
     private static partial Regex _ConvertTotal();
+
+    // Validate
+    [GeneratedRegex(@"<title>(?<title>.*?)</title>", RegexOptions.Compiled)]
+	private static partial Regex _URLTitle();
+    [GeneratedRegex(@"\.(?<host>.*?)\.", RegexOptions.Compiled)]
+	private static partial Regex _URLname();
 
     /// <summary>
     /// Group Names in Order:<br/>
@@ -27,4 +35,6 @@ public partial class RegexComponentList
     readonly public static Regex ProgressBarInfo = _ProgressBarInfo();
     readonly public static Regex ConvertCurrent = _ConvertCurrent();
     readonly public static Regex ConvertTotal = _ConvertTotal();
+    readonly public static Regex URLTitle = _URLTitle();
+    readonly public static Regex URLname = _URLname();
 }

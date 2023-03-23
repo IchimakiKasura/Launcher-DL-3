@@ -4,7 +4,7 @@ public class DL_Dispatch
 {
     public static void Invoke(Action Method, string StringData)
     {
-        if(string.IsNullOrEmpty(StringData)) return;
+        if(StringData.IsEmpty()) return;
         if(!MainWindowStatic.Dispatcher.CheckAccess())
             MainWindowStatic.Dispatcher.Invoke(DispatcherPriority.Normal, Method);
     }

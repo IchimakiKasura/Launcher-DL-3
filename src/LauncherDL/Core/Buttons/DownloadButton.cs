@@ -7,14 +7,22 @@ public class DownloadButton : ConvertButton
         e.Handled = true;
 
         // Checks if the button is set to Convert
-        if(comboBoxType.ItemIndex is 3) 
+        if(comboBoxType.ItemIndex is not 3) 
         {
             ButtonConvertClicked();
             return;
         }
-            
-        var IsSuccess = BodyButton.CheckLinkValidation();
-        if(!IsSuccess) return;
+        
+        if(!BodyButton.CheckLinkValidation(true))
+            return;
+
+        // Checks if "-o" on format exist because its an output argument on ytdlp
+		if (comboBoxFormat.MainText.Text.Contains("-o"))
+		{
+			MessageBox.Show("The \"-o\" is reserved, Instead change the \"output\" on the Config.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+			console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "The \"-o\" is reserved, Instead change the \"output\" on the Config.");
+			return;
+		}
 
         // To be removed
         #if DEBUG
