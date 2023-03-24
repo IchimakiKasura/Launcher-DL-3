@@ -6,7 +6,7 @@ namespace LauncherDL.Core.TaskProcess;
 /// </summary>
 abstract class EndProcess
 {
-    public static async void ProcessTaskEnded()
+    public static void ProcessTaskEnded()
     {
         comboBoxFormat.AddFormatList(TemporaryList);
 
@@ -20,9 +20,7 @@ abstract class EndProcess
             WindowsComponents.WindowTaskBarFlash();
 
         ConsoleLive.SingleErrorInstance = false;
-        
-        await WindowsComponents.WindowAwaitLoad(progressBar.IsValueExact);
-
+    
         WindowsComponents.FreezeComponents();
     }
     static void ConvertTaskEnded() =>

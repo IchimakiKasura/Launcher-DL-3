@@ -5,7 +5,6 @@ sealed class LinkValidate
 {
     public bool IsValid;
     public bool HasPlaylist;
-    
     bool IsError = false;
     bool TempHasPlaylist;
     string url;

@@ -87,5 +87,21 @@ sealed partial class YDL
 
         var Args = Format;
         ConsoleLive.SelectedError = 1;
+
+        // To be change
+        switch(Type)
+        {
+            case TypeOfButton.CustomType:
+                Console.WriteLine($"Custom Type\nFormat: {Args}");
+            break;
+
+            case TypeOfButton.VideoType:
+                Console.WriteLine($"Video Type\nFormat: {Args}");
+            break;
+
+            case TypeOfButton.AudioType:
+                Console.WriteLine($"Audio Type\nFormat: {Args}");
+            break;
+        }
     }
 }

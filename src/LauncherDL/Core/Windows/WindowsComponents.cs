@@ -3,9 +3,6 @@ namespace LauncherDL.Core.Windows;
 
 class WindowsComponents
 {
-    static DoubleAnimation WindowOpacity;
-    static ColorAnimation WindowAnimation;
-
     // Onload Event
     public static void WindowLoaded(object sender, RoutedEventArgs e) =>
         new TransparencyConverter(MainWindowStatic).MakeTransparent();
@@ -13,7 +10,7 @@ class WindowsComponents
     // Window Focus or unfocused
     public static void WindowFocusAnimation()
     {
-        void Focus()
+        void Focus(ColorAnimation WindowAnimation, DoubleAnimation WindowOpacity)
         {
             new StoryboardApplier(WindowOpacity     ,   MainWindowStatic    ,   new(             "(Window.Effect).Opacity"        ) );
             new StoryboardApplier(WindowAnimation   ,   windowInnerBG       ,   new("(Control.Background).(SolidColorBrush.Color)") );
@@ -26,9 +23,10 @@ class WindowsComponents
             if (TaskbarProgressBar.ProgressValue is 1)
                 TaskbarProgressBar.ProgressValue  = 0;
 
-            WindowOpacity       = new(1, TimeSpan.FromMilliseconds(100));
-            WindowAnimation     = new(config.backgroundColor, TimeSpan.FromMilliseconds(100));
-            Focus();
+            Focus(
+                WindowOpacity       : new(1, TimeSpan.FromMilliseconds(100)),
+                WindowAnimation     : new(config.backgroundColor, TimeSpan.FromMilliseconds(100))
+            );
 
             #if DEBUG
                 ConsoleDebug.WindowFocused(true);
@@ -37,10 +35,11 @@ class WindowsComponents
 
         MainWindowStatic.Deactivated += (s,e) =>
         {
-            WindowOpacity       = new(0, TimeSpan.FromMilliseconds(100));
-            WindowAnimation     = new(Colors.Black, TimeSpan.FromMilliseconds(100));
-            Focus();
-            
+            Focus(
+                WindowOpacity       : new(0, TimeSpan.FromMilliseconds(100)),
+                WindowAnimation     : new(Colors.Black, TimeSpan.FromMilliseconds(100))
+            );
+
             #if DEBUG
                 ConsoleDebug.WindowFocused(false);
             #endif

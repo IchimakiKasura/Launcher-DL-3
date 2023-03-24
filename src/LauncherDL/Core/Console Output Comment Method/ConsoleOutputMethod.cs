@@ -79,14 +79,14 @@ internal static class ConsoleOutputMethod
             _       => null
         });
 
-    public static void DownloadInfoOutputComment(dynamic ObjectListNames) =>
+    public static void DownloadInfoOutputComment(ObjectListNames Obj) =>
         console.DLAddConsole(CONSOLE_INFO_STRING, "Downloading Please wait$nl$"+
-        $"<Gray%10>[]"+
-        $"<Gray%10>[]"+
-        $"<Gray%10>[]"+
-        $"<Gray%10>[]"+
-        $"<Gray%10>[]"+
-        $"<Gray%10>[]");
+        $"<Gray%10>[] Title$tab$$tab$: {Obj.Title}$nl$"+
+        $"<Gray%10>[] Download Type$tab$: {Obj.Type}$nl$"+
+        $"<Gray%10>[] Name$tab$$tab$: {Obj.Name}$nl$"+
+        $"<Gray%10>[] Format$tab$$tab$: {Obj.Format}$nl$"+
+        $"<Gray%10>[] Link$tab$$tab$: {Obj.Link}$nl$"+
+        $"<Gray%10>[] Playlist?$tab$: {Obj.Playlist}");
 
     ////////////////////////////////////////////////////////////////////////////////////
     /// This is pain in the ass, please excuse this bad shit until i found a better way

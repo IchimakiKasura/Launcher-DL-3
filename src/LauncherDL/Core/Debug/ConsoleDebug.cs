@@ -133,7 +133,7 @@ public static class ConsoleDebug
 
     public static void LoadingFFmpeg(bool a, string c)
     {
-        Console.Write(a ? $"[FFMPEG] \x1b[32m{c}SUCCESS" : $"[FFMPEG] \x1b[31m{c}");
+        Console.Write(a ? $"[FFMPEG] \x1b[32m{c}" : $"[FFMPEG] \x1b[31m{c}");
         Console.SetCursorPosition(43, Console.GetCursorPosition().Top);
         Console.Write(a ? $"FOUND\x1b[0m\n" : $"NOT FOUND\x1b[0m\n");
     }

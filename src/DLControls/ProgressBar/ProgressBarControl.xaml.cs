@@ -10,7 +10,9 @@ public partial class ProgressBarControl : UserControl
 
     public enum ProgressBarState{Hide,Show}
     
-    public bool IsValueExact = true;
+    public UIElement UICanvas =>
+        UserProgressBar;
+
     public double Value
     {
         get => (double)GetValue(ValueProperty);

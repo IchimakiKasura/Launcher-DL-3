@@ -10,9 +10,6 @@ public partial class MetadataWindow
     private Canvas MetadataWindowCanvas;
     #endregion
 
-    private ColorAnimation WindowAnimation;
-    private DoubleAnimation  WindowOpacity;
-
     #region Window Controls
     [ToolTipTexts("Edit Title")]
     private TextBoxControl Metadata_Title;

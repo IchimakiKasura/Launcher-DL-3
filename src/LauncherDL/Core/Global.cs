@@ -81,3 +81,12 @@ public partial class Global
 
 }
 
+public class ObjectListNames
+{
+    public string Title     { get; set; }
+    public string Type      { get; set; }
+    public string Name      { get; set; }
+    public string Format    { get; set; }
+    public string Link      { get; set; }
+    public string Playlist  { get; set; }
+}

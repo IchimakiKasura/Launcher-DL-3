@@ -10,8 +10,6 @@ public partial class ComboBoxControl
     public void AddQualityTypeList()          => AutoAdd(TypeList.QualityType);
     public void AddFormatList(List<FormatList> FormatListArgs)
     {
-        if(!TextEditable) return;
-        
         foreach (var CBT in FormatListArgs)
             UserComboBox.Items.Add(CBT);
     }
