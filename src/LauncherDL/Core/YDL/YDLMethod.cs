@@ -39,6 +39,19 @@ sealed partial class YDL
 
         ConsoleLive.SelectedError = 0;
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.FileFormatLiveOutputComment);
+
+        // Always leave a default list :D
+        TemporaryList.Add(new()
+        {
+            Name        =       "Default",
+            ID          =       "Best",
+            FORMAT      =       "Best",
+            RESOLUTION  =       "Best",
+            FPS         =       "N/A",
+            SIZE        =       "N/A",
+            BITRATE     =       "~"
+        });
+
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 

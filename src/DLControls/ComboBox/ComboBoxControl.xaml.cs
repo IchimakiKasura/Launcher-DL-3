@@ -37,6 +37,12 @@ public partial class ComboBoxControl : UserControl
         set => SetValue(ShowVerticalScrollbarProperty, value);
     }
 
+    public string Text
+    {
+        get => MainText.Text;
+        set => MainText.Text = value;
+    }
+
     public string PlaceholderText = "default (Best)";
 
     public UIElement UICanvas =>
@@ -53,7 +59,7 @@ public partial class ComboBoxControl : UserControl
 
     public bool isTextFocused { get; set; }
     public RoutedEventHandler OnItemChange;
-    public TextBox MainText;
+    private TextBox MainText;
     TextBlock Placeholder;
     public ContentPresenter Contents;
     public Grid ComboBoxTemplateGRID;
@@ -80,7 +86,7 @@ public partial class ComboBoxControl : UserControl
 
         MainText.TextChanged += delegate
         {
-            if (MainText.Text is not null)
+            if (MainText.Text is "" or null)
                 ComboBoxTemplateGRID.Add(Placeholder);
             else ComboBoxTemplateGRID.Remove(Placeholder);
         };

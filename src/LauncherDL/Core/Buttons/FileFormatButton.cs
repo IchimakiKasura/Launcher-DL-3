@@ -2,11 +2,11 @@ namespace LauncherDL.Core.Buttons;
 
 public abstract class FileFormatButton
 {
-    public static void ButtonClicked(object s, RoutedEventArgs e)
+    public static async void ButtonClicked(object s, RoutedEventArgs e)
     {
         e.Handled = true;
 
-        if(!BodyButton.CheckLinkValidation(false))
+        if(!await BodyButton.CheckLinkValidation())
             return;
 
         console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");

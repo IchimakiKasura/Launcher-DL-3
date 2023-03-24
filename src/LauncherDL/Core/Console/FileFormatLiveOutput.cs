@@ -81,6 +81,6 @@ internal partial class ConsoleLive
             VID_W_AUD   =       VID_AO
         });
 
-        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$vbar$    {FormatNames[SIZE]}");
+        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$    {FormatNames[SIZE]}$tab$🔗");
     }
 }

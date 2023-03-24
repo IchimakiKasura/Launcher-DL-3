@@ -6,6 +6,6 @@ partial class OnStartUp
     private static void InitiateProgressBar()
     {
         progressBar = new() { Width = 555 };
-        SetCanvas(progressBar, 300, 490);
+        SetCanvas(progressBar, 490, 300);
     }
 }

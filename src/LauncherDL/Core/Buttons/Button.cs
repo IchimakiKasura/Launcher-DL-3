@@ -4,7 +4,7 @@ public abstract class BodyButton
 {
     private static bool IsFailed;
 
-    public static bool CheckLinkValidation(bool IsDownload)
+    public static async Task<bool> CheckLinkValidation()
     {
         // Resets the static variable
         IsFailed = false;
@@ -35,7 +35,7 @@ public abstract class BodyButton
             char[] arr              = UnwantedChars.ToCharArray();
 
             foreach (char ch in arr)
-                if (textBoxLink.Text.Contains(ch))
+                if (textBoxName.Text.Contains(ch) && !IsFailed)
                 {
                     MessageBox.Show("File name cannot contain the following characters:"+
                                     "\n                             \\ / * : ? \" < > |",
@@ -46,12 +46,12 @@ public abstract class BodyButton
                }
         }
 
-        // Avoids being fired when the validation already failed
+        // Avoids being fired when the link validation already failed
         // because it'll take more time
-        if(!IsFailed && IsDownload)
+        if(!IsFailed)
         {
             console.DLAddConsole(CONSOLE_INFO_STRING, $"Fetching Link..$nl$<Gray%10>{textBoxLink.Text}");
-            var ValidateLink = new LauncherDL.Core.TaskProcess.LinkValidate(textBoxLink.Text).Validate();
+            var ValidateLink = await new LauncherDL.Core.TaskProcess.LinkValidate(textBoxLink.Text).Validate();
 
             if(!config.EnablePlaylist && ValidateLink.HasPlaylist)
             {

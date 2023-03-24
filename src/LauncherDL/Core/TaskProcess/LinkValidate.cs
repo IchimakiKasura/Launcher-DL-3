@@ -5,24 +5,27 @@ sealed class LinkValidate
 {
     public bool IsValid;
     public bool HasPlaylist;
+    
     bool IsError = false;
     bool TempHasPlaylist;
     string url;
 
-    public LinkValidate(string _url)
-    {
+    public LinkValidate(string _url) =>
         url = _url;
-    }
-
-    public LinkValidate Validate()
+    
+    public async Task<LinkValidate> Validate()
     {
+        // Force to disable the components
+        WindowsComponents.FreezeComponents();
+        
         try
         {
             Uri Link = new(url);
             var UrlHost = URLname.Match(Link.Host).Groups["host"].Value;
             var UrlPath = Link.PathAndQuery;
-            GetFileName();
+            await GetFileName();
 
+            WindowsComponents.FreezeComponents();
             return new(default)
             {
                 IsValid = !IsError,
@@ -31,6 +34,7 @@ sealed class LinkValidate
         }
         catch
         {
+            WindowsComponents.FreezeComponents();
             return new(default)
             {
                 IsValid = false,
@@ -38,7 +42,7 @@ sealed class LinkValidate
             };
         }
     }
-    private async void GetFileName()
+    private async Task GetFileName()
     {
         await Task.Run(async()=>
         {
@@ -58,10 +62,10 @@ sealed class LinkValidate
             Proc.OutputDataReceived += (s,e) =>
                 DL_Dispatch.Invoke(()=>{
                     console.AddFormattedText($"<Green>[SUCCESS] <>{e.Data}");
-                    if(textBoxLink.Text.IsEmpty()) textBoxName.Text = e.Data;
+                    if(textBoxName.Text.IsEmpty())
+                        textBoxName.Text = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();  // Very Epic
                 }, e.Data);
             
-
             Proc.ErrorDataReceived += (s, e) =>
                 DL_Dispatch.Invoke(()=>{
                     if (e.Data.Contains("ERROR") || e.Data.Contains("Traceback"))

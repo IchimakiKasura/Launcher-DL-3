@@ -8,12 +8,14 @@
 //  Finish Metadata Design and refactor it to make it look
 //  cleaner
 //
+//  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation
 //  not single typed focused or idk selective
 //  [3/22/23] Have a temporary Tooltip fix but It needs to accept both Properties and Fields 
 //  [3/22/23 | 5:02 AM] Got it to make smaller 
 //
 //  "Nothing more permanent than a temporary solution" ☠️☠️
+//  ==============================================================================================
 //
 //  Try to use Attributes for easy coding
 //  [] Try using Attributes on DLControls if possible

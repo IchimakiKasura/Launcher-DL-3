@@ -2,44 +2,43 @@ namespace LauncherDL.Core.Buttons;
 
 public class DownloadButton : ConvertButton
 {
-    public static void ButtonClicked(object s, RoutedEventArgs e)
+    public static async void ButtonClicked(object s, RoutedEventArgs e)
     {
         e.Handled = true;
 
         // Checks if the button is set to Convert
-        if(comboBoxType.ItemIndex is not 3) 
+        if(comboBoxType.ItemIndex is 3) 
         {
             ButtonConvertClicked();
             return;
         }
         
-        if(!BodyButton.CheckLinkValidation(true))
+        if(!await BodyButton.CheckLinkValidation())
             return;
 
         // Checks if "-o" on format exist because its an output argument on ytdlp
-		if (comboBoxFormat.MainText.Text.Contains("-o"))
+		if (comboBoxFormat.Text.Contains("-o"))
 		{
 			MessageBox.Show("The \"-o\" is reserved, Instead change the \"output\" on the Config.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
 			console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "The \"-o\" is reserved, Instead change the \"output\" on the Config.");
 			return;
 		}
 
-        // To be removed
-        #if DEBUG
-            if(comboBoxFormat.ItemIndex > -1)
-            {
-                if(TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD != null)
-                    ConsoleDebug.Log($"SELECTED ID: "+TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD);
-                else ConsoleDebug.Log($"SELECTED ID (AUDIO ONLY): "+TemporaryList[comboBoxFormat.ItemIndex].ID);
-            }
-        #endif
+        // Check if Format text has been changed after selecting an item
+        // or File format was fired and haven't selected an item yet.
+        if(comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > 0)
+        {
+            if(TemporaryList[comboBoxFormat.ItemIndex].Name == comboBoxFormat.Text)
+                Console.WriteLine("Match");
+            else Console.WriteLine("Not Match");
+        }
 
         // Gets the info before downloading
         #region Info Setup
-        var _format = comboBoxFormat.MainText.Text ?? comboBoxFormat.GetItemContent; 
+        var _format = comboBoxFormat.Text ?? comboBoxFormat.GetItemContent; 
         TypeOfButton _type = TypeOfButton.CustomType;
 
-        if(string.IsNullOrEmpty(_format)) _format = "Best";
+        if(_format.IsEmpty()) _format = "Best";
 
         switch(comboBoxType.ItemIndex)
         {

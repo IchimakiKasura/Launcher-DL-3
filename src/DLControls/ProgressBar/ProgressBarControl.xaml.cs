@@ -9,11 +9,18 @@ public partial class ProgressBarControl : UserControl
     DependencyProperty.Register("Value", typeof(double), typeof(ProgressBarControl));
 
     public enum ProgressBarState{Hide,Show}
-
+    
+    public bool IsValueExact = true;
     public double Value
     {
         get => (double)GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
+        set
+        {
+            // FIXME: Make the Caller wait until the animation finished
+            // smooth increase animation
+            var animation = new DoubleAnimation(value, TimeSpan.FromMilliseconds(800));
+            UserProgressBar.BeginAnimation(ProgressBar.ValueProperty, animation);
+        }
     }
 
     public ProgressBarControl() =>
