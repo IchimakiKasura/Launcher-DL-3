@@ -14,6 +14,7 @@ public partial class Global
     [WindowStaticRef]
     public static MetadataWindow MetadataWindowStatic;
 
+
     /// <summary>Config</summary>
     public static DefaultConfig config;
 
@@ -29,7 +30,6 @@ public partial class Global
     /// <summary>Languages</summary>
     public static DLLanguages.Pick.LanguagePick Language;
     
-    /// <summary>for Renaming Process</summary>
     public static List<string> FileExtensions = new()
     {
         "mp4",
@@ -43,6 +43,7 @@ public partial class Global
 
     /// <summary>ComboBoxFormat Temporary list</summary>
     public static List<FormatList> TemporaryList = new();
+    public static MemoryStream ConsoleLastDocument;
 
     /// <summary>Process Start</summary>
     public static Process ProcessTaskVariable;

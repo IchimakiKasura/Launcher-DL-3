@@ -60,9 +60,10 @@ sealed class LinkValidate
             
             Proc.OutputDataReceived += (s,e) =>
                 DL_Dispatch.Invoke(()=>{
-                    console.AddFormattedText($"<Green>[SUCCESS] <>{e.Data}");
+                    var FetchedTitle = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();
+                    console.AddFormattedText($"<Lime%14>[SUCCESS] <%14>{FetchedTitle}");
                     if(textBoxName.Text.IsEmpty())
-                        textBoxName.Text = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();  // Very Epic
+                        textBoxName.Text = FetchedTitle;
                 }, e.Data);
             
             Proc.ErrorDataReceived += (s, e) =>
@@ -74,7 +75,7 @@ sealed class LinkValidate
                             TempHasPlaylist = true;
 
                         if (e.Data.Contains("cookies"))
-                            console.AddFormattedText($"<Yellow>[INFO] <>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\". This method might be risky so I'm not liable if your account is blocked or locked");
+                            console.AddFormattedText($"<Yellow%14>[INFO] <%14>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\". This method might be risky so I'm not liable if your account is blocked or locked");
 
                         IsError = true;
                     }

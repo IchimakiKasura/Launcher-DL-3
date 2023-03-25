@@ -19,7 +19,7 @@ internal partial class ConsoleLive
         {
             CurrentTimeInt = (int)TimeSpan.Parse(CurrentTime).TotalSeconds;
             double ProgressValue = (double)((decimal)CurrentTimeInt / (decimal)TotalDuration) * 100;
-            TaskbarProgressBar.ProgressValue = ProgressValue;
+            TaskbarProgressBar.ProgressValue = ProgressValue / 100;
             progressBar.Value = ProgressValue;
         }
 

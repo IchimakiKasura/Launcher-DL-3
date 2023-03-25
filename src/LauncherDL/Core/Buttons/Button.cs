@@ -64,10 +64,7 @@ public abstract class BodyButton
         }
         
 
-        if(!IsFailed)
-        {
-            WindowsComponents.FreezeComponents();
-            return true;
-        } else return false;
+        if(!IsFailed) return true;
+        else return false;
     }
 };

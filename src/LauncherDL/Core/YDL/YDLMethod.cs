@@ -18,6 +18,9 @@ sealed partial class YDL
         WindowsComponents.FreezeComponents();
     }
 
+
+
+
     /// <summary>
     /// FileFormat Method
     /// </summary>
@@ -26,9 +29,9 @@ sealed partial class YDL
         if (!IsFileFormat)
             throw new FileFormatMethodException();
 
-        var Args = $"--compat-options format-sort -F {Link} --no-playlist";
+        var Arguments = $"--compat-options format-sort -F {Link} --no-playlist";
 
-        if (config.AllowCookies) Args += $" --cookies-from-browser {config.BrowserCookie}";
+        if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
 
         // Clear existing list on ComboBoxFormat and its Temporarylist
         TemporaryList.Clear();
@@ -38,7 +41,7 @@ sealed partial class YDL
         MetadataWindow.MetadataClear();
 
         ConsoleLive.SelectedError = 0;
-        await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.FileFormatLiveOutputComment);
+        await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.FileFormatLiveOutputComment);
 
         // Always leave a default list :D
         TemporaryList.Add(new()
@@ -55,6 +58,8 @@ sealed partial class YDL
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
+
+
     /// <summary>
     /// Convert Method
     /// </summary>
@@ -67,15 +72,17 @@ sealed partial class YDL
         "-metadata description=\"Converted on LauncherDL\" " +
         "-metadata comment=\"Converted on LauncherDL\" ";
 
-        var Args = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
+        var Arguments = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
         ConsoleLive.SelectedError = 2;
 
         if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
             Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
 
-        await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.ConvertLiveOutputComment);
+        await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.ConvertLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
+
+
 
     /// <summary>
     /// Download Method
@@ -85,23 +92,86 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new DownloadMethodException();
 
-        var Args = Format;
+        string FolderType = "Formatted\\%(ext)s";
+        string Arguments = "N/A";
+        string ExtensionFormat = "N/A";
         ConsoleLive.SelectedError = 1;
 
         // To be change
         switch(Type)
         {
             case TypeOfButton.CustomType:
-                Console.WriteLine($"Custom Type\nFormat: {Args}");
+                Arguments = $"-f \"{Format}\"";
+                ExtensionFormat = "%(ext)s";
             break;
 
             case TypeOfButton.VideoType:
-                Console.WriteLine($"Video Type\nFormat: {Args}");
+                FolderType = "Video";
+                
+                Arguments = $"--recode-video {Format}"; 
+                ExtensionFormat = Format;
+
+                if(Format is not "auto") break;
+
+                Arguments= $"-f b"; 
+                ExtensionFormat = "%(ext)s";
             break;
 
             case TypeOfButton.AudioType:
-                Console.WriteLine($"Audio Type\nFormat: {Args}");
+                FolderType = "Audio";
+
+                Arguments = $"-x --audio-format {Format}"; 
+                ExtensionFormat = Format;
+
+                if(Format is not "auto") break;
+
+                Arguments = $"-x -f b"; 
+                ExtensionFormat = "%(ext)s";
             break;
         }
+
+        var FILE_EXIST_PATH = $"{config.DefaultOutput}\\{FolderType}\\{textBoxName.Text}.{ExtensionFormat}";
+
+        if(CheckFileExist(FILE_EXIST_PATH, Type))
+        {
+            console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, ConvertButton.NAME_EXIST);
+
+            WindowsComponents.FreezeComponents();
+
+            return;
+        }
+
+        Arguments = $"{Arguments} {Link} -o \"{FILE_EXIST_PATH}\"";
+
+        if (!config.EnablePlaylist) Arguments += " --no-playlist";
+        if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
+        Arguments += $" --ffmpeg-location \"{FFMPEG_Path}\" --no-part";
+
+        ConsoleLastDocument = console.SaveText();
+        await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.DownloadLiveOutputComment);
+        TaskProcess.EndProcess.ProcessTaskEnded();
+    }
+
+    // FIXME: refactor this future me if possible
+    private bool CheckFileExist(string FilePath, TypeOfButton Type)
+    {
+        var Existed = false;
+
+        if(Type != TypeOfButton.CustomType)
+        {
+            if(Format is "auto" && File.Exists(FilePath.Replace("%(ext)s", ".*")))
+                Existed = true;
+            else
+                if(File.Exists(FilePath)) Existed = true;
+            
+            return Existed;
+        }
+
+        // This is pain :<
+        foreach(var Ext in FileExtensions)
+            if(File.Exists(FilePath.Replace("%(ext)s", Ext)))
+                Existed = true;
+        
+        return Existed;
     }
 }

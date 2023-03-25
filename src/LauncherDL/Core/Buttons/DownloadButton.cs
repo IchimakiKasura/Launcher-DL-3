@@ -24,23 +24,32 @@ public class DownloadButton : ConvertButton
             return;
         }
 
+        // Freeze the components
+        WindowsComponents.FreezeComponents();
+
         // Gets the info before downloading
         #region Info Setup
 
-        string _format = "Best";
+        string _format = "b"; // b as it Best
+        string _FormatOutputComment  = "Best";
         
         switch(_format)
         {
+            // Checks if has file format fetched
             case string when comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > 0:
                 _format = TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD ?? TemporaryList[comboBoxFormat.ItemIndex].ID;
+                _FormatOutputComment = TemporaryList[comboBoxFormat.ItemIndex].Name;
+
+                // Checks if format text is changed by the user manually
+                if(comboBoxFormat.Text != TemporaryList[comboBoxFormat.ItemIndex].Name)
+                    _FormatOutputComment =
+                    _format = comboBoxFormat.Text;
             break;
 
+            // If its not on Custom Type
             case string when comboBoxType.ItemIndex != 0:
+                _FormatOutputComment =
                 _format = comboBoxFormat.GetItemContent;
-            break;
-
-            case string when !comboBoxType.Text.IsEmpty():
-                _format = comboBoxFormat.Text;
             break;
         };
 
@@ -61,15 +70,13 @@ public class DownloadButton : ConvertButton
             Type = _type
         };
 
-        Console.WriteLine(_format);
-
         // yeah i don't know either that I put N/A on some that is un-unassignable
         ConsoleOutputMethod.DownloadInfoOutputComment(new()
         {
             Title = textBoxName.Text ?? "N/A",
             Type = comboBoxType.GetItemContent ?? "N/A",
             Name = textBoxName.Text ?? "N/A",
-            Format = _format ?? "N/A",
+            Format = _FormatOutputComment.Replace("|", "$vbar$") ?? "N/A",
             Link = textBoxLink.Text ?? "N/A",
             Playlist = config.EnablePlaylist.ToString() ?? "N/A"
         });
@@ -77,7 +84,5 @@ public class DownloadButton : ConvertButton
         YDL YDLInfo = new(Info);
 
         YDLInfo.DownloadMethod();
-
-        WindowsComponents.FreezeComponents();
     }
 }

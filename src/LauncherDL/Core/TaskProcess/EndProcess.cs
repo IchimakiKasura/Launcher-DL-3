@@ -8,12 +8,11 @@ abstract class EndProcess
 {
     public static void ProcessTaskEnded()
     {
-        comboBoxFormat.AddFormatList(TemporaryList);
-
         switch(ConsoleLive.SelectedError)
         {
-            case 1: DownloadTaskEnded(); break;
-            case 2: ConvertTaskEnded();  break;
+            case 0: FileFormatTaskEnded(); break;
+            case 1: DownloadTaskEnded();   break;
+            case 2: ConvertTaskEnded();    break;
         }
 
         if (!MainWindowStatic.IsActive)
@@ -23,11 +22,16 @@ abstract class EndProcess
     
         WindowsComponents.FreezeComponents();
     }
+
+    static void FileFormatTaskEnded() =>
+        comboBoxFormat.AddFormatList(TemporaryList);
+
     static void ConvertTaskEnded() =>
         console.DLAddConsole(CONSOLE_YEY_STRING, $"File converted: \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}\"");
     
     static void DownloadTaskEnded()
     {
-
+        console.LoadText(ConsoleLastDocument);
+        console.DLAddConsole(CONSOLE_YEY_STRING, $"Downloaded!");
     }
 }

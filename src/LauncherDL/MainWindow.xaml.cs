@@ -2,11 +2,7 @@
 
 // TODO:
 //
-//  Add download method functionality
-//  Add Metadata Functionality
-//
-//  Finish Metadata Design and refactor it to make it look
-//  cleaner
+//  Fix UI thread freezing because its invoking too much
 //
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation
@@ -17,10 +13,6 @@
 //  "Nothing more permanent than a temporary solution" ☠️☠️
 //  ==============================================================================================
 //
-//  Try to use Attributes for easy coding
-//  [] Try using Attributes on DLControls if possible
-// 
-//  Implement the YDL.cs based on the old script from v6
 //
 // wa:
 //  nothing, just clean the code idk.

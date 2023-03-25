@@ -20,7 +20,7 @@ public partial class ProgressBarControl : UserControl
         {
             // FIXME: Make the Caller wait until the animation finished
             // smooth increase animation
-            var animation = new DoubleAnimation(value, TimeSpan.FromMilliseconds(800));
+            var animation = new DoubleAnimation(value, TimeSpan.FromMilliseconds(300));
             UserProgressBar.BeginAnimation(ProgressBar.ValueProperty, animation);
         }
     }

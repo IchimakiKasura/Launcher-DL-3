@@ -10,6 +10,9 @@ public abstract class FileFormatButton
             return;
 
         console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
+        
+        // Freeze the components
+        WindowsComponents.FreezeComponents();
 
         YDL YDLInfo = new(
             new()

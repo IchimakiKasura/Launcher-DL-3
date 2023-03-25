@@ -3,7 +3,7 @@ namespace LauncherDL.Core.Buttons;
 public class ConvertButton
 {
     #region Error Texts
-    const string
+    public const string
     FILE_NOTFOUND   = "<%14>Selected file cannot be found!",
     NAME_REQUIRED   = "<%14>Name is required!",
     FFMPEG_NOTFOUND = "<%14>FFmpeg files are missing! Cannot continue.",

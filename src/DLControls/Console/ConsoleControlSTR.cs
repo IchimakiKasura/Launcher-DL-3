@@ -10,6 +10,7 @@ public abstract class CONSOLEOUTPUTMETHOD_STR
     public const string CONSOLE_INFO_STRING             = "<Yellow%14>[INFO] <%14>";
     public const string CONSOLE_YEY_STRING              = "<Pink%14>[YEY] <%14>";
     public const string CONSOLE_VERBOSE_STRING          = "<Cyan%14>[V] <%14>";
+    public const string CONSOLE_PROCESSING              = "<Cyan%14>[PROCESSING] <%14>";
 
     public const string CONSOLE_METADATA_TITLE          = "[METADATA] Title$tab$$tab$:  ";
     public const string CONSOLE_METADATA_ALBUM          = "[METADATA] Album$tab$$tab$:  ";

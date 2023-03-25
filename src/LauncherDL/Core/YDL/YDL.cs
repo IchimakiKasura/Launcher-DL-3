@@ -30,10 +30,5 @@ sealed partial class YDL
         Format = args.Format;
         Type = args.Type;
     }
-
-    public void ValidateLink()
-    {
-
-    }
 }
 

@@ -61,9 +61,9 @@ internal partial class ConsoleLive
             // Puts the latest Audio format ID to the video that has no Audio
             VID_AO = FormatNames[FORMAT] switch
             {
-                string when FormatNames[FORMAT].Contains("mp4") =>
+                _ when FormatNames[FORMAT].Contains("mp4") =>
                     $"{FormatNames[ID]}+{AudioOnlyID_M4A}",
-                string when FormatNames[FORMAT].Contains("webm")=>
+                _ when FormatNames[FORMAT].Contains("webm")=>
                     $"{FormatNames[ID]}+{AudioOnlyID_WEBM}",
                 _ => null
             };
@@ -81,6 +81,6 @@ internal partial class ConsoleLive
             VID_W_AUD   =       VID_AO
         });
 
-        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$    {FormatNames[SIZE]}$tab$🔗");
+        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}$tab$🔗");
     }
 }
