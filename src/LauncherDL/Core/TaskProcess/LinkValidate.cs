@@ -43,6 +43,7 @@ sealed class LinkValidate
     }
     private async Task GetFileName()
     {
+        ConsoleLive.SelectedError = 2;
         await Task.Run(async()=>
         {
             Process Proc = new();
@@ -60,14 +61,16 @@ sealed class LinkValidate
             
             Proc.OutputDataReceived += (s,e) =>
                 DL_Dispatch.Invoke(()=>{
+                    if(e.Data.IsEmpty()) return;
                     var FetchedTitle = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();
                     console.AddFormattedText($"<Lime%14>[SUCCESS] <%14>{FetchedTitle}");
                     if(textBoxName.Text.IsEmpty())
                         textBoxName.Text = FetchedTitle;
-                }, e.Data);
+                });
             
             Proc.ErrorDataReceived += (s, e) =>
                 DL_Dispatch.Invoke(()=>{
+                    if(e.Data.IsEmpty()) return;
                     if (e.Data.Contains("ERROR") || e.Data.Contains("Traceback"))
                     {
                         TempHasPlaylist = false;
@@ -79,7 +82,9 @@ sealed class LinkValidate
 
                         IsError = true;
                     }
-                }, e.Data);
+                    if(e.Data.Contains("error"))
+                        ConsoleLive.Error_Invoked();
+                });
 
             Proc.Start();
             Proc.BeginOutputReadLine();

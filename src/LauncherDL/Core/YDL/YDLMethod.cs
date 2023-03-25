@@ -108,7 +108,7 @@ sealed partial class YDL
             case TypeOfButton.VideoType:
                 FolderType = "Video";
                 
-                Arguments = $"--recode-video {Format}"; 
+                Arguments = $"ext:mp4:m4a --recode-video {Format}"; 
                 ExtensionFormat = Format;
 
                 if(Format is not "auto") break;
@@ -120,12 +120,12 @@ sealed partial class YDL
             case TypeOfButton.AudioType:
                 FolderType = "Audio";
 
-                Arguments = $"-x --audio-format {Format}"; 
+                Arguments = $"-f ba -x --audio-format {Format}"; 
                 ExtensionFormat = Format;
 
                 if(Format is not "auto") break;
 
-                Arguments = $"-x -f b"; 
+                Arguments = $"-f ba -x"; 
                 ExtensionFormat = "%(ext)s";
             break;
         }

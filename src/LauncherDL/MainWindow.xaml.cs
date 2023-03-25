@@ -2,7 +2,6 @@
 
 // TODO:
 //
-//  Fix UI thread freezing because its invoking too much
 //
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation

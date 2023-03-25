@@ -7,7 +7,8 @@ internal partial class ConsoleLive                                              
     
     0 = File format                                                                                                                         
     1 = Download                                                                                                                            
-    2 = Convert                                                                                                                                                         */
+    2 = Validation                                                                                                                                                      
+    3 = Convert                                                                                                                                                         */
     public static int SelectedError = 0                                                                                                                                 ;/*
     
     Avoid multiple instances of error outputs when
@@ -18,9 +19,9 @@ internal partial class ConsoleLive                                              
                                       "4. YT-DLP might be outdated please update it first!"                                                                             ;
 
     public static void ErrorOutputComment(object s, DataReceivedEventArgs e)                                                                                            =>
-        DL_Dispatch.Invoke(()=>Error_Invoked(),e.Data)                                                                                                                  ;
+        DL_Dispatch.Invoke(Error_Invoked)                                                                                                                               ;
 
-    static void Error_Invoked()                                                                                                                                         {
+    public static void Error_Invoked()                                                                                                                                  {
         if (!SingleErrorInstance)
             switch(SelectedError)                                                                                                                                       {
                 case 0                                                                                                                                                  :
@@ -36,6 +37,12 @@ internal partial class ConsoleLive                                              
                 break                                                                                                                                                   ;
                 
                 case 2                                                                                                                                                  :
+                    console.DLAddConsole(CONSOLE_ERROR_STRING,
+                    $"Validation failed! {ERROR_MESSAGE_HINT}")                                                                                                         ;
+                    SingleErrorInstance = true                                                                                                                          ;
+                break                                                                                                                                                   ;
+
+                case 3                                                                                                                                                  :
                     console.DLAddConsole(CONSOLE_ERROR_STRING,
                     "Convert failed! If error is consistent please report it to the author")                                                                            ;
                     SingleErrorInstance = true                                                                                                                          ;

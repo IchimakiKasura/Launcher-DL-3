@@ -5,8 +5,6 @@ public class UpdateButton
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {
         e.Handled = true;
-        
-        WindowsComponents.FreezeComponents();
 
         console.DLAddConsole(CONSOLE_INFO_STRING, "Updating...");
 
@@ -14,5 +12,7 @@ public class UpdateButton
         YDLInfo.IsUpdate = true;
 
         YDLInfo.UpdateMethod();
+
+        WindowsComponents.FreezeComponents();
     }
 }

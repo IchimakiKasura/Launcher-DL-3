@@ -9,25 +9,23 @@ internal partial class ConsoleLive
     DOWNLOAD_SPEED      = 2,
     DOWNLOAD_ETA        = 3;
     #endregion
-    static List<string> ProgressInfo = new();
-    public static void DownloadLiveOutputComment(object s, DataReceivedEventArgs e) =>
-        DL_Dispatch.Invoke(()=>Download_Invoke(e.Data),e.Data);
+    static List<string> ProgressInfo;
+    static string NetworkSpeedColor = "";
 
-    static void Download_Invoke(string StringData)
+    public static void DownloadLiveOutputComment(object s, DataReceivedEventArgs e)
     {
-        console.LoadText(ConsoleLastDocument);
+        var StringData = e.Data;
 
-        Console.WriteLine("RAW: "+StringData);
+        if(StringData.IsEmpty()) return;
 
         ProgressInfo = new();
-        string NetworkSpeedColor = "";
+        NetworkSpeedColor = "";
 
         foreach(Group match in DownloadInfo.Match(StringData).Groups)
             if(!match.Name.Contains("0") && !match.Value.IsEmpty())
                 ProgressInfo.Add(match.Value.Trim());
             
         if(ProgressInfo.Count <= 1) return;
-
 
         #region Change Foreground based on the speed.
         var SpeedNumber = double.Parse(Regex.Replace(ProgressInfo[DOWNLOAD_SPEED], @"[a-zA-Z\/]", "").Replace("~","").ToString());
@@ -49,10 +47,18 @@ internal partial class ConsoleLive
         };
         #endregion
 
+        DL_Dispatch.Invoke(()=>Download_Invoke(StringData));
+    }
+
+    static void Download_Invoke(string StringData)
+    {
+        Console.WriteLine(StringData);
+        console.LoadText(ConsoleLastDocument);
+
         console.AddFormattedText(
             $"<Cyan>[ PROGRESS$tab$] <>{ProgressInfo[DOWNLOAD_PROGRESS]}%$nl$"+
-            $"<Cyan>[ SIZE$tab$] <>{ProgressInfo[DOWNLOAD_SIZE]}$nl$"+
-            $"<Cyan>[ SPEED$tab$] <{NetworkSpeedColor}>{ProgressInfo[DOWNLOAD_SPEED]}$nl$"+
+            $"<Cyan>[ SIZE$tab$$tab$] <>{ProgressInfo[DOWNLOAD_SIZE]}$nl$"+
+            $"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{ProgressInfo[DOWNLOAD_SPEED]}$nl$"+
             $"<Cyan>[ TIME (ETA)$tab$] <>{ProgressInfo[DOWNLOAD_ETA]}$nl$"
         );
 

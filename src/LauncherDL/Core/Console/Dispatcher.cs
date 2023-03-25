@@ -2,10 +2,9 @@ namespace LauncherDL.Core.ConsoleDL;
 
 public class DL_Dispatch
 {
-    public static async void Invoke(Action Method, string StringData)
+    public static void Invoke(Action Invoked)
     {
-        if(StringData.IsEmpty()) return;
         if(!console.Dispatcher.CheckAccess())
-            await console.Dispatcher.InvokeAsync(Method);
+            console.Dispatcher.Invoke(DispatcherPriority.Background, Invoked);
     }
 }

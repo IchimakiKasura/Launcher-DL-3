@@ -24,19 +24,16 @@ public class DownloadButton : ConvertButton
             return;
         }
 
-        // Freeze the components
-        WindowsComponents.FreezeComponents();
-
         // Gets the info before downloading
         #region Info Setup
 
         string _format = "b"; // b as it Best
         string _FormatOutputComment  = "Best";
-        
+
         switch(_format)
         {
             // Checks if has file format fetched
-            case string when comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > 0:
+            case string when comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > 0:
                 _format = TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD ?? TemporaryList[comboBoxFormat.ItemIndex].ID;
                 _FormatOutputComment = TemporaryList[comboBoxFormat.ItemIndex].Name;
 
@@ -47,7 +44,7 @@ public class DownloadButton : ConvertButton
             break;
 
             // If its not on Custom Type
-            case string when comboBoxType.ItemIndex != 0:
+            case string when comboBoxType.ItemIndex is not 0:
                 _FormatOutputComment =
                 _format = comboBoxFormat.GetItemContent;
             break;
@@ -70,7 +67,7 @@ public class DownloadButton : ConvertButton
             Type = _type
         };
 
-        // yeah i don't know either that I put N/A on some that is un-unassignable
+        // yeah i don't know either that I put N/A on some that is "un-unassignable" ☠️
         ConsoleOutputMethod.DownloadInfoOutputComment(new()
         {
             Title = textBoxName.Text ?? "N/A",
@@ -84,5 +81,7 @@ public class DownloadButton : ConvertButton
         YDL YDLInfo = new(Info);
 
         YDLInfo.DownloadMethod();
+        
+        WindowsComponents.FreezeComponents();
     }
 }

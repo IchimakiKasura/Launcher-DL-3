@@ -4,10 +4,12 @@ internal partial class ConsoleLive
 {
     
     public static void UpdateLiveOutputComment(object s, DataReceivedEventArgs e) =>
-        DL_Dispatch.Invoke(()=>Update_Invoked(e.Data),e.Data);
+        DL_Dispatch.Invoke(()=>Update_Invoked(e.Data));
 
     static void Update_Invoked(string StringData)
     {
+        if(StringData.IsEmpty()) return;
+
         switch(StringData)
         {
             case string when StringData.Contains("yt-dlp is up to date"):

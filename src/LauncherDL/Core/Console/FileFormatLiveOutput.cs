@@ -14,11 +14,12 @@ internal partial class ConsoleLive
     static List<string> FormatNames = new();
     static string AudioOnlyID_M4A, AudioOnlyID_WEBM;
 
-    public static void FileFormatLiveOutputComment(object s, DataReceivedEventArgs e) =>
-        DL_Dispatch.Invoke(()=>FileFormat_Invoked(e.Data),e.Data);
-
-    static void FileFormat_Invoked(string StringData)
+    public static void FileFormatLiveOutputComment(object s, DataReceivedEventArgs e)
     {
+        var StringData = e.Data;
+
+        if(StringData.IsEmpty()) return;
+
         FormatNames     = new();
         bool HasAudio   = false;
         string VID_AO   = null;
@@ -81,6 +82,10 @@ internal partial class ConsoleLive
             VID_W_AUD   =       VID_AO
         });
 
-        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}$tab$🔗");
+        DL_Dispatch.Invoke(FileFormat_Invoked);
     }
+
+    static void FileFormat_Invoked() =>
+        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}$tab$🔗");
+    
 }
