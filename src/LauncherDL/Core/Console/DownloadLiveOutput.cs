@@ -28,23 +28,26 @@ internal partial class ConsoleLive
         if(ProgressInfo.Count <= 1) return;
 
         #region Change Foreground based on the speed.
-        var SpeedNumber = double.Parse(Regex.Replace(ProgressInfo[DOWNLOAD_SPEED], @"[a-zA-Z\/]", "").Replace("~","").ToString());
-        switch("")
+        if(!ProgressInfo[DOWNLOAD_SPEED].IsEmpty())
         {
-            case string when ProgressInfo[DOWNLOAD_SPEED].Contains("K"):
-                if (SpeedNumber > 199.99) NetworkSpeedColor = "Red";
-                else NetworkSpeedColor = "#381900";
-            break;
+            var SpeedNumber = double.Parse(Regex.Replace(ProgressInfo[DOWNLOAD_SPEED], @"[a-zA-Z\/]", "").Replace("~","").ToString());
+            switch("")
+            {
+                case string when ProgressInfo[DOWNLOAD_SPEED].Contains("K"):
+                    if (SpeedNumber > 199.99) NetworkSpeedColor = "Red";
+                    else NetworkSpeedColor = "#381900";
+                break;
 
-            case string when ProgressInfo[DOWNLOAD_SPEED].Contains("M"):
-                if (SpeedNumber > 0.99) NetworkSpeedColor = "#83fa57";
-                else NetworkSpeedColor = "#fff154";
-            break;
+                case string when ProgressInfo[DOWNLOAD_SPEED].Contains("M"):
+                    if (SpeedNumber > 0.99) NetworkSpeedColor = "#83fa57";
+                    else NetworkSpeedColor = "#fff154";
+                break;
 
-            case string when ProgressInfo[DOWNLOAD_SPEED].Contains("G"):
-                NetworkSpeedColor = "Pink";
-            break;
-        };
+                case string when ProgressInfo[DOWNLOAD_SPEED].Contains("G"):
+                    NetworkSpeedColor = "Pink";
+                break;
+            };
+        }
         #endregion
 
         DL_Dispatch.Invoke(()=>Download_Invoke(StringData));
@@ -52,7 +55,6 @@ internal partial class ConsoleLive
 
     static void Download_Invoke(string StringData)
     {
-        Console.WriteLine(StringData);
         console.LoadText(ConsoleLastDocument);
 
         console.AddFormattedText(

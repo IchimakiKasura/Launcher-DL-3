@@ -145,8 +145,14 @@ sealed partial class YDL
 
         if (!config.EnablePlaylist) Arguments += " --no-playlist";
         if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
-        Arguments += $" --ffmpeg-location \"{FFMPEG_Path}\" --no-part";
+        
+        if(FFmpeg.FFmpegFiles.ErrorOccured)
+        {
+            console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
+            Arguments += " --no-part";
+        } else Arguments += $" --ffmpeg-location \"{FFMPEG_Path}\" --no-part";
 
+        console.Break("Gray");
         ConsoleLastDocument = console.SaveText();
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.DownloadLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();

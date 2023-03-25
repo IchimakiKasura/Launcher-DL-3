@@ -48,7 +48,7 @@ sealed class LinkValidate
         {
             Process Proc = new();
 
-            string Arguments = $"--get-filename -o '%(title)s' {url} --verbose --no-playlist --encoding utf8";
+            string Arguments = $"--get-filename -o '%(title)s' {url} --no-playlist --encoding utf8";
             if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
 
             Proc.StartInfo = new(YDL_Path, Arguments)
@@ -82,7 +82,7 @@ sealed class LinkValidate
 
                         IsError = true;
                     }
-                    if(e.Data.Contains("error"))
+                    if(e.Data.Contains("ERROR:"))
                         ConsoleLive.Error_Invoked();
                 });
 

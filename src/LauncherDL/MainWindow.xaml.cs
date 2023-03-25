@@ -2,6 +2,7 @@
 
 // TODO:
 //
+//  Add metadata functionality
 //
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation
