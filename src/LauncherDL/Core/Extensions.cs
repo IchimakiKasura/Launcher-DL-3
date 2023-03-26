@@ -12,7 +12,12 @@ internal static class _Core_Extensions
     #endregion
 
     #region Process
-    public static async Task StartAsync(this Process _proc) =>
+    /// <summary>
+    /// Starts the process Asynchronously without freezing the UI.
+    /// </summary>
+    /// <param name="_proc"></param>
+    /// <returns><see langword="true"/> if resource is started; <see langword="false"/> if no new resource process is started </returns>
+    public static async Task<bool> StartAsync(this Process _proc) =>
         await Task.Run(()=>_proc.Start());
     #endregion
 

@@ -14,6 +14,7 @@ sealed partial class YDL
         var Args = "-U";
         
         progressBar.Value = 99;
+        ConsoleLive.SelectedError = 9999;
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.UpdateLiveOutputComment);
         WindowsComponents.FreezeComponents();
     }
@@ -41,6 +42,7 @@ sealed partial class YDL
         MetadataWindow.MetadataClear();
 
         ConsoleLive.SelectedError = 0;
+        progressBar.Value = 0;
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.FileFormatLiveOutputComment);
 
         // Always leave a default list :D
@@ -78,6 +80,7 @@ sealed partial class YDL
         if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
             Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
 
+        progressBar.Value = 0;
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.ConvertLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
@@ -154,6 +157,8 @@ sealed partial class YDL
 
         console.Break("Gray");
         ConsoleLastDocument = console.SaveText();
+        
+        progressBar.Value = 0;
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.DownloadLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }

@@ -88,27 +88,8 @@ internal static class ConsoleOutputMethod
         $"<Gray%10>[] Link$tab$$tab$: {Obj.Link}$nl$"+
         $"<Gray%10>[] Playlist?$tab$: {Obj.Playlist}");
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    /// This is pain in the ass, please excuse this bad shit until i found a better way
     public static void MetadataOutputComment()
     {
-        int i = 0;
-        string[] Old_Temporary =
-        {
-            Old_Title,
-            Old_Album,
-            Old_Album_Artist,
-            Old_Year,
-            Old_Genre
-        };
-        
-        // FIXME: It needs to only check the changed variables 
-        // If the textbox are the same values it should not fire the 
-        // comment output but how?
-        foreach (var strings in Old_Temporary)
-            if(!strings.IsEmpty()) i++;
-
-        if(i is 0) return;
         console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been set!");
         console.AddFormattedText("<Gray%12>"+
             $"{CONSOLE_METADATA_TITLE       }"  +  $"{Old_Title        ?? "N\\A"} $nl$"  +      

@@ -31,6 +31,10 @@ abstract class EndProcess
     
     static void DownloadTaskEnded()
     {
+        // Sets the metadata
+        if(MetadataWindowStatic != null && MetadataWindowStatic.IsTextChanged)
+            MetadataWindow.ApplyMetadataOnFile();
+        
         console.LoadText(ConsoleLastDocument);
         console.DLAddConsole(CONSOLE_YEY_STRING, $"Downloaded!");
     }

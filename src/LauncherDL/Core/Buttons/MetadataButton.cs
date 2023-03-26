@@ -3,11 +3,11 @@ namespace LauncherDL.Core.Buttons;
 public abstract class MetadataButton
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
-    {
-        if(new MetadataWindow().OpenDialog() is MetadataWindow.MetadataClicked.Set)
-            ConsoleOutputMethod.MetadataOutputComment();
+    {   
+        if(new MetadataWindow().OpenDialog() is not MetadataWindow.MetadataClicked.Set)
+            return;
 
-        // Remove the instance on static field
-        MetadataWindowStatic = null;
+        if(MetadataWindowStatic.IsTextChanged)
+            ConsoleOutputMethod.MetadataOutputComment();
     }
 }
