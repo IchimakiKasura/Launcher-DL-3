@@ -19,10 +19,10 @@ internal partial class ConsoleLive                                              
                                       "4. YT-DLP might be outdated please update it first!"                                                                             ;
 
     public static void ErrorOutputComment(object s, DataReceivedEventArgs e)                                                                                            =>
-        DL_Dispatch.Invoke(Error_Invoked)                                                                                                                               ;
+        DL_Dispatch.Invoke(()=>Error_Invoked(e.Data))                                                                                                                   ;
 
-    public static void Error_Invoked()                                                                                                                                  {
-        if (!SingleErrorInstance)
+    public static void Error_Invoked(string StringData)                                                                                                                 {
+        if (!SingleErrorInstance && !StringData.IsEmpty())
             switch(SelectedError)                                                                                                                                       {
                 case 0                                                                                                                                                  :
                     console.DLAddConsole(CONSOLE_ERROR_STRING,

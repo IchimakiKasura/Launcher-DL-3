@@ -1,4 +1,3 @@
-using System.Threading;
 namespace LauncherDL.Core.TaskProcess;
 
 /// <summary>
@@ -19,8 +18,12 @@ abstract class EndProcess
             WindowsComponents.WindowTaskBarFlash();
 
         ConsoleLive.SingleErrorInstance = false;
-    
+
         WindowsComponents.FreezeComponents();
+
+        IsInProcess = false;
+        progressBar.Value = 0;
+        TaskbarProgressBar.ProgressValue = 0;
     }
 
     static void FileFormatTaskEnded() =>
@@ -31,11 +34,20 @@ abstract class EndProcess
     
     static void DownloadTaskEnded()
     {
+        if(!ConsoleLive.SingleErrorInstance)
+            console.LoadText(ConsoleLastDocument);
+        else return;
+
         // Sets the metadata
-        if(MetadataWindowStatic != null && MetadataWindowStatic.IsTextChanged)
+        if(MetadataWindowStatic != null && MetadataWindowStatic.IsTextChanged && !FFmpegFiles.ErrorOccured)
+        {
+            console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been applied.");
             MetadataWindow.ApplyMetadataOnFile();
+        }
+        else if(FFmpegFiles.ErrorOccured)
+            console.DLAddConsole(CONSOLE_ERROR_STRING, "Metadata cannot be applied! FFMPEG is missing!");
         
-        console.LoadText(ConsoleLastDocument);
-        console.DLAddConsole(CONSOLE_YEY_STRING, $"Downloaded!");
+        
+        console.DLAddConsole(CONSOLE_YEY_STRING, "Downloaded!");
     }
 }

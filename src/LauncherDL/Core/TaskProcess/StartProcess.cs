@@ -3,7 +3,9 @@ namespace LauncherDL.Core.TaskProcess;
 abstract class StartProcess
 {
     public static async Task ProcessTask(string Args, DataReceivedEventHandler e)
-    {;
+    {
+        IsInProcess = true;
+
         ProcessTaskVariable = new();
 
         bool isConvert = ConsoleLive.SelectedError is 3;

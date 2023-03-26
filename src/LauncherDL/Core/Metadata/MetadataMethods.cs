@@ -38,68 +38,41 @@ public partial class MetadataWindow
             );
     }
 
-    // FIXME: Refactor this please future me
-    // it looks shit
     public static async void ApplyMetadataOnFile()
     {
-        Console.WriteLine("adding metadata");
+        // for better naming
+        string
+        DIRECTORY_OUTPUT            = config.DefaultOutput,
+        DIRECTORY_TYPE              = comboBoxType.GetItemContent,
+        FILE_NAME                   = textBoxName.Text,
+        FILE_EXTENSION              = comboBoxFormat.GetItemContent,
 
-        bool isFileFound = false;
+        // Full path and Full name with extension
+        FILE_FULL_NAME              = $"{FILE_NAME}.{FILE_EXTENSION}",
+        FILE_PATH                   = $"{DIRECTORY_OUTPUT}\\{DIRECTORY_TYPE}",
 
-        #region Finds the file downloaded
-        string FilePath = $"{config.DefaultOutput}\\{comboBoxType.GetItemContent ?? ""}\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}";
-        string FilePathArugment = "";
-        string FileOutputDirectory = $"{config.DefaultOutput}\\{comboBoxType.GetItemContent ?? ""}";
-        string FileNameWithExt = $"{textBoxName.Text}.{comboBoxFormat.GetItemContent}";
+        TEMPORARY_NAME_DIRECTORY    = $"\"{FILE_PATH}\\TEMP_{FILE_FULL_NAME}\"",
+        NAME_DIRECTORY              = $"\"{FILE_PATH}\\{FILE_FULL_NAME}\"",
 
-        if(comboBoxType.ItemIndex == 0)
-        {
-            foreach(var Ext in FileExtensions)
-                if (File.Exists($"{config.DefaultOutput}\\Formatted\\{Ext}\\{textBoxName.Text}.{Ext}"))
-                {
-                    FilePathArugment = $"{config.DefaultOutput}\\Formatted\\{Ext}\\{textBoxName.Text}.{Ext}";
-                    FileOutputDirectory = $"{config.DefaultOutput}\\Formatted\\{Ext}";
-                    FileNameWithExt = $"{textBoxName.Text}.{Ext}";
-                    isFileFound = true;
-                }
-        }
-        else if (File.Exists(FilePath))
-        {
-            FilePathArugment = FilePath;
-            isFileFound = true;
-        }
+        // For deleting and renaming
+        DeleteAndRename             = $"del {NAME_DIRECTORY} && ren {TEMPORARY_NAME_DIRECTORY} \"{FILE_FULL_NAME}\"";
         
-        #endregion
-    
-        if(isFileFound)
+        var MetadataArguments = $" -i {NAME_DIRECTORY} "     +
+        $"-metadata title=\"{Old_Title}\" "                 +
+        $"-metadata album=\"{Old_Album}\" "                 +
+        $"-metadata album_artist=\"{Old_Album_Artist}\" "   +
+        $"-metadata date=\"{Old_Year}\" "                   + 
+        $"-metadata genre=\"{Old_Genre}\" "                 +
+        $"-metadata comments=\"Downloaded on launcherDL\" " ;
+
+        Process FFmpegMetadata = new()
         {
-
-            var Arguments = $" -i \"{FilePathArugment}\" "      +
-            $"-metadata title=\"{Old_Title}\" "                 +
-            $"-metadata album=\"{Old_Album}\" "                 +
-            $"-metadata album_artist=\"{Old_Album_Artist}\" "   +
-            $"-metadata date=\"{Old_Year}\" "                   + 
-            $"-metadata genre=\"{Old_Genre}\" "                 +
-            $"-metadata comment=\"Downloaded on launcherDL\" "  ;
-
-            Process FFmpegMetadata = new();
-
-            string TEMP_DIR = $"\"{FileOutputDirectory}\\TEMP_{FileNameWithExt}\"";
-            string DIR_NAME = $"\"{FileOutputDirectory}\\{FileNameWithExt}\"";
-
-            FFmpegMetadata.StartInfo =
-                new("cmd.exe", $"/c \"\"{FFMPEG_Path}\" {Arguments} -codec copy {TEMP_DIR} && del {DIR_NAME} && ren {TEMP_DIR} \"{FileNameWithExt}\" \"")
-                {
-                    CreateNoWindow = true
-                };
-            
-            await FFmpegMetadata.StartAsync();
-            await FFmpegMetadata.WaitForExitAsync();
-        }
-        else
-        {
-            Console.WriteLine("wat");
-            // throw error on console
-        }
+            StartInfo =
+                new("cmd.exe", $"/c \"\"{FFMPEG_Path}\" {MetadataArguments} -codec copy {TEMPORARY_NAME_DIRECTORY} && {DeleteAndRename} \"")
+                    { CreateNoWindow = true }
+        };
+        
+        await FFmpegMetadata.StartAsync();
+        await FFmpegMetadata.WaitForExitAsync();
     }
 }

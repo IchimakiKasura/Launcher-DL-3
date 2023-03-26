@@ -5,9 +5,6 @@
 /// </summary>
 public partial class ProgressBarControl : UserControl
 {
-    readonly static DependencyProperty ValueProperty =
-    DependencyProperty.Register("Value", typeof(double), typeof(ProgressBarControl));
-
     public enum ProgressBarState{Hide,Show}
     
     public UIElement UICanvas =>
@@ -15,7 +12,7 @@ public partial class ProgressBarControl : UserControl
 
     public double Value
     {
-        get => (double)GetValue(ValueProperty);
+        get => (double)UserProgressBar.GetValue(ProgressBar.ValueProperty);
         set
         {
             // FIXME: Make the Caller wait until the animation finished

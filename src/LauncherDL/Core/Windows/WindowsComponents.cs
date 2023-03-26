@@ -58,7 +58,6 @@ class WindowsComponents
             case ProgressBarState.Hide: windowCanvas.Remove    (progressBar);  console.ConsoleHeight = 273; break;
             case ProgressBarState.Show: windowCanvas.Add       (progressBar);  console.ConsoleHeight = 245; break;
         }
-        if(progressBar.Value > 0) progressBar.Value = 0;
         console.manualScrollToEnd();
     }
 
@@ -101,14 +100,20 @@ class WindowsComponents
         foreach (var CL in ControlLists)
             CL.IsEnabled = !CL.IsEnabled;
 
-        _ = comboBoxType switch
+        if(comboBoxType.ItemIndex is not 0)
+            buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
+
+        switch(comboBoxType.ItemIndex)
         {
-            _ when comboBoxType.ItemIndex is 3 =>
-                buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled,
-            _ when comboBoxType.ItemIndex is not 0 =>
-                buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled,
-            _ => default
-        };
+            case 0:
+                buttonMetadata.IsEnabled = !buttonMetadata.IsEnabled;
+            break;
+
+            case 3:
+                buttonMetadata.IsEnabled = !buttonMetadata.IsEnabled;
+                buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
+            break;
+        }
 
         WindowProgressBar(comboBoxType.IsEnabled ? ProgressBarState.Hide : ProgressBarState.Show);
     }

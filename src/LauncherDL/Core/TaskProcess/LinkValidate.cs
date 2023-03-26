@@ -83,7 +83,7 @@ sealed class LinkValidate
                         IsError = true;
                     }
                     if(e.Data.Contains("ERROR:"))
-                        ConsoleLive.Error_Invoked();
+                        ConsoleLive.Error_Invoked("error");
                 });
 
             Proc.Start();

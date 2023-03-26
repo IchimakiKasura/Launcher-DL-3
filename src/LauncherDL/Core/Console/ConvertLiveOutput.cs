@@ -25,7 +25,7 @@ internal partial class ConsoleLive
         }
 
         if(StringData.Contains("error"))
-            Error_Invoked();
+            Error_Invoked("error");
 
         DL_Dispatch.Invoke(Convert_Invoked);
     }

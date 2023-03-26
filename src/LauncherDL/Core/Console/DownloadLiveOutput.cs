@@ -15,8 +15,13 @@ internal partial class ConsoleLive
     public static void DownloadLiveOutputComment(object s, DataReceivedEventArgs e)
     {
         var StringData = e.Data;
-
         if(StringData.IsEmpty()) return;
+
+        if(StringData.Contains("[ExtractAudio]") || StringData.Contains("[VideoConvertor]"))
+            DL_Dispatch.Invoke(()=>{
+                console.DLAddConsole(CONSOLE_PROCESSING,"Please wait until its finished processing.");
+                progressBar.Value = 99;
+            });
 
         ProgressInfo = new();
         NetworkSpeedColor = "";
@@ -28,26 +33,23 @@ internal partial class ConsoleLive
         if(ProgressInfo.Count <= 1) return;
 
         #region Change Foreground based on the speed.
-        if(!ProgressInfo[DOWNLOAD_SPEED].IsEmpty())
+        var SpeedNumber = double.Parse(Regex.Replace(ProgressInfo[DOWNLOAD_SPEED], @"[a-zA-Z\/]", "").Replace("~","").ToString() + 0);
+        switch("")
         {
-            var SpeedNumber = double.Parse(Regex.Replace(ProgressInfo[DOWNLOAD_SPEED], @"[a-zA-Z\/]", "").Replace("~","").ToString());
-            switch("")
-            {
-                case string when ProgressInfo[DOWNLOAD_SPEED].Contains("K"):
-                    if (SpeedNumber > 199.99) NetworkSpeedColor = "Red";
-                    else NetworkSpeedColor = "#381900";
-                break;
+            case string when ProgressInfo[DOWNLOAD_SPEED].Contains("K"):
+                if (SpeedNumber > 199.99) NetworkSpeedColor = "Red";
+                else NetworkSpeedColor = "#381900";
+            break;
 
-                case string when ProgressInfo[DOWNLOAD_SPEED].Contains("M"):
-                    if (SpeedNumber > 0.99) NetworkSpeedColor = "#83fa57";
-                    else NetworkSpeedColor = "#fff154";
-                break;
+            case string when ProgressInfo[DOWNLOAD_SPEED].Contains("M"):
+                if (SpeedNumber > 0.99) NetworkSpeedColor = "#83fa57";
+                else NetworkSpeedColor = "#fff154";
+            break;
 
-                case string when ProgressInfo[DOWNLOAD_SPEED].Contains("G"):
-                    NetworkSpeedColor = "Pink";
-                break;
-            };
-        }
+            case string when ProgressInfo[DOWNLOAD_SPEED].Contains("G"):
+                NetworkSpeedColor = "Pink";
+            break;
+        };
         #endregion
 
         DL_Dispatch.Invoke(()=>Download_Invoke(StringData));
@@ -64,13 +66,8 @@ internal partial class ConsoleLive
             $"<Cyan>[ TIME (ETA)$tab$] <>{ProgressInfo[DOWNLOAD_ETA]}$nl$"
         );
 
-        progressBar.Value = double.Parse(ProgressInfo[DOWNLOAD_PROGRESS]);
+        progressBar.Value = double.Parse(ProgressInfo[DOWNLOAD_PROGRESS] + 0);
+            
         TaskbarProgressBar.ProgressValue = progressBar.Value / 100;
-
-        if(StringData.Contains("[ExtractAudio]") || StringData.Contains("[VideoConvertor]"))
-        {
-            console.DLAddConsole(CONSOLE_PROCESSING,"Please wait until its finished processing.");
-            progressBar.Value = 99;
-        }
     }
 }

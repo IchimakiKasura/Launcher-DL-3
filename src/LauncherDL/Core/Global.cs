@@ -14,6 +14,8 @@ public partial class Global
     [WindowStaticRef]
     public static MetadataWindow MetadataWindowStatic;
 
+    // Prevents app from closing when downloading
+    public static bool IsInProcess = false;
 
     /// <summary>Config</summary>
     public static DefaultConfig config;

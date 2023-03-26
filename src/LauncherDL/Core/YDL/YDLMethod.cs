@@ -42,7 +42,6 @@ sealed partial class YDL
         MetadataWindow.MetadataClear();
 
         ConsoleLive.SelectedError = 0;
-        progressBar.Value = 0;
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.FileFormatLiveOutputComment);
 
         // Always leave a default list :D
@@ -80,7 +79,6 @@ sealed partial class YDL
         if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
             Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
 
-        progressBar.Value = 0;
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.ConvertLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
@@ -111,29 +109,19 @@ sealed partial class YDL
             case TypeOfButton.VideoType:
                 FolderType = "Video";
                 
-                Arguments = $"ext:mp4:m4a --recode-video {Format}"; 
+                Arguments = $"-f \"b [ext=mp4]\" --recode-video {Format}"; 
                 ExtensionFormat = Format;
-
-                if(Format is not "auto") break;
-
-                Arguments= $"-f b"; 
-                ExtensionFormat = "%(ext)s";
             break;
 
             case TypeOfButton.AudioType:
                 FolderType = "Audio";
 
-                Arguments = $"-f ba -x --audio-format {Format}"; 
+                Arguments = $"-x --audio-format {Format}"; 
                 ExtensionFormat = Format;
-
-                if(Format is not "auto") break;
-
-                Arguments = $"-f ba -x"; 
-                ExtensionFormat = "%(ext)s";
             break;
         }
 
-        var FILE_EXIST_PATH = $"{config.DefaultOutput}\\{FolderType}\\{textBoxName.Text}.{ExtensionFormat}";
+        var FILE_EXIST_PATH = $"{config.DefaultOutput}/{FolderType}/{textBoxName.Text}.{ExtensionFormat}";
 
         if(CheckFileExist(FILE_EXIST_PATH, Type))
         {
@@ -144,7 +132,7 @@ sealed partial class YDL
             return;
         }
 
-        Arguments = $"{Arguments} {Link} -o \"{FILE_EXIST_PATH}\"";
+        Arguments = $"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\"";
 
         if (!config.EnablePlaylist) Arguments += " --no-playlist";
         if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
@@ -158,7 +146,6 @@ sealed partial class YDL
         console.Break("Gray");
         ConsoleLastDocument = console.SaveText();
         
-        progressBar.Value = 0;
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.DownloadLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
@@ -170,18 +157,13 @@ sealed partial class YDL
 
         if(Type != TypeOfButton.CustomType)
         {
-            if(Format is "auto" && File.Exists(FilePath.Replace("%(ext)s", ".*")))
+            if(File.Exists(FilePath))
                 Existed = true;
-            else
-                if(File.Exists(FilePath)) Existed = true;
-            
-            return Existed;
         }
-
-        // This is pain :<
-        foreach(var Ext in FileExtensions)
-            if(File.Exists(FilePath.Replace("%(ext)s", Ext)))
-                Existed = true;
+        else
+            foreach(var Ext in FileExtensions)
+                if(File.Exists(FilePath.Replace("%(ext)s", Ext)))
+                    Existed = true;
         
         return Existed;
     }

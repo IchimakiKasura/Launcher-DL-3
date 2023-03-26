@@ -12,13 +12,10 @@ public class ToolTipTextsAttribute : Attribute
     // Initialize the Attribute
     public static void InitiateAttribute<WindowType>()
     {
-        IEnumerable<dynamic> _PropertyInfo;
-
-        // Checks whether if the Type is from MainWindow
-        // Please refactor this future me! if possible
-        if(typeof(WindowType) == typeof(MainWindow))
-            _PropertyInfo = typeof(WindowType).GetRuntimeProperties();
-        else _PropertyInfo = typeof(WindowType).GetRuntimeFields();
+        IEnumerable<dynamic> _PropertyInfo =
+        typeof(WindowType) == typeof(MainWindow)  ? 
+        typeof(WindowType).GetRuntimeProperties() :
+        typeof(WindowType).GetRuntimeFields()     ;
 
         foreach(var ToolTipField in _PropertyInfo)
         {

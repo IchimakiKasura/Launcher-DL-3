@@ -49,7 +49,6 @@ public class ComboBoxList
         new() { Content="m4a"  },
         new() { Content="mp4"  },
         new() { Content="wav"  },
-        new() { Content="auto" },
     };
     public static List<ComboBoxItem> ComboBoxVideoFormats = new()
     {
@@ -57,7 +56,6 @@ public class ComboBoxList
         new() { Content="mkv"  },
         new() { Content="webm" },
         new() { Content="flv"  },
-        new() { Content="auto" },
     };
     public static List<ComboBoxItem> ComboBoxConvertFormats = new()
     {
