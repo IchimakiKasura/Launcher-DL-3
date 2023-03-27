@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.ComboBoxDL;
 
-public class QualityComboBox
+public class QualityComboBox : IComboBoxControl
 {
     public static void ItemChanged(object s, RoutedEventArgs e)
     {

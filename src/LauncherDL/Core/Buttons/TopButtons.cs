@@ -9,6 +9,5 @@ class TopButtons
     }
     public static void MinimizeWindow(object sender, RoutedEventArgs handler) =>
         MainWindowStatic.WindowState = WindowState.Minimized;
-    
 }
 

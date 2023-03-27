@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-public class DownloadButton : ConvertButton
+public class DownloadButton : IButtonControls
 {
     public static async void ButtonClicked(object s, RoutedEventArgs e)
     {
@@ -9,7 +9,7 @@ public class DownloadButton : ConvertButton
         // Checks if the button is set to Convert
         if(comboBoxType.ItemIndex is 3) 
         {
-            ButtonConvertClicked();
+            ConvertButton.ButtonClicked(s,e);
             return;
         }
         

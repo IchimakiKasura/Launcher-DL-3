@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-public class UpdateButton
+public class UpdateButton : IButtonControls
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {

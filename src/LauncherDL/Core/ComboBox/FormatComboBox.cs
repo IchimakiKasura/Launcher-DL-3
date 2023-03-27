@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.ComboBoxDL;
 
-public class FormatComboBox
+public class FormatComboBox : IComboBoxControl
 {
     public static void ItemChanged(object s, RoutedEventArgs e)
     {

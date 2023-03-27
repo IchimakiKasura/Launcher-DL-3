@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-public class ConvertButton
+public class ConvertButton : IButtonControls
 {
     #region Error Texts
     public const string
@@ -10,7 +10,7 @@ public class ConvertButton
     NAME_EXIST      = "<%14>File already Exist! or File name are the same!";
     #endregion
 
-    public static void ButtonConvertClicked()
+    public static void ButtonClicked(object s, RoutedEventArgs e)
     {
         var FILE_EXIST_PATH = $"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}";
 
