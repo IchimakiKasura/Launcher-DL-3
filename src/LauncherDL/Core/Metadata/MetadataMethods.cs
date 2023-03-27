@@ -38,7 +38,7 @@ public partial class MetadataWindow
             );
     }
 
-    public static async void ApplyMetadataOnFile()
+    public static void ApplyMetadataOnFile()
     {
         // for better naming
         string
@@ -57,22 +57,20 @@ public partial class MetadataWindow
         // For deleting and renaming
         DeleteAndRename             = $"del {NAME_DIRECTORY} && ren {TEMPORARY_NAME_DIRECTORY} \"{FILE_FULL_NAME}\"";
         
-        var MetadataArguments = $" -i {NAME_DIRECTORY} "     +
-        $"-metadata title=\"{Old_Title}\" "                 +
-        $"-metadata album=\"{Old_Album}\" "                 +
-        $"-metadata album_artist=\"{Old_Album_Artist}\" "   +
-        $"-metadata date=\"{Old_Year}\" "                   + 
-        $"-metadata genre=\"{Old_Genre}\" "                 +
-        $"-metadata comments=\"Downloaded on launcherDL\" " ;
+        var MetadataArguments = $" -i {NAME_DIRECTORY} "        +
+        $"-metadata title=\"{Old_Title}\" "                     +
+        $"-metadata album=\"{Old_Album}\" "                     +
+        $"-metadata album_artist=\"{Old_Album_Artist}\" "       +
+        $"-metadata date=\"{Old_Year}\" "                       + 
+        $"-metadata genre=\"{Old_Genre}\" "                     +
+        $"-metadata description=\"Downloaded on launcherDL\" "  +
+        $"-metadata comment=\"Downloaded on launcherDL\" "      ;
 
-        Process FFmpegMetadata = new()
+        Process.Start(new ProcessStartInfo()
         {
-            StartInfo =
-                new("cmd.exe", $"/c \"\"{FFMPEG_Path}\" {MetadataArguments} -codec copy {TEMPORARY_NAME_DIRECTORY} && {DeleteAndRename} \"")
-                    { CreateNoWindow = true }
-        };
-        
-        await FFmpegMetadata.StartAsync();
-        await FFmpegMetadata.WaitForExitAsync();
+            FileName        = "cmd.exe",
+            Arguments       = $"/c \"\"{FFMPEG_Path}\" {MetadataArguments} -codec copy {TEMPORARY_NAME_DIRECTORY} && {DeleteAndRename} \"",
+            CreateNoWindow  = true  
+        });
     }
 }

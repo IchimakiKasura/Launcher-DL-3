@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-public abstract class MetadataButton : IButtonControls
+internal class MetadataButton : IButtonControls
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {   

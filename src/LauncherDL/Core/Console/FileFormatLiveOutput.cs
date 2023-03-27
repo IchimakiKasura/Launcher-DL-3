@@ -101,7 +101,7 @@ internal partial class ConsoleLive
         }
         ////
 
-        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}$tab$🔗");
+        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: 🔗 {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}");
     }
     
 }

@@ -44,53 +44,54 @@ sealed class LinkValidate
     private async Task GetFileName()
     {
         ConsoleLive.SelectedError = 2;
-        await Task.Run(async()=>
+
+        string Arguments = $"--get-filename -o '%(title)s' {url} --no-playlist --encoding utf8";
+        if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
+
+        Process LinkValidationProcess = new()
         {
-            Process Proc = new();
-
-            string Arguments = $"--get-filename -o '%(title)s' {url} --no-playlist --encoding utf8";
-            if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
-
-            Proc.StartInfo = new(YDL_Path, Arguments)
+            StartInfo = new()
             {
+                FileName = YDL_Path,
+                Arguments = Arguments,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 CreateNoWindow = true
-            };
-            
-            Proc.OutputDataReceived += (s,e) =>
-                DL_Dispatch.Invoke(()=>{
-                    if(e.Data.IsEmpty()) return;
-                    var FetchedTitle = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();
-                    console.AddFormattedText($"<Lime%14>[SUCCESS] <%14>{FetchedTitle}");
-                    if(textBoxName.Text.IsEmpty())
-                        textBoxName.Text = FetchedTitle;
-                });
-            
-            Proc.ErrorDataReceived += (s, e) =>
-                DL_Dispatch.Invoke(()=>{
-                    if(e.Data.IsEmpty()) return;
-                    if (e.Data.Contains("ERROR") || e.Data.Contains("Traceback"))
-                    {
-                        TempHasPlaylist = false;
-                        if (e.Data.Contains("--no-playlist"))
-                            TempHasPlaylist = true;
+            }
+        };
 
-                        if (e.Data.Contains("cookies"))
-                            console.AddFormattedText($"<Yellow%14>[INFO] <%14>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\". This method might be risky so I'm not liable if your account is blocked or locked");
+        LinkValidationProcess.OutputDataReceived += (s,e) =>
+            DL_Dispatch.Invoke(()=>{
+                if(e.Data.IsEmpty()) return;
+                var FetchedTitle = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();
+                console.AddFormattedText($"<Lime%14>[SUCCESS] <%14>{FetchedTitle}");
+                if(textBoxName.Text.IsEmpty())
+                    textBoxName.Text = FetchedTitle;
+            });
+        
+        LinkValidationProcess.ErrorDataReceived += (s, e) =>
+            DL_Dispatch.Invoke(()=>{
+                if(e.Data.IsEmpty()) return;
+                if (e.Data.Contains("ERROR") || e.Data.Contains("Traceback"))
+                {
+                    TempHasPlaylist = false;
+                    if (e.Data.Contains("--no-playlist"))
+                        TempHasPlaylist = true;
 
-                        IsError = true;
-                    }
-                    if(e.Data.Contains("ERROR:"))
-                        ConsoleLive.Error_Invoked("error");
-                });
+                    if (e.Data.Contains("cookies"))
+                        console.AddFormattedText($"<Yellow%14>[INFO] <%14>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\". This method might be risky so I'm not liable if your account is blocked or locked");
 
-            Proc.Start();
-            Proc.BeginOutputReadLine();
-            Proc.BeginErrorReadLine();
-            await Proc.WaitForExitAsync();
-        });
+                    IsError = true;
+                }
+                if(e.Data.Contains("ERROR:"))
+                    ConsoleLive.Error_Invoked("error");
+            });
+
+        await LinkValidationProcess.StartAsync();
+        LinkValidationProcess.BeginOutputReadLine();
+        LinkValidationProcess.BeginErrorReadLine();
+        await LinkValidationProcess.WaitForExitAsync();
     }
 
 }

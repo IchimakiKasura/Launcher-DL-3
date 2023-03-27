@@ -29,8 +29,7 @@ public class TypeComboBox : IComboBoxControl
 
         // Resets cbf width
         comboBoxFormat.Width = 440;
-        if(windowCanvas.Contains(comboBoxQuality))
-            windowCanvas.Remove(comboBoxQuality);
+        windowCanvas.Remove(comboBoxQuality);
 
         DownloadToConvert(comboBoxType.ItemIndex is 3);
 

@@ -24,14 +24,21 @@ abstract class EndProcess
         IsInProcess = false;
         progressBar.Value = 0;
         TaskbarProgressBar.ProgressValue = 0;
+
+        if(Directory.Exists(FolderButton.FolderDirectory()))
+            windowCanvas.Add(ButtonOpenFolder);
+
     }
 
+    // File Format method after fetching
     static void FileFormatTaskEnded() =>
         comboBoxFormat.AddFormatList(TemporaryList);
 
+    // Convert method after conversion
     static void ConvertTaskEnded() =>
         console.DLAddConsole(CONSOLE_YEY_STRING, $"File converted: \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}\"");
     
+    // Download method after download
     static void DownloadTaskEnded()
     {
         if(!ConsoleLive.SingleErrorInstance)

@@ -7,6 +7,20 @@ class WindowsComponents
     public static void WindowLoaded(object sender, RoutedEventArgs e) =>
         new TransparencyConverter(MainWindowStatic).MakeTransparent();
 
+    // Avoid window closing when there's an ongoing process
+    public static void WindowOnClose(object s, System.ComponentModel.CancelEventArgs e)
+    {
+        if (IsInProcess)
+        {
+            MessageBoxResult sagot = MessageBox.Show(
+                "Hey! You can't close me while Working! ಠ_ಠ",
+                "Hutao",
+                MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+            if (sagot == MessageBoxResult.OK) e.Cancel = true;
+        }
+    }
+
     // Window Focus or unfocused
     public static void WindowFocusAnimation()
     {

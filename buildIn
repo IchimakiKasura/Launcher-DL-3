@@ -3,3 +3,5 @@
 # only build the debug inside the src only!
 cd src
 dotnet build
+cd "LauncherDL/bin/Debug/net7.0-windows/win-x64"
+"./Launcher DL [Development].exe"

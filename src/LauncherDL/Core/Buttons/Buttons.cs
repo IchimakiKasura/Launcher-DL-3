@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-public abstract class BodyButton
+internal abstract class BodyButton
 {
     private static bool IsFailed;
 

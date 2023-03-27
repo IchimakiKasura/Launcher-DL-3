@@ -8,6 +8,9 @@ public partial class MainWindow
     [MainWindowStaticMember, ToolTipTexts("Close Window")]
     public static   Button                          CloseButton         { get; set; }
 
+    [ToolTipTexts("Open downloaded files")]
+    public static   Button                          ButtonOpenFolder    { get; set; }
+
     [MainWindowStaticMember, ToolTipTexts("Fetch File Formats")]
     public static   ButtonControl                   buttonFileFormat    { get; set; }
 
@@ -82,6 +85,14 @@ public partial class MainWindow
             Width = 154,
             TextEditable = false,
         };
+
+        ButtonOpenFolder = new()
+        {
+            Height = 25,
+            Width = 100,
+            Style = (Style)MainWindowStatic.FindResource("MetadataButtons")
+        };
+
 
         // "None" style has no minimize animation
         WindowStyle = WindowStyle.SingleBorderWindow;

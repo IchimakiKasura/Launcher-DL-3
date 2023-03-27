@@ -16,7 +16,7 @@ sealed partial class YDL
         progressBar.Value = 99;
         ConsoleLive.SelectedError = 9999;
         await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.UpdateLiveOutputComment);
-        WindowsComponents.FreezeComponents();
+        TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
 
@@ -93,9 +93,11 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new DownloadMethodException();
 
-        string FolderType = "Formatted\\%(ext)s";
-        string Arguments = "N/A";
-        string ExtensionFormat = "N/A";
+        string
+        FolderType = "Formatted\\%(ext)s",
+        Arguments = "N/A",
+        ExtensionFormat = "N/A";
+
         ConsoleLive.SelectedError = 1;
 
         // To be change
@@ -125,18 +127,17 @@ sealed partial class YDL
 
         if(CheckFileExist(FILE_EXIST_PATH, Type))
         {
-            console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, ConvertButton.NAME_EXIST);
-
+            console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, ConvertButton.NAME___EXIST);
             WindowsComponents.FreezeComponents();
-
             return;
         }
 
+        // Finalizing the arguments
         Arguments = $"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\"";
-
         if (!config.EnablePlaylist) Arguments += " --no-playlist";
         if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
         
+        // Warns the user that there's no FFMPEG in presence
         if(FFmpeg.FFmpegFiles.ErrorOccured)
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
@@ -150,21 +151,16 @@ sealed partial class YDL
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
-    // FIXME: refactor this future me if possible
     private bool CheckFileExist(string FilePath, TypeOfButton Type)
     {
-        var Existed = false;
+        if (Type is TypeOfButton.CustomType)
+            foreach(var Extenstion in FileExtensions)
+                if(File.Exists(FilePath.Replace("%(ext)s", Extenstion)))
+                    return true;
 
-        if(Type != TypeOfButton.CustomType)
-        {
-            if(File.Exists(FilePath))
-                Existed = true;
-        }
-        else
-            foreach(var Ext in FileExtensions)
-                if(File.Exists(FilePath.Replace("%(ext)s", Ext)))
-                    Existed = true;
-        
-        return Existed;
+        if(File.Exists(FilePath))
+            return true;
+
+        return false;
     }
 }

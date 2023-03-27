@@ -7,6 +7,7 @@ internal class EventHandlers
     {
         #region windows stuffs
         MainWindowStatic.Loaded         +=      WindowsComponents.WindowLoaded;
+        MainWindowStatic.Closing        +=      WindowsComponents.WindowOnClose;
 
         windowDrag.MouseDown            +=      WindowsComponents.WindowDrag;
         windowInnerBG.MouseDown         +=      (s,e) => Keyboard.ClearFocus();
@@ -24,6 +25,7 @@ internal class EventHandlers
         buttonUpdate.Click              +=      UpdateButton.ButtonClicked;
         buttonOpenFile.Click            +=      FileButton.ButtonClicked;
         buttonMetadata.Click            +=      MetadataButton.ButtonClicked;
+        ButtonOpenFolder.Click			+=		FolderButton.ButtonClicked;
 
         #endregion
 

@@ -38,5 +38,10 @@ partial class OnStartUp
         buttonOpenFile.IsAnimationOn    =
         buttonMetadata.IsAnimationOn    =   config.EpicAnimations;
 
+        // Open Folder button
+        SetCanvas(ButtonOpenFolder, 510, 755);
+        
+        if(Directory.Exists(config.DefaultOutput))
+            windowCanvas.Add(ButtonOpenFolder);
     }
 }

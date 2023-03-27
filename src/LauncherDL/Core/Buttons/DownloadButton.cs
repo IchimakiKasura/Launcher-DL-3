@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-public class DownloadButton : IButtonControls
+internal class DownloadButton : IButtonControls
 {
     public static async void ButtonClicked(object s, RoutedEventArgs e)
     {
