@@ -74,7 +74,9 @@ sealed partial class YDL
         "-metadata comment=\"Converted on LauncherDL\" ";
 
         var Arguments = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
-        ConsoleLive.SelectedError = 2;
+        ConsoleLive.SelectedError = 3;
+
+        Console.WriteLine(Arguments);
 
         if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
             Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
@@ -133,8 +135,7 @@ sealed partial class YDL
         }
 
         // Finalizing the arguments
-        Arguments = $"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\"";
-        if (!config.EnablePlaylist) Arguments += " --no-playlist";
+        Arguments = $"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\" --no-playlist";
         if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
         
         // Warns the user that there's no FFMPEG in presence

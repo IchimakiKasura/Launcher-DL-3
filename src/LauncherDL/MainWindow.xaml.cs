@@ -2,7 +2,6 @@
 
 // TODO:
 //
-//  fix the Playlist feature/functionality
 //
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation

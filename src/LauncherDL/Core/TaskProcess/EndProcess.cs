@@ -11,7 +11,7 @@ abstract class EndProcess
         {
             case 0: FileFormatTaskEnded(); break;
             case 1: DownloadTaskEnded();   break;
-            case 2: ConvertTaskEnded();    break;
+            case 3: ConvertTaskEnded();    break;
         }
 
         if (!MainWindowStatic.IsActive)
@@ -51,7 +51,7 @@ abstract class EndProcess
             console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been applied.");
             MetadataWindow.ApplyMetadataOnFile();
         }
-        else if(FFmpegFiles.ErrorOccured)
+        else if(MetadataWindowStatic != null && MetadataWindowStatic.IsTextChanged && FFmpegFiles.ErrorOccured)
             console.DLAddConsole(CONSOLE_ERROR_STRING, "Metadata cannot be applied! FFMPEG is missing!");
         
         

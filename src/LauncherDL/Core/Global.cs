@@ -7,6 +7,9 @@
 /// </summary>
 public partial class Global
 {
+    // App version
+    public const string APP_CURRENT_VERION = "7.0_DT3.29.2023";
+
     /// <summary>MainWindow but in <see langword="static"/></summary>
     [WindowStaticRef]
     public static MainWindow MainWindowStatic;
@@ -83,6 +86,27 @@ public partial class Global
     Old_Genre;
     #endregion
 
+    #region HUZUAAH!
+    public const string hidden =
+    "Launcher DL Version 7 (7th Generation DL)\n\n"         +
+    "[New!]\n"                                              +
+    "- NEW UI\n"                                            +
+    "- Improved Perfomance\n"                               +
+    "- Code Refactored\n\n"                                 +
+    "[New Features | Removed Features]\n"                   +
+    "- Open file button has its own dedicated button.\n"    +
+    "- Metadata button for Video/Audio Types!\n"            +
+    "- Convert has now Quality options.\n"                  +
+    "- Added more Console comments!\n"                      +
+    "- Uses ARIA2C as downloader for faster download\n"     +
+    "- REMOVED Playlist feature.\n"                         +
+    "\n\n"                                                  +
+    "[Fixes]\n"                                             +
+    "- FIXED \'Cannot reenter Text Formatting engine\n"     +
+    "During Optimal paragraph formatting\'\n"               +
+    "- FIXED Text go beyond the button's width\n"           ;
+    #endregion
+
 }
 
 public class ObjectListNames
@@ -92,5 +116,4 @@ public class ObjectListNames
     public string Name      { get; set; }
     public string Format    { get; set; }
     public string Link      { get; set; }
-    public string Playlist  { get; set; }
 }

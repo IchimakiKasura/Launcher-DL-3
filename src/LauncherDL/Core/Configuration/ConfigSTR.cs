@@ -9,7 +9,6 @@ public abstract class CONFIG_STR
     public const string CONFIG_DEFAULT_BACKGROUND_COLOR     = "#FF161438";
     public const string CONFIG_DEFAULT_BACKGROUND_GLOW      = "#FF7DB5FF";
     public const bool CONFIG_DEFAULT_SYSTEM_OUTPUT          = true;
-    public const bool CONFIG_DEFAULT_PLAYLIST               = true;
     public const bool CONFIG_DEFAULT_ANIMATIONS             = true;
     public const bool CONFIG_DEFAULT_COOKIES                = false;
     public const int CONFIG_DEFAULT_FILE_TYPE               = 0;
@@ -26,7 +25,6 @@ public abstract class CONFIG_STR
     public const string CONFIG_OUTPUT                       = "DefaultOutput";
     public const string CONFIG_SYSTEM_OUTPUT                = "ShowSystemOutput";
     public const string CONFIG_FILE_TYPE                    = "DefaultFileTypeOnStartUp";
-    public const string CONFIG_ENABLE_PLAYLIST              = "EnablePlaylist";
     public const string CONFIG_ANIMATIONS                   = "EpicAnimations";
 
     public const string CONFIG_SECTION_APP                  = "App";
@@ -35,7 +33,6 @@ public abstract class CONFIG_STR
     public const string CONFIG_SECTION_FILE                 = "File";
     public const string CONFIG_SECTION_CONSOLE              = "Console";
     public const string CONFIG_SECTION_DROPDOWN             = "DropDown";
-    public const string CONFIG_SECTION_PLAYLIST             = "Playlist";
     public const string CONFIG_SECTION_GRAPHICS             = "graphics";
 
     public const string CONFIG_COLOR_CONTAINS               = "System.Windows.Media.Color";
@@ -49,6 +46,5 @@ public abstract class CONFIG_STR
     public const int    CONFIG_PROPERTY_OUTPUT              = 0;
     public const int    CONFIG_PROPERTY_SYSTEM_OUTPUT       = 0;
     public const int    CONFIG_PROPERTY_FILE_TYPE           = 0;
-    public const int    CONFIG_PROPERTY_ENABLE_PLAYLIST     = 0;
     public const int    CONFIG_PROPERTY_ANMATIONS           = 0;
 }

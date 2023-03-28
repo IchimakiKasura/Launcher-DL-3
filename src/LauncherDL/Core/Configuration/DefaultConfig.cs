@@ -12,7 +12,6 @@ public class DefaultConfig
     public Color backgroundGlow                     =   ClrConv(CONFIG_DEFAULT_BACKGROUND_GLOW);
     
     public bool ShowSystemOutput                    =   CONFIG_DEFAULT_SYSTEM_OUTPUT;
-    public bool EnablePlaylist                      =   CONFIG_DEFAULT_PLAYLIST;
     public bool EpicAnimations                      =   CONFIG_DEFAULT_ANIMATIONS;
     public bool AllowCookies                        =   CONFIG_DEFAULT_COOKIES;
 

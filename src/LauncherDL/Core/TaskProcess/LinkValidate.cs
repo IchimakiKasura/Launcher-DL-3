@@ -4,9 +4,7 @@ namespace LauncherDL.Core.TaskProcess;
 sealed class LinkValidate
 {
     public bool IsValid;
-    public bool HasPlaylist;
     bool IsError = false;
-    bool TempHasPlaylist;
     string url;
 
     public LinkValidate(string _url) =>
@@ -28,7 +26,6 @@ sealed class LinkValidate
             return new(default)
             {
                 IsValid = !IsError,
-                HasPlaylist = TempHasPlaylist
             };
         }
         catch
@@ -37,7 +34,6 @@ sealed class LinkValidate
             return new(default)
             {
                 IsValid = false,
-                HasPlaylist = false
             };
         }
     }
@@ -57,7 +53,9 @@ sealed class LinkValidate
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                CreateNoWindow = true
+                CreateNoWindow = true,
+                StandardOutputEncoding = System.Text.Encoding.UTF8,
+                StandardErrorEncoding = System.Text.Encoding.UTF8
             }
         };
 
@@ -75,10 +73,6 @@ sealed class LinkValidate
                 if(e.Data.IsEmpty()) return;
                 if (e.Data.Contains("ERROR") || e.Data.Contains("Traceback"))
                 {
-                    TempHasPlaylist = false;
-                    if (e.Data.Contains("--no-playlist"))
-                        TempHasPlaylist = true;
-
                     if (e.Data.Contains("cookies"))
                         console.AddFormattedText($"<Yellow%14>[INFO] <%14>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\". This method might be risky so I'm not liable if your account is blocked or locked");
 

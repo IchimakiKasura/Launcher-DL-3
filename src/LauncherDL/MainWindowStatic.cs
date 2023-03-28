@@ -70,6 +70,9 @@ public partial class MainWindow
     
     [MainWindowStaticMember]
     public static   TaskbarItemInfo                 TaskbarProgressBar  { get; set; }
+    
+    [MainWindowStaticMember]
+    public static   TextBlock                       textBlockFooter     { get; set; }
 
     void InitiateStaticComponents(MainWindow _)
     {

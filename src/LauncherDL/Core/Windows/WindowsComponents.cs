@@ -104,6 +104,7 @@ class WindowsComponents
             buttonDownload,
             buttonUpdate,
             buttonMetadata,
+            ButtonOpenFolder,
             textBoxLink,
             textBoxName,
             comboBoxType,

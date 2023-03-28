@@ -9,7 +9,7 @@ internal partial class ConsoleLive
         var StringData = e.Data;
         
         if(StringData.IsEmpty()) return;
-
+        
         ProgressValue = 0;
         int CurrentTimeInt;
         string TotalTime = ConvertTotal.Match(StringData).Groups["TotalTime"].Value.Trim();

@@ -11,6 +11,9 @@ public partial class RegexComponentList
 
     [GeneratedRegex(@"\[.*\#[\d\w]*.?(?<size>.*)\/.*\((?<progress>.*)\%\) CN.*DL:(?<speed>.*)ETA:(?<time>.*)]", RegexOptions.Compiled)]
     private static partial Regex _DownloadInfoARIA2C();
+    
+    [GeneratedRegex(@"\[DL:(?<speed>.*?)\].*\[.?#[\d\w].*? (?<total>.*)\/.*?\((?<progress>.*)\%.*?\)", RegexOptions.Compiled)]
+    private static partial Regex _DownloadInfoARIA2CFetchedFormat();
 
     // FFmpeg
     [GeneratedRegex(@"time=(?<CurrentTime>[\d\w:]{8})", RegexOptions.Compiled)]
@@ -38,6 +41,7 @@ public partial class RegexComponentList
     readonly public static Regex FileFormatInfo = _FileFormatInfo();
     // readonly public static Regex DownloadInfo = _DownloadInfo();
     readonly public static Regex DownloadInfoARIA2C = _DownloadInfoARIA2C();
+    readonly public static Regex DownloadInfoARIA2CFetchedFormat = _DownloadInfoARIA2CFetchedFormat();
     readonly public static Regex ConvertCurrent = _ConvertCurrent();
     readonly public static Regex ConvertTotal = _ConvertTotal();
     readonly public static Regex URLTitle = _URLTitle();

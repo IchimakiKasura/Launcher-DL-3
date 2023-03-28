@@ -14,12 +14,12 @@
                 <Image Source="/guicomp;component/Images/FolderButtons/AudioFolder.png" />
             </MenuItem.Icon>
         </MenuItem>
-        <MenuItem Header="Open Converted" Uid="Converted" Click="OpenFolderProcess" >
+        <MenuItem Header="Open Converted" Uid="Convert" Click="OpenFolderProcess" >
             <MenuItem.Icon>
                 <Image Source="/guicomp;component/Images/FolderButtons/ConvertFolder.png" />
             </MenuItem.Icon>
         </MenuItem>
-        <MenuItem Header="Logs" Uid="Logs" Click="OpenFolderProcess" >
+        <MenuItem Header="Logs" Uid="Logs" Click="OpenFolderProcess" IsEnabled="false">
             <MenuItem.Icon>
                 <Image Source="/guicomp;component/Images/FolderButtons/LogFolder.png" />
             </MenuItem.Icon>

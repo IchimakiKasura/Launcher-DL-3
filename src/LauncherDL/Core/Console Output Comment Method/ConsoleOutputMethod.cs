@@ -85,8 +85,7 @@ internal static class ConsoleOutputMethod
         $"<Gray%10>[] Download Type$tab$: {Obj.Type}$nl$"+
         $"<Gray%10>[] Name$tab$$tab$: {Obj.Name}$nl$"+
         $"<Gray%10>[] Format$tab$$tab$: {Obj.Format}$nl$"+
-        $"<Gray%10>[] Link$tab$$tab$: {Obj.Link}$nl$"+
-        $"<Gray%10>[] Playlist?$tab$: {Obj.Playlist}");
+        $"<Gray%10>[] Link$tab$$tab$: {Obj.Link}$nl$");
 
     public static void MetadataOutputComment()
     {

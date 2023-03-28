@@ -68,6 +68,7 @@ internal class DownloadButton : IButtonControls
         };
 
         // yeah i don't know either that I put N/A on some that is "un-unassignable" ☠️
+        console.Break("Gray");
         ConsoleOutputMethod.DownloadInfoOutputComment(new()
         {
             Title = textBoxName.Text ?? "N/A",
@@ -75,13 +76,12 @@ internal class DownloadButton : IButtonControls
             Name = textBoxName.Text ?? "N/A",
             Format = _FormatOutputComment.Replace("|", "$vbar$") ?? "N/A",
             Link = textBoxLink.Text ?? "N/A",
-            Playlist = config.EnablePlaylist.ToString() ?? "N/A"
         });
 
         YDL YDLInfo = new(Info);
 
         YDLInfo.DownloadMethod();
-        
+
         WindowsComponents.FreezeComponents();
     }
 }

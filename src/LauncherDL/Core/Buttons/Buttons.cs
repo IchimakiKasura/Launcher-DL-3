@@ -53,12 +53,6 @@ internal abstract class BodyButton
             console.DLAddConsole(CONSOLE_INFO_STRING, $"Fetching Link..$nl$<Gray%10>{textBoxLink.Text}");
             var ValidateLink = await new LauncherDL.Core.TaskProcess.LinkValidate(textBoxLink.Text).Validate();
 
-            if(!config.EnablePlaylist && ValidateLink.HasPlaylist)
-            {
-                console.DLAddConsole(CONSOLE_INFO_STRING, $"Playlist was found! please enable the playlist on th config!");
-                IsFailed = true;
-            }
-
             if(!ValidateLink.IsValid)
                 IsFailed = true;
         }
