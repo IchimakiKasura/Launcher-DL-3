@@ -89,19 +89,13 @@ internal partial class ConsoleLive
     {
         //// [3/27/2023] This code is straight up from v6 :D
         // ProgressBar lmao 
-        if (StringData.Contains("["))
-        {
-            progressBar.Value += 25;
+        progressBar.Value += 25;
 
-            if (progressBar.Value >= 90)
-                progressBar.Value = 75;
-
-            if (StringData.Contains("[info] Available formats"))
-                progressBar.Value += 100;
-        }
+        if (progressBar.Value >= 90)
+            progressBar.Value += 75;
         ////
 
-        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: 🔗 {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}");
+        console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}");
     }
     
 }

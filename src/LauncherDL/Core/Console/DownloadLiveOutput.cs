@@ -4,8 +4,8 @@ internal partial class ConsoleLive
 {
     #region Constants STR
     const int 
-    DOWNLOAD_PROGRESS   = 0,
-    DOWNLOAD_SIZE       = 1,
+    DOWNLOAD_SIZE       = 0,
+    DOWNLOAD_PROGRESS   = 1,
     DOWNLOAD_SPEED      = 2,
     DOWNLOAD_ETA        = 3;
     #endregion
@@ -26,14 +26,15 @@ internal partial class ConsoleLive
         ProgressInfo = new();
         NetworkSpeedColor = "";
 
-        foreach(Group match in DownloadInfo.Match(StringData).Groups)
+        foreach(Group match in DownloadInfoARIA2C.Match(StringData).Groups)
             if(!match.Name.Contains("0") && !match.Value.IsEmpty())
                 ProgressInfo.Add(match.Value.Trim());
             
         if(ProgressInfo.Count <= 1) return;
 
         #region Change Foreground based on the speed.
-        var SpeedNumber = double.Parse(Regex.Replace(ProgressInfo[DOWNLOAD_SPEED], @"[a-zA-Z\/]", "").Replace("~","").ToString() + 0);
+        double SpeedNumber = 0;
+        double.TryParse(Regex.Replace($"{ProgressInfo[DOWNLOAD_SPEED] ?? "0.0"}", @"[a-zA-Z\/]", "").Replace("~","").ToString(),out SpeedNumber);
         switch("")
         {
             case string when ProgressInfo[DOWNLOAD_SPEED].Contains("K"):
@@ -62,11 +63,13 @@ internal partial class ConsoleLive
         console.AddFormattedText(
             $"<Cyan>[ PROGRESS$tab$] <>{ProgressInfo[DOWNLOAD_PROGRESS]}%$nl$"+
             $"<Cyan>[ SIZE$tab$$tab$] <>{ProgressInfo[DOWNLOAD_SIZE]}$nl$"+
-            $"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{ProgressInfo[DOWNLOAD_SPEED]}$nl$"+
+            $"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{ProgressInfo[DOWNLOAD_SPEED]}/s$nl$"+
             $"<Cyan>[ TIME (ETA)$tab$] <>{ProgressInfo[DOWNLOAD_ETA]}$nl$"
         );
-
-        progressBar.Value = double.Parse(ProgressInfo[DOWNLOAD_PROGRESS] + 0);
+        
+        double value = 0;
+        double.TryParse($"{ProgressInfo[DOWNLOAD_PROGRESS] ?? "0.0"}", out value);
+        progressBar.Value = value;
             
         TaskbarProgressBar.ProgressValue = progressBar.Value / 100;
     }

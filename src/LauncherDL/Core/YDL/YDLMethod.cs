@@ -141,8 +141,8 @@ sealed partial class YDL
         if(FFmpeg.FFmpegFiles.ErrorOccured)
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
-            Arguments += " --no-part";
-        } else Arguments += $" --ffmpeg-location \"{FFMPEG_Path}\" --no-part";
+            Arguments += $"  --downloader \"{ARIA2C_Path}\" --no-part";
+        } else Arguments += $" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part";
 
         console.Break("Gray");
         ConsoleLastDocument = console.SaveText();

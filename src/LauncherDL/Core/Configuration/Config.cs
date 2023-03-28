@@ -13,7 +13,12 @@ public class Config
     public static DefaultConfig ReadConfigINI()
     {
         string  ConfigString    =   File.ReadAllText(CONFIG_NAME);
-        IniData Data            =   new IniDataParser().Parse(ConfigString);
+        IniDataParser ParserSTR =   new();
+        IniData Data            =   new();
+
+        ParserSTR.Scheme.CommentString = "#";
+        Data = ParserSTR.Parse(ConfigString);
+        
         string  LanguageCheck   =   Data[CONFIG_SECTION_APP][CONFIG_LANGUAGE];
 
         switch(LanguageCheck.ToLower())

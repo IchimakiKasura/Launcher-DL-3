@@ -53,6 +53,7 @@ public partial class Global
     #region Path variables
     public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
     public readonly static string FFMPEG_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ffmpeg.exe";
+    public readonly static string ARIA2C_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\aria2c.exe";
     #endregion
 
     #region Window Flash
