@@ -30,6 +30,8 @@ partial class OnStartUp
         ContextMenuResource.Link    =   textBoxLink;
         ContextMenuResource.Format  =   comboBoxFormat;
         ContextMenuResource.Name    =   textBoxName;
+        
+        ContextMenuResource.CONTEXTMENU_configDefaultDirectory = FolderButton.FolderDirectory();
     }
 
     private static void InitializeTextBoxComponents()

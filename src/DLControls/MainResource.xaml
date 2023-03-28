@@ -5,7 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/guicomp;component/Buttons/TopButtons.xaml"/>
         <ResourceDictionary Source="/guicomp;component/ScrollViewResource.xaml"/>
-        <ResourceDictionary Source="/guicomp;component/ContextMenuResource.xaml"/>
+        <ResourceDictionary Source="/guicomp;component/ContextMenu/ContextMenuResource.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
     <SolidColorBrush x:Key="ButtonBG" Color="#CCFBC2C2"/>

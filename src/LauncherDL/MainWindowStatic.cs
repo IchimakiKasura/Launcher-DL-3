@@ -90,10 +90,10 @@ public partial class MainWindow
         {
             Height = 25,
             Width = 100,
-            Style = (Style)MainWindowStatic.FindResource("MetadataButtons")
+            Style = (Style)MainWindowStatic.FindResource("MetadataButtons"),
+            ContextMenu = (ContextMenu)MainWindowStatic.FindResource("OpenFolderCM")
         };
-
-
+        
         // "None" style has no minimize animation
         WindowStyle = WindowStyle.SingleBorderWindow;
 

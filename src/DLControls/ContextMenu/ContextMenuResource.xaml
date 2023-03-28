@@ -2,6 +2,40 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     x:Class="DLControls.ContextMenuResource">
 
+    <!--#region OpenFolder ContextMenu -->
+    <ContextMenu x:Key="OpenFolderCM" StaysOpen="true">
+        <MenuItem Header="Open Video" Uid="Video" Click="OpenFolderProcess" >
+            <MenuItem.Icon>
+                <Image Source="/guicomp;component/Images/FolderButtons/VideoFolder.png" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="Open Audio" Uid="Audio" Click="OpenFolderProcess" >
+            <MenuItem.Icon>
+                <Image Source="/guicomp;component/Images/FolderButtons/AudioFolder.png" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="Open Converted" Uid="Converted" Click="OpenFolderProcess" >
+            <MenuItem.Icon>
+                <Image Source="/guicomp;component/Images/FolderButtons/ConvertFolder.png" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="Logs" Uid="Logs" Click="OpenFolderProcess" >
+            <MenuItem.Icon>
+                <Image Source="/guicomp;component/Images/FolderButtons/LogFolder.png" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="Formatted 📁">
+            <MenuItem Header="m4a" Uid="Formatted\m4a" Click="OpenFolderProcess" />
+            <MenuItem Header="mp3" Uid="Formatted\mp3" Click="OpenFolderProcess" />
+            <MenuItem Header="mp4" Uid="Formatted\mp4" Click="OpenFolderProcess" />
+            <MenuItem Header="webm" Uid="Formatted\webm" Click="OpenFolderProcess" />
+            <MenuItem Header="3gp" Uid="Formatted\3gp" Click="OpenFolderProcess" />
+            <MenuItem Header="flv" Uid="Formatted\flv" Click="OpenFolderProcess" />
+            <MenuItem Header="mkv" Uid="Formatted\mkv" Click="OpenFolderProcess" />
+        </MenuItem>
+    </ContextMenu>
+    <!--#endregion -->
+
     <!--#region ContextMenu -->
     <ContextMenu x:Key="TextBoxMenu">
         <MenuItem Command="Paste">
@@ -58,8 +92,7 @@
     </Style>
 
     <Style TargetType="MenuItem">
-        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
-        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="MenuItem">
@@ -72,7 +105,7 @@
                         <Grid CacheMode="BitmapCache" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="IconWidth" Width="35" SharedSizeGroup="Icon" />
-                                <ColumnDefinition/>
+                                <ColumnDefinition />
                                 <ColumnDefinition SharedSizeGroup="Shortcut" />
                             </Grid.ColumnDefinitions>
                             <ContentPresenter x:Name="Icon"
@@ -96,6 +129,7 @@
                             <Popup x:Name="Popup"
                                     Placement="Right"
                                     IsOpen="{TemplateBinding IsSubmenuOpen}"
+                                    AllowsTransparency="True"
                                     Focusable="False"
                                     PopupAnimation="Fade">
                                 <Border x:Name="SubmenuBorder"
@@ -103,7 +137,15 @@
                                         BorderThickness="2"
                                         BorderBrush="#4F000000"
                                         CornerRadius="5"
-                                        Padding="4"/>
+                                        Padding="4">
+                                    <ScrollViewer CanContentScroll="True" 
+                                        Width="Auto"
+                                        HorizontalScrollBarVisibility="Hidden"
+                                        VerticalScrollBarVisibility="Auto"
+                                        IsDeferredScrollingEnabled="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                    </ScrollViewer>    
+                                </Border>
                             </Popup>
                         </Grid>
                     </Border>
@@ -128,5 +170,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

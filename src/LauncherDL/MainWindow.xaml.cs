@@ -3,7 +3,6 @@
 // TODO:
 //
 //  fix the Playlist feature/functionality
-//  re-implement the Open Folder
 //
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation
