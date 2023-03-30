@@ -21,6 +21,7 @@
                 <Setter Property="Background" Value="{StaticResource 74000000}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource DefaultBorderBrush}"/>
                 <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Focusable" Value="False"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TextBox">
@@ -35,7 +36,7 @@
                                                     RenderAtScale="1" 
                                                     SnapsToDevicePixels="False"/>
                                     </Grid.CacheMode>
-                                    <TextBox Text="{Binding Text,ElementName=root,UpdateSourceTrigger=PropertyChanged}"
+                                    <TextBox Text="{Binding Text, ElementName=root, UpdateSourceTrigger=PropertyChanged}"
                                      Background="Transparent"
                                      BorderBrush="Transparent"
                                      BorderThickness="0"

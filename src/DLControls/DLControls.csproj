@@ -8,9 +8,9 @@
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <NoWarn>NU1701,CS8981,NU1503</NoWarn>
-    <Version>7.0.0</Version>
-    <AssemblyVersion>7.0.0</AssemblyVersion>
-    <FileVersion>7.0.0</FileVersion>
+    <Version>7.1.0</Version>
+    <AssemblyVersion>7.1.0</AssemblyVersion>
+    <FileVersion>7.1.0</FileVersion>
     <Description>Provide all the Component to LauncherDL app</Description>
     <OutputType>Library</OutputType>
   </PropertyGroup>
@@ -57,7 +57,7 @@
     <Resource Include="..\Images\megumin.jpg" Link="Images\megumin.jpg" />
     <Resource Include="..\Images\hime.jpg" Link="Images\hime.jpg" />
     
-    <Resource Include="..\Fonts\NotoSansJP-Medium.otf"/>
+    <Resource Include="..\Fonts\NotoSansJP-Medium.otf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,7 +81,7 @@
 
   <ItemGroup>
     <Page Update="MainResource.xaml">
-      <CustomToolNamespace>DLControls</CustomToolNamespace>
+      <CustomToolNamespace></CustomToolNamespace>
     </Page>
   </ItemGroup>
   

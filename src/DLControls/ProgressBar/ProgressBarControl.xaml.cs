@@ -12,7 +12,7 @@ public partial class ProgressBarControl : UserControl
 
     public double Value
     {
-        get => (double)UserProgressBar.GetValue(ProgressBar.ValueProperty);
+        get => (double)UserProgressBar.Value;
         set
         {
             // FIXME: Make the Caller wait until the animation finished

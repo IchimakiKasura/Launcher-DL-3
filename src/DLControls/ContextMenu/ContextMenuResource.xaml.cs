@@ -26,7 +26,7 @@ public partial class ContextMenuResource
     void ClearText(object s, RoutedEventArgs e)
     {
         if (Link.isTextBoxFocused) Link.Text = null;
-        if (Format.isTextFocused) Format.Text = null;
+        if (Format.isTextFocused)  Format.Text = null;
         if (Name.isTextBoxFocused) Name.Text = null;
     }
 }

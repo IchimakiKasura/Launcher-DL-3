@@ -47,7 +47,6 @@ public partial class TextBoxControl : UserControl
         set => SetValue(isTextBoxFocusedProperty, value);
     }
 
-
     public UIElement UICanvas =>
         UserTextBox;
 
@@ -57,7 +56,8 @@ public partial class TextBoxControl : UserControl
     private void ContentLoaded(object sender, RoutedEventArgs e)
     {
         Grid UserGrid = GetTemplateResource<Grid>("UserTextBoxGRID", UserTextBox);
-
+        TextBox UserGridChildrenTextBox = UserGrid.Children[0] as TextBox;
+    
         var Placeholder = new TextBlock()
         {
             Foreground = Brushes.DimGray,
@@ -69,7 +69,7 @@ public partial class TextBoxControl : UserControl
             VerticalAlignment = VerticalAlignment.Center
         };
 
-        // Prevents colusion with with the instatiated text
+        // Prevents collusion with with the instatiated text
         if(Text is "" or null)
             UserGrid.Add(Placeholder);
 

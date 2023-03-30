@@ -1,4 +1,4 @@
-using DLLanguages.Pick;
+using Lang = DLLanguages.Pick.LanguageName;
 using static LauncherDL.Core.Configuration.CONFIG_STR;
 using static LauncherDL.Core.Console_Output_Comment_Method.ConsoleOutputCheck;
 
@@ -23,11 +23,11 @@ public class Config
 
         switch(LanguageCheck.ToLower())
         {
-            case "default"  : CheckError(ref DefaultConfiguration.Language, LanguageName.Default    , CONFIG_LANGUAGE); break;
-            case "english"  : CheckError(ref DefaultConfiguration.Language, LanguageName.English    , CONFIG_LANGUAGE); break;
-            case "japanese" : CheckError(ref DefaultConfiguration.Language, LanguageName.Japanese   , CONFIG_LANGUAGE); break;
-            case "tagalog"  : CheckError(ref DefaultConfiguration.Language, LanguageName.Tagalog    , CONFIG_LANGUAGE); break;
-            case "bruh"     : CheckError(ref DefaultConfiguration.Language, LanguageName.bruh       , CONFIG_LANGUAGE); break;
+            case "default"  : CheckError(ref DefaultConfiguration.Language, Lang.Default    , CONFIG_LANGUAGE); break;
+            case "english"  : CheckError(ref DefaultConfiguration.Language, Lang.English    , CONFIG_LANGUAGE); break;
+            case "japanese" : CheckError(ref DefaultConfiguration.Language, Lang.Japanese   , CONFIG_LANGUAGE); break;
+            case "tagalog"  : CheckError(ref DefaultConfiguration.Language, Lang.Tagalog    , CONFIG_LANGUAGE); break;
+            case "bruh"     : CheckError(ref DefaultConfiguration.Language, Lang.bruh       , CONFIG_LANGUAGE); break;
         }
 
         #region Check Error part
@@ -44,6 +44,8 @@ public class Config
 
         if(!error)
         {
+            ApplyConfig();
+
             ConsoleOutputMethod.ConfigOutputComment(SUCCESS);
             
             #if DEBUG
@@ -94,4 +96,17 @@ public class Config
             ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, e.Message, c);
         }
     } 
+
+    // GITHUB ISSUE 3
+    private static void ApplyConfig()
+    {
+        var DefaultBG = $"pack://siteoforigin:,,,/Images/{DefaultConfiguration.background}";
+        
+        if(DefaultConfiguration.background != new DefaultConfig().background)
+            DefaultBG = DefaultConfiguration.background;
+
+        windowBackgroundImage.ImageSource = new BitmapImage(new Uri(DefaultBG, UriKind.Absolute));
+
+        windowDropShadow.Color = DefaultConfiguration.backgroundGlow;
+    }
 }

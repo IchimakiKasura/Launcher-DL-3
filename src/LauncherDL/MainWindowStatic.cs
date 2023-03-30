@@ -3,76 +3,82 @@
 public partial class MainWindow
 {
     [MainWindowStaticMember, ToolTipTexts("Minimize Window")]
-    public static   Button                          Minimize            { get; set; }
+    public static   Button                          Minimize                { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Close Window")]
-    public static   Button                          CloseButton         { get; set; }
+    public static   Button                          CloseButton             { get; set; }
 
     [ToolTipTexts("Open downloaded files")]
-    public static   Button                          ButtonOpenFolder    { get; set; }
+    public static   Button                          ButtonOpenFolder        { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Fetch File Formats")]
-    public static   ButtonControl                   buttonFileFormat    { get; set; }
+    public static   ButtonControl                   buttonFileFormat        { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Download")]
-    public static   ButtonControl                   buttonDownload      { get; set; }
+    public static   ButtonControl                   buttonDownload          { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Update yt-dlp")]
-    public static   ButtonControl                   buttonUpdate        { get; set; }
+    public static   ButtonControl                   buttonUpdate            { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Open File")]
-    public static   ButtonControl                   buttonOpenFile      { get; set; }
+    public static   ButtonControl                   buttonOpenFile          { get; set; }
     
     [MainWindowStaticMember, ToolTipTexts("Edit Metadata")]
-    public static   ButtonControl                   buttonMetadata      { get; set; }
+    public static   ButtonControl                   buttonMetadata          { get; set; }
 
     [MainWindowStaticMember]
-    public static   Border                          windowDrag          { get; set; }
+    public static   Border                          windowDrag              { get; set; }
 
     [MainWindowStaticMember]
-    public static   Border                          windowInnerBG       { get; set; }
+    public static   Border                          windowInnerBG           { get; set; }
 
-    public static   ProgressBarControl              progressBar         { get; set; }
+    public static   ProgressBarControl              progressBar             { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Console Output")]
-    public static   ConsoleControl                  console             { get; set; }
+    public static   ConsoleControl                  console                 { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Input Link")]
-    public static   TextBoxControl                  textBoxLink         { get; set; }
+    public static   TextBoxControl                  textBoxLink             { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Input Name")]
-    public static   TextBoxControl                  textBoxName         { get; set; }
+    public static   TextBoxControl                  textBoxName             { get; set; }
 
     [MainWindowStaticMember]
-    public static   Canvas                          windowCanvas        { get; set; }
+    public static   Canvas                          windowCanvas            { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Select a type of download")]
-    public static   ComboBoxControl                 comboBoxType        { get; set; }
+    public static   ComboBoxControl                 comboBoxType            { get; set; }
 
     [MainWindowStaticMember, ToolTipTexts("Select or Input Format")]
-    public static   ComboBoxControl                 comboBoxFormat      { get; set; }
+    public static   ComboBoxControl                 comboBoxFormat          { get; set; }
 
     [ToolTipTexts("Select Quality")]
-    public static   ComboBoxControl                 comboBoxQuality     { get; set; }
+    public static   ComboBoxControl                 comboBoxQuality         { get; set; }
 
 
     [MainWindowStaticMember]
-    public static   TextBlockControl                textBlockLink       { get; set; }
+    public static   TextBlockControl                textBlockLink           { get; set; }
 
     [MainWindowStaticMember]
-    public static   TextBlockControl                textBlockFormat     { get; set; }
+    public static   TextBlockControl                textBlockFormat         { get; set; }
 
     [MainWindowStaticMember]
-    public static   TextBlockControl                textBlockName       { get; set; }
+    public static   TextBlockControl                textBlockName           { get; set; }
 
     [MainWindowStaticMember]
-    public static   TextBlockControl                textBlockType       { get; set; }
+    public static   TextBlockControl                textBlockType           { get; set; }
     
     [MainWindowStaticMember]
-    public static   TaskbarItemInfo                 TaskbarProgressBar  { get; set; }
+    public static   TaskbarItemInfo                 TaskbarProgressBar      { get; set; }
     
     [MainWindowStaticMember]
-    public static   TextBlock                       textBlockFooter     { get; set; }
+    public static   TextBlock                       textBlockFooter         { get; set; }
+
+    [MainWindowStaticMember]
+    public static   ImageBrush                      windowBackgroundImage   { get; set; }
+
+    [MainWindowStaticMember]
+    public static   DropShadowEffect                windowDropShadow        { get; set; }
 
     void InitiateStaticComponents(MainWindow _)
     {

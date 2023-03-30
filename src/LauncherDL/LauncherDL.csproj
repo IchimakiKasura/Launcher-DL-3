@@ -24,7 +24,7 @@
   <PropertyGroup>
     <Authors>Ichimaki Kasura</Authors>
     <Copyright>Copyright © 2023</Copyright>
-    <AssemblyVersion>7.0.0</AssemblyVersion>
+    <AssemblyVersion>7.1.0</AssemblyVersion>
     <RepositoryUrl>https://github.com/IchimakiKasura/Launcher-DL-3</RepositoryUrl>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageIcon>Icon.ico</PackageIcon>
@@ -37,8 +37,8 @@
     <SelfContained>false</SelfContained>
     <PublishSingleFile>True</PublishSingleFile>
     <PublishReadyToRun>True</PublishReadyToRun>
-    <FileVersion>7.0.0</FileVersion>
-    <Version>7.0.0</Version>
+    <FileVersion>7.1.0</FileVersion>
+    <Version>7.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(Configuration) == Release">
@@ -132,6 +132,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\LauncherDL_Data\ydl.bin" Link="LauncherDL_Data\ydl.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\LauncherDL_Data\aria2c.exe" Link="LauncherDL_Data\aria2c.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\Images\background.jpg" Link="Images\background.jpg">

@@ -11,8 +11,8 @@ public partial class ConsoleControl : UserControl
     {
         get => (double)GetValue(ConsoleHeightProperty);
         set => SetValue(ConsoleHeightProperty, value);
-        
     }
+    
     public double ConsoleWidth
     {
         get => (double)GetValue(ConsoleWidthProperty);

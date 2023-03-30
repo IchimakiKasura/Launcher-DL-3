@@ -75,9 +75,7 @@ sealed partial class YDL
 
         var Arguments = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
         ConsoleLive.SelectedError = 3;
-
-        Console.WriteLine(Arguments);
-
+        
         if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
             Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
 

@@ -31,10 +31,8 @@ internal static class _Core_Extensions
     /// </summary>
     /// <param name="_proc"></param>
     /// <returns><see langword="true"/> if resource is started; <see langword="false"/> if no new resource process is started </returns>
-    public static async Task<bool> StartAsync(this Process _proc) =>
-        await Task.Run(()=>_proc.Start());
-    public static async Task<Process> StartAsync(this Process _proc, ProcessStartInfo _procStartInfo) =>
-        await Task.Run(()=>Process.Start(_procStartInfo));
+    public static Task<bool> StartAsync(this Process _proc) =>
+        Task.Run(()=>_proc.Start());
     #endregion
 
     #region ConsoleControl

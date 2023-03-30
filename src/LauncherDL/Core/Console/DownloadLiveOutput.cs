@@ -2,7 +2,7 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal partial class ConsoleLive
 {
-    #region Constants STR
+    #region Constants STR | Should I use Enum?
     const int 
     DOWNLOAD_SIZE           = 0,
     DOWNLOAD_PROGRESS       = 1,
@@ -33,7 +33,7 @@ internal partial class ConsoleLive
         var DefaultRegex = DownloadInfoARIA2C;
 
         DL_Dispatch.Invoke(()=>{
-            if(comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > 0)
+            if(comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > -1)
                 DefaultRegex = DownloadInfoARIA2CFetchedFormat; 
         });
 
@@ -50,7 +50,7 @@ internal partial class ConsoleLive
             DefaultRegex == DownloadInfoARIA2C ?
                 ProgressInfo[DOWNLOAD_SPEED] : ProgressInfo[DOWNLOAD_FMT_SPEED];
 
-        double.TryParse(Regex.Replace($"{DownSpeedSTR ?? "0.0"}", @"[a-zA-Z\/]", "").Replace("~","").ToString(),out SpeedNumber);
+        double.TryParse(Regex.Replace(DownSpeedSTR, @"~|[a-zA-Z\/]", ""),out SpeedNumber);
         switch("")
         {
             case string when DownSpeedSTR.Contains("K"):
@@ -72,6 +72,7 @@ internal partial class ConsoleLive
         DL_Dispatch.Invoke(()=>Download_Invoke(StringData, DefaultRegex != DownloadInfoARIA2C));
     }
 
+    //FIXME: Refactor it? if possible future me;
     static void Download_Invoke(string StringData, bool IsFetchedFormat)
     {
         console.LoadText(ConsoleLastDocument);
@@ -84,14 +85,14 @@ internal partial class ConsoleLive
 
         if(IsFetchedFormat)
         {
-            _Progress   = ProgressInfo[DOWNLOAD_FMT_PROGRESS];
-            _Size       = ProgressInfo[DOWNLOAD_FMT_SIZE];
             _Speed      = ProgressInfo[DOWNLOAD_FMT_SPEED];
+            _Size       = ProgressInfo[DOWNLOAD_FMT_SIZE];
+            _Progress   = ProgressInfo[DOWNLOAD_FMT_PROGRESS];
         }
         else
         {
-            _Progress   = ProgressInfo[DOWNLOAD_PROGRESS];
             _Size       = ProgressInfo[DOWNLOAD_SIZE];
+            _Progress   = ProgressInfo[DOWNLOAD_PROGRESS];
             _Speed      = ProgressInfo[DOWNLOAD_SPEED];
             _Time       = ProgressInfo[DOWNLOAD_ETA];
         }
@@ -99,12 +100,12 @@ internal partial class ConsoleLive
         console.AddFormattedText(
             $"<Cyan>[ PROGRESS$tab$] <>{_Progress}%$nl$"+
             $"<Cyan>[ SIZE$tab$$tab$] <>{_Size}$nl$"+
-            $"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{_Size}/s$nl$"+
+            $"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{_Speed}/s$nl$"+
             $"<Cyan>[ TIME (ETA)$tab$] <>{_Time}$nl$"
         );
         
         double value = 0;
-        double.TryParse($"{_Progress ?? "0.0"}", out value);
+        double.TryParse(_Progress, out value);
         progressBar.Value = value;
             
         TaskbarProgressBar.ProgressValue = progressBar.Value / 100;

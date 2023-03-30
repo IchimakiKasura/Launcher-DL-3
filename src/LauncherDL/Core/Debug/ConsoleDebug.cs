@@ -18,6 +18,11 @@ public static class ConsoleDebug
         ConsoleDebug.Log("==== DEBUG ====\n");
         ConsoleDebug.Log($"\x1b[33m[INFO] Current OS: {Environment.OSVersion}");
         ConsoleDebug.Log("[INFO] You are now running in DEBUG mode!\x1b[0m");
+        ConsoleDebug.Log("\n-----------------------Loading CONFIG------------------------");
+    }
+
+    private static void Infos()
+    {
         ConsoleDebug.Log("\x1b[35m[SYSTEM] Loading resources \x1b[0m");
 
         PerformanceCounter Yeet = new("Processor", "% Processor Time", "_Total");
@@ -34,7 +39,7 @@ public static class ConsoleDebug
         Canvas.SetTop(Test4, 70);
 
         windowCanvas.Add(Test4);
-        
+
         Test3.Width = Test1.Width = 750;
         Test1.Height = 25;
         Test3.Height = 35;
@@ -42,9 +47,9 @@ public static class ConsoleDebug
         Test3.Maximum = 10000;
         Test3.BorderBrush =
         Test3.Background = Brushes.Transparent;
-        Test3.BorderThickness = new(0,0,0,0);
+        Test3.BorderThickness = new(0, 0, 0, 0);
         Test3.Foreground = Brushes.Red;
-        
+
         Test2.FontSize = 15;
         Test2.Foreground = Brushes.White;
         Test2.Text = "N/A";
@@ -53,27 +58,27 @@ public static class ConsoleDebug
         double cpu = 0;
         CompositionTarget.Rendering += delegate
         {
-           if (System.Environment.TickCount64 - lastTick >= 1000)
+            if (System.Environment.TickCount64 - lastTick >= 1000)
             {
                 lastFrameRate = frameRate;
                 frameRate = 0;
                 lastTick = System.Environment.TickCount64;
-                if(cpu.ToString().Length < 2) cpu += 0.01;
+                if (cpu.ToString().Length < 2) cpu += 0.01;
                 cpu = Math.Round(Yeet.NextValue(), 2);
             }
             frameRate++;
 
-            if(lastFrameRate >= 61) lastFrameRate = 60;
+            if (lastFrameRate >= 61) lastFrameRate = 60;
 
-            Test1.Value = new Random().Next(0, 100-1);
+            Test1.Value = new Random().Next(0, 100 - 1);
             Test3.Value += 2;
             Test2.Text = $"CPU: {cpu}\rFPS: {lastFrameRate}\rDateNow: {DateTime.UtcNow.Ticks}";
-            if(Test3.Value == Test3.Maximum) Test3.Value = 0;
+            if (Test3.Value == Test3.Maximum) Test3.Value = 0;
         };
 
-        Test4.Click += (s,e)=>
+        Test4.Click += (s, e) =>
         {
-            if(windowCanvas.Contains(Test3))
+            if (windowCanvas.Contains(Test3))
             {
                 windowCanvas.Remove(Test3);
                 windowCanvas.Remove(Test1);
@@ -86,7 +91,6 @@ public static class ConsoleDebug
                 windowCanvas.Add(Test2);
             }
         };
-        ConsoleDebug.Log("\n-----------------------Loading CONFIG------------------------");
     }
 
     public static void LoadConfigDone(bool isFailed)

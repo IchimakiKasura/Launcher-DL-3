@@ -25,13 +25,21 @@ internal partial class ConsoleLive
         string VID_AO   = null;
 
         foreach(Group match in FileFormatInfo.Match(StringData).Groups)
+        {
             if(!match.Name.Contains("0") && !match.Value.IsEmpty())
                 FormatNames.Add(match.Value.Trim());
 
-        // Avoid video that has no Codec. It can cause weird issue when
-        // merging 2 formats together.
-        if(FormatNames.Count != 7) return;
-        
+            if(match.Name is "FPS" && match.Value.IsEmpty())
+                FormatNames.Add("1");
+
+            // Avoid video that has no Codec. It can cause weird issue when
+            // merging a codec that is avc0
+            if(match.Name is "Codec" && match.Value.IsEmpty())
+                return;
+        }
+
+        if(FormatNames.Count is 0) return;
+
         string NameFormat = 
             new FormatName(
                 ID      :       FormatNames[ID],
@@ -42,12 +50,13 @@ internal partial class ConsoleLive
         
         switch(FormatNames[FPS].Length)
         {
-            case 1: if(FormatNames[FPS].Contains("2")) FormatNames[FPS] = "Stereo";             break;
+            case 1: if(FormatNames[FPS].Contains("2")) FormatNames[FPS] = "Stereo";
+                    else if(FormatNames[FPS].Contains("1")) FormatNames[FPS] = "N/A";           break;
             case 2: FormatNames[FPS] += " fps";                                                 break;
             case 4: FormatNames[FPS] = FormatNames[FPS].Replace("1","  fps");                   break;
             case 5: FormatNames[FPS] = FormatNames[FPS].Replace(" 2","fps"); HasAudio = true;   break;
         };
-
+        
         if(FormatNames[RESOLUTION].Contains("audio only"))
             // Takes the latest Audio format ID
             switch(FormatNames[FORMAT])
@@ -62,14 +71,18 @@ internal partial class ConsoleLive
             // Puts the latest Audio format ID to the video that has no Audio
             VID_AO = FormatNames[FORMAT] switch
             {
-                _ when FormatNames[FORMAT].Contains("mp4") =>
+                _ when FormatNames[FORMAT].Contains("mp4")  &&
+                    !AudioOnlyID_M4A.IsEmpty()  =>
                     $"{FormatNames[ID]}+{AudioOnlyID_M4A}",
-                _ when FormatNames[FORMAT].Contains("webm")=>
+
+                _ when FormatNames[FORMAT].Contains("webm") &&
+                    !AudioOnlyID_WEBM.IsEmpty() =>
                     $"{FormatNames[ID]}+{AudioOnlyID_WEBM}",
+
                 _ => null
             };
         }
-
+    
         TemporaryList.Add(new()
         {
             Name        =       NameFormat,

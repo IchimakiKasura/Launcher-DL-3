@@ -23,7 +23,6 @@
 
     <DropShadowEffect x:Key="ContentPresenterEffect" Color="Red" BlurRadius="2.5" ShadowDepth="0" RenderingBias="Performance"/>
     <DropShadowEffect x:Key="CB_RTB_BM_Effect" Color="Black" BlurRadius="2.5" ShadowDepth="0" Direction="0" RenderingBias="Performance"/>
-    <DropShadowEffect x:Key="WindowDropShadow" Opacity="1" ShadowDepth="0" BlurRadius="10" Direction="0" Color="#FF7DB5FF" RenderingBias="Performance"/>
 
     <DropShadowEffect x:Key="ExitDSE" Color="#FFAD0000" Opacity="0" ShadowDepth="0" Direction="0" BlurRadius="5" RenderingBias="Performance"/>
     <DropShadowEffect x:Key="MinDSE" Color="#FFC19F9F" Opacity="0" ShadowDepth="0" Direction="0" BlurRadius="5" RenderingBias="Performance"/>
@@ -35,29 +34,30 @@
         <Setter Property="UndoLimit" Value="0"/>
     </Style>
 
-	<Style TargetType="ToolTip">
-		<Setter Property="OverridesDefaultStyle" Value="true" />
-		<Setter Property="HasDropShadow" Value="True" />
-		<Setter Property="FontSize" Value="15" />
-		<Setter Property="Foreground" Value="White" />
+    <Style TargetType="ToolTip">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="HasDropShadow" Value="True" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
         <Setter Property="FontStyle" Value="Normal"/>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ToolTip">
-					<Border Background="{Binding Source={StaticResource 74000000}}"
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border Background="{Binding Source={StaticResource 74000000}}"
                     BorderBrush="Blue"
                     BorderThickness="2"
                     CornerRadius="5">
-						<ContentPresenter Margin="4"/>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+                        <ContentPresenter Margin="4"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
     <!-- Metadata Button Style | Yeah I got lazy doing this coded so I just made it on xaml, fuck -->
     <Style x:Key="MetadataButtons" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ButtonBG}"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="100"/>
         <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
@@ -67,7 +67,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{StaticResource ButtonBG}"
+                    <Border Background="{TemplateBinding Background}"
                             CornerRadius="5"
                             Cursor="Hand">
                         <Border.Effect>
@@ -102,6 +102,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="Red"/>
+                <Setter Property="Background" Value="{StaticResource ButtonBGDisabled}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

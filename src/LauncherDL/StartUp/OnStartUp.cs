@@ -16,22 +16,13 @@ partial class OnStartUp
 
         InitializeComboBoxComponents();
 
-        InitiateContextMenu();
+        InitializeContextMenuComponents();
 
         InitiateProgressBar();
 
         ConsoleOutputMethod.StartUpOutputComments();
 
         WindowsComponents.WindowTaskBarFlash();
-    }
-
-    private static void InitiateContextMenu()
-    {
-        ContextMenuResource.Link    =   textBoxLink;
-        ContextMenuResource.Format  =   comboBoxFormat;
-        ContextMenuResource.Name    =   textBoxName;
-        
-        ContextMenuResource.CONTEXTMENU_configDefaultDirectory = FolderButton.FolderDirectory();
     }
 
     private static void InitializeTextBoxComponents()

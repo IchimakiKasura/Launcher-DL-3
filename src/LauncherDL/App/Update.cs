@@ -2,7 +2,7 @@ namespace Update;
 
 class Updater
 {
-    readonly public double CurrentVersion = 7.0;
+    readonly public double CurrentVersion = 7.1;
     readonly public double NewVersion;
 
     public Updater()

@@ -8,7 +8,7 @@
 public partial class Global
 {
     // App version
-    public const string APP_CURRENT_VERION = "7.0_DT3.29.2023";
+    public const string APP_CURRENT_VERION = "7.1_DT0.0.0000";
 
     /// <summary>MainWindow but in <see langword="static"/></summary>
     [WindowStaticRef]
@@ -88,23 +88,24 @@ public partial class Global
 
     #region HUZUAAH!
     public const string hidden =
-    "Launcher DL Version 7 (7th Generation DL)\n\n"         +
-    "[New!]\n"                                              +
-    "- NEW UI\n"                                            +
-    "- Improved Perfomance\n"                               +
-    "- Code Refactored\n\n"                                 +
-    "[New Features | Removed Features]\n"                   +
-    "- Open file button has its own dedicated button.\n"    +
-    "- Metadata button for Video/Audio Types!\n"            +
-    "- Convert has now Quality options.\n"                  +
-    "- Added more Console comments!\n"                      +
-    "- Uses ARIA2C as downloader for faster download\n"     +
-    "- REMOVED Playlist feature.\n"                         +
-    "\n\n"                                                  +
-    "[Fixes]\n"                                             +
-    "- FIXED \'Cannot reenter Text Formatting engine\n"     +
-    "During Optimal paragraph formatting\'\n"               +
-    "- FIXED Text go beyond the button's width\n"           ;
+    "Launcher DL Version 7.1 (7th Generation DL)\n\n"         +
+    "[ Fixes ]\n"                                             +
+    "- Fixed where BackgroundGlow and Image are not setting\n"+
+    "up correctly as it is.\n"                                + 
+    "- Fixed where Textbox needing 2 tab presses\n"           +
+    "before actually typing on it.\n"                         +
+    "- ComboBo'x textbox also need 2 tab presses when its\n"  +
+    "on TextEditable state.\n"                                +
+    "- Fixed where Download on Custom types with fetched\n"   +
+    "Formats other sites other than youtube.\n"               +
+    "- Fixed where Download on Twitter throws random error\n" +
+    "because of api but it doesn't affect\n"                  +
+    "the downloaded file.\n"                                  +
+    "- Fixed where ID is going past the limit on ComboBox\n"  +
+    "now has an \"...\" when it has more than 8 chars\n\n"    +
+    "[ New ]\n"+
+    "- Open file context menu will have disabled buttons\n"   +
+    "if the folder doesn't exist.";
     #endregion
 
 }

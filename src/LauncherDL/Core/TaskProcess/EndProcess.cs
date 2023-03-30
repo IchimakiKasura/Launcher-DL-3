@@ -27,7 +27,8 @@ abstract class EndProcess
 
         if(Directory.Exists(FolderButton.FolderDirectory()))
             windowCanvas.Add(ButtonOpenFolder);
-
+            
+        OnStartUp.UpdateContexButtons();
     }
 
     // File Format method after fetching

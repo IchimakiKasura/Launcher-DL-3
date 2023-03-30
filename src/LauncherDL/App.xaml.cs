@@ -18,10 +18,10 @@ public partial class App : Application
                                 MessageBoxImage.Warning) is MessageBoxResult.OK)
                 Environment.Exit(0);
 
-        App_Startup(null,e);
+        App_Startup(e);
     }    
 
-    private void App_Startup(object s, StartupEventArgs e)
+    private void App_Startup(StartupEventArgs e)
     {
         PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
         Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.BelowNormal;
@@ -44,12 +44,12 @@ public partial class App : Application
             SetConsoleMode(consoleHandle, consoleMode);
 
             ConsoleDebug.Log(
-@$"============================
-=   Version Update Check   =
-============================
-Current Version: {Update.CurrentVersion}
-Latest Version: {Update.NewVersion}
-            ");
+             "============================\n"+
+             "=   Version Update Check   =\n"+
+             "============================\n"+
+            $"Current Version: {Update.CurrentVersion}\n"+
+            $"Latest Version: {Update.NewVersion}\n"
+            );
         #endif
     }
 }

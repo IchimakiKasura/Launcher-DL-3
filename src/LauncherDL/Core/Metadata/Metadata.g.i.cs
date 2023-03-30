@@ -59,7 +59,7 @@ public partial class MetadataWindow
         ResizeMode              = ResizeMode.CanMinimize;
         WindowStartupLocation   = WindowStartupLocation.CenterScreen;
         Background              = Brushes.Transparent;
-        Effect                  = (Effect)MainWindowStatic.FindResource(WINDOW_RESOURCE_DROP_SHADOW);
+        Effect                  = windowDropShadow;
         Resources               = MainWindowStatic.Resources;
         new WindowInteropHelper(this).EnsureHandle();
         new TransparencyConverter(this).MakeTransparent();

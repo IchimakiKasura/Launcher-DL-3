@@ -4,17 +4,17 @@
 
     <!--#region OpenFolder ContextMenu -->
     <ContextMenu x:Key="OpenFolderCM" StaysOpen="true">
-        <MenuItem Header="Open Video" Uid="Video" Click="OpenFolderProcess" >
+        <MenuItem Header="Open Video" Uid="Video" Click="OpenFolderProcess">
             <MenuItem.Icon>
                 <Image Source="/guicomp;component/Images/FolderButtons/VideoFolder.png" />
             </MenuItem.Icon>
         </MenuItem>
-        <MenuItem Header="Open Audio" Uid="Audio" Click="OpenFolderProcess" >
+        <MenuItem Header="Open Audio" Uid="Audio" Click="OpenFolderProcess">
             <MenuItem.Icon>
                 <Image Source="/guicomp;component/Images/FolderButtons/AudioFolder.png" />
             </MenuItem.Icon>
         </MenuItem>
-        <MenuItem Header="Open Converted" Uid="Convert" Click="OpenFolderProcess" >
+        <MenuItem Header="Open Converted" Uid="Convert" Click="OpenFolderProcess">
             <MenuItem.Icon>
                 <Image Source="/guicomp;component/Images/FolderButtons/ConvertFolder.png" />
             </MenuItem.Icon>
