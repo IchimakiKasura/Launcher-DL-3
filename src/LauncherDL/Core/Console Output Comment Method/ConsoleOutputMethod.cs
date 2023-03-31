@@ -1,12 +1,5 @@
 ﻿namespace LauncherDL.Core.Console_Output_Comment_Method;
 
-public enum ConsoleOutputCheck
-{
-    SUCCESS,
-    FAILED_MESSAGE,
-    FAILED
-}
-
 /// <summary>
 /// Where string are repeatedly called so<br/>
 /// made it into a class which a single call<br/>
@@ -14,8 +7,6 @@ public enum ConsoleOutputCheck
 /// </summary>
 internal static class ConsoleOutputMethod
 {
-    public const int TYPE = 0, FORMAT = 1, QUALITY = 2;
-
     public static void StartUpOutputComments()
     {
         console.AddFormattedText(CONSOLE_START);
@@ -70,13 +61,13 @@ internal static class ConsoleOutputMethod
     public static void NoLinkOutputComment() =>
         console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "No Link provided or Link is invalid");
 
-    public static void ComboBoxChangedOutputComment(int ComboBoxControlType) =>
+    public static void ComboBoxChangedOutputComment(ConsoleOutputMethodSelection ComboBoxControlType) =>
         console.DLAddConsole(CONSOLE_SYSTEM_STRING, ComboBoxControlType switch
         {
-            TYPE    => $"<Gray%14>Changed TYPE to {comboBoxType.GetItemContent}",
-            FORMAT  => $"<Gray%14>Changed FORMAT to {comboBoxFormat.GetItemContent}",
-            QUALITY => $"<Gray%14>Changed QUALITY to {comboBoxQuality.GetItemContent}",
-            _       => null
+            ConsoleOutputMethodSelection.TYPE    => $"<Gray%14>Changed TYPE to {comboBoxType.GetItemContent}",
+            ConsoleOutputMethodSelection.FORMAT  => $"<Gray%14>Changed FORMAT to {comboBoxFormat.GetItemContent}",
+            ConsoleOutputMethodSelection.QUALITY => $"<Gray%14>Changed QUALITY to {comboBoxQuality.GetItemContent}",
+            _                                    => null
         });
 
     public static void DownloadInfoOutputComment(ObjectListNames Obj) =>

@@ -20,38 +20,34 @@ public partial class ButtonControl
     };
     List<TimeSpan> AnimationDuration;
 
+    // ChatGPT says it so fuck it, ternary it is because fuck if-else and switch;
     private void SetAnimationsValues(bool isEnter, List<TimeSpan> AnimationDuration)
     {
-        switch(isEnter)
+        //  Variable Names      | Boolean |        If its true         |   If its False  |
+        var ButtonOpacity       = isEnter ?                          1 :                0;
+        var ButtonWidth         = isEnter ?                        260 :              250;
+        var ButtonHeight        = isEnter ?                       67.5 :               65;
+        var ButtonText          = isEnter ?                 TextSize+2 :         TextSize;
+        var ButtonImageOpacity  = isEnter ?                       0.85 :                0;
+        var buttonMargin        = isEnter ? new Thickness(-5,-1.5,0,0) : new Thickness(0);
+        var buttonForeground    = isEnter ?               Colors.White :     Colors.Black;
+
+        ControlDA = new List<DoubleAnimation>()
         {
-            case true:
-                ControlDA = new List<DoubleAnimation>()
-                {
-                    new(1, AnimationDuration[NORMAL_ANIMATION]),         // ButtonOpacity
-                    new(260, AnimationDuration[NORMAL_ANIMATION]),       // ButtonWidth
-                    new(67.5, AnimationDuration[NORMAL_ANIMATION]),      // ButtonHeight
-                    new(TextSize+2, AnimationDuration[NORMAL_ANIMATION]),// ButtonText
-                    new(0.85, AnimationDuration[NORMAL_ANIMATION])       // ButtonImageOpacity
-                };
-                ButtonMargin = new(new(-5,-1.5,0,0), AnimationDuration[NORMAL_ANIMATION]);
-                ButtonForeground = new(Colors.White, AnimationDuration[NORMAL_ANIMATION]);
-                ButtonImageViewport = new(new(0,0,1,1), AnimationDuration[NORMAL_ANIMATION]);
-            break;
-            
-            case false:
-                ControlDA = new List<DoubleAnimation>()
-                {
-                    new(0, AnimationDuration[NORMAL_ANIMATION]),       // ButtonOpacity
-                    new(250, AnimationDuration[NORMAL_ANIMATION]),     // ButtonWidth
-                    new(65, AnimationDuration[NORMAL_ANIMATION]) ,     // ButtonHeight
-                    new(TextSize, AnimationDuration[NORMAL_ANIMATION]),// ButtonText
-                    new(0, AnimationDuration[FASTER_ANIMATION])        // ButtonImageOpacity
-                };
-                ButtonMargin = new(new(0,0,0,0), AnimationDuration[NORMAL_ANIMATION]);
-                ButtonForeground = new(Colors.Black, AnimationDuration[NORMAL_ANIMATION]);
-                ButtonImageViewport = new(new(-0.3,0,1.5,1.8), AnimationDuration[FASTER_ANIMATION]);
-            break;
-        }
+            new(ButtonOpacity       , AnimationDuration[NORMAL_ANIMATION]),
+            new(ButtonWidth         , AnimationDuration[NORMAL_ANIMATION]),
+            new(ButtonHeight        , AnimationDuration[NORMAL_ANIMATION]),
+            new(ButtonText          , AnimationDuration[NORMAL_ANIMATION]),
+            new(ButtonImageOpacity  , AnimationDuration[NORMAL_ANIMATION]),
+        };
+
+        ButtonMargin            = new(buttonMargin, AnimationDuration[NORMAL_ANIMATION]);
+        ButtonForeground        = new(buttonForeground, AnimationDuration[NORMAL_ANIMATION]);
+
+        ButtonImageViewport     = isEnter ? 
+            new(new(0,0,1,1), AnimationDuration[NORMAL_ANIMATION])
+        :
+            new(new(-0.3,0,1.5,1.8), AnimationDuration[NORMAL_ANIMATION]);
     }
 
     private void SetStoryboard(bool IsEnter)

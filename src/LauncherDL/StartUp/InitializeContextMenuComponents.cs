@@ -13,23 +13,24 @@ partial class OnStartUp
         UpdateContexButtons();
     }
 
+    // Code was 100% refactored by one and only ChatGPT ☠️☠️
     public static void UpdateContexButtons()
     {
-        // Disables buttons that has no folders
-        foreach (MenuItem menuItems in ((ContextMenu)MainWindowStatic.FindResource("OpenFolderCM")).Items)
-        {
-            if (!Directory.Exists($"{FolderButton.FolderDirectory()}\\{menuItems.Uid}"))
-            {
-                if(menuItems.Items.Count is 0)
-                    menuItems.IsEnabled = false;
-            }
-            else menuItems.IsEnabled = true;
+        ContextMenu contextMenu = (ContextMenu)MainWindowStatic.FindResource("OpenFolderCM");
 
-            if (menuItems.Items.Count > 1)
-                foreach (MenuItem formatExtItems in menuItems.Items)
-                    if (!Directory.Exists($"{FolderButton.FolderDirectory()}\\{formatExtItems.Uid}"))
-                        formatExtItems.IsEnabled = false;
-                    else formatExtItems.IsEnabled = true;
+        foreach(MenuItem menuItem in contextMenu.Items)
+        {
+            bool hasFolder = Directory.Exists($"{FolderButton.FolderDirectory()}\\{menuItem.Uid}");
+
+            // Disable the menu item if there is no folder
+            menuItem.IsEnabled = hasFolder;
+
+            // Disable the menu item if there is no folder
+            foreach(MenuItem childMenuItem in menuItem.Items)
+            {
+                bool childHasFolder = Directory.Exists($"{FolderButton.FolderDirectory()}\\{childMenuItem.Uid}");
+                childMenuItem.IsEnabled = childHasFolder;
+            }
         }
     }
 }

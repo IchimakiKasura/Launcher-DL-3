@@ -38,39 +38,46 @@ public partial class MetadataWindow
             );
     }
 
+    // Another chatGPT refactoring ffs
     public static void ApplyMetadataOnFile()
     {
-        // for better naming
+        // Retrieve input from UI controls
         string
-        DIRECTORY_OUTPUT            = config.DefaultOutput,
-        DIRECTORY_TYPE              = comboBoxType.GetItemContent,
-        FILE_NAME                   = textBoxName.Text,
-        FILE_EXTENSION              = comboBoxFormat.GetItemContent,
-
-        // Full path and Full name with extension
-        FILE_FULL_NAME              = $"{FILE_NAME}.{FILE_EXTENSION}",
-        FILE_PATH                   = $"{DIRECTORY_OUTPUT}\\{DIRECTORY_TYPE}",
-
-        TEMPORARY_NAME_DIRECTORY    = $"\"{FILE_PATH}\\TEMP_{FILE_FULL_NAME}\"",
-        NAME_DIRECTORY              = $"\"{FILE_PATH}\\{FILE_FULL_NAME}\"",
-
-        // For deleting and renaming
-        DeleteAndRename             = $"del {NAME_DIRECTORY} && ren {TEMPORARY_NAME_DIRECTORY} \"{FILE_FULL_NAME}\"";
+        directoryOutput     = config.DefaultOutput,
+        directoryType       = comboBoxType.GetItemContent,
+        fileName            = textBoxName.Text,
+        fileExtension       = comboBoxFormat.GetItemContent,
+        filePath            = Path.Combine(directoryOutput, directoryType),
+        fullFilePath        = Path.Combine(filePath, $"{fileName}.{fileExtension}"),
+        temporaryFilePath   = Path.Combine(filePath, $"TEMP_{fileName}.{fileExtension}");
         
-        var MetadataArguments = $" -i {NAME_DIRECTORY} "        +
-        $"-metadata title=\"{Old_Title}\" "                     +
-        $"-metadata album=\"{Old_Album}\" "                     +
-        $"-metadata album_artist=\"{Old_Album_Artist}\" "       +
-        $"-metadata date=\"{Old_Year}\" "                       + 
-        $"-metadata genre=\"{Old_Genre}\" "                     +
-        $"-metadata description=\"Downloaded on launcherDL\" "  +
-        $"-metadata comment=\"Downloaded on launcherDL\" "      ;
-
-        Process.Start(new ProcessStartInfo()
+        // Prepare FFmpeg command
+        var metadataArguments = new System.Text.StringBuilder();
+        metadataArguments.Append($"-i \"{fullFilePath}\" ");
+        metadataArguments.Append($"-metadata title=\"{Old_Title}\" ");
+        metadataArguments.Append($"-metadata album=\"{Old_Album}\" ");
+        metadataArguments.Append($"-metadata album_artist=\"{Old_Album_Artist}\" ");
+        metadataArguments.Append($"-metadata date=\"{Old_Year}\" ");
+        metadataArguments.Append($"-metadata genre=\"{Old_Genre}\" ");
+        metadataArguments.Append($"-metadata description=\"Downloaded on launcherDL\" ");
+        metadataArguments.Append($"-metadata comment=\"Downloaded on launcherDL\" ");
+        
+        Process ffmpegProcess = new()
         {
-            FileName        = "cmd.exe",
-            Arguments       = $"/c \"\"{FFMPEG_Path}\" {MetadataArguments} -codec copy {TEMPORARY_NAME_DIRECTORY} && {DeleteAndRename} \"",
-            CreateNoWindow  = true  
-        });
+            StartInfo = new ProcessStartInfo()
+            {
+                FileName = FFMPEG_Path,
+                Arguments = $"{metadataArguments.ToString()} -codec copy \"{temporaryFilePath}\"",
+                CreateNoWindow = true,
+                UseShellExecute = false,
+            }
+        };
+
+        ffmpegProcess.StartAsync();
+
+        // Rename temporary file to final file name
+        File.Delete(fullFilePath);
+        File.Move(temporaryFilePath, fullFilePath);
     }
+
 }

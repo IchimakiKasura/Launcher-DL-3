@@ -1,6 +1,6 @@
 namespace DLControls;
 
-public class FormatList
+public class FormatList : UIElement
 {
     public string Name              { get; set; }
     public string ID                { get; set; }
@@ -14,29 +14,29 @@ public class FormatList
 
 public class FormatName
 {
-    string _ID,
-           _FMT,
-           _RES,
-           _SIZE;
-
     public FormatName(string ID, string FMT, string RES, string SIZE)
     {
-        _ID = ID;
-        _FMT = FMT;
-        _RES = RES;
-        _SIZE = SIZE;
+        Id = ID;
+        Fmt = FMT;
+        Res = RES;
+        Size = SIZE;
     }
 
-    public string Name => $"[{_ID}]   {_FMT}   |   {_RES}   |   {_SIZE}";
+    public string Id { get; }
+    public string Fmt { get; }
+    public string Res { get; }
+    public string Size { get; }
+
+    public string Name => $"[{Id}]   {Fmt}   |   {Res}   |   {Size}";
 }
 
-public abstract class TypeList
+public enum TypeList
 {
-    public const int CustomType  = 0,
-                     VideoType   = 1,
-                     AudioType   = 2,
-                     ConvertType = 3,
-                     QualityType = 4;
+    CustomType ,
+    VideoType  ,
+    AudioType  ,
+    ConvertType,
+    QualityType
 }
 
 public class ComboBoxList

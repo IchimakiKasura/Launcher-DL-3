@@ -64,40 +64,44 @@ public class Config
         return DefaultConfiguration;
     }
 
+    // rip
     private static void CheckError<T>(ref T a, dynamic b, string c)
     {
         #if DEBUG
-            ConsoleDebug.LoadingConfig(a,b,c);
+            ConsoleDebug.LoadingConfig(a, b, c);
         #endif
-        string ThrowError = null;
 
         try
         {
-            switch(c)
+            switch (c)
             {
                 case CONFIG_FILE_TYPE:
-                    if(b > 3) ThrowError = "Default File type is above 3!";
+                    if (b > 3) throw new Exception("Default File type is above 3!");
                 break;
 
                 case CONFIG_BACKGROUND_NAME:
-                    if(!File.Exists($@"./Images/{b}")) ThrowError = "Background image not found!";
+                    var defaultBGPath = $"./Images/{new DefaultConfig().background}";
+
+                    if (b != new DefaultConfig().background)
+                        defaultBGPath = b;
+
+                    if (!File.Exists(defaultBGPath))
+                        throw new Exception("Background image not found!");
                 break;
             }
 
-            if(ThrowError != null) throw new Exception(ThrowError);
-
-            if(a.GetType().ToString().Contains(CONFIG_COLOR_CONTAINS)) a = ClrConv(b);
+            if (a.GetType().ToString().Contains(CONFIG_COLOR_CONTAINS))
+                a = ClrConv(b);
             else a = b;
-
-        } 
-        catch(Exception e)
+        }
+        catch (Exception e)
         {
             error = true;
             ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, e.Message, c);
         }
-    } 
+    }
 
-    // GITHUB ISSUE 3
+
     private static void ApplyConfig()
     {
         var DefaultBG = $"pack://siteoforigin:,,,/Images/{DefaultConfiguration.background}";

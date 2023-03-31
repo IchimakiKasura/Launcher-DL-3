@@ -10,7 +10,13 @@ public partial class ConsoleControl : UserControl
     public double ConsoleHeight
     {
         get => (double)GetValue(ConsoleHeightProperty);
-        set => SetValue(ConsoleHeightProperty, value);
+        set
+        {
+            // Heh smooth animations lmao
+            DoubleAnimation animation = new(value, TimeSpan.FromMilliseconds(200));
+            animation.Completed += (s,e) => manualScrollToEnd();
+            BeginAnimation(ConsoleHeightProperty, animation);
+        }
     }
     
     public double ConsoleWidth
@@ -24,7 +30,6 @@ public partial class ConsoleControl : UserControl
 
     public ConsoleControl() =>
         InitializeComponent();
-        
 
     public void manualScrollToEnd() => UserRichTextBox.ScrollToEnd();
 }

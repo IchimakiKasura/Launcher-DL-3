@@ -23,7 +23,7 @@ public partial class Global
     /// <summary>Config</summary>
     public static DefaultConfig config;
 
-    /// <summary>shortcuts</summary>
+    /// shortcuts
     public static Color ClrConv(string color) => (Color)ColorConverter.ConvertFromString(color);
     public static Brush BrhConv(string color) => (Brush)new BrushConverter().ConvertFromString(color);
     public static void SetCanvas(UIElement Element, double Top, double Left)
@@ -110,7 +110,7 @@ public partial class Global
 
 }
 
-public class ObjectListNames
+public struct ObjectListNames
 {
     public string Title     { get; set; }
     public string Type      { get; set; }

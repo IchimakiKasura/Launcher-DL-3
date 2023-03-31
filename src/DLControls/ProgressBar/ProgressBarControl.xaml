@@ -36,7 +36,7 @@
                 <Setter Property="Background" Value="{StaticResource 74000000}"/>
                 <Setter Property="Foreground" Value="#FF902C2C"/>
                 <Setter Property="Value" Value="{Binding Value, ElementName=root}"/>
-
+                <Setter Property="Opacity" Value="{Binding Opacity, ElementName=root}"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ProgressBar">

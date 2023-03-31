@@ -8,27 +8,27 @@ partial class OnStartUp
         AdjustFontSize();
 
         // Buttons
-        buttonFileFormat.Text                                       =   Language.Button_Format;
-        buttonDownload.Text                                         =   Language.Button_Download;
-        buttonUpdate.Text                                           =   Language.Button_Update;
-        buttonOpenFile.Text                                         =   Language.Button_OpenFile;
-        buttonMetadata.Text                                         =   Language.Button_Metadata;
-        ButtonOpenFolder.Content									=   Language.Button_OpenFolder;
+        buttonFileFormat.Text                                           =   Language.Button_Format;
+        buttonDownload.Text                                             =   Language.Button_Download;
+        buttonUpdate.Text                                               =   Language.Button_Update;
+        buttonOpenFile.Text                                             =   Language.Button_OpenFile;
+        buttonMetadata.Text                                             =   Language.Button_Metadata;
+        ButtonOpenFolder.Content									    =   Language.Button_OpenFolder;
 
         // Placeholders
-        textBoxLink.TextPlaceholder                                 =   Language.Placeholder_Link;
-        textBoxName.TextPlaceholder                                 =   Language.Placeholder_Optional;
+        textBoxLink.TextPlaceholder                                     =   Language.Placeholder_Link;
+        textBoxName.TextPlaceholder                                     =   Language.Placeholder_Optional;
 
         // ComboBox
-        ComboBoxList.ComboBoxTypes[TypeList.CustomType ].Content    =   Language.Types_Custom;
-        ComboBoxList.ComboBoxTypes[TypeList.VideoType  ].Content    =   Language.Types_Video;
-        ComboBoxList.ComboBoxTypes[TypeList.AudioType  ].Content    =   Language.Types_Audio;
-        ComboBoxList.ComboBoxTypes[TypeList.ConvertType].Content    =   Language.Types_Convert;
+        ComboBoxList.ComboBoxTypes[(int)TypeList.CustomType ].Content   =   Language.Types_Custom;
+        ComboBoxList.ComboBoxTypes[(int)TypeList.VideoType  ].Content   =   Language.Types_Video;
+        ComboBoxList.ComboBoxTypes[(int)TypeList.AudioType  ].Content   =   Language.Types_Audio;
+        ComboBoxList.ComboBoxTypes[(int)TypeList.ConvertType].Content   =   Language.Types_Convert;
 
-        textBlockLink.Text                                          =   Language.Label_Link;
-        textBlockFormat.Text                                        =   Language.Label_Format;
-        textBlockName.Text                                          =   Language.Label_Name;
-        textBlockType.Text                                          =   Language.Label_Type;
+        textBlockLink.Text                                              =   Language.Label_Link;
+        textBlockFormat.Text                                            =   Language.Label_Format;
+        textBlockName.Text                                              =   Language.Label_Name;
+        textBlockType.Text                                              =   Language.Label_Type;
     }
 
     private static async void AdjustFontSize()

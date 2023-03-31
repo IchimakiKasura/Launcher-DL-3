@@ -5,7 +5,6 @@ public partial class MetadataWindow
 {
     private void GenerateElements()
     {
-
         // Window Rounded corner and Image Background
         MetadataRoundBorder = new()
         {
@@ -28,6 +27,25 @@ public partial class MetadataWindow
         // Instantiate the button because holy fuck
         // i don't know how to initiate it under the Grid Children 
         Button_Exit = new();
+
+        // Icon Bar
+        var iconBar = new Image()
+        {
+            IsHitTestVisible = false,
+            Source = new BitmapImage(new(WINDOW_ICON, UriKind.Absolute)),
+            Margin = new Thickness(8,0,this.Width - 49,0)
+        };
+
+        // Title Bar
+        var titleBar = new TextBlock()
+        {
+            IsHitTestVisible = false,
+            Text = Title,
+            Foreground = Brushes.White,
+            FontWeight = FontWeights.Medium,
+            FontSize = 14,
+            Padding = new Thickness(34,6.5,0,0)
+        };
         
         // Top Bar
         MetadataDragBorder = new()
@@ -40,26 +58,8 @@ public partial class MetadataWindow
             {
                 Children =
                 {
-                    // Icon bar
-                    new Image()
-                    {
-                        IsHitTestVisible = false,
-                        Source = new BitmapImage(new(WINDOW_ICON, UriKind.Absolute)),
-                        Margin = new(8,0,this.Width - 49,0)
-                    },
-
-                    // Title bar
-                    new TextBlock()
-                    {
-                        IsHitTestVisible = false,
-                        Text = Title,
-                        Foreground = Brushes.White,
-                        FontWeight = FontWeights.Medium,
-                        FontSize = 14,
-                        Padding = new(34,6.5,0,0)
-                    },
-
-                    // Exit button
+                    iconBar,
+                    titleBar,
                     Button_Exit
                 }
             }

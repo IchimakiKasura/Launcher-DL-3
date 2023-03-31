@@ -14,18 +14,18 @@ public partial class ComboBoxControl
             UserComboBox.Items.Add(CBT);
     }
 
-    private void AutoAdd(int x)
+    private void AutoAdd(TypeList x)
     {
         ClearItems();
         List<ComboBoxItem> temp = new();
         
         switch(x)
         {
-            case 0: temp = ComboBoxList.ComboBoxTypes;           break;
-            case 1: temp = ComboBoxList.ComboBoxVideoFormats;    break;
-            case 2: temp = ComboBoxList.ComboBoxAudioFormats;    break;
-            case 3: temp = ComboBoxList.ComboBoxConvertFormats;  break;
-            case 4: temp = ComboBoxList.ComboBoxFormatQuality;	break;
+            case TypeList.CustomType    : temp = ComboBoxList.ComboBoxTypes;           break;
+            case TypeList.VideoType     : temp = ComboBoxList.ComboBoxVideoFormats;    break;
+            case TypeList.AudioType     : temp = ComboBoxList.ComboBoxAudioFormats;    break;
+            case TypeList.ConvertType   : temp = ComboBoxList.ComboBoxConvertFormats;  break;
+            case TypeList.QualityType   : temp = ComboBoxList.ComboBoxFormatQuality;   break;
         }
 
         foreach (var CBT in temp)
@@ -33,9 +33,7 @@ public partial class ComboBoxControl
 
         UserComboBox.SelectedIndex = x switch
         {
-            // ☠️☠️
-            int when x is not 0 => 0,
-            int when x is     4 => 3,
+            TypeList.QualityType => 3,
             _ => 0
         };
     }

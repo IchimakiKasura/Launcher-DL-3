@@ -65,12 +65,25 @@ class WindowsComponents
         if (e.ChangedButton is MouseButton.Left) MainWindowStatic.DragMove();
     }
 
-    public static void WindowProgressBar(ProgressBarState State)
+    public static async void WindowProgressBar(ProgressBarState State)
     {
         switch(State)
         {
-            case ProgressBarState.Hide: windowCanvas.Remove    (progressBar);  console.ConsoleHeight = 273; break;
-            case ProgressBarState.Show: windowCanvas.Add       (progressBar);  console.ConsoleHeight = 245; break;
+            case ProgressBarState.Hide:
+                progressBar.Opacity = 0;
+                
+                // avoid that weird progressbar disappear quickly
+                await progressBar.AwaitOpacityCompletion(0);
+
+                windowCanvas.Remove(progressBar);
+                console.ConsoleHeight = 273;
+            break;
+            
+            case ProgressBarState.Show:
+                progressBar.Opacity = 1;
+                windowCanvas.Add(progressBar);
+                console.ConsoleHeight = 245;
+            break;
         }
         console.manualScrollToEnd();
     }
@@ -90,10 +103,12 @@ class WindowsComponents
         return FlashWindowEx(ref fInfo);
     }
 
+    /// <summary>
+    /// Keeps delaying until the passed bool turns to true
+    /// </summary>
     public static async Task WindowAwaitLoad(bool a) =>
         await Task.Run(()=>{ MainWindowStatic.Dispatcher.Invoke(async()=>{ while(!a) await Task.Delay(100); }); });
   
-
     // Is it bad to just call it without parameters to know if its freezed or not?
     // nah its my code and I know when to call the method but yeah it does look bad practice
     public static void FreezeComponents()

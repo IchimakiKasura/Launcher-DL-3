@@ -15,9 +15,6 @@ internal partial class ConsoleLive                                              
     it spews tons of errors so yeah                                                                                                                                     */
     public static bool SingleErrorInstance = false                                                                                                                      ;
     
-    const string ERROR_MESSAGE_HINT = "$nl$1. Link is unavailable$nl$2. Link is invalid$nl$3. Check internet connection.$nl$"                                           +
-                                      "4. YT-DLP might be outdated please update it first!"                                                                             ;
-
     public static void ErrorOutputComment(object s, DataReceivedEventArgs e)                                                                                            =>
         DL_Dispatch.Invoke(()=>Error_Invoked(e.Data))                                                                                                                   ;
 

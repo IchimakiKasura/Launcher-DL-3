@@ -21,7 +21,6 @@ sealed partial class YDL
 
 
 
-
     /// <summary>
     /// FileFormat Method
     /// </summary>
@@ -30,9 +29,10 @@ sealed partial class YDL
         if (!IsFileFormat)
             throw new FileFormatMethodException();
 
-        var Arguments = $"--compat-options format-sort -F {Link} --no-playlist";
+        var Arguments = new System.Text.StringBuilder();
+        Arguments.Append($"--compat-options format-sort -F {Link} --no-playlist");
 
-        if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
+        if (config.AllowCookies) Arguments.Append($" --cookies-from-browser {config.BrowserCookie}");
 
         // Clear existing list on ComboBoxFormat and its Temporarylist
         TemporaryList.Clear();
@@ -42,7 +42,7 @@ sealed partial class YDL
         MetadataWindow.MetadataClear();
 
         ConsoleLive.SelectedError = 0;
-        await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.FileFormatLiveOutputComment);
+        await TaskProcess.StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.FileFormatLiveOutputComment);
 
         // Always leave a default list :D
         TemporaryList.Add(new()
@@ -69,11 +69,11 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new ConvertMethodException();
 
-        var FFMPEG_STRINGS =
-        "-metadata description=\"Converted on LauncherDL\" " +
-        "-metadata comment=\"Converted on LauncherDL\" ";
+        var FFMPEG_STRINGS = new System.Text.StringBuilder();
+        FFMPEG_STRINGS.Append("-metadata description=\"Converted on LauncherDL\" ");
+        FFMPEG_STRINGS.Append("-metadata comment=\"Converted on LauncherDL\" ");
 
-        var Arguments = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
+        var Arguments = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS.ToString()} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
         ConsoleLive.SelectedError = 3;
         
         if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
@@ -93,9 +93,10 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new DownloadMethodException();
 
+        var Arguments = new System.Text.StringBuilder();
+
         string
         FolderType = "Formatted\\%(ext)s",
-        Arguments = "N/A",
         ExtensionFormat = "N/A";
 
         ConsoleLive.SelectedError = 1;
@@ -104,21 +105,21 @@ sealed partial class YDL
         switch(Type)
         {
             case TypeOfButton.CustomType:
-                Arguments = $"-f \"{Format}\"";
+                Arguments.Append($"-f \"{Format}\"");
                 ExtensionFormat = "%(ext)s";
             break;
 
             case TypeOfButton.VideoType:
                 FolderType = "Video";
                 
-                Arguments = $"-f \"b [ext=mp4]\" --recode-video {Format}"; 
+                Arguments.Append($"-f \"b [ext=mp4]\" --recode-video {Format}"); 
                 ExtensionFormat = Format;
             break;
 
             case TypeOfButton.AudioType:
                 FolderType = "Audio";
 
-                Arguments = $"-x --audio-format {Format}"; 
+                Arguments.Append($"-x --audio-format {Format}");
                 ExtensionFormat = Format;
             break;
         }
@@ -133,20 +134,20 @@ sealed partial class YDL
         }
 
         // Finalizing the arguments
-        Arguments = $"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\" --no-playlist";
-        if (config.AllowCookies) Arguments += $" --cookies-from-browser {config.BrowserCookie}";
+        Arguments.Append($"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\" --no-playlist");
+        if (config.AllowCookies) Arguments.Append($" --cookies-from-browser {config.BrowserCookie}");
         
         // Warns the user that there's no FFMPEG in presence
         if(FFmpeg.FFmpegFiles.ErrorOccured)
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
-            Arguments += $"  --downloader \"{ARIA2C_Path}\" --no-part";
-        } else Arguments += $" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part";
+            Arguments.Append($"  --downloader \"{ARIA2C_Path}\" --no-part");
+        } else Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
 
         console.Break("Gray");
         ConsoleLastDocument = console.SaveText();
         
-        await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.DownloadLiveOutputComment);
+        await TaskProcess.StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.DownloadLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 

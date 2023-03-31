@@ -5,7 +5,7 @@ namespace LauncherDL.Core.TaskProcess;
 /// </summary>
 abstract class EndProcess
 {
-    public static void ProcessTaskEnded()
+    public static async void ProcessTaskEnded()
     {
         switch(ConsoleLive.SelectedError)
         {
@@ -18,22 +18,33 @@ abstract class EndProcess
             WindowsComponents.WindowTaskBarFlash();
 
         ConsoleLive.SingleErrorInstance = false;
+        
+        // It now fucking waits until the progress bar is full
+        // congrats to me!
+        if(ConsoleLive.SelectedError is not 9999 && !ConsoleLive.SingleErrorInstance)
+            await progressBar.AwaitCompletion();
 
         WindowsComponents.FreezeComponents();
 
         IsInProcess = false;
-        progressBar.Value = 0;
         TaskbarProgressBar.ProgressValue = 0;
 
         if(Directory.Exists(FolderButton.FolderDirectory()))
             windowCanvas.Add(ButtonOpenFolder);
             
         OnStartUp.UpdateContexButtons();
+
+        // waits until the thing is faded
+        await progressBar.AwaitOpacityCompletion(0);
+        progressBar.Value = 0;
     }
 
     // File Format method after fetching
-    static void FileFormatTaskEnded() =>
+    static void FileFormatTaskEnded()
+    {
         comboBoxFormat.AddFormatList(TemporaryList);
+        progressBar.Value = 100;
+    }
 
     // Convert method after conversion
     static void ConvertTaskEnded() =>

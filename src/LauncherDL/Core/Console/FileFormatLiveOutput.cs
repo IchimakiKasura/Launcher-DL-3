@@ -2,15 +2,6 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal partial class ConsoleLive
 {
-    #region Constants STR
-    const int ID            = 0,
-              FORMAT        = 1,
-              RESOLUTION    = 2,
-              FPS           = 3,
-              SIZE          = 4,
-              BITRATE       = 5;
-    #endregion
-
     static List<string> FormatNames = new();
     static string AudioOnlyID_M4A, AudioOnlyID_WEBM;
 
@@ -100,7 +91,15 @@ internal partial class ConsoleLive
 
     static void FileFormat_Invoked(string StringData)
     {
-        progressBar.Value = 99;
+        //// [3/27/2023] This code is straight up from v6 :D
+        //// [3/31/2023] the code returns
+        // ProgressBar lmao 
+        progressBar.Value += 25;
+
+        if (progressBar.Value >= 90)
+            progressBar.Value += 75;
+        ////
+
         console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}");
     }
     

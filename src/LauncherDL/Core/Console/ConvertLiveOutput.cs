@@ -12,8 +12,8 @@ internal partial class ConsoleLive
         
         ProgressValue = 0;
         int CurrentTimeInt;
-        string TotalTime = ConvertTotal.Match(StringData).Groups["TotalTime"].Value.Trim();
-        string CurrentTime = ConvertCurrent.Match(StringData).Groups["CurrentTime"].Value.Trim();
+        string TotalTime = ConvertTotal.Match(StringData).Groups[CONVERT_GROUP_TOTALTIME].Value.Trim();
+        string CurrentTime = ConvertCurrent.Match(StringData).Groups[CONVERT_GROUP_CURRENTTIME].Value.Trim();
 
         if (!TotalTime.IsEmpty())
             TotalDuration = (int)TimeSpan.Parse(TotalTime).TotalSeconds;

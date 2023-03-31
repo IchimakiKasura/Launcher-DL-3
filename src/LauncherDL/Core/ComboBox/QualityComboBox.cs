@@ -5,6 +5,6 @@ public class QualityComboBox : IComboBoxControl
     public static void ItemChanged(object s, RoutedEventArgs e)
     {
         if(windowCanvas.Contains(comboBoxQuality))
-            ConsoleOutputMethod.ComboBoxChangedOutputComment(ConsoleOutputMethod.QUALITY);
+            ConsoleOutputMethod.ComboBoxChangedOutputComment(ConsoleOutputMethodSelection.QUALITY);
     }
 }

@@ -2,17 +2,6 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal partial class ConsoleLive
 {
-    #region Constants STR | Should I use Enum?
-    const int 
-    DOWNLOAD_SIZE           = 0,
-    DOWNLOAD_PROGRESS       = 1,
-    DOWNLOAD_SPEED          = 2,
-    DOWNLOAD_ETA            = 3,
-    DOWNLOAD_FMT_SPEED      = 0,
-    DOWNLOAD_FMT_SIZE       = 1,
-    DOWNLOAD_FMT_PROGRESS   = 2;
-    #endregion
-
     static List<string> ProgressInfo;
     static string NetworkSpeedColor = "";
 
@@ -23,7 +12,7 @@ internal partial class ConsoleLive
 
         if(StringData.Contains("[ExtractAudio]") || StringData.Contains("[VideoConvertor]") || StringData.Contains("[Merger]"))
             DL_Dispatch.Invoke(()=>{
-                console.DLAddConsole(CONSOLE_PROCESSING,"Please wait until its finished processing.");
+                console.DLAddConsole(CONSOLE_PROCESSING, PROCESSING_MESSAGE);
                 progressBar.Value = 99;
             });
 
@@ -54,17 +43,19 @@ internal partial class ConsoleLive
         switch("")
         {
             case string when DownSpeedSTR.Contains("K"):
-                if (SpeedNumber > 199.99) NetworkSpeedColor = "Red";
-                else NetworkSpeedColor = "#381900";
+                if (SpeedNumber > 199.99)
+                    NetworkSpeedColor = DOWNSPEED_COLOR_KB_HIGH;
+                else NetworkSpeedColor = DOWNSPEED_COLOR_KB_LOW;
             break;
 
             case string when DownSpeedSTR.Contains("M"):
-                if (SpeedNumber > 0.99) NetworkSpeedColor = "#83fa57";
-                else NetworkSpeedColor = "#fff154";
+                if (SpeedNumber > 0.99)
+                    NetworkSpeedColor = DOWNSPEED_COLOR_MB_HIGH;
+                else NetworkSpeedColor = DOWNSPEED_COLOR_MB_LOW;
             break;
 
             case string when DownSpeedSTR.Contains("G"):
-                NetworkSpeedColor = "Pink";
+                NetworkSpeedColor = DOWNSPEED_COLOR_GB;
             break;
         };
         #endregion
@@ -72,37 +63,24 @@ internal partial class ConsoleLive
         DL_Dispatch.Invoke(()=>Download_Invoke(StringData, DefaultRegex != DownloadInfoARIA2C));
     }
 
-    //FIXME: Refactor it? if possible future me;
     static void Download_Invoke(string StringData, bool IsFetchedFormat)
     {
         console.LoadText(ConsoleLastDocument);
 
         string
-        _Progress   ,
-        _Size       ,
-        _Speed      ,
-        _Time       = "N/A";
+        _Progress   = IsFetchedFormat ? ProgressInfo[DOWNLOAD_FMT_PROGRESS] : ProgressInfo[DOWNLOAD_PROGRESS]   ,
+        _Size       = IsFetchedFormat ? ProgressInfo[DOWNLOAD_FMT_SIZE]     : ProgressInfo[DOWNLOAD_SIZE]       ,
+        _Speed      = IsFetchedFormat ? ProgressInfo[DOWNLOAD_FMT_SPEED]    : ProgressInfo[DOWNLOAD_SPEED]      ,
+        _Time       = IsFetchedFormat ? "N/A"                               : ProgressInfo[DOWNLOAD_ETA]        ;
 
-        if(IsFetchedFormat)
-        {
-            _Speed      = ProgressInfo[DOWNLOAD_FMT_SPEED];
-            _Size       = ProgressInfo[DOWNLOAD_FMT_SIZE];
-            _Progress   = ProgressInfo[DOWNLOAD_FMT_PROGRESS];
-        }
-        else
-        {
-            _Size       = ProgressInfo[DOWNLOAD_SIZE];
-            _Progress   = ProgressInfo[DOWNLOAD_PROGRESS];
-            _Speed      = ProgressInfo[DOWNLOAD_SPEED];
-            _Time       = ProgressInfo[DOWNLOAD_ETA];
-        }
+        // chatgpt says string builder is better than "+" when dealing will long things
+        var FormattedTextOutput = new System.Text.StringBuilder();
+        FormattedTextOutput.Append($"<Cyan>[ PROGRESS$tab$] <>{_Progress}%$nl$");
+        FormattedTextOutput.Append($"<Cyan>[ SIZE$tab$$tab$] <>{_Size}$nl$");
+        FormattedTextOutput.Append($"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{_Speed}/s$nl$");
+        FormattedTextOutput.Append($"<Cyan>[ TIME (ETA)$tab$] <>{_Time}$nl$");
 
-        console.AddFormattedText(
-            $"<Cyan>[ PROGRESS$tab$] <>{_Progress}%$nl$"+
-            $"<Cyan>[ SIZE$tab$$tab$] <>{_Size}$nl$"+
-            $"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{_Speed}/s$nl$"+
-            $"<Cyan>[ TIME (ETA)$tab$] <>{_Time}$nl$"
-        );
+        console.AddFormattedText(FormattedTextOutput.ToString());
         
         double value = 0;
         double.TryParse(_Progress, out value);

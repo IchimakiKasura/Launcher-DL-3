@@ -33,11 +33,23 @@ internal class EventHandlers
         comboBoxFormat.OnItemChange     +=      FormatComboBox.ItemChanged;
         comboBoxQuality.OnItemChange    +=      QualityComboBox.ItemChanged;
 
-        // ComboBox Tooltip list
-        foreach(var ComboBoxTypeList in ComboBoxList.ComboBoxTypes)
-            ComboBoxTypeList.MouseMove += (s,e) => Follow(s,e, ComboBoxTypeList.Content.ToString());
+        // lmaooooooo
+        #pragma warning disable CS8848
 
-        foreach(var ComboBoxTypeList in ComboBoxList.ComboBoxFormatQuality)
-            ComboBoxTypeList.MouseMove += (s,e) => Follow(s,e, ComboBoxTypeList.Content.ToString());
+        #region ComboBox Tooltip List (CTL)
+        foreach(var CTL in ComboBoxList.ComboBoxTypes)
+            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Type?"); // looks better than ToString() idk
+                                                                                     // also kinda looks epic or idk
+        foreach(var CTL in ComboBoxList.ComboBoxVideoFormats)
+            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Format");
+
+        foreach(var CTL in ComboBoxList.ComboBoxAudioFormats)
+            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Format");
+
+        foreach(var CTL in ComboBoxList.ComboBoxFormatQuality)
+            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Quality");
+        #endregion
+
+        #pragma warning restore CS8848
     }
 }
