@@ -13,7 +13,7 @@ public static class ConsoleDebug
     // Only shows when the OutputType is on "Exe" and not "WinExe"
     public static void InitiateConsoleDebug()
     {
-        System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+        System.Console.OutputEncoding = Encoding.UTF8;
         Console.Title = "LauncherDL: ==== DEBUG ====";
         ConsoleDebug.Log("==== DEBUG ====\n");
         ConsoleDebug.Log($"\x1b[33m[INFO] Current OS: {Environment.OSVersion}");

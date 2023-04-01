@@ -19,24 +19,14 @@ public partial class ProgressBarControl : UserControl
     public double Value
     {
         get => (double)GetValue(ValueProperty);
-        set
-        {
-            // smooth increase animation
-            DoubleAnimation animation = new(value, TimeSpan.FromMilliseconds(500));
-            BeginAnimation(ValueProperty, animation);
-        }
+        set => SetValueAnimated(this, ValueProperty, value, TimeSpan.FromMilliseconds(500));
+        
     }
 
     public new double Opacity
     {
         get => (double)GetValue(OpacityProperty);
-        set
-        {
-            var Anti_Overflow = Math.Max(0, Math.Min(value, 1));
-
-            DoubleAnimation animation = new(Anti_Overflow, TimeSpan.FromMilliseconds(300));
-            BeginAnimation(OpacityProperty, animation);
-        }
+        set => SetValueAnimated(this, OpacityProperty, Math.Max(0, Math.Min(value, 1)), TimeSpan.FromMilliseconds(300));
     }
 
     /// <summary>

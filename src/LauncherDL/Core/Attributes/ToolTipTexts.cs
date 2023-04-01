@@ -26,7 +26,7 @@ public class ToolTipTextsAttribute : Attribute
     // Sets the value on selected Attribute
     private void SetValue<WindowType>(string Name, string PropertyDescription, dynamic PropertyField)
     {
-        dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<WindowType>());
+        dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<WindowType, Global>());
         
         if(PropertyItem.GetType().Namespace is "DLControls")
             ((UIElement)PropertyItem.UICanvas).MouseMove += (s,e) =>Follow(s,e, PropertyDescription);

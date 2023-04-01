@@ -33,12 +33,15 @@ internal abstract class BodyButton
         {
             string UnwantedChars    = "\\/*:?\"<>|";
             char[] arr              = UnwantedChars.ToCharArray();
+            var Message = new StringBuilder()
+                .Append("File name cannot contain the following characters:")
+                .Append("\n                             \\ / * : ? \" < > |")
+                .ToString();
 
             foreach (char ch in arr)
                 if (textBoxName.Text.Contains(ch) && !IsFailed)
                 {
-                    MessageBox.Show("File name cannot contain the following characters:"+
-                                    "\n                             \\ / * : ? \" < > |",
+                    MessageBox.Show(Message,
                                     "Error",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Error);

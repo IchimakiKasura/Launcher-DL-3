@@ -99,8 +99,8 @@ public partial class MainWindow
         {
             Height = 25,
             Width = 100,
-            Style = (Style)MainWindowStatic.FindResource("MetadataButtons"),
-            ContextMenu = (ContextMenu)MainWindowStatic.FindResource("OpenFolderCM")
+            Style = GetResources<Style>("MetadataButtons"),
+            ContextMenu = GetResources<ContextMenu>("OpenFolderCM")
         };
         
         // "None" style has no minimize animation
@@ -108,5 +108,6 @@ public partial class MainWindow
 
         MainWindowStaticMemberAttribute.InitiateAttribute<MainWindow>();
         ToolTipTextsAttribute.InitiateAttribute<MainWindow>();
+        FilePathAttribute.InitiateAttribute<Global>();
     }
 }

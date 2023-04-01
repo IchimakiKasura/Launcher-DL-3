@@ -11,7 +11,7 @@ public partial class ContextMenuResource
     {
         string FolderName = ((MenuItem)s).Uid;
 
-        var CurrentDirectory = $"{CONTEXTMENU_configDefaultDirectory}\\{FolderName}";
+        var CurrentDirectory = Path.Combine(CONTEXTMENU_configDefaultDirectory, FolderName);
 
         if(!Directory.Exists(CurrentDirectory))
             CurrentDirectory = Directory.GetCurrentDirectory();

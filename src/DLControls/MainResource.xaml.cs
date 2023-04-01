@@ -16,6 +16,12 @@ public partial class MainResource
         Control.MouseEnter += (s,e) => Enter();
         Control.MouseLeave += (s,e) => Leave();
     }
+
+    public static void SetValueAnimated(UIElement Element, DependencyProperty dp, dynamic value, TimeSpan time)
+    {
+        DoubleAnimation anim = new(value, time);
+        Element.BeginAnimation(dp, anim);
+    }
 }
 
 internal static class _Extensions

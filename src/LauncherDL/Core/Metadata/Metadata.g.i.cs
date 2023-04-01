@@ -29,15 +29,16 @@ public partial class MetadataWindow
     private Button Button_Exit;
     #endregion
 
-    private List<TextBlock> LABEL_LIST = new()
-    {
-        new() { Text = LABEL_TITLE          },
-        new() { Text = LABEL_ALBUM          },
-        new() { Text = LABEL_ALBUM_ARTIST   },
-        new() { Text = LABEL_YEAR           },
-        new() { Text = LABEL_GENRE          },
-        new() { Text = LABEL_CREATOR        }
-    };
+    private readonly ImmutableList<TextBlock> LABEL_LIST =
+        ImmutableList.Create<TextBlock>(
+            new() { Text = LABEL_TITLE          },
+            new() { Text = LABEL_ALBUM          },
+            new() { Text = LABEL_ALBUM_ARTIST   },
+            new() { Text = LABEL_YEAR           },
+            new() { Text = LABEL_GENRE          },
+            new() { Text = LABEL_CREATOR        }
+        );
+        
     private List<TextBoxControl> TEXTBOX_LIST = new();
     
     private bool _contentLoad;
@@ -51,31 +52,27 @@ public partial class MetadataWindow
         IsWindowOpen = true;
 
         #region Setup window
-
-        Name                    = "MetadataRoot";
-        Title                   = LABEL_WINDOW_TITLE;
-        Height                  = 260;
-        Width                   = 455;
-        ResizeMode              = ResizeMode.CanMinimize;
-        WindowStartupLocation   = WindowStartupLocation.CenterScreen;
-        Background              = Brushes.Transparent;
-        Effect                  = windowDropShadow;
-        Resources               = MainWindowStatic.Resources;
-        new WindowInteropHelper(this).EnsureHandle();
-        new TransparencyConverter(this).MakeTransparent();
-
+            Name                    = "MetadataRoot";
+            Title                   = LABEL_WINDOW_TITLE;
+            Height                  = 260;
+            Width                   = 455;
+            ResizeMode              = ResizeMode.CanMinimize;
+            WindowStartupLocation   = WindowStartupLocation.CenterScreen;
+            Background              = Brushes.Transparent;
+            Effect                  = windowDropShadow;
+            Resources               = MainWindowStatic.Resources;
+            new WindowInteropHelper(this).EnsureHandle();
+            new TransparencyConverter(this).MakeTransparent();
         #endregion
 
         #region Setup Top bar
-
-        var _WindowChrome                   = new WindowChrome();
-        _WindowChrome.GlassFrameThickness   = new(0);
-        _WindowChrome.CornerRadius          = new(0);
-        _WindowChrome.CaptionHeight         = 0;
-        _WindowChrome.UseAeroCaptionButtons = false;
-        _WindowChrome.ResizeBorderThickness = new(7);
-        WindowChrome.SetWindowChrome(this, _WindowChrome);
-
+            var _WindowChrome                   = new WindowChrome();
+            _WindowChrome.GlassFrameThickness   = new(0);
+            _WindowChrome.CornerRadius          = new(0);
+            _WindowChrome.CaptionHeight         = 0;
+            _WindowChrome.UseAeroCaptionButtons = false;
+            _WindowChrome.ResizeBorderThickness = new(7);
+            WindowChrome.SetWindowChrome(this, _WindowChrome);
         #endregion
 
         // Creates the Elements and its children 👀
@@ -104,23 +101,23 @@ public partial class MetadataWindow
 
         // Did this for Placeholders
         #region Metadata
-        Metadata_Title                          = TEXTBOX_LIST[METADATA_TITLE];
-        Metadata_Album                          = TEXTBOX_LIST[METADATA_ALBUM];
-        Metadata_Album_Artist                   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
-        Metadata_Year                           = TEXTBOX_LIST[METADATA_YEAR];
-        Metadata_Genre                          = TEXTBOX_LIST[METADATA_GENRE];
+            Metadata_Title                          = TEXTBOX_LIST[METADATA_TITLE];
+            Metadata_Album                          = TEXTBOX_LIST[METADATA_ALBUM];
+            Metadata_Album_Artist                   = TEXTBOX_LIST[METADATA_ALBUM_ARTIST];
+            Metadata_Year                           = TEXTBOX_LIST[METADATA_YEAR];
+            Metadata_Genre                          = TEXTBOX_LIST[METADATA_GENRE];
 
-        Metadata_Title.TextPlaceholder          = PLACEHOLDER_TITLE;
-        Metadata_Album.TextPlaceholder          = PLACEHOLDER_ALBUM;
-        Metadata_Album_Artist.TextPlaceholder   = PLACEHOLDER_ALBUM_ARTIST;
-        Metadata_Year.TextPlaceholder           = PLACEHOLDER_YEAR;
-        Metadata_Genre.TextPlaceholder          = PLACEHOLDER_GENRE;
+            Metadata_Title.TextPlaceholder          = PLACEHOLDER_TITLE;
+            Metadata_Album.TextPlaceholder          = PLACEHOLDER_ALBUM;
+            Metadata_Album_Artist.TextPlaceholder   = PLACEHOLDER_ALBUM_ARTIST;
+            Metadata_Year.TextPlaceholder           = PLACEHOLDER_YEAR;
+            Metadata_Genre.TextPlaceholder          = PLACEHOLDER_GENRE;
         #endregion
 
-        Button_Set          = new() { Content = BUTTON_SET    , Style = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_BUTTONS)};
-        Button_Cancel       = new() { Content = BUTTON_CANCEL , Style = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_BUTTONS)};
+        Button_Set          = new() { Content = BUTTON_SET    , Style = GetResources<Style>(WINDOW_RESOURCE_BUTTONS)};
+        Button_Cancel       = new() { Content = BUTTON_CANCEL , Style = GetResources<Style>(WINDOW_RESOURCE_BUTTONS)};
         Button_Exit.Content = "✕";
-        Button_Exit.Style   = (Style)MainWindowStatic.FindResource(WINDOW_RESOURCE_EXIT_BUTTON);
+        Button_Exit.Style   = GetResources<Style>(WINDOW_RESOURCE_EXIT_BUTTON);
         Button_Exit.Margin  = new(this.Width - 70, 0,0,0);
 
         SetCanvasPlacement();
@@ -148,25 +145,25 @@ public partial class MetadataWindow
     private void SetCanvasPlacement()
     {
         #region Label Placements
-        SetCanvas(LABEL_LIST[METADATA_TITLE       ] ,  42, 16);
-        SetCanvas(LABEL_LIST[METADATA_ALBUM       ] ,  70, 16);
-        SetCanvas(LABEL_LIST[METADATA_ALBUM_ARTIST] ,  98, 16);
-        SetCanvas(LABEL_LIST[METADATA_YEAR        ] , 126, 16);
-        SetCanvas(LABEL_LIST[METADATA_GENRE       ] , 154, 16);
-        SetCanvas(LABEL_LIST[METADATA_LABEL       ] , 210, 16);
+            SetCanvas(LABEL_LIST[METADATA_TITLE       ] ,  42, 16);
+            SetCanvas(LABEL_LIST[METADATA_ALBUM       ] ,  70, 16);
+            SetCanvas(LABEL_LIST[METADATA_ALBUM_ARTIST] ,  98, 16);
+            SetCanvas(LABEL_LIST[METADATA_YEAR        ] , 126, 16);
+            SetCanvas(LABEL_LIST[METADATA_GENRE       ] , 154, 16);
+            SetCanvas(LABEL_LIST[METADATA_LABEL       ] , 210, 16);
         #endregion
 
         #region Textbox Placements
-        SetCanvas(Metadata_Title        ,   44, 155);
-        SetCanvas(Metadata_Album        ,   72, 155);
-        SetCanvas(Metadata_Album_Artist ,  100, 155);
-        SetCanvas(Metadata_Year         ,  128, 155);
-        SetCanvas(Metadata_Genre        ,  156, 155);
+            SetCanvas(Metadata_Title        ,   44, 155);
+            SetCanvas(Metadata_Album        ,   72, 155);
+            SetCanvas(Metadata_Album_Artist ,  100, 155);
+            SetCanvas(Metadata_Year         ,  128, 155);
+            SetCanvas(Metadata_Genre        ,  156, 155);
         #endregion
 
         #region Button Placements
-        SetCanvas(Button_Set    ,   196,204);
-        SetCanvas(Button_Cancel ,   196,320);
+            SetCanvas(Button_Set    ,   196,204);
+            SetCanvas(Button_Cancel ,   196,320);
         #endregion
     }
     
@@ -180,10 +177,8 @@ public partial class MetadataWindow
             if (e.ChangedButton is MouseButton.Left)
                 DragMove();
         };
-
     }
     
     protected override void OnClosing(System.ComponentModel.CancelEventArgs e) =>
         IsWindowOpen = false;
-
 }

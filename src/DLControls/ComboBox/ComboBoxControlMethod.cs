@@ -17,7 +17,7 @@ public partial class ComboBoxControl
     private void AutoAdd(TypeList x)
     {
         ClearItems();
-        List<ComboBoxItem> temp = new();
+        ImmutableList<ComboBoxItem> temp = null;
         
         switch(x)
         {

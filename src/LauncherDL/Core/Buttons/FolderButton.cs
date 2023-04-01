@@ -20,7 +20,7 @@ internal class FolderButton : IButtonControls
 
     public static string FolderDirectory()
     {
-        var currentDirectory = $"{Directory.GetCurrentDirectory()}\\{config.DefaultOutput}";
+        var currentDirectory = Path.Combine(Directory.GetCurrentDirectory(), config.DefaultOutput);
 
         if(config.DefaultOutput != new DefaultConfig().DefaultOutput)
             currentDirectory = config.DefaultOutput ;

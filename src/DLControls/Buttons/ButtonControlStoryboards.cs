@@ -7,17 +7,18 @@ public partial class ButtonControl
     ColorAnimation ButtonForeground;
     RectAnimation ButtonImageViewport;
     List<Storyboard> ControlsStoryboards;
-    List<PropertyPath> ControlPaths = new List<PropertyPath>()
-    {
-        new(BUTTON_OPACITY),    // 0
-        new(BUTTON_WIDTH),      // 1
-        new(BUTTON_HEIGHT),     // 2
-        new(BUTTON_FONTSIZE),   // 3
-        new(IMAGE_OPACITY),     // 4
-        new(IMAGE_MARGIN),      // 5
-        new(BUTTON_FONTCOLOR),  // 6
-        new(IMAGE_VIEWPORT),    // 7
-    };
+    readonly ImmutableList<PropertyPath> ControlPaths =
+        ImmutableList.Create<PropertyPath>(
+            new(BUTTON_OPACITY),    // 0
+            new(BUTTON_WIDTH),      // 1
+            new(BUTTON_HEIGHT),     // 2
+            new(BUTTON_FONTSIZE),   // 3
+            new(IMAGE_OPACITY),     // 4
+            new(IMAGE_MARGIN),      // 5
+            new(BUTTON_FONTCOLOR),  // 6
+            new(IMAGE_VIEWPORT)     // 7
+        );
+
     List<TimeSpan> AnimationDuration;
 
     // ChatGPT says it so fuck it, ternary it is because fuck if-else and switch;
@@ -52,9 +53,9 @@ public partial class ButtonControl
 
     private void SetStoryboard(bool IsEnter)
     {
-        if (IsAnimationOn)
-            AnimationDuration = new(){ TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(50) };
-        else AnimationDuration = new(){ TimeSpan.Zero };
+        AnimationDuration = IsAnimationOn ? 
+            new() { TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(50) }
+          : new() { TimeSpan.Zero };
 
         SetAnimationsValues(IsEnter, AnimationDuration);
 
@@ -79,7 +80,7 @@ public partial class ButtonControl
             DependencyObject TargetElement = UserButton;
 
             if (index is 4 || index is 7)
-                TargetElement = (Border)GetTemplateResource<Border>(BORDER_RESOURCE, TargetElement);
+                TargetElement = GetTemplateResource<Border>(BORDER_RESOURCE, TargetElement);
 
             SetStoryboardAuto(storyboard, TargetElement, ControlPaths[index]);
 

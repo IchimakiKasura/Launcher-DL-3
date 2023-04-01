@@ -29,7 +29,7 @@ sealed partial class YDL
         if (!IsFileFormat)
             throw new FileFormatMethodException();
 
-        var Arguments = new System.Text.StringBuilder();
+        var Arguments = new StringBuilder();
         Arguments.Append($"--compat-options format-sort -F {Link} --no-playlist");
 
         if (config.AllowCookies) Arguments.Append($" --cookies-from-browser {config.BrowserCookie}");
@@ -69,15 +69,27 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new ConvertMethodException();
 
-        var FFMPEG_STRINGS = new System.Text.StringBuilder();
+        var FFMPEG_STRINGS = new StringBuilder();
         FFMPEG_STRINGS.Append("-metadata description=\"Converted on LauncherDL\" ");
         FFMPEG_STRINGS.Append("-metadata comment=\"Converted on LauncherDL\" ");
 
-        var Arguments = $"-i \"{Link}\" {comboBoxQuality.GetItemUID} {FFMPEG_STRINGS.ToString()} \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{Format}\"";
+        var directoryPath = Path.Combine(config.DefaultOutput, "Convert");
+
+        var Arguments = new StringBuilder()
+        .Append("-i \"")
+        .Append(Link)
+        .Append("\" ")
+        .Append(comboBoxQuality.GetItemUID)
+        .Append(" ")
+        .Append(FFMPEG_STRINGS.ToString())
+        .Append(" \"")
+        .Append(Path.Combine(config.DefaultOutput, "Convert", $"{textBoxName.Text}.{Format}\""))
+        .ToString();
+
         ConsoleLive.SelectedError = 3;
         
-        if (!Directory.Exists($"{config.DefaultOutput}\\Convert"))
-            Directory.CreateDirectory($"{config.DefaultOutput}\\Convert");
+        if (!Directory.Exists(directoryPath))
+            Directory.CreateDirectory(directoryPath);
 
         await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.ConvertLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
@@ -93,7 +105,7 @@ sealed partial class YDL
         if (IsUpdate || IsFileFormat)
             throw new DownloadMethodException();
 
-        var Arguments = new System.Text.StringBuilder();
+        var Arguments = new StringBuilder();
 
         string
         FolderType = "Formatted\\%(ext)s",
@@ -124,7 +136,7 @@ sealed partial class YDL
             break;
         }
 
-        var FILE_EXIST_PATH = $"{config.DefaultOutput}/{FolderType}/{textBoxName.Text}.{ExtensionFormat}";
+        var FILE_EXIST_PATH = Path.Combine(config.DefaultOutput, FolderType, $"{textBoxName.Text}.{ExtensionFormat}");
 
         if(CheckFileExist(FILE_EXIST_PATH, Type))
         {
@@ -135,6 +147,7 @@ sealed partial class YDL
 
         // Finalizing the arguments
         Arguments.Append($"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\" --no-playlist");
+        
         if (config.AllowCookies) Arguments.Append($" --cookies-from-browser {config.BrowserCookie}");
         
         // Warns the user that there's no FFMPEG in presence

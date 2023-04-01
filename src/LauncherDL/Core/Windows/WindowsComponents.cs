@@ -96,7 +96,7 @@ class WindowsComponents
 
         fInfo.cbSize = Convert.ToUInt32(Marshal.SizeOf(fInfo));
         fInfo.hwnd = hWnd;
-        fInfo.dwFlags = FLASHW_ALL | FLASHW_TIMERNOFG;
+        fInfo.dwFlags = FLASHW_ALL;
         fInfo.uCount = uint.MaxValue;
         fInfo.dwTimeout = 0;
 

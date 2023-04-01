@@ -12,7 +12,7 @@ internal class ConvertButton : IButtonControls
 
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {
-        var FILE_EXIST_PATH = $"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}";
+        var FILE_EXIST_PATH = Path.Combine(config.DefaultOutput, "Convert", $"{textBoxName.Text}.{comboBoxFormat.GetItemContent}");;
 
         string ErrorString = string.Empty switch
         {

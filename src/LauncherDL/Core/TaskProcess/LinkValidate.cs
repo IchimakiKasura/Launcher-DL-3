@@ -54,8 +54,8 @@ sealed class LinkValidate
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 CreateNoWindow = true,
-                StandardOutputEncoding = System.Text.Encoding.UTF8,
-                StandardErrorEncoding = System.Text.Encoding.UTF8
+                StandardOutputEncoding = Encoding.UTF8,
+                StandardErrorEncoding = Encoding.UTF8
             }
         };
 

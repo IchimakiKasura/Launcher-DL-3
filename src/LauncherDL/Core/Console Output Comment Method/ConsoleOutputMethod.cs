@@ -70,24 +70,34 @@ internal static class ConsoleOutputMethod
             _                                    => null
         });
 
-    public static void DownloadInfoOutputComment(ObjectListNames Obj) =>
-        console.DLAddConsole(CONSOLE_INFO_STRING, "Downloading Please wait$nl$"+
-        $"<Gray%10>[] Title$tab$$tab$: {Obj.Title}$nl$"+
-        $"<Gray%10>[] Download Type$tab$: {Obj.Type}$nl$"+
-        $"<Gray%10>[] Name$tab$$tab$: {Obj.Name}$nl$"+
-        $"<Gray%10>[] Format$tab$$tab$: {Obj.Format}$nl$"+
-        $"<Gray%10>[] Link$tab$$tab$: {Obj.Link}$nl$");
+    public static void DownloadInfoOutputComment(ObjectListNames Obj)
+    {
+        var OutputComment = new StringBuilder()
+            .Append("Downloading Please wait$nl$")
+            .Append($"<Gray%10>[] Title$tab$$tab$: {Obj.Title}$nl$")
+            .Append($"<Gray%10>[] Download Type$tab$: {Obj.Type}$nl$")
+            .Append($"<Gray%10>[] Name$tab$$tab$: {Obj.Name}$nl$")
+            .Append($"<Gray%10>[] Format$tab$$tab$: {Obj.Format}$nl$")
+            .Append($"<Gray%10>[] Link$tab$$tab$: {Obj.Link}$nl$")
+            .ToString();
+
+        console.DLAddConsole(CONSOLE_INFO_STRING,OutputComment);
+    }
 
     public static void MetadataOutputComment()
     {
         console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been set!");
-        console.AddFormattedText("<Gray%12>"+
-            $"{CONSOLE_METADATA_TITLE       }"  +  $"{Old_Title        ?? "N\\A"} $nl$"  +      
-            $"{CONSOLE_METADATA_ALBUM       }"  +  $"{Old_Album        ?? "N\\A"} $nl$"  +
-            $"{CONSOLE_METADATA_ALBUM_ARTIST}"  +  $"{Old_Album_Artist ?? "N\\A"} $nl$"  +
-            $"{CONSOLE_METADATA_YEAR        }"  +  $"{Old_Year         ?? "N\\A"} $nl$"  +
-            $"{CONSOLE_METADATA_GENRE       }"  +  $"{Old_Genre        ?? "N\\A"}"
-        );
+
+        var MetadataOutputComment = new StringBuilder()
+            .Append("<Gray%12>")
+            .Append($"{CONSOLE_METADATA_TITLE       }"  +  $"{Old_Title        ?? "N\\A"}$nl$")
+            .Append($"{CONSOLE_METADATA_ALBUM       }"  +  $"{Old_Album        ?? "N\\A"}$nl$")
+            .Append($"{CONSOLE_METADATA_ALBUM_ARTIST}"  +  $"{Old_Album_Artist ?? "N\\A"}$nl$")
+            .Append($"{CONSOLE_METADATA_YEAR        }"  +  $"{Old_Year         ?? "N\\A"}$nl$")
+            .Append($"{CONSOLE_METADATA_GENRE       }"  +  $"{Old_Genre        ?? "N\\A"}")
+            .ToString();
+
+        console.AddFormattedText(MetadataOutputComment);
     }
 
 }

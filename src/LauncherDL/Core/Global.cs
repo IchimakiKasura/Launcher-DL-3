@@ -24,6 +24,7 @@ public partial class Global
     public static DefaultConfig config;
 
     /// shortcuts
+    public static T GetResources<T>(string Name) => (T)MainWindowStatic.FindResource(Name);
     public static Color ClrConv(string color) => (Color)ColorConverter.ConvertFromString(color);
     public static Brush BrhConv(string color) => (Brush)new BrushConverter().ConvertFromString(color);
     public static void SetCanvas(UIElement Element, double Top, double Left)
@@ -35,7 +36,7 @@ public partial class Global
     /// <summary>Languages</summary>
     public static DLLanguages.Pick.LanguagePick Language;
     
-    public static List<string> FileExtensions = new()
+    public static readonly ReadOnlyCollection<string> FileExtensions = Array.AsReadOnly(new string[]
     {
         "mp4",
         "mkv",
@@ -44,27 +45,29 @@ public partial class Global
         "m4a",
         "3gp",
         "flv"
-    };
+    });
 
     /// <summary>ComboBoxFormat Temporary list</summary>
     public static List<FormatList> TemporaryList = new();
+
     public static MemoryStream ConsoleLastDocument;
 
     /// <summary>Process Start</summary>
     public static Process ProcessTaskVariable;
 
     #region Path variables
-    public readonly static string YDL_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ydl.bin"; 
-    public readonly static string FFMPEG_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\ffmpeg.exe";
-    public readonly static string ARIA2C_Path = $"{Directory.GetCurrentDirectory()}\\LauncherDL_Data\\aria2c.exe";
+    [FilePath("ydl.bin")]
+    public static string YDL_Path;
+    [FilePath("ffmpeg.exe")]
+    public static string FFMPEG_Path;
+    [FilePath("aria2c.exe")]
+    public static string ARIA2C_Path;
     #endregion
 
     #region Window Flash
-    [DllImport("user32.dll", CallingConvention = CallingConvention.Cdecl)]
-    [return: MarshalAs(UnmanagedType.Bool)]
+    [DllImport("user32.dll")]
     public static extern bool FlashWindowEx(ref FLASHWINFO pwfi);
     public const uint FLASHW_ALL = 3;
-    public const uint FLASHW_TIMERNOFG = 12;
     [StructLayout(LayoutKind.Sequential)]
     /// <summary>Window Flashing</summary>
     public struct FLASHWINFO
@@ -110,7 +113,7 @@ public partial class Global
 
 }
 
-public struct ObjectListNames
+public ref struct ObjectListNames
 {
     public string Title     { get; set; }
     public string Type      { get; set; }

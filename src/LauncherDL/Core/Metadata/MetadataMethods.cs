@@ -52,7 +52,7 @@ public partial class MetadataWindow
         temporaryFilePath   = Path.Combine(filePath, $"TEMP_{fileName}.{fileExtension}");
         
         // Prepare FFmpeg command
-        var metadataArguments = new System.Text.StringBuilder();
+        var metadataArguments = new StringBuilder();
         metadataArguments.Append($"-i \"{fullFilePath}\" ");
         metadataArguments.Append($"-metadata title=\"{Old_Title}\" ");
         metadataArguments.Append($"-metadata album=\"{Old_Album}\" ");

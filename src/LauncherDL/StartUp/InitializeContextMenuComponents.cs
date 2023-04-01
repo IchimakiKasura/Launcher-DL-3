@@ -16,11 +16,12 @@ partial class OnStartUp
     // Code was 100% refactored by one and only ChatGPT ☠️☠️
     public static void UpdateContexButtons()
     {
-        ContextMenu contextMenu = (ContextMenu)MainWindowStatic.FindResource("OpenFolderCM");
+        ContextMenu contextMenu = GetResources<ContextMenu>("OpenFolderCM");
 
         foreach(MenuItem menuItem in contextMenu.Items)
         {
-            bool hasFolder = Directory.Exists($"{FolderButton.FolderDirectory()}\\{menuItem.Uid}");
+            string menuItemPath = Path.Combine(FolderButton.FolderDirectory(), menuItem.Uid);
+            bool hasFolder = Directory.Exists(menuItemPath);
 
             // Disable the menu item if there is no folder
             menuItem.IsEnabled = hasFolder;
@@ -28,7 +29,8 @@ partial class OnStartUp
             // Disable the menu item if there is no folder
             foreach(MenuItem childMenuItem in menuItem.Items)
             {
-                bool childHasFolder = Directory.Exists($"{FolderButton.FolderDirectory()}\\{childMenuItem.Uid}");
+                string childMenuItemPath = Path.Combine(FolderButton.FolderDirectory(), childMenuItem.Uid); 
+                bool childHasFolder = Directory.Exists(childMenuItemPath);
                 childMenuItem.IsEnabled = childHasFolder;
             }
         }

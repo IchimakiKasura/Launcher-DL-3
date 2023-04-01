@@ -78,6 +78,7 @@
     <Using Include="System" />
     <Using Include="System.IO" />
     <Using Include="System.Linq" />
+    <Using Include="System.Text" />
     <Using Include="System.Windows" />
     <Using Include="Microsoft.Win32" />
     <Using Include="System.Reflection" />
@@ -92,9 +93,11 @@
     <Using Include="System.Collections.Generic" />
     <Using Include="System.Windows.Media.Imaging"/>
     <Using Include="System.Windows.Media.Effects" />
+    <Using Include="System.Collections.Immutable" />
     <Using Include="System.Text.RegularExpressions" />
     <Using Include="System.Runtime.InteropServices" />
     <Using Include="System.Windows.Media.Animation" />
+    <Using Include="System.Collections.ObjectModel" />
   </ItemGroup>
 
   <ItemGroup>

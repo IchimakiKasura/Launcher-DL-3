@@ -74,7 +74,7 @@ internal partial class ConsoleLive
         _Time       = IsFetchedFormat ? "N/A"                               : ProgressInfo[DOWNLOAD_ETA]        ;
 
         // chatgpt says string builder is better than "+" when dealing will long things
-        var FormattedTextOutput = new System.Text.StringBuilder();
+        var FormattedTextOutput = new StringBuilder();
         FormattedTextOutput.Append($"<Cyan>[ PROGRESS$tab$] <>{_Progress}%$nl$");
         FormattedTextOutput.Append($"<Cyan>[ SIZE$tab$$tab$] <>{_Size}$nl$");
         FormattedTextOutput.Append($"<Cyan>[ SPEED$tab$$tab$] <{NetworkSpeedColor}>{_Speed}/s$nl$");

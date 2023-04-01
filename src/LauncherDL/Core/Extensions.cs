@@ -38,14 +38,19 @@ internal static class _Core_Extensions
     #region ConsoleControl
     public static void DLAddConsole(this ConsoleControl console,string TypeString, string FormattedText, bool Italic = false, bool NoNL = false)
     {
+        var Message = new StringBuilder()
+            .Append(TypeString)
+            .Append(" ")
+            .Append(FormattedText).ToString();
+
         switch(TypeString)
         {
             case string when TypeString.Contains(CONSOLE_SYSTEM_STRING) && config.ShowSystemOutput:
-                console.AddFormattedText($"{TypeString} {FormattedText}", Italic, NoNL);
+                console.AddFormattedText(Message, Italic, NoNL);
             break;
 
             case string when !TypeString.Contains(CONSOLE_SYSTEM_STRING):
-                console.AddFormattedText($"{TypeString} {FormattedText}", Italic, NoNL);
+                console.AddFormattedText(Message, Italic, NoNL);
             break;
         };
     }

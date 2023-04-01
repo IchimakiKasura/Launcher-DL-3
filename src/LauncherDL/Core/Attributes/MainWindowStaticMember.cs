@@ -34,7 +34,7 @@ public class MainWindowStaticMemberAttribute : Attribute
         var fieldInfo = typeof(T).GetField($"_{propertyInfo.Name}", BindingFlags.NonPublic|BindingFlags.Instance);
 
         // Gets the Static object of the of the Type
-        var fieldItem = fieldInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<T>());
+        var fieldItem = fieldInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<T, Global>());
 
         // Returns if its null
         if (fieldItem is null) return;

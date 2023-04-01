@@ -1,24 +1,29 @@
 namespace LauncherDL.Core.YTDLP;
 
-internal class UpdateMethodException : Exception
+public class YTDLException : Exception
+{
+    public YTDLException(string message) : base(message) { }
+}
+
+internal class UpdateMethodException : YTDLException
 {
     public UpdateMethodException()
         : base("Upload boolean is not set!") { }
 }
 
-public class FileFormatMethodException : Exception
+internal class FileFormatMethodException : YTDLException
 {
     public FileFormatMethodException()
         : base("FileFormat boolean is not set!") { }
 }
 
-public class DownloadMethodException : Exception
+internal class DownloadMethodException : YTDLException
 {
     public DownloadMethodException()
         : base("FileFormat or Update boolean is set to true!") { }
 }
 
-public class ConvertMethodException : Exception
+internal class ConvertMethodException : YTDLException
 {
     public ConvertMethodException()
         : base("FileFormat or Update boolean is set to true!") { }
