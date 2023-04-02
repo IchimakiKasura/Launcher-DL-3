@@ -146,7 +146,7 @@ sealed partial class YDL
         }
 
         // Finalizing the arguments
-        Arguments.Append($"{Arguments} \"{Link}\" -o \"{FILE_EXIST_PATH}\" --no-playlist");
+        Arguments.Append($" \"{Link}\" -o \"{FILE_EXIST_PATH}\" --no-playlist");
         
         if (config.AllowCookies) Arguments.Append($" --cookies-from-browser {config.BrowserCookie}");
         
@@ -154,7 +154,7 @@ sealed partial class YDL
         if(FFmpeg.FFmpegFiles.ErrorOccured)
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
-            Arguments.Append($"  --downloader \"{ARIA2C_Path}\" --no-part");
+            Arguments.Append($" --downloader \"{ARIA2C_Path}\" --no-part");
         } else Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
 
         console.Break("Gray");

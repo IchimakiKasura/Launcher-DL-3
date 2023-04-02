@@ -27,6 +27,11 @@ abstract class StartProcess
             ProcessTaskVariable.ErrorDataReceived -= e;
             ProcessTaskVariable.ErrorDataReceived += ConsoleLive.ErrorOutputComment;
             ProcessTaskVariable.OutputDataReceived += e;
+
+            #if DEBUG
+                ProcessTaskVariable.ErrorDataReceived += (s,e) => Console.WriteLine($"ERROR: {e.Data}");
+                ProcessTaskVariable.OutputDataReceived += (s,e) => Console.WriteLine($"NORMAL: {e.Data}");
+            #endif
         }
 
         // UI freezes when starting up like wth

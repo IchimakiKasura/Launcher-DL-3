@@ -65,16 +65,13 @@ class WindowsComponents
         if (e.ChangedButton is MouseButton.Left) MainWindowStatic.DragMove();
     }
 
-    public static async void WindowProgressBar(ProgressBarState State)
+    public static async void WindowProgressBar(ProgressBarState state)
     {
-        switch(State)
+        switch(state)
         {
             case ProgressBarState.Hide:
                 progressBar.Opacity = 0;
-                
-                // avoid that weird progressbar disappear quickly
-                await progressBar.AwaitOpacityCompletion(0);
-
+                await progressBar.AwaitOpacityCompletionAsync(0);
                 windowCanvas.Remove(progressBar);
                 console.ConsoleHeight = 273;
             break;

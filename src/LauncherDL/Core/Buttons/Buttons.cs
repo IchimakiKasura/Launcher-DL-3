@@ -6,7 +6,6 @@ internal abstract class BodyButton
 
     public static async Task<bool> CheckLinkValidation()
     {
-        // Resets the static variable
         IsFailed = false;
 
         if (textBoxLink.Text.IsEmpty()

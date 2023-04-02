@@ -1,6 +1,6 @@
 namespace DLControls;
 
-public class FormatList : UIElement
+public class FormatList
 {
     public string Name              { get; set; }
     public string ID                { get; set; }

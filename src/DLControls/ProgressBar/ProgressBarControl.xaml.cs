@@ -31,7 +31,7 @@ public partial class ProgressBarControl : UserControl
     /// <summary>
     /// Holds the thread until the progress value is 100
     /// </summary>
-    public async Task AwaitCompletion()
+    public async Task AwaitCompletionAsync()
     {
         while(Value is not 100) await Task.Delay(100);
     }
@@ -39,7 +39,7 @@ public partial class ProgressBarControl : UserControl
     /// <summary>
     /// Holds the thread until the Opacity hits its mark
     /// </summary>
-    public async Task AwaitOpacityCompletion(int TargetValue)
+    public async Task AwaitOpacityCompletionAsync(int TargetValue)
     {
         while(Opacity != TargetValue) await Task.Delay(100);
     }
