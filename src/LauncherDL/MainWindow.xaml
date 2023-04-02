@@ -37,7 +37,7 @@
     <!--#endregion-->
 
     <Border x:Name="_windowInnerBG" Background="Black" Margin="10,10,10,10" CornerRadius="10">
-        <Border Focusable="True">
+        <Border Focusable="False">
             <Border.Background>
                 <ImageBrush x:Name="_windowBackgroundImage" ImageSource="pack://siteoforigin:,,,/Images/background.jpg" Opacity="0.5"/>
             </Border.Background>

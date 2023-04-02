@@ -5,16 +5,15 @@ public class WindowStaticRefAttribute : Attribute
 {
     public WindowStaticRefAttribute() { }
     
-    public static dynamic InitiateAttribute<T1, T2>()
-        where T2 : new()
+    public static dynamic InitiateAttribute<TargetType, GlobalType>()
     {
-        foreach(FieldInfo GlobalFields in typeof(T2).GetFields())
+        foreach(FieldInfo GlobalFields in typeof(GlobalType).GetFields())
         {
             var FieldAttribute = GlobalFields.GetCustomAttribute<WindowStaticRefAttribute>();
             
             if(FieldAttribute is not null)
-                if(typeof(T1) == GlobalFields.FieldType)
-                    return GlobalFields.GetValue(new T2());
+                if(typeof(TargetType) == GlobalFields.FieldType)
+                    return GlobalFields.GetValue(null);
         }
         return null;
     }

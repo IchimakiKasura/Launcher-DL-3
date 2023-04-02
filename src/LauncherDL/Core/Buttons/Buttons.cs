@@ -9,23 +9,12 @@ internal abstract class BodyButton
         // Resets the static variable
         IsFailed = false;
 
-        // Check if link missing
-        if (textBoxLink.Text.IsEmpty())
+        if (textBoxLink.Text.IsEmpty()
+            || !Uri.TryCreate(textBoxLink.Text, UriKind.Absolute, out Uri uriResult)
+            || !(uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps) )
         {
             ConsoleOutputMethod.NoLinkOutputComment();
             IsFailed = true;
-        }
-        else // Checks if link is valid
-        {
-            Uri uriResult;
-            bool result = Uri.TryCreate(textBoxLink.Text, UriKind.Absolute, out uriResult) 
-                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-
-            if(!result)
-            {
-                ConsoleOutputMethod.NoLinkOutputComment();
-                IsFailed = true;
-            }
         }
 
         // Checks on Name characters

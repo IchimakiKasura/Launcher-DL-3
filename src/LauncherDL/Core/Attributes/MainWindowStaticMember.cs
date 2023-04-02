@@ -12,10 +12,10 @@ public class MainWindowStaticMemberAttribute : Attribute
     public MainWindowStaticMemberAttribute() { }
 
     // Initialize the Attribute
-    public static void InitiateAttribute<T>()
+    public static void InitiateAttribute<TargetType>()
     {
         // Iterate to all the properties of the given type of generic
-        foreach(PropertyInfo MainWindowField in typeof(T).GetProperties())
+        foreach(PropertyInfo MainWindowField in typeof(TargetType).GetProperties())
         {
             // Gets the custom attribute of the iterated property
             var FieldAttribute = MainWindowField.GetCustomAttribute<MainWindowStaticMemberAttribute>();
@@ -23,23 +23,23 @@ public class MainWindowStaticMemberAttribute : Attribute
             // Checks if the given attribute is null
             if(FieldAttribute is not null)
                 // Proceed to Set the value if there's an attribute found
-                FieldAttribute.SetValue<T>(MainWindowField);
+                FieldAttribute.SetValue<TargetType>(MainWindowField);
         }
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<T>(PropertyInfo propertyInfo)
+    private void SetValue<TargetType>(PropertyInfo propertyInfo)
     {
         // Gets the Field from MainWindow that are non static
-        var fieldInfo = typeof(T).GetField($"_{propertyInfo.Name}", BindingFlags.NonPublic|BindingFlags.Instance);
+        var fieldInfo = typeof(TargetType).GetField($"_{propertyInfo.Name}", BindingFlags.NonPublic|BindingFlags.Instance);
 
         // Gets the Static object of the of the Type
-        var fieldItem = fieldInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<T, Global>());
+        var fieldItem = fieldInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<TargetType, Global>());
 
         // Returns if its null
         if (fieldItem is null) return;
         
         // Sets the Static properties from non static field
-        typeof(T).GetProperty(propertyInfo.Name).SetValue(propertyInfo, fieldItem);
+        typeof(TargetType).GetProperty(propertyInfo.Name).SetValue(null, fieldItem);
     }
 } 

@@ -7,7 +7,7 @@ sealed class LinkValidate
     bool IsError = false;
     string url;
 
-    public LinkValidate(string _url) =>
+    public LinkValidate(string _url = "") =>
         url = _url;
     
     public async Task<LinkValidate> Validate()
@@ -23,7 +23,7 @@ sealed class LinkValidate
             await GetFileName();
 
             WindowsComponents.FreezeComponents();
-            return new(default)
+            return new()
             {
                 IsValid = !IsError,
             };
@@ -31,12 +31,13 @@ sealed class LinkValidate
         catch
         {
             WindowsComponents.FreezeComponents();
-            return new(default)
+            return new()
             {
                 IsValid = false,
             };
         }
     }
+    
     private async Task GetFileName()
     {
         ConsoleLive.SelectedError = 2;

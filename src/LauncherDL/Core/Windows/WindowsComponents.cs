@@ -113,7 +113,7 @@ class WindowsComponents
     // nah its my code and I know when to call the method but yeah it does look bad practice
     public static void FreezeComponents()
     {
-        UIElement[] ControlLists = 
+        ReadOnlyCollection<UIElement> ControlLists = Array.AsReadOnly(new UIElement[]
         {
             buttonFileFormat,
             buttonDownload,
@@ -125,7 +125,7 @@ class WindowsComponents
             comboBoxType,
             comboBoxFormat,
             comboBoxQuality
-        };
+        });
 
         foreach (var CL in ControlLists)
             CL.IsEnabled = !CL.IsEnabled;

@@ -7,14 +7,12 @@ public class FilePathAttribute : Attribute
 
     public string FileName { get; }
 
-    public FilePathAttribute(string fileName)
-    {
+    public FilePathAttribute(string fileName) =>
         FileName = fileName;
-    }
 
-    public static void InitiateAttribute<T>()
+    public static void InitiateAttribute<TargetType>()
     {
-        foreach (FieldInfo field in typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static))
+        foreach (FieldInfo field in typeof(TargetType).GetFields(BindingFlags.Public | BindingFlags.Static))
         {
             if (field.IsDefined(typeof(FilePathAttribute), false))
             {

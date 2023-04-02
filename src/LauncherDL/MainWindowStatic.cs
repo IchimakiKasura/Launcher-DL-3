@@ -80,6 +80,10 @@ public partial class MainWindow
     [MainWindowStaticMember]
     public static   DropShadowEffect                windowDropShadow        { get; set; }
 
+    /// <summary>
+    /// InitiateStaticComponents
+    /// </summary>
+    /// <param name="_">MainWindow Class</param>
     void InitiateStaticComponents(MainWindow _)
     {
         MainWindowStatic = _;

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-namespace DLControls;
+﻿namespace DLControls;
 
 /// <summary>
 /// Interaction logic for ProgressBarControl.xaml
@@ -32,7 +31,7 @@ public partial class ProgressBarControl : UserControl
     /// <summary>
     /// Holds the thread until the progress value is 100
     /// </summary>
-    public async System.Threading.Tasks.Task AwaitCompletion()
+    public async Task AwaitCompletion()
     {
         while(Value is not 100) await Task.Delay(100);
     }
@@ -40,7 +39,7 @@ public partial class ProgressBarControl : UserControl
     /// <summary>
     /// Holds the thread until the Opacity hits its mark
     /// </summary>
-    public async System.Threading.Tasks.Task AwaitOpacityCompletion(int TargetValue)
+    public async Task AwaitOpacityCompletion(int TargetValue)
     {
         while(Opacity != TargetValue) await Task.Delay(100);
     }

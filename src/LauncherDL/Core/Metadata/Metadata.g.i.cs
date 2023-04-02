@@ -2,7 +2,7 @@ namespace LauncherDL.Core.Metadata;
 
 // Bro literally created his own shit without xaml ☠️☠️
 // I like it more chaotic
-public partial class MetadataWindow
+public partial class MetadataWindow : IMetadataComponent
 {
     #region Window fields
     private Border MetadataRoundBorder;
@@ -88,7 +88,8 @@ public partial class MetadataWindow
 		ToolTipTextsAttribute.InitiateAttribute<MetadataWindow>();
     }
 
-    private void SetupControls()
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void SetupControls()
     {
         // TextBox background
         var TEXTBOX_Color = new SolidColorBrush();
@@ -167,7 +168,8 @@ public partial class MetadataWindow
         #endregion
     }
     
-    void EventHandlers()
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void EventHandlers()
     {
         Button_Set.Click                += MetadataSet;
         Button_Exit.Click               += (s,e) => Close();

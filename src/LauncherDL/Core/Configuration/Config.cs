@@ -5,11 +5,17 @@ using static LauncherDL.Core.Console_Output_Comment_Method.ConsoleOutputCheck;
 namespace LauncherDL.Core.Configuration;
 
 // Don't even question about it...
+/// <summary>
+/// Initiate the config by reading the Config.ini
+/// </summary>
 public class Config
 {
     static DefaultConfig DefaultConfiguration   =   new();
     static bool error                           =   false;
     
+    /// <summary>
+    /// Reads the Config.ini at the current directory
+    /// </summary>
     public static DefaultConfig ReadConfigINI()
     {
         string  ConfigString    =   File.ReadAllText(CONFIG_NAME);

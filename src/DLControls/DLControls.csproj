@@ -22,6 +22,7 @@
     <Using Include="System.Windows" />
     <Using Include="System.Windows.Media" />
     <Using Include="System.ComponentModel" />
+    <Using Include="System.Threading.Tasks" />
     <Using Include="System.Windows.Controls" />
     <Using Include="System.Windows.Documents" />
     <Using Include="System.Collections.Generic" />
