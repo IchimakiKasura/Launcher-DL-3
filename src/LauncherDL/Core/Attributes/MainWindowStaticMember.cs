@@ -14,21 +14,24 @@ public class MainWindowStaticMemberAttribute : Attribute
     // Initialize the Attribute
     public static void InitiateAttribute<TargetType>()
     {
+        // Get all the properties as array
+        PropertyInfo[] MainWindowField = typeof(TargetType).GetProperties();
+
         // Iterate to all the properties of the given type of generic
-        foreach(PropertyInfo MainWindowField in typeof(TargetType).GetProperties())
+        for (int propertiesFound = 0; propertiesFound < MainWindowField.Length; propertiesFound++)
         {
             // Gets the custom attribute of the iterated property
-            var FieldAttribute = MainWindowField.GetCustomAttribute<MainWindowStaticMemberAttribute>();
+            var FieldAttribute = MainWindowField[propertiesFound].GetCustomAttribute<MainWindowStaticMemberAttribute>();
 
             // Checks if the given attribute is null
             if(FieldAttribute is not null)
-                // Proceed to Set the value if there's an attribute found
-                FieldAttribute.SetValue<TargetType>(MainWindowField);
+                // Proceed to Set the value if there's an attribute found as a reference
+                FieldAttribute.SetValue<TargetType>(ref MainWindowField[propertiesFound]);
         }
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<TargetType>(PropertyInfo propertyInfo)
+    private void SetValue<TargetType>(ref PropertyInfo propertyInfo)
     {
         // Gets the Field from MainWindow that are non static
         var fieldInfo = typeof(TargetType).GetField($"_{propertyInfo.Name}", BindingFlags.NonPublic|BindingFlags.Instance);

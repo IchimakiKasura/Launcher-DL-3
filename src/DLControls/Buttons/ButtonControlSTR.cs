@@ -2,10 +2,6 @@ namespace DLControls;
 
 public partial class ButtonControl
 {
-    // Normal is default 100ms
-    // faster is 50ms
-    const int NORMAL_ANIMATION = 0, FASTER_ANIMATION = 1;
-
     const string
     BUTTON_OPACITY  = "(Effect).Opacity", 
     BUTTON_WIDTH    = "Width",

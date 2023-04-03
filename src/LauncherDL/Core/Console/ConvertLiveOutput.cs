@@ -21,7 +21,7 @@ internal partial class ConsoleLive
         if (!CurrentTime.IsEmpty())
         {
             CurrentTimeInt = (int)TimeSpan.Parse(CurrentTime).TotalSeconds;
-            double ProgressValue = (double)((decimal)CurrentTimeInt / (decimal)TotalDuration) * 100;
+            ProgressValue = (double)((decimal)CurrentTimeInt / (decimal)TotalDuration) * 100;
         }
 
         if(StringData.Contains("error"))

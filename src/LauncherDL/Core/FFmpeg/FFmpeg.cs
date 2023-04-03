@@ -5,7 +5,7 @@ namespace LauncherDL.Core.FFmpeg;
 internal static partial class FFmpegFiles
 {
     readonly static string FFmpegPath = "./LauncherDL_Data";
-    static List<string> FileMissingOnly = new List<string>();
+    static List<string> FileMissingOnly = new List<string>(9);
     public static bool ErrorOccured = false;
     readonly static string[] FileNames =
     {

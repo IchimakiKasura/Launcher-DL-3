@@ -24,7 +24,7 @@ public class ToolTipTextsAttribute : Attribute
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<WindowType>(string Name, string PropertyDescription, dynamic PropertyField)
+    private void SetValue<WindowType>(string Name,string PropertyDescription, dynamic PropertyField)
     {
         dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<WindowType, Global>());
         
@@ -33,7 +33,7 @@ public class ToolTipTextsAttribute : Attribute
         else ((UIElement)PropertyItem).MouseMove += (s,e) => Follow(s, e, PropertyDescription);
     }
 
-    public static void Follow(object sender, MouseEventArgs eventargs, string Content)
+    public static void Follow(object sender, MouseEventArgs eventargs,string Content)
     {
         FrameworkElement TooltipElement = (FrameworkElement)sender;
         

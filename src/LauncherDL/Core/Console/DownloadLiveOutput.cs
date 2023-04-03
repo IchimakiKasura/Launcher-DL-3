@@ -16,7 +16,7 @@ internal partial class ConsoleLive
                 progressBar.Value = 99;
             });
 
-        ProgressInfo = new();
+        ProgressInfo = new(7);
         NetworkSpeedColor = "";
 
         var DefaultRegex = DownloadInfoARIA2C;

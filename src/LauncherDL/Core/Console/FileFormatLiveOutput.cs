@@ -2,7 +2,7 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal partial class ConsoleLive
 {
-    static List<string> FormatNames = new();
+    static List<string> FormatNames = new(5);
     static string AudioOnlyID_M4A, AudioOnlyID_WEBM;
 
     public static void FileFormatLiveOutputComment(object s, DataReceivedEventArgs e)

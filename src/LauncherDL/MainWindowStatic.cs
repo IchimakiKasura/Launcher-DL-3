@@ -90,7 +90,7 @@ public partial class MainWindow
 
         //// Idk about these
         /**/VisualBitmapScalingMode = BitmapScalingMode.LowQuality;
-        /**/MediaTimeline.DesiredFrameRateProperty.OverrideMetadata(typeof(System.Windows.Media.Animation.Timeline), new FrameworkPropertyMetadata(60));
+        /**/Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata(120));
         ////
 
         comboBoxQuality = new()

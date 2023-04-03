@@ -8,7 +8,11 @@
 public partial class Global
 {
     // App version
-    public const string APP_CURRENT_VERION = "7.1_DT0.0.0000";
+    #if !DEBUG
+    public const string APP_CURRENT_VERSION = "7.1_DT0.0.0000";
+    #else
+    public const string APP_CURRENT_VERSION = "Development Build";
+    #endif
 
     /// <summary>MainWindow but in <see langword="static"/></summary>
     [WindowStaticRef]

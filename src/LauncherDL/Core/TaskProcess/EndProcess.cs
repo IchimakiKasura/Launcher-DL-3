@@ -16,7 +16,7 @@ abstract class EndProcess
 
         if (!MainWindowStatic.IsActive)
             WindowsComponents.WindowTaskBarFlash();
-
+            
         if(ConsoleLive.SelectedError is not 9999 && !ConsoleLive.SingleErrorInstance
             || ConsoleLive.SelectedError is 0 && progressBar.Value is 99)
             {
@@ -43,7 +43,6 @@ abstract class EndProcess
     static void FileFormatTaskEnded() =>
         comboBoxFormat.AddFormatList(TemporaryList);
     
-
     // Convert method after conversion
     static void ConvertTaskEnded() =>
         console.DLAddConsole(CONSOLE_YEY_STRING, $"File converted: \"{config.DefaultOutput}\\Convert\\{textBoxName.Text}.{comboBoxFormat.GetItemContent}\"");

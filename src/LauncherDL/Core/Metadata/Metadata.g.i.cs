@@ -39,7 +39,7 @@ public partial class MetadataWindow : IMetadataComponent
             new() { Text = LABEL_CREATOR        }
         );
         
-    private List<TextBoxControl> TEXTBOX_LIST = new();
+    private List<TextBoxControl> TEXTBOX_LIST = new(4);
     
     private bool _contentLoad;
     public void InitializeComponent()

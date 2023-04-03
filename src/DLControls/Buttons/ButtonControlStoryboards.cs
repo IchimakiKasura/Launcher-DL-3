@@ -2,11 +2,8 @@ namespace DLControls;
 
 public partial class ButtonControl
 {
-    List<DoubleAnimation> ControlDA;
-    ThicknessAnimation ButtonMargin;
-    ColorAnimation ButtonForeground;
-    RectAnimation ButtonImageViewport;
-    List<Storyboard> ControlsStoryboards;
+    ImmutableList<Timeline> ControlDA;
+    TimeSpan AnimationDuration;
     readonly ImmutableList<PropertyPath> ControlPaths =
         ImmutableList.Create<PropertyPath>(
             new(BUTTON_OPACITY),    // 0
@@ -19,80 +16,65 @@ public partial class ButtonControl
             new(IMAGE_VIEWPORT)     // 7
         );
 
-    List<TimeSpan> AnimationDuration;
-
-    // ChatGPT says it so fuck it, ternary it is because fuck if-else and switch;
-    private void SetAnimationsValues(bool isEnter, List<TimeSpan> AnimationDuration)
+    private void SetAnimationsValues(bool isEnter, TimeSpan animationDuration)
     {
-        //  Variable Names      | Boolean |        If its true         |   If its False  |
-        var ButtonOpacity       = isEnter ?                          1 :                0;
-        var ButtonWidth         = isEnter ?                        260 :              250;
-        var ButtonHeight        = isEnter ?                       67.5 :               65;
-        var ButtonText          = isEnter ?                 TextSize+2 :         TextSize;
-        var ButtonImageOpacity  = isEnter ?                       0.85 :                0;
-        var buttonMargin        = isEnter ? new Thickness(-5,-1.5,0,0) : new Thickness(0);
-        var buttonForeground    = isEnter ?               Colors.White :     Colors.Black;
+        //  Variable Names      | Boolean |        If its true         |       If its False      |
+        var ButtonOpacity       = isEnter ?                          1 :                        0;
+        var ButtonWidth         = isEnter ?                        260 :                      250;
+        var ButtonHeight        = isEnter ?                       67.5 :                       65;
+        var ButtonText          = isEnter ?                 TextSize+2 :                 TextSize;
+        var ButtonImageOpacity  = isEnter ?                       0.85 :                        0;
+        var buttonMargin        = isEnter ? new Thickness(-5,-1.5,0,0) :         new Thickness(0);
+        var buttonForeground    = isEnter ?               Colors.White :             Colors.Black;
+        var buttonImageViewport = isEnter ?          new Rect(0,0,1,1) : new Rect(-0.3,0,1.5,1.8);
 
-        ControlDA = new List<DoubleAnimation>()
+        ControlDA = ImmutableList.Create<Timeline>(
+            new DoubleAnimation     (ButtonOpacity       , animationDuration),
+            new DoubleAnimation     (ButtonWidth         , animationDuration),
+            new DoubleAnimation     (ButtonHeight        , animationDuration),
+            new DoubleAnimation     (ButtonText          , animationDuration),
+            new DoubleAnimation     (ButtonImageOpacity  , animationDuration),
+            new ThicknessAnimation  (buttonMargin        , animationDuration),
+            new ColorAnimation      (buttonForeground    , animationDuration),
+            new RectAnimation       (buttonImageViewport , animationDuration)
+        );
+
+        ((RectAnimation)ControlDA[7]).EasingFunction = new PowerEase()
         {
-            new(ButtonOpacity       , AnimationDuration[NORMAL_ANIMATION]),
-            new(ButtonWidth         , AnimationDuration[NORMAL_ANIMATION]),
-            new(ButtonHeight        , AnimationDuration[NORMAL_ANIMATION]),
-            new(ButtonText          , AnimationDuration[NORMAL_ANIMATION]),
-            new(ButtonImageOpacity  , AnimationDuration[NORMAL_ANIMATION]),
+            EasingMode = EasingMode.EaseIn,
+            Power = 0.5
         };
-
-        ButtonMargin            = new(buttonMargin, AnimationDuration[NORMAL_ANIMATION]);
-        ButtonForeground        = new(buttonForeground, AnimationDuration[NORMAL_ANIMATION]);
-
-        ButtonImageViewport     = isEnter ? 
-            new(new(0,0,1,1), AnimationDuration[NORMAL_ANIMATION])
-        :
-            new(new(-0.3,0,1.5,1.8), AnimationDuration[NORMAL_ANIMATION]);
     }
 
     private void SetStoryboard(bool IsEnter)
     {
-        AnimationDuration = IsAnimationOn ? 
-            new() { TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(50) }
-          : new() { TimeSpan.Zero };
-
+        AnimationDuration = IsAnimationOn ? TimeSpan.FromMilliseconds(100) : TimeSpan.Zero;
+        
         SetAnimationsValues(IsEnter, AnimationDuration);
 
-        // Found the Low framerate button animation bug
-        // I just needed to Renew the Storyboards because its
-        // stacking up thats why every hover the animation fps
-        // goes down hard.
-        ControlsStoryboards = new List<Storyboard>()
+        ref var ControlAnimations = ref MemoryMarshal.GetArrayDataReference(ControlDA.ToArray());
+        ref var ControlPathRef = ref MemoryMarshal.GetArrayDataReference(ControlPaths.ToArray());
+
+        var storyboard = new Storyboard();
+        DependencyObject TargetElement;
+        var index = 0;
+
+        while(index <= 7)
         {
-            new(),  // storyboard_ButtonOpacity
-            new(),  // storyboard_ButtonWidth
-            new(),  // storyboard_ButtonHeight
-            new(),  // storyboard_ButtonText
-            new(),  // storyboard_ButtonImageOpacity
-            new(),  // storyboard_ButtonMargin
-            new(),  // storyboard_ButtonForeground
-            new(),  // storyboard_ButtonImageViewport
-        };
+            if(index is 4 || index is 7)
+                TargetElement = GetTemplateResource<Border>(BORDER_RESOURCE, UserButton);
+            else TargetElement = UserButton;
 
-        foreach (var (storyboard, index) in ControlsStoryboards.Select((value, index) => (value, index)))
-        {
-            DependencyObject TargetElement = UserButton;
+            ref var ControlTimeline = ref Unsafe.Add(ref ControlAnimations, index);
 
-            if (index is 4 || index is 7)
-                TargetElement = GetTemplateResource<Border>(BORDER_RESOURCE, TargetElement);
+            SetStoryboardAuto(ControlTimeline, TargetElement, Unsafe.Add(ref ControlPathRef, index));
+            storyboard.Children.Add(ControlTimeline);
 
-            SetStoryboardAuto(storyboard, TargetElement, ControlPaths[index]);
-
-            switch (index)
-            {
-                default: storyboard.Add(ControlDA[index]);      break;
-                case  5: storyboard.Add(ButtonMargin);          break;
-                case  6: storyboard.Add(ButtonForeground);      break;
-                case  7: storyboard.Add(ButtonImageViewport);   break;
-            }
-
-            storyboard.Begin();
+            index++;
         }
+
+        storyboard.Begin();
+
+        ControlDA = ImmutableList<Timeline>.Empty;
     }
 }

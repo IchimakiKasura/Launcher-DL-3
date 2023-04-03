@@ -175,7 +175,7 @@ public partial class ComboBoxControl : UserControl
             if (IsEnter)
                 BorderBrush = new(Colors.Blue, TimeSpan.FromMilliseconds(100));
 
-            SetStoryboardAuto(STYB_BorderBrush, border, new("(Control.BorderBrush).(SolidColorBrush.Color)"));
+            SetStoryboardAuto(BorderBrush, border, new("(Control.BorderBrush).(SolidColorBrush.Color)"));
             
             STYB_BorderBrush.Add(BorderBrush);
             STYB_BorderBrush.Begin();

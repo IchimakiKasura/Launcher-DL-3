@@ -11,6 +11,8 @@ internal class EventHandlers
 
         windowDrag.MouseDown            +=      WindowsComponents.WindowDrag;
         windowInnerBG.MouseDown         +=      (s,e) => Keyboard.ClearFocus();
+
+        textBlockFooter.MouseDown       +=      (s,e) => MessageBox.Show(hidden, "Huzuaah!", MessageBoxButton.OK, MessageBoxImage.Information);
         #endregion
 
         #region Buttons
@@ -38,8 +40,8 @@ internal class EventHandlers
 
         #region ComboBox Tooltip List (CTL)
         foreach(var CTL in ComboBoxList.ComboBoxTypes)
-            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Type?"); // looks better than ToString() idk
-                                                                                     // also kinda looks epic or idk
+            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Type?");
+                                                                                    
         foreach(var CTL in ComboBoxList.ComboBoxVideoFormats)
             CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Format");
 

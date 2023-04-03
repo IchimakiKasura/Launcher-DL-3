@@ -29,6 +29,8 @@
     <Using Include="System.Collections.Immutable" />
     <Using Include="System.Text.RegularExpressions" />
     <Using Include="System.Windows.Media.Animation" />
+    <Using Include="System.Runtime.InteropServices" />
+    <Using Include="System.Runtime.CompilerServices" />
     <Using Include="System.Windows.Controls.Primitives" />
 
     <Using Include="DLControls.MainResource" Static="true" />
