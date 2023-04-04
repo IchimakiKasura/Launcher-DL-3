@@ -43,13 +43,15 @@ public partial class App : Application
             consoleMode &= ~ENABLE_QUICK_EDIT;
             SetConsoleMode(consoleHandle, consoleMode);
 
-            ConsoleDebug.Log(
-             "============================\n"+
-             "=   Version Update Check   =\n"+
-             "============================\n"+
-            $"Current Version: {Update.CurrentVersion}\n"+
-            $"Latest Version: {Update.NewVersion}\n"
-            );
+            ConsoleDebug.Log($"""
+            
+            ============================
+            =   Version Update Check   =
+            ============================
+            Current Version: {Update.CurrentVersion}
+            Latest Version: {Update.NewVersion}
+
+            """);
         #endif
     }
 }

@@ -2,10 +2,10 @@ namespace DLControls;
 
 public partial class MainResource
 {
-    public static T GetTemplateResource<T>(string Name, dynamic TemplatedParent) =>
+    public static T GetTemplateResource<T>(string Name,dynamic TemplatedParent) =>
         (T)TemplatedParent.Template.FindName(Name, TemplatedParent);
-
-    public static void SetStoryboardAuto(DependencyObject element, DependencyObject value, PropertyPath path)
+    
+    public static void SetStoryboardAuto(Timeline element, DependencyObject value, PropertyPath path)
     {
         Storyboard.SetTargetProperty(element, path);
         Storyboard.SetTarget(element, value);

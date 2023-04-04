@@ -16,23 +16,27 @@ partial class OnStartUp
     // Code was 100% refactored by one and only ChatGPT ☠️☠️
     public static void UpdateContexButtons()
     {
+        int MenuItemsIteration = 0,
+            MenuItemChildIteration = 0;
+
         ContextMenu contextMenu = GetResources<ContextMenu>("OpenFolderCM");
 
-        foreach(MenuItem menuItem in contextMenu.Items)
+        while(MenuItemsIteration < contextMenu.Items.Count)
         {
-            string menuItemPath = Path.Combine(FolderButton.FolderDirectory(), menuItem.Uid);
-            bool hasFolder = Directory.Exists(menuItemPath);
+            var menuItemVar = (MenuItem)contextMenu.Items[MenuItemsIteration];
+            string menuItemPath = Path.Combine(FolderButton.FolderDirectory(), menuItemVar.Uid);
 
-            // Disable the menu item if there is no folder
-            menuItem.IsEnabled = hasFolder;
+            menuItemVar.IsEnabled = Directory.Exists(menuItemPath);
 
-            // Disable the menu item if there is no folder
-            foreach(MenuItem childMenuItem in menuItem.Items)
+            while(MenuItemChildIteration < menuItemVar.Items.Count)
             {
-                string childMenuItemPath = Path.Combine(FolderButton.FolderDirectory(), childMenuItem.Uid); 
-                bool childHasFolder = Directory.Exists(childMenuItemPath);
-                childMenuItem.IsEnabled = childHasFolder;
+                var childMenuItemVar = (MenuItem)menuItemVar.Items[MenuItemChildIteration];
+                string childMenuItemPath = Path.Combine(FolderButton.FolderDirectory(), childMenuItemVar.Uid);
+
+                childMenuItemVar.IsEnabled = Directory.Exists(childMenuItemPath);
+                MenuItemChildIteration++;
             }
+            MenuItemsIteration++;
         }
     }
 }

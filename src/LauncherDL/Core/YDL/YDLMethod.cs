@@ -138,7 +138,7 @@ sealed partial class YDL
 
         var FILE_EXIST_PATH = Path.Combine(config.DefaultOutput, FolderType, $"{textBoxName.Text}.{ExtensionFormat}");
 
-        if(CheckFileExist(FILE_EXIST_PATH, Type))
+        if(CheckFileExist(ref FILE_EXIST_PATH, Type))
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, ConvertButton.NAME___EXIST);
             WindowsComponents.FreezeComponents();
@@ -164,7 +164,7 @@ sealed partial class YDL
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
-    private bool CheckFileExist(string FilePath, TypeOfButton Type)
+    private bool CheckFileExist(ref string FilePath, TypeOfButton Type)
     {
         if (Type is TypeOfButton.CustomType)
             foreach(var Extenstion in FileExtensions)

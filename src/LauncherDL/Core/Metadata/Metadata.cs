@@ -11,11 +11,11 @@ public partial class MetadataWindow : Window
         InitializeComponent();
         InitializeBorderEffect();
 
-        GetOldText(Old_Title, Metadata_Title);
-        GetOldText(Old_Album, Metadata_Album);
-        GetOldText(Old_Album_Artist, Metadata_Album_Artist);
-        GetOldText(Old_Year, Metadata_Year);
-        GetOldText(Old_Genre, Metadata_Genre);
+        GetOldText(ref Old_Title, Metadata_Title);
+        GetOldText(ref Old_Album, Metadata_Album);
+        GetOldText(ref Old_Album_Artist, Metadata_Album_Artist);
+        GetOldText(ref Old_Year, Metadata_Year);
+        GetOldText(ref Old_Genre, Metadata_Genre);
     }
 
     public MetadataClicked OpenDialog()

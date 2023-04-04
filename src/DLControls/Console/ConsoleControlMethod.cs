@@ -50,32 +50,37 @@ public partial class ConsoleControl
         if (!DontAddNewline) Input += "\r";
         TextRange range;
         FontStyle _FontStyle = FontStyles.Normal;
+        MatchCollection textMatches = RTBregex.Matches(Input);
+        int index = 0;
 
-        foreach (Match textMatch in RTBregex.Matches(Input)) 
+        while(index < textMatches.Count)
         {
+            Match textMatch = textMatches[index];
+
             range = new(UserRichTextBox.Document.ContentEnd, UserRichTextBox.Document.ContentEnd);
 
             // yes i'm not normal :D
-            string color = string.IsNullOrEmpty(textMatch.Groups["color"].Value) ? "White" : textMatch.Groups["color"].Value;
+            string color = textMatch.Groups["color"].Value is null or "" ? "White" : textMatch.Groups["color"].Value;
             // bruh
-            string size = string.IsNullOrEmpty(textMatch.Groups["size"].Value) ? string.IsNullOrEmpty(textMatch.Groups["sizeOnly"].Value) ? "19" : textMatch.Groups["sizeOnly"].Value : textMatch.Groups["size"].Value;
-            string weight = string.IsNullOrEmpty(textMatch.Groups["weight"].Value) ? "Normal" : textMatch.Groups["weight"].Value;
+            string size = textMatch.Groups["size"].Value is null or "" ? textMatch.Groups["sizeOnly"].Value is null or "" ? "19" : textMatch.Groups["sizeOnly"].Value : textMatch.Groups["size"].Value;
+            string weight = textMatch.Groups["weight"].Value is null or "" ? "Normal" : textMatch.Groups["weight"].Value;
             string text = textMatch.Groups["text"].Value;
 
             if (isItalic) _FontStyle = FontStyles.Italic;
 
-            text = text.Replace("$lt$", "<");
-            text = text.Replace("$gt$", ">");
-            text = text.Replace("$perc$", "%");
-            text = text.Replace("$vbar$", "|");
-            text = text.Replace("$tab$", "\t");
-            text = text.Replace("$nl$", "\r");
+            text = text.Replace("$lt$", "<")
+            .Replace("$gt$", ">")
+            .Replace("$perc$", "%")
+            .Replace("$vbar$", "|")
+            .Replace("$tab$", "\t")
+            .Replace("$nl$", "\r");
 
             try { range.Text = text; } catch { throw new TextPropertyException(); };
             range.ApplyPropertyValue(Control.FontStyleProperty, _FontStyle);
             try { range.ApplyPropertyValue(TextElement.ForegroundProperty   , new BrushConverter().ConvertFromString(color) ); } catch { throw new ForegroundPropertyException();   };
             try { range.ApplyPropertyValue(Control.FontSizeProperty         , size                                          ); } catch { throw new FontSizePropertyException();     };
             try { range.ApplyPropertyValue(Control.FontWeightProperty       , weight                                        ); } catch { throw new FontWeightPropertyException();   };
+            index++;
         }
     }
 

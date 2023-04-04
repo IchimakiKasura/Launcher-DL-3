@@ -16,7 +16,7 @@ public partial class ButtonControl
             new(IMAGE_VIEWPORT)     // 7
         );
 
-    private void SetAnimationsValues(bool isEnter, TimeSpan animationDuration)
+    private void SetAnimationsValues(ref bool isEnter,ref TimeSpan animationDuration)
     {
         //  Variable Names      | Boolean |        If its true         |       If its False      |
         var ButtonOpacity       = isEnter ?                          1 :                        0;
@@ -39,9 +39,16 @@ public partial class ButtonControl
             new RectAnimation       (buttonImageViewport , animationDuration)
         );
 
-        ((RectAnimation)ControlDA[7]).EasingFunction = new PowerEase()
+        ((RectAnimation)ControlDA[7]).EasingFunction = isEnter ?
+        new PowerEase()
         {
             EasingMode = EasingMode.EaseIn,
+            Power = 0.2
+        }
+        :
+        new PowerEase()
+        {
+            EasingMode = EasingMode.EaseOut,
             Power = 0.5
         };
     }
@@ -50,7 +57,7 @@ public partial class ButtonControl
     {
         AnimationDuration = IsAnimationOn ? TimeSpan.FromMilliseconds(100) : TimeSpan.Zero;
         
-        SetAnimationsValues(IsEnter, AnimationDuration);
+        SetAnimationsValues(ref IsEnter,ref AnimationDuration);
 
         ref var ControlAnimations = ref MemoryMarshal.GetArrayDataReference(ControlDA.ToArray());
         ref var ControlPathRef = ref MemoryMarshal.GetArrayDataReference(ControlPaths.ToArray());

@@ -90,11 +90,11 @@ internal static class ConsoleOutputMethod
 
         var MetadataOutputComment = new StringBuilder()
             .Append("<Gray%12>")
-            .Append($"{CONSOLE_METADATA_TITLE       }"  +  $"{Old_Title        ?? "N\\A"}$nl$")
-            .Append($"{CONSOLE_METADATA_ALBUM       }"  +  $"{Old_Album        ?? "N\\A"}$nl$")
-            .Append($"{CONSOLE_METADATA_ALBUM_ARTIST}"  +  $"{Old_Album_Artist ?? "N\\A"}$nl$")
-            .Append($"{CONSOLE_METADATA_YEAR        }"  +  $"{Old_Year         ?? "N\\A"}$nl$")
-            .Append($"{CONSOLE_METADATA_GENRE       }"  +  $"{Old_Genre        ?? "N\\A"}")
+            .Append(CONSOLE_METADATA_TITLE       ).Append(Old_Title        ?? "N\\A").Append("$nl$")
+            .Append(CONSOLE_METADATA_ALBUM       ).Append(Old_Album        ?? "N\\A").Append("$nl$")
+            .Append(CONSOLE_METADATA_ALBUM_ARTIST).Append(Old_Album_Artist ?? "N\\A").Append("$nl$")
+            .Append(CONSOLE_METADATA_YEAR        ).Append(Old_Year         ?? "N\\A").Append("$nl$")
+            .Append(CONSOLE_METADATA_GENRE       ).Append(Old_Genre        ?? "N\\A")
             .ToString();
 
         console.AddFormattedText(MetadataOutputComment);

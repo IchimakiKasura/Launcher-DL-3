@@ -41,7 +41,7 @@ abstract class EndProcess
 
     // File Format method after fetching
     static void FileFormatTaskEnded() =>
-        comboBoxFormat.AddFormatList(TemporaryList);
+        comboBoxFormat.AddFormatList(ref TemporaryList);
     
     // Convert method after conversion
     static void ConvertTaskEnded() =>

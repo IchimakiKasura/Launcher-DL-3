@@ -60,10 +60,10 @@ internal partial class ConsoleLive
         };
         #endregion
 
-        DL_Dispatch.Invoke(()=>Download_Invoke(StringData, DefaultRegex != DownloadInfoARIA2C));
+        DL_Dispatch.Invoke(()=>Download_Invoke(ref StringData, DefaultRegex != DownloadInfoARIA2C));
     }
 
-    static void Download_Invoke(string StringData, bool IsFetchedFormat)
+    static void Download_Invoke(ref string StringData, bool IsFetchedFormat)
     {
         console.LoadText(ConsoleLastDocument);
 
@@ -73,7 +73,6 @@ internal partial class ConsoleLive
         _Speed      = IsFetchedFormat ? ProgressInfo[DOWNLOAD_FMT_SPEED]    : ProgressInfo[DOWNLOAD_SPEED]      ,
         _Time       = IsFetchedFormat ? "N/A"                               : ProgressInfo[DOWNLOAD_ETA]        ;
 
-        // chatgpt says string builder is better than "+" when dealing will long things
         var FormattedTextOutput = new StringBuilder();
         FormattedTextOutput.Append($"<Cyan>[ PROGRESS$tab$] <>{_Progress}%$nl$");
         FormattedTextOutput.Append($"<Cyan>[ SIZE$tab$$tab$] <>{_Size}$nl$");

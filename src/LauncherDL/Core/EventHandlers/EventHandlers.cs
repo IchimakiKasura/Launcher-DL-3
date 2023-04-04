@@ -39,17 +39,20 @@ internal class EventHandlers
         #pragma warning disable CS8848
 
         #region ComboBox Tooltip List (CTL)
+        void AttachToolTip(ComboBoxItem CTL, string text) =>
+            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + text);
+
         foreach(var CTL in ComboBoxList.ComboBoxTypes)
-            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Type?");
+            AttachToolTip(CTL, CTL.Content as string + " Type?");
                                                                                     
         foreach(var CTL in ComboBoxList.ComboBoxVideoFormats)
-            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Format");
+            AttachToolTip(CTL, CTL.Content as string + " Format");
 
         foreach(var CTL in ComboBoxList.ComboBoxAudioFormats)
-            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Format");
+            AttachToolTip(CTL, CTL.Content as string + " Format");
 
         foreach(var CTL in ComboBoxList.ComboBoxFormatQuality)
-            CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + " Quality");
+            AttachToolTip(CTL, CTL.Content as string + " Quality");
         #endregion
 
         #pragma warning restore CS8848

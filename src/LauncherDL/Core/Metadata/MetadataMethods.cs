@@ -2,7 +2,7 @@ namespace LauncherDL.Core.Metadata;
 
 public partial class MetadataWindow
 {
-    private void GetOldText(string Old, TextBoxControl Element) =>
+    private void GetOldText(ref string Old, TextBoxControl Element) =>
         Element.Text = Old;
 
     private void SetOldText(ref string Old, TextBoxControl Element)
