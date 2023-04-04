@@ -2,7 +2,8 @@ namespace LauncherDL.Core.Metadata;
 
 public interface IMetadataComponent
 {
+    void InitializeComponent();
     void SetupControls();
     void EventHandlers();
-    void InitializeComponent();
+    MetadataClicked OpenDialog();
 }

@@ -18,6 +18,8 @@ public partial class ButtonControl
 
     private void SetAnimationsValues(ref bool isEnter,ref TimeSpan animationDuration)
     {
+        ControlDA = ImmutableList<Timeline>.Empty;
+
         //  Variable Names      | Boolean |        If its true         |       If its False      |
         var ButtonOpacity       = isEnter ?                          1 :                        0;
         var ButtonWidth         = isEnter ?                        260 :                      250;
@@ -81,7 +83,5 @@ public partial class ButtonControl
         }
 
         storyboard.Begin();
-
-        ControlDA = ImmutableList<Timeline>.Empty;
     }
 }

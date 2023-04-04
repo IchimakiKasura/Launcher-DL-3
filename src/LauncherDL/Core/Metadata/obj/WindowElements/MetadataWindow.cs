@@ -1,4 +1,3 @@
-using System.Net.Mime;
 namespace LauncherDL.Core.Metadata;
 
 public partial class MetadataWindow

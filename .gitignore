@@ -6,3 +6,4 @@ obj
 /ydl.cs
 Build/DEBUG
 Build/RELEASE
+!src/LauncherDL/Core/Metadata/obj

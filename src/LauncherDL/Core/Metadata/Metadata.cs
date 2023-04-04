@@ -5,7 +5,6 @@ public partial class MetadataWindow : Window
     MetadataClicked DefaultClicked = MetadataClicked.Cancel;
     public static bool IsWindowOpen = false;
     public bool IsTextChanged = false;
-    public enum MetadataClicked { Set,Cancel }
     public MetadataWindow()
     {
         InitializeComponent();
