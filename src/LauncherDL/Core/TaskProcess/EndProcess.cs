@@ -51,7 +51,7 @@ abstract class EndProcess
     static void DownloadTaskEnded()
     {
         if(!ConsoleLive.SingleErrorInstance)
-            console.LoadText(ConsoleLastDocument);
+            console.LoadText(ref ConsoleLastDocument);
         else return;
 
         // Sets the metadata

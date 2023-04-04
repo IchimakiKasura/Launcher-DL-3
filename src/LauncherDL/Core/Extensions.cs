@@ -41,16 +41,17 @@ internal static class _Core_Extensions
         var Message = new StringBuilder()
             .Append(TypeString)
             .Append(" ")
-            .Append(FormattedText).ToString();
+            .Append(FormattedText)
+            .ToString();
 
         switch(TypeString)
         {
-            case string when TypeString.Contains(CONSOLE_SYSTEM_STRING) && config.ShowSystemOutput:
-                console.AddFormattedText(Message, Italic, NoNL);
+            case string T when T.Contains(CONSOLE_SYSTEM_STRING) && config.ShowSystemOutput:
+                console.AddFormattedText(ref Message, Italic, NoNL);
             break;
 
-            case string when !TypeString.Contains(CONSOLE_SYSTEM_STRING):
-                console.AddFormattedText(Message, Italic, NoNL);
+            case string T when !T.Contains(CONSOLE_SYSTEM_STRING):
+                console.AddFormattedText(ref Message, Italic, NoNL);
             break;
         };
     }

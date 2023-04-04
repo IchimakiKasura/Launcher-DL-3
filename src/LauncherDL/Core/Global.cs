@@ -38,7 +38,7 @@ public partial class Global
     }
 
     /// <summary>Languages</summary>
-    public static DLLanguages.Pick.LanguagePick Language;
+    public static DLLanguages.Pick.Interface.ILanguagePick Language;
     
     public static readonly ReadOnlyCollection<string> FileExtensions = Array.AsReadOnly(new string[]
     {

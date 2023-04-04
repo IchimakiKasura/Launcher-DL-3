@@ -14,11 +14,17 @@ public partial class ConsoleControl
         tr.ApplyPropertyValue(TextElement.ForegroundProperty, new BrushConverter().ConvertFromString(color));
     }
 
-    ///<inheritdoc cref="AddFormattedText(string, bool, bool)"/>
-    public void AddFormattedText(string Input) => AddFormattedText(Input, false, false);
 
     ///<inheritdoc cref="AddFormattedText(string, bool, bool)"/>
-    public void AddFormattedText(string Input, bool isItalic) => AddFormattedText(Input,isItalic, false);
+    public void AddFormattedText(string Input) => AddFormattedText(ref Input, false, false);
+
+    ///<inheritdoc cref="AddFormattedText(ref string, bool, bool)"/>
+    public void AddFormattedText(string Input, bool isItalic) => AddFormattedText(ref Input,isItalic, false);
+    ///<inheritdoc cref="AddFormattedText(ref string, bool, bool)"/>
+    public void AddFormattedText(ref string Input) => AddFormattedText(ref Input, false, false);
+
+    ///<inheritdoc cref="AddFormattedText(ref string, bool, bool)"/>
+    public void AddFormattedText(ref string Input, bool isItalic) => AddFormattedText(ref Input,isItalic, false);
 
     /// <summary id="1" >
     /// Append a Text with Format.<br/>
@@ -40,7 +46,7 @@ public partial class ConsoleControl
     /// <exception cref="ForegroundPropertyException"/>
     /// <exception cref="FontSizePropertyException"/>
     /// <exception cref="FontWeightPropertyException"/>
-    public void AddFormattedText(string Input, bool isItalic, bool DontAddNewline)
+    public void AddFormattedText(ref string Input, bool isItalic, bool DontAddNewline)
     {
         // resets the Format
         Input += "<>";
@@ -84,39 +90,26 @@ public partial class ConsoleControl
         }
     }
 
-    ///<inheritdoc cref="SaveText(string)"/>
-    public MemoryStream SaveText() => SaveText(default);
-
     /// <summary>
     /// Save text to <see cref="MemoryStream"/>
     /// </summary>
     /// <param name="format">Input string?</param>
     /// <returns><see cref="MemoryStream"/></returns>
-    public MemoryStream SaveText(string format)
+    public void SaveText(ref MemoryStream stream)
     {
-        format ??= DataFormats.Xaml;
-
         FlowDocument doc = UserRichTextBox.Document;
         TextRange range = new(doc.ContentStart, doc.ContentEnd);
-        MemoryStream TextStream = new();
 
-        range.Save(TextStream, format);
-        TextStream.Flush();
-        TextStream.Seek(0, SeekOrigin.Begin);
-
-        return TextStream;
+        range.Save(stream, DataFormats.Xaml);
+        stream.Flush();
+        stream.Seek(0, SeekOrigin.Begin);
     }
 
     /// <summary>Load text</summary>
-    public void LoadText(MemoryStream Stream) => LoadText(Stream, default);
-
-    /// <summary>Load text</summary>
-    public void LoadText(MemoryStream Stream, string format)
+    public void LoadText(ref MemoryStream stream)
     {
-        format ??= DataFormats.Xaml;
-
         FlowDocument doc = new();
-        new TextRange(doc.ContentStart, doc.ContentEnd).Load(Stream, format);
+        new TextRange(doc.ContentStart, doc.ContentEnd).Load(stream, DataFormats.Xaml);
 
         UserRichTextBox.Document = doc;
     }

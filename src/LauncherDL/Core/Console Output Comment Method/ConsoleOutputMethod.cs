@@ -26,7 +26,8 @@ internal static class ConsoleOutputMethod
         
         switch(IsSuccess)
         {
-            case ConsoleOutputCheck.SUCCESS: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>Config loaded");
+            case ConsoleOutputCheck.SUCCESS:
+                console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>Config loaded");
             break;
 
             case ConsoleOutputCheck.FAILED_MESSAGE:
@@ -34,7 +35,8 @@ internal static class ConsoleOutputMethod
                 console.AddFormattedText($"<DimGray%12>ERROR: {error}", true);
             break;
 
-            case ConsoleOutputCheck.FAILED: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>Default Config loaded");
+            case ConsoleOutputCheck.FAILED:
+                console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>Default Config loaded");
             break;
         }
     }
@@ -45,7 +47,8 @@ internal static class ConsoleOutputMethod
 
         switch(IsSuccess)
         {
-            case ConsoleOutputCheck.SUCCESS: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>FFmpeg is Available");
+            case ConsoleOutputCheck.SUCCESS:
+                console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Green%14>SUCCESS <Gray%14>FFmpeg is Available");
             break;
 
             case ConsoleOutputCheck.FAILED_MESSAGE:
@@ -53,7 +56,8 @@ internal static class ConsoleOutputMethod
                 console.AddFormattedText($"<DimGray%12>ERROR: {Filename}", true);
             break;
 
-            case ConsoleOutputCheck.FAILED: console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>FFmpeg is Unavailable");
+            case ConsoleOutputCheck.FAILED:
+                console.DLAddConsole(CONSOLE_SYSTEM_STRING, "<Red%14>FAILED <Gray%14>FFmpeg is Unavailable");
             break;
         }
     }
@@ -97,7 +101,7 @@ internal static class ConsoleOutputMethod
             .Append(CONSOLE_METADATA_GENRE       ).Append(Old_Genre        ?? "N\\A")
             .ToString();
 
-        console.AddFormattedText(MetadataOutputComment);
+        console.AddFormattedText(ref MetadataOutputComment);
     }
 
 }

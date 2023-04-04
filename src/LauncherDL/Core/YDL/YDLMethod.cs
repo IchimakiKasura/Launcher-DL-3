@@ -1,6 +1,5 @@
 namespace LauncherDL.Core.YTDLP;
 
-#pragma warning disable CS1998  // Remove this after DownloadMetho has awaitables
 sealed partial class YDL
 {
     /// <summary>
@@ -158,7 +157,7 @@ sealed partial class YDL
         } else Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
 
         console.Break("Gray");
-        ConsoleLastDocument = console.SaveText();
+        console.SaveText(ref ConsoleLastDocument);
         
         await TaskProcess.StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.DownloadLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();

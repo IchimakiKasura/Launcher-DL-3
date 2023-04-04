@@ -4,7 +4,7 @@ partial class OnStartUp
 {
     private static void InitializeLanguage()
     {
-        Language = new(config.Language);
+        Language = new DLLanguages.Pick.LanguagePick(config.Language);
         AdjustFontSize();
 
         // Buttons

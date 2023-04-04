@@ -8,7 +8,7 @@ enum TypeOfButton
     ConvertType
 }
 
-sealed class YDLArguments
+ref struct YDLArguments
 {
     public string Link { get; set; }
     public string Format { get; set; }

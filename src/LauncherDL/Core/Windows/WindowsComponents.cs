@@ -1,14 +1,14 @@
 ﻿using static DLControls.ProgressBarControl;
 namespace LauncherDL.Core.Windows;
 
-class WindowsComponents
+class WindowsComponents : IWindowsComponents
 {
     // Onload Event
     public static void WindowLoaded(object sender, RoutedEventArgs e) =>
         new TransparencyConverter(MainWindowStatic).MakeTransparent();
 
     // Avoid window closing when there's an ongoing process
-    public static void WindowOnClose(object s, System.ComponentModel.CancelEventArgs e)
+    public static void WindowOnClose(object s, CancelEventArgs e)
     {
         if (IsInProcess)
         {

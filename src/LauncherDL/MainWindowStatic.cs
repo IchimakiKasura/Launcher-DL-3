@@ -89,7 +89,7 @@ public partial class MainWindow
         MainWindowStatic = _;
 
         //// Idk about these
-        /**/VisualBitmapScalingMode = BitmapScalingMode.LowQuality;
+        /**/VisualBitmapScalingMode = BitmapScalingMode.HighQuality;
         /**/Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata(120));
         ////
 

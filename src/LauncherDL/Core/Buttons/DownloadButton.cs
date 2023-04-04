@@ -59,14 +59,6 @@ internal class DownloadButton : IButtonControls
             case 2:  _type=TypeOfButton.AudioType;  break;
         }
         #endregion
-
-        YDLArguments Info = new()
-        {
-            Link = textBoxLink.Text,
-            Format = _format,
-            Type = _type
-        };
-
         // yeah i don't know either that I put N/A on some that is "un-unassignable" ☠️
         console.Break("Gray");
         ConsoleOutputMethod.DownloadInfoOutputComment(new()
@@ -78,7 +70,14 @@ internal class DownloadButton : IButtonControls
             Link = textBoxLink.Text ?? "N/A",
         });
 
-        YDL YDLInfo = new(Info);
+        YDL YDLInfo = new(
+            new()
+            {
+                Link = textBoxLink.Text,
+                Format = _format,
+                Type = _type
+            }
+        );
 
         YDLInfo.DownloadMethod();
 

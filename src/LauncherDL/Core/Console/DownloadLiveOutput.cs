@@ -40,21 +40,21 @@ internal partial class ConsoleLive
                 ProgressInfo[DOWNLOAD_SPEED] : ProgressInfo[DOWNLOAD_FMT_SPEED];
 
         double.TryParse(Regex.Replace(DownSpeedSTR, @"~|[a-zA-Z\/]", ""),out SpeedNumber);
-        switch("")
+        switch(DownSpeedSTR)
         {
-            case string when DownSpeedSTR.Contains("K"):
+            case string str when str.Contains("K"):
                 if (SpeedNumber > 199.99)
                     NetworkSpeedColor = DOWNSPEED_COLOR_KB_HIGH;
                 else NetworkSpeedColor = DOWNSPEED_COLOR_KB_LOW;
             break;
 
-            case string when DownSpeedSTR.Contains("M"):
+            case string str when str.Contains("M"):
                 if (SpeedNumber > 0.99)
                     NetworkSpeedColor = DOWNSPEED_COLOR_MB_HIGH;
                 else NetworkSpeedColor = DOWNSPEED_COLOR_MB_LOW;
             break;
 
-            case string when DownSpeedSTR.Contains("G"):
+            case string str when str.Contains("G"):
                 NetworkSpeedColor = DOWNSPEED_COLOR_GB;
             break;
         };
@@ -65,7 +65,7 @@ internal partial class ConsoleLive
 
     static void Download_Invoke(ref string StringData, bool IsFetchedFormat)
     {
-        console.LoadText(ConsoleLastDocument);
+        console.LoadText(ref ConsoleLastDocument);
 
         string
         _Progress   = IsFetchedFormat ? ProgressInfo[DOWNLOAD_FMT_PROGRESS] : ProgressInfo[DOWNLOAD_PROGRESS]   ,
