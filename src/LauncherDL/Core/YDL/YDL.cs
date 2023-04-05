@@ -1,28 +1,13 @@
 namespace LauncherDL.Core.YTDLP;
 
-enum TypeOfButton
-{
-    CustomType,
-    AudioType,
-    VideoType,
-    ConvertType
-}
-
-ref struct YDLArguments
-{
-    public string Link { get; set; }
-    public string Format { get; set; }
-    public TypeOfButton Type { get; set; }
-}
-
 sealed partial class YDL
 {
     string Link;
     string Format;
     TypeOfButton Type;
 
-    public bool IsFileFormat = false;
-    public bool IsUpdate = false;
+    public bool IsFileFormat { get; set; } = false;
+    public bool IsUpdate { get; set; } = false;
 
     public YDL(YDLArguments args)
     {

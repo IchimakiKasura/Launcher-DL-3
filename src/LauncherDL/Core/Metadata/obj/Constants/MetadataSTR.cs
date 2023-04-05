@@ -30,9 +30,10 @@ public partial class MetadataWindow
     DEFAULT_COLOR               = "#FF011F4C",
     TOPBAR_COLOR                = "#A34F002F",
     WINDOW_RESOURCE_EXIT_BUTTON = "ExitButtonAlt",
-    WINDOW_RESOURCE_BUTTONS     = "MetadataButtons";
+    WINDOW_RESOURCE_BUTTONS     = "MetadataButtons",
+    MESSAGE_CLEARED             = "Metadata has been cleared!";
     
-    string
+    readonly string
     WINDOW_BACKGROUND           = $"pack://siteoforigin:,,,/Images/{config.background}",
     WINDOW_ICON                 = $@"pack://application:,,,{DLStrings.AppIcon}";
 }

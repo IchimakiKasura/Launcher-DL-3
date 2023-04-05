@@ -11,20 +11,14 @@ internal partial class ConsoleLive
         if(StringData.IsEmpty()) return;
 
         if(StringData.Contains("[ExtractAudio]") || StringData.Contains("[VideoConvertor]") || StringData.Contains("[Merger]"))
-            DL_Dispatch.Invoke(()=>{
-                console.DLAddConsole(CONSOLE_PROCESSING, PROCESSING_MESSAGE);
-                progressBar.Value = 99;
-            });
+            DL_Dispatch.Invoke(ProcessMessage);
 
         ProgressInfo = new(7);
-        NetworkSpeedColor = "";
+        NetworkSpeedColor = string.Empty;
 
         var DefaultRegex = DownloadInfoARIA2C;
 
-        DL_Dispatch.Invoke(()=>{
-            if(comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > -1)
-                DefaultRegex = DownloadInfoARIA2CFetchedFormat; 
-        });
+        DL_Dispatch.Invoke(()=>DownloaderRegexChanged(out DefaultRegex));
 
         foreach(Group match in DefaultRegex.Match(StringData).Groups)
             if(!match.Name.Contains("0") && !match.Value.IsEmpty())
@@ -33,13 +27,11 @@ internal partial class ConsoleLive
         if(ProgressInfo.Count <= 1) return;
 
         #region Change Foreground based on the speed.
-        double SpeedNumber = 0;
-
         var DownSpeedSTR = 
             DefaultRegex == DownloadInfoARIA2C ?
                 ProgressInfo[DOWNLOAD_SPEED] : ProgressInfo[DOWNLOAD_FMT_SPEED];
 
-        double.TryParse(Regex.Replace(DownSpeedSTR, @"~|[a-zA-Z\/]", ""),out SpeedNumber);
+        double.TryParse(Regex.Replace(DownSpeedSTR, @"~|[a-zA-Z\/]", ""),out Double SpeedNumber);
         switch(DownSpeedSTR)
         {
             case string str when str.Contains("K"):
@@ -60,12 +52,12 @@ internal partial class ConsoleLive
         };
         #endregion
 
-        DL_Dispatch.Invoke(()=>Download_Invoke(ref StringData, DefaultRegex != DownloadInfoARIA2C));
+        DL_Dispatch.Invoke(()=>Download_Invoke(DefaultRegex != DownloadInfoARIA2C));
     }
 
-    static void Download_Invoke(ref string StringData, bool IsFetchedFormat)
+    static void Download_Invoke(bool IsFetchedFormat)
     {
-        console.LoadText(ref ConsoleLastDocument);
+        console.LoadText(in ConsoleLastDocument);
 
         string
         _Progress   = IsFetchedFormat ? ProgressInfo[DOWNLOAD_FMT_PROGRESS] : ProgressInfo[DOWNLOAD_PROGRESS]   ,
@@ -81,10 +73,23 @@ internal partial class ConsoleLive
 
         console.AddFormattedText(FormattedTextOutput.ToString());
         
-        double value = 0;
-        double.TryParse(_Progress, out value);
+        double.TryParse(_Progress, out Double value);
         progressBar.Value = value;
             
         TaskbarProgressBar.ProgressValue = progressBar.Value / 100;
+    }
+
+    static void ProcessMessage()
+    {
+        console.DLAddConsole(CONSOLE_PROCESSING, PROCESSING_MESSAGE);
+        progressBar.Value = 99;
+    }
+
+    static void DownloaderRegexChanged(out Regex DefaultRegex)
+    {
+        DefaultRegex = null;
+
+        if(comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > -1)
+            DefaultRegex = DownloadInfoARIA2CFetchedFormat; 
     }
 }

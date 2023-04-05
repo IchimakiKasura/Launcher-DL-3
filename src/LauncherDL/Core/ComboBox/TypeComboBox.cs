@@ -14,7 +14,7 @@ public class TypeComboBox : IComboBoxControl
             buttonMetadata.IsEnabled = false;
 
             if(TemporaryList.Count > 0)
-                comboBoxFormat.AddFormatList(ref TemporaryList);
+                comboBoxFormat.AddFormatList(TemporaryList);
 
             comboBoxFormatText(true);
 
@@ -68,6 +68,6 @@ public class TypeComboBox : IComboBoxControl
     {
         comboBoxFormat.TextEditable         = Editable;
         comboBoxFormat.RefreshEditable();
-        comboBoxFormat.SetFormatListStyle(ref Editable);
+        comboBoxFormat.SetFormatListStyle(in Editable);
     }
 };

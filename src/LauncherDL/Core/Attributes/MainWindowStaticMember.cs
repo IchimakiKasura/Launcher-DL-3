@@ -26,12 +26,12 @@ public class MainWindowStaticMemberAttribute : Attribute
             // Checks if the given attribute is null
             if(FieldAttribute is not null)
                 // Proceed to Set the value if there's an attribute found as a reference
-                FieldAttribute.SetValue<TargetType>(ref MainWindowField[propertiesFound]);
+                FieldAttribute.SetValue<TargetType>(in MainWindowField[propertiesFound]);
         }
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<TargetType>(ref PropertyInfo propertyInfo)
+    private void SetValue<TargetType>(in PropertyInfo propertyInfo)
     {
         // Gets the Field from MainWindow that are non static
         var fieldInfo = typeof(TargetType).GetField($"_{propertyInfo.Name}", BindingFlags.NonPublic|BindingFlags.Instance);

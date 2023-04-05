@@ -2,7 +2,7 @@ namespace DLControls;
 
 public partial class MainResource
 {
-    public static T GetTemplateResource<T>(string Name,dynamic TemplatedParent) =>
+    public static T GetTemplateResource<T>(in string Name,dynamic TemplatedParent) =>
         (T)TemplatedParent.Template.FindName(Name, TemplatedParent);
     
     public static void SetStoryboardAuto(Timeline element, DependencyObject value, PropertyPath path)
@@ -26,6 +26,10 @@ public partial class MainResource
 
 internal static class _Extensions
 {
+    // Strings
+    public static bool IsEmpty(this string str) =>
+        string.IsNullOrEmpty(str);
+
     // Storyboard
     public static void Add(this Storyboard storyboard, Timeline Element) =>
         storyboard.Children.Add(Element);

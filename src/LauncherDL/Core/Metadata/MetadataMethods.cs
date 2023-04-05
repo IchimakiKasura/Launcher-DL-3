@@ -2,15 +2,15 @@ namespace LauncherDL.Core.Metadata;
 
 public partial class MetadataWindow
 {
-    private void GetOldText(ref string Old, TextBoxControl Element) =>
+    private void GetOldText(in string Old, TextBoxControl Element) =>
         Element.Text = Old;
 
     private void SetOldText(ref string Old, TextBoxControl Element)
     {
-        if(Old != Element.Text && Element.Text is not "" or null)
+        if(Old != Element.Text && !Element.Text.IsEmpty())
             IsTextChanged = true;
 
-        Old = Element.Text is "" ? null : Element.Text;
+        Old = Element.Text.IsEmpty() ? null : Element.Text;
     }
     
     void AddToCanvas(UIElement Element) =>

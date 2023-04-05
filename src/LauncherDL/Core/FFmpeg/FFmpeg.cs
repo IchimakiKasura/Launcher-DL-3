@@ -46,13 +46,15 @@ internal static partial class FFmpegFiles
         
         if(ErrorOccured)
         {
-            var FilesMissing = "";
+            StringBuilder FilesMissing = new();
 
             foreach(var Names in FileMissingOnly)
-                FilesMissing += $"{Names}";
+                FilesMissing.Append($"{Names}");
             
-            ConsoleOutputMethod.FFmpegOutputComment(FAILED_MESSAGE, FilesMissing);
+            ConsoleOutputMethod.FFmpegOutputComment(FAILED_MESSAGE, FilesMissing.ToString());
             ConsoleOutputMethod.FFmpegOutputComment(FAILED);
         } else ConsoleOutputMethod.FFmpegOutputComment(SUCCESS);
+
+        FileMissingOnly.Clear();
     }
 }

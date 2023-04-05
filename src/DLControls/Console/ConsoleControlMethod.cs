@@ -66,10 +66,10 @@ public partial class ConsoleControl
             range = new(UserRichTextBox.Document.ContentEnd, UserRichTextBox.Document.ContentEnd);
 
             // yes i'm not normal :D
-            string color = textMatch.Groups["color"].Value is null or "" ? "White" : textMatch.Groups["color"].Value;
+            string color = textMatch.Groups["color"].Value.IsEmpty() ? "White" : textMatch.Groups["color"].Value;
             // bruh
-            string size = textMatch.Groups["size"].Value is null or "" ? textMatch.Groups["sizeOnly"].Value is null or "" ? "19" : textMatch.Groups["sizeOnly"].Value : textMatch.Groups["size"].Value;
-            string weight = textMatch.Groups["weight"].Value is null or "" ? "Normal" : textMatch.Groups["weight"].Value;
+            string size = textMatch.Groups["size"].Value.IsEmpty() ? textMatch.Groups["sizeOnly"].Value.IsEmpty() ? "19" : textMatch.Groups["sizeOnly"].Value : textMatch.Groups["size"].Value;
+            string weight = textMatch.Groups["weight"].Value.IsEmpty() ? "Normal" : textMatch.Groups["weight"].Value;
             string text = textMatch.Groups["text"].Value;
 
             if (isItalic) _FontStyle = FontStyles.Italic;
@@ -95,7 +95,7 @@ public partial class ConsoleControl
     /// </summary>
     /// <param name="format">Input string?</param>
     /// <returns><see cref="MemoryStream"/></returns>
-    public void SaveText(ref MemoryStream stream)
+    public void SaveText(in MemoryStream stream)
     {
         FlowDocument doc = UserRichTextBox.Document;
         TextRange range = new(doc.ContentStart, doc.ContentEnd);
@@ -106,7 +106,7 @@ public partial class ConsoleControl
     }
 
     /// <summary>Load text</summary>
-    public void LoadText(ref MemoryStream stream)
+    public void LoadText(in MemoryStream stream)
     {
         FlowDocument doc = new();
         new TextRange(doc.ContentStart, doc.ContentEnd).Load(stream, DataFormats.Xaml);

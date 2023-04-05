@@ -5,16 +5,12 @@ public partial class MetadataWindow : Window
     MetadataClicked DefaultClicked = MetadataClicked.Cancel;
     public static bool IsWindowOpen = false;
     public bool IsTextChanged = false;
+    
     public MetadataWindow()
     {
         InitializeComponent();
         InitializeBorderEffect();
-
-        GetOldText(ref Old_Title, Metadata_Title);
-        GetOldText(ref Old_Album, Metadata_Album);
-        GetOldText(ref Old_Album_Artist, Metadata_Album_Artist);
-        GetOldText(ref Old_Year, Metadata_Year);
-        GetOldText(ref Old_Genre, Metadata_Genre);
+        MetadataGet();
     }
 
     public MetadataClicked OpenDialog()
@@ -35,9 +31,18 @@ public partial class MetadataWindow : Window
         Close();
     }
 
+    private void MetadataGet()
+    {
+        GetOldText(in Old_Title, Metadata_Title);
+        GetOldText(in Old_Album, Metadata_Album);
+        GetOldText(in Old_Album_Artist, Metadata_Album_Artist);
+        GetOldText(in Old_Year, Metadata_Year);
+        GetOldText(in Old_Genre, Metadata_Genre);
+    }
+
     public static void MetadataClear()
     {
-        console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been cleared!");
+        console.DLAddConsole(CONSOLE_INFO_STRING, MESSAGE_CLEARED);
 
         Old_Title           =
         Old_Album           =

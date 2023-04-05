@@ -36,7 +36,7 @@ internal static class _Core_Extensions
     #endregion
 
     #region ConsoleControl
-    public static void DLAddConsole(this ConsoleControl console,string TypeString, string FormattedText, bool Italic = false, bool NoNL = false)
+    public static void DLAddConsole(this ConsoleControl console, string TypeString, string FormattedText, bool Italic = false, bool NoNL = false)
     {
         var Message = new StringBuilder()
             .Append(TypeString)

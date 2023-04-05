@@ -39,8 +39,11 @@ public enum TypeList
     QualityType
 }
 
-public class ComboBoxList
+public static class ComboBoxList
 {
+    // I did ImmutableList instead of ComboBoxItem[] cuz ImmutableList said its thread safe
+    // idk wtf am i doing.
+
     public readonly static ImmutableList<ComboBoxItem> ComboBoxTypes =
         ImmutableList.Create<ComboBoxItem>( new(),new(),new(),new() );
 

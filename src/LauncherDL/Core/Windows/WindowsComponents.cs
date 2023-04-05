@@ -17,7 +17,7 @@ class WindowsComponents : IWindowsComponents
                 "Hutao",
                 MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
-            if (sagot == MessageBoxResult.OK) e.Cancel = true;
+            if (sagot is MessageBoxResult.OK) e.Cancel = true;
         }
     }
 
@@ -32,6 +32,8 @@ class WindowsComponents : IWindowsComponents
 
         MainWindowStatic.Activated += (s,e) =>
         {
+            OnStartUp.INITIATE_CONSISTENT_FPS(true);
+            
             if(MetadataWindow.IsWindowOpen) return;
             
             if (TaskbarProgressBar.ProgressValue is 1)
@@ -49,6 +51,8 @@ class WindowsComponents : IWindowsComponents
 
         MainWindowStatic.Deactivated += (s,e) =>
         {
+            OnStartUp.INITIATE_CONSISTENT_FPS(false);
+
             Focus(
                 WindowOpacity       : new(0, TimeSpan.FromMilliseconds(100)),
                 WindowAnimation     : new(Colors.Black, TimeSpan.FromMilliseconds(100))

@@ -41,7 +41,7 @@ abstract class EndProcess
 
     // File Format method after fetching
     static void FileFormatTaskEnded() =>
-        comboBoxFormat.AddFormatList(ref TemporaryList);
+        comboBoxFormat.AddFormatList(TemporaryList);
     
     // Convert method after conversion
     static void ConvertTaskEnded() =>
@@ -51,7 +51,7 @@ abstract class EndProcess
     static void DownloadTaskEnded()
     {
         if(!ConsoleLive.SingleErrorInstance)
-            console.LoadText(ref ConsoleLastDocument);
+            console.LoadText(in ConsoleLastDocument);
         else return;
 
         // Sets the metadata

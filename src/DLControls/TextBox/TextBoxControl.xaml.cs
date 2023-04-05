@@ -14,12 +14,7 @@ public partial class TextBoxControl : UserControl
     [Browsable(false)]
     public Thickness TextPlaceholderMargin
     {
-        get
-        {
-            if (TextPlaceholderAlignment is HorizontalAlignment.Left)
-                return new(10, 2, 0, 0);
-            else return new(0, 2, 0, 0);
-        }
+        get => TextPlaceholderAlignment is HorizontalAlignment.Left ? new(10, 2, 0, 0) : new(0, 2, 0, 0);
     }
 
     public double TextPlaceholderFontSize = 20;

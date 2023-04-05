@@ -137,7 +137,7 @@ sealed partial class YDL
 
         var FILE_EXIST_PATH = Path.Combine(config.DefaultOutput, FolderType, $"{textBoxName.Text}.{ExtensionFormat}");
 
-        if(CheckFileExist(ref FILE_EXIST_PATH, Type))
+        if(CheckFileExist(FILE_EXIST_PATH, Type))
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, ConvertButton.NAME___EXIST);
             WindowsComponents.FreezeComponents();
@@ -157,22 +157,19 @@ sealed partial class YDL
         } else Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
 
         console.Break("Gray");
-        console.SaveText(ref ConsoleLastDocument);
+        console.SaveText(ConsoleLastDocument);
         
         await TaskProcess.StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.DownloadLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
-    private bool CheckFileExist(ref string FilePath, TypeOfButton Type)
+    private bool CheckFileExist(in string FilePath, TypeOfButton Type)
     {
         if (Type is TypeOfButton.CustomType)
             foreach(var Extenstion in FileExtensions)
                 if(File.Exists(FilePath.Replace("%(ext)s", Extenstion)))
                     return true;
 
-        if(File.Exists(FilePath))
-            return true;
-
-        return false;
+        return File.Exists(FilePath) ? true : false;
     }
 }

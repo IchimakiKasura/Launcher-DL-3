@@ -8,7 +8,7 @@ public partial class ComboBoxControl
     public void AddAudioTypeList()            => AutoAdd(TypeList.AudioType  );
     public void AddConvertTypeList()          => AutoAdd(TypeList.ConvertType);
     public void AddQualityTypeList()          => AutoAdd(TypeList.QualityType);
-    public void AddFormatList(ref List<FormatList> FormatListArgs)
+    public void AddFormatList(in List<FormatList> FormatListArgs)
     {
         foreach (var CBT in FormatListArgs)
             UserComboBox.Items.Add(CBT);
@@ -43,7 +43,7 @@ public partial class ComboBoxControl
     {
         if(!IsLoaded) return;
 
-        MainText.Text = "";
+        MainText.Text = string.Empty;
 
         ComboBoxTemplateGRID.Remove(MainText);
         ComboBoxTemplateGRID.Remove(Placeholder);
@@ -56,7 +56,7 @@ public partial class ComboBoxControl
         Contents.Visibility = Visibility.Hidden;
     }
 
-    public void SetFormatListStyle(ref bool clear)
+    public void SetFormatListStyle(in bool clear)
     {
         UserComboBox.ItemContainerStyle = (Style)UserComboBox.FindResource("FormatListType");
         if(!clear)UserComboBox.ItemContainerStyle = default;
@@ -66,7 +66,7 @@ public partial class ComboBoxControl
     {
         if(!TextEditable) return;
 
-        MainText.Text = "";
+        MainText.Text = string.Empty;
         ItemIndex = -1;
         ClearItems();
     }
