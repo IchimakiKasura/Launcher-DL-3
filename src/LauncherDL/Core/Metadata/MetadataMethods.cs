@@ -38,7 +38,12 @@ public partial class MetadataWindow
             );
     }
 
-    // Another chatGPT refactoring ffs
+    // Ight, hear me out!
+    // The reason this exist because "postprocessing-args" on ytdlp
+    // won't fire when the file isn't "converted" or "merged" so selecting the 
+    // "best" format won't run "postprocessing-args" hence this method
+    // exist just to add metadata on a single option "Video Type: mp4"
+    // The Convert type and Audio type still works tho
     public static void ApplyMetadataOnFile()
     {
         // Retrieve input from UI controls
@@ -75,9 +80,20 @@ public partial class MetadataWindow
 
         ffmpegProcess.StartAsync();
 
-        // Rename temporary file to final file name
         File.Delete(fullFilePath);
         File.Move(temporaryFilePath, fullFilePath);
+    }
+
+    public static void ApplyMetadataOnFile(ref StringBuilder MetadataArguments)
+    {
+        MetadataArguments.Append(" --postprocessor-args \"ffmpeg:");
+        MetadataArguments.Append($"-metadata title='{Old_Title}' ");
+        MetadataArguments.Append($"-metadata album='{Old_Album}' ");
+        MetadataArguments.Append($"-metadata album_artist='{Old_Album_Artist}' ");
+        MetadataArguments.Append($"-metadata date='{Old_Year}' ");
+        MetadataArguments.Append($"-metadata genre='{Old_Genre}' ");
+        MetadataArguments.Append($"-metadata description='Downloaded on launcherDL' ");
+        MetadataArguments.Append($"-metadata comment='Downloaded on launcherDL' \"");
     }
 
 }

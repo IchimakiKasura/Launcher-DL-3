@@ -31,6 +31,7 @@ public partial class ComboBoxControl : UserControl
         set => SetValue(ItemIndexProperty, value);
     }
 
+
     public ScrollBarVisibility ShowVerticalScrollbar
     {
         get => (ScrollBarVisibility)GetValue(ShowVerticalScrollbarProperty);
@@ -56,6 +57,12 @@ public partial class ComboBoxControl : UserControl
 
     public bool HasItems =>
         UserComboBox.HasItems;
+
+    public ItemCollection Items =>
+        UserComboBox.Items;
+
+    public object SelectedItem =>
+        UserComboBox.SelectedItem;
 
     public bool isTextFocused { get; set; }
     public RoutedEventHandler OnItemChange;
@@ -86,7 +93,7 @@ public partial class ComboBoxControl : UserControl
 
         MainText.TextChanged += delegate
         {
-            if (MainText.Text is "" or null)
+            if (MainText.Text.IsEmpty())
                 ComboBoxTemplateGRID.Add(Placeholder);
             else ComboBoxTemplateGRID.Remove(Placeholder);
         };
@@ -118,7 +125,7 @@ public partial class ComboBoxControl : UserControl
                     
                     if(TextEditable)
                     {
-                        if(string.IsNullOrEmpty(MainText.Text))
+                        if(MainText.Text.IsEmpty())
                             ComboBoxTemplateGRID.Remove(MainText);
                             
                         Placeholder.Text = " Unavailable";

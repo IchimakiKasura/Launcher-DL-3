@@ -69,6 +69,7 @@ internal class DownloadButton : IButtonControls
             Format = _FormatOutputComment.Replace("|", "$vbar$") ?? "N/A",
             Link = textBoxLink.Text ?? "N/A",
         });
+        console.Break("Gray");
 
         YDL YDLInfo = new(
             new()

@@ -2,6 +2,7 @@
 
 // TODO:
 //
+//  Fix naming if possible
 //
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation

@@ -16,7 +16,7 @@ public partial class ButtonControl
             new(IMAGE_VIEWPORT)     // 7
         );
 
-    private void SetAnimationsValues(in bool isEnter,in TimeSpan animationDuration)
+    private void SetAnimationsValues(bool isEnter, TimeSpan animationDuration)
     {
         ControlDA = ImmutableList<Timeline>.Empty;
 
@@ -59,7 +59,7 @@ public partial class ButtonControl
     {
         AnimationDuration = IsAnimationOn ? TimeSpan.FromMilliseconds(100) : TimeSpan.Zero;
         
-        SetAnimationsValues(in IsEnter,in AnimationDuration);
+        SetAnimationsValues(IsEnter, AnimationDuration);
 
         ref var ControlAnimations = ref MemoryMarshal.GetArrayDataReference(ControlDA.ToArray());
         ref var ControlPathRef = ref MemoryMarshal.GetArrayDataReference(ControlPaths.ToArray());

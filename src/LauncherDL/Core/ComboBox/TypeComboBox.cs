@@ -7,11 +7,11 @@ public class TypeComboBox : IComboBoxControl
         ConsoleOutputMethod.ComboBoxChangedOutputComment(ConsoleOutputMethodSelection.TYPE);
         
         comboBoxFormat.ClearItems();
+        buttonMetadata.IsEnabled = true;
 
         if(comboBoxType.ItemIndex is 0)
         {
             buttonFileFormat.IsEnabled = true;
-            buttonMetadata.IsEnabled = false;
 
             if(TemporaryList.Count > 0)
                 comboBoxFormat.AddFormatList(TemporaryList);
@@ -22,7 +22,6 @@ public class TypeComboBox : IComboBoxControl
         }
         else
         {
-            buttonMetadata.IsEnabled = true;
             buttonFileFormat.IsEnabled = false;
             comboBoxFormatText(false);
         }
@@ -68,6 +67,6 @@ public class TypeComboBox : IComboBoxControl
     {
         comboBoxFormat.TextEditable         = Editable;
         comboBoxFormat.RefreshEditable();
-        comboBoxFormat.SetFormatListStyle(in Editable);
+        comboBoxFormat.SetFormatListStyle(Editable);
     }
 };

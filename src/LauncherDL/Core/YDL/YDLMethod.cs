@@ -154,16 +154,22 @@ sealed partial class YDL
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
             Arguments.Append($" --downloader \"{ARIA2C_Path}\" --no-part");
-        } else Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
+        }
+        else 
+        {
+            Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
+            
+            //Apply Metadata if exist
+            MetadataWindow.ApplyMetadataOnFile(ref Arguments);
+        }
 
-        console.Break("Gray");
-        console.SaveText(ConsoleLastDocument);
-        
+        console.SaveText(ref ConsoleLastDocument);
+
         await TaskProcess.StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.DownloadLiveOutputComment);
         TaskProcess.EndProcess.ProcessTaskEnded();
     }
 
-    private bool CheckFileExist(in string FilePath, TypeOfButton Type)
+    private bool CheckFileExist(string FilePath, TypeOfButton Type)
     {
         if (Type is TypeOfButton.CustomType)
             foreach(var Extenstion in FileExtensions)

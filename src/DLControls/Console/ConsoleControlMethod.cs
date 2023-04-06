@@ -95,7 +95,7 @@ public partial class ConsoleControl
     /// </summary>
     /// <param name="format">Input string?</param>
     /// <returns><see cref="MemoryStream"/></returns>
-    public void SaveText(in MemoryStream stream)
+    public void SaveText(ref MemoryStream stream)
     {
         FlowDocument doc = UserRichTextBox.Document;
         TextRange range = new(doc.ContentStart, doc.ContentEnd);

@@ -72,7 +72,7 @@ sealed class LinkValidate
         LinkValidationProcess.ErrorDataReceived += (s, e) =>
             DL_Dispatch.Invoke(()=>{
                 if(e.Data.IsEmpty()) return;
-                if (e.Data.Contains("ERROR") || e.Data.Contains("Traceback"))
+                if (Regex.IsMatch(e.Data, @"(ERROR|Traceback)"))
                 {
                     if (e.Data.Contains("cookies"))
                         console.AddFormattedText($"<Yellow%14>[INFO] <%14>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\". This method might be risky so I'm not liable if your account is blocked or locked");

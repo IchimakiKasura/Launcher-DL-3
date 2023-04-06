@@ -51,18 +51,17 @@ abstract class EndProcess
     static void DownloadTaskEnded()
     {
         if(!ConsoleLive.SingleErrorInstance)
-            console.LoadText(in ConsoleLastDocument);
+            console.LoadText(ConsoleLastDocument);
         else return;
 
         // Sets the metadata
-        if(MetadataWindowStatic != null && MetadataWindowStatic.IsTextChanged && !FFmpegFiles.ErrorOccured)
-        {
-            console.DLAddConsole(CONSOLE_INFO_STRING, "Metadata has been applied.");
+        // **read the comment on MetadataMethod.cs LN:41 for explanation idk**
+        if(MetadataWindowStatic is not null &&
+            MetadataWindowStatic.IsTextChanged &&
+            !FFmpegFiles.ErrorOccured &&
+            comboBoxType.GetItemContent == "Video" &&
+            comboBoxFormat.GetItemContent == "mp4")
             MetadataWindow.ApplyMetadataOnFile();
-        }
-        else if(MetadataWindowStatic != null && MetadataWindowStatic.IsTextChanged && FFmpegFiles.ErrorOccured)
-            console.DLAddConsole(CONSOLE_ERROR_STRING, "Metadata cannot be applied! FFMPEG is missing!");
-        
         
         console.DLAddConsole(CONSOLE_YEY_STRING, "Downloaded!");
     }

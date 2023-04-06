@@ -29,7 +29,7 @@ internal class ConvertButton : IButtonControls
             return;
         }
 
-        console.AddFormattedText("<#83fa57%14>[PROCESSING] <%14>Please wait until the conversion is finished.");
+        console.DLAddConsole(CONSOLE_PROCESSING, "<%14>Please wait until the conversion is finished.");
 
         YDL YDLInfo = new(
             new()

@@ -33,11 +33,11 @@ public partial class MetadataWindow : Window
 
     private void MetadataGet()
     {
-        GetOldText(in Old_Title, Metadata_Title);
-        GetOldText(in Old_Album, Metadata_Album);
-        GetOldText(in Old_Album_Artist, Metadata_Album_Artist);
-        GetOldText(in Old_Year, Metadata_Year);
-        GetOldText(in Old_Genre, Metadata_Genre);
+        GetOldText(Old_Title, Metadata_Title);
+        GetOldText(Old_Album, Metadata_Album);
+        GetOldText(Old_Album_Artist, Metadata_Album_Artist);
+        GetOldText(Old_Year, Metadata_Year);
+        GetOldText(Old_Genre, Metadata_Genre);
     }
 
     public static void MetadataClear()

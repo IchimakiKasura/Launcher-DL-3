@@ -16,7 +16,7 @@ public partial class App
         
         void setAlignmentValue()
         {
-            if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);	
+            if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
         }
         
         setAlignmentValue();
@@ -38,7 +38,7 @@ public partial class App
 
         // Checks if the Unhandled exception has a custom message.
         if (CustomMessage != string.Empty)
-            errorMessage = $"It Appears the the application encounters an Error!\n\n{CustomMessage}";			
+            errorMessage = $"It Appears the the application encounters an Error!\n\n{CustomMessage}";
 
         if (MessageBox.Show(MainWindow, errorMessage, "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Error) is MessageBoxResult.OK)
             Application.Current.Shutdown();

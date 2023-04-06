@@ -10,17 +10,16 @@ internal partial class ConsoleLive
         var StringData = e.Data;
         if(StringData.IsEmpty()) return;
 
-        if(StringData.Contains("[ExtractAudio]") || StringData.Contains("[VideoConvertor]") || StringData.Contains("[Merger]"))
+        if(Regex.IsMatch(StringData, @"\[(ExtractAudio|VideoConvertor|Merger)\]"))
             DL_Dispatch.Invoke(ProcessMessage);
 
         ProgressInfo = new(7);
         NetworkSpeedColor = string.Empty;
+        Regex DefaultRegex = null;
 
-        var DefaultRegex = DownloadInfoARIA2C;
+        DL_Dispatch.Invoke(()=> DownloaderRegexChanged(out DefaultRegex));
 
-        DL_Dispatch.Invoke(()=>DownloaderRegexChanged(out DefaultRegex));
-
-        foreach(Group match in DefaultRegex.Match(StringData).Groups)
+        foreach (Group match in DefaultRegex.Match(StringData).Groups)
             if(!match.Name.Contains("0") && !match.Value.IsEmpty())
                 ProgressInfo.Add(match.Value.Trim());
             
@@ -31,25 +30,25 @@ internal partial class ConsoleLive
             DefaultRegex == DownloadInfoARIA2C ?
                 ProgressInfo[DOWNLOAD_SPEED] : ProgressInfo[DOWNLOAD_FMT_SPEED];
 
-        double.TryParse(Regex.Replace(DownSpeedSTR, @"~|[a-zA-Z\/]", ""),out Double SpeedNumber);
-        switch(DownSpeedSTR)
-        {
-            case string str when str.Contains("K"):
-                if (SpeedNumber > 199.99)
-                    NetworkSpeedColor = DOWNSPEED_COLOR_KB_HIGH;
-                else NetworkSpeedColor = DOWNSPEED_COLOR_KB_LOW;
-            break;
+        if(double.TryParse(Regex.Replace(DownSpeedSTR, @"~|[a-zA-Z\/]", ""),out Double SpeedNumber))
+            switch(DownSpeedSTR)
+            {
+                case string str when str.Contains("K"):
+                    if (SpeedNumber > 199.99)
+                        NetworkSpeedColor = DOWNSPEED_COLOR_KB_HIGH;
+                    else NetworkSpeedColor = DOWNSPEED_COLOR_KB_LOW;
+                break;
 
-            case string str when str.Contains("M"):
-                if (SpeedNumber > 0.99)
-                    NetworkSpeedColor = DOWNSPEED_COLOR_MB_HIGH;
-                else NetworkSpeedColor = DOWNSPEED_COLOR_MB_LOW;
-            break;
+                case string str when str.Contains("M"):
+                    if (SpeedNumber > 0.99)
+                        NetworkSpeedColor = DOWNSPEED_COLOR_MB_HIGH;
+                    else NetworkSpeedColor = DOWNSPEED_COLOR_MB_LOW;
+                break;
 
-            case string str when str.Contains("G"):
-                NetworkSpeedColor = DOWNSPEED_COLOR_GB;
-            break;
-        };
+                case string str when str.Contains("G"):
+                    NetworkSpeedColor = DOWNSPEED_COLOR_GB;
+                break;
+            };
         #endregion
 
         DL_Dispatch.Invoke(()=>Download_Invoke(DefaultRegex != DownloadInfoARIA2C));
@@ -57,7 +56,7 @@ internal partial class ConsoleLive
 
     static void Download_Invoke(bool IsFetchedFormat)
     {
-        console.LoadText(in ConsoleLastDocument);
+        console.LoadText(ConsoleLastDocument);
 
         string
         _Progress   = IsFetchedFormat ? ProgressInfo[DOWNLOAD_FMT_PROGRESS] : ProgressInfo[DOWNLOAD_PROGRESS]   ,
@@ -73,8 +72,8 @@ internal partial class ConsoleLive
 
         console.AddFormattedText(FormattedTextOutput.ToString());
         
-        double.TryParse(_Progress, out Double value);
-        progressBar.Value = value;
+        if(double.TryParse(_Progress, out Double value))
+            progressBar.Value = value;
             
         TaskbarProgressBar.ProgressValue = progressBar.Value / 100;
     }
@@ -87,9 +86,9 @@ internal partial class ConsoleLive
 
     static void DownloaderRegexChanged(out Regex DefaultRegex)
     {
-        DefaultRegex = null;
+        DefaultRegex = DownloadInfoARIA2C;
 
-        if(comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > -1)
+        if (comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > -1)
             DefaultRegex = DownloadInfoARIA2CFetchedFormat; 
     }
 }

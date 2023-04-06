@@ -19,7 +19,7 @@ internal partial class ConsoleLive                                              
         DL_Dispatch.Invoke(()=>Error_Invoked(e.Data))                                                                                                                   ;
 
     public static void Error_Invoked(string StringData)                                                                                                                 {
-        if (!SingleErrorInstance && !StringData.IsEmpty() && !StringData.Contains("[twitter]"))
+        if (!SingleErrorInstance && !StringData.IsEmpty() && !Regex.IsMatch(StringData,@"\[(twitter|generic)\]"))
             switch(SelectedError)                                                                                                                                       {
                 case 0                                                                                                                                                  :
                     console.DLAddConsole(CONSOLE_ERROR_STRING,

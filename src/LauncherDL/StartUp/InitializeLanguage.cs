@@ -13,7 +13,7 @@ partial class OnStartUp
         buttonUpdate.Text                                               =   Language.Button_Update;
         buttonOpenFile.Text                                             =   Language.Button_OpenFile;
         buttonMetadata.Text                                             =   Language.Button_Metadata;
-        ButtonOpenFolder.Content									    =   Language.Button_OpenFolder;
+        ButtonOpenFolder.Content                                        =   Language.Button_OpenFolder;
 
         // Placeholders
         textBoxLink.TextPlaceholder                                     =   Language.Placeholder_Link;

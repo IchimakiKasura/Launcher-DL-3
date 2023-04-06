@@ -6,5 +6,13 @@ public class FormatComboBox : IComboBoxControl
     {
         if(comboBoxFormat.HasItems && !comboBoxFormat.TextEditable)
             ConsoleOutputMethod.ComboBoxChangedOutputComment(ConsoleOutputMethodSelection.FORMAT);
+
+        // Weird
+        if(comboBoxType.ItemIndex is 0 &&
+           comboBoxFormat.HasItems &&
+           comboBoxFormat.SelectedItem is FormatList SelectedFormat &&
+           SelectedFormat.ID  is "Best"
+          )
+            console.DLAddConsole(CONSOLE_WARNING_STRING, "Metadata will be ignored when the format is on default!");
     }
 }

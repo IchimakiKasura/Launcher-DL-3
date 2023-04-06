@@ -38,7 +38,7 @@ public partial class MetadataWindow : IMetadataComponent
             new() { Text = LABEL_GENRE          },
             new() { Text = LABEL_CREATOR        }
         );
-        
+    
     private List<TextBoxControl> TEXTBOX_LIST = new(4);
     
     private bool _contentLoad;
@@ -85,7 +85,7 @@ public partial class MetadataWindow : IMetadataComponent
         EventHandlers();
 
         // Setup the Tooltips
-		ToolTipTextsAttribute.InitiateAttribute<MetadataWindow>();
+        ToolTipTextsAttribute.InitiateAttribute<MetadataWindow>();
     }
 
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -117,6 +117,7 @@ public partial class MetadataWindow : IMetadataComponent
 
         Button_Set          = new() { Content = BUTTON_SET    , Style = GetResources<Style>(WINDOW_RESOURCE_BUTTONS)};
         Button_Cancel       = new() { Content = BUTTON_CANCEL , Style = GetResources<Style>(WINDOW_RESOURCE_BUTTONS)};
+
         Button_Exit.Content = "✕";
         Button_Exit.Style   = GetResources<Style>(WINDOW_RESOURCE_EXIT_BUTTON);
         Button_Exit.Margin  = new(this.Width - 70, 0,0,0);
@@ -140,7 +141,6 @@ public partial class MetadataWindow : IMetadataComponent
 
         foreach(TextBoxControl Controls in TEXTBOX_LIST)
             AddToCanvas(Controls);
-        
     }
 
     private void SetCanvasPlacement()

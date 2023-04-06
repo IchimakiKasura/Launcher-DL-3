@@ -97,7 +97,6 @@ class WindowsComponents : IWindowsComponents
         IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(MainWindowStatic).Handle;
         FLASHWINFO fInfo = new FLASHWINFO();
 
-        fInfo.cbSize = Convert.ToUInt32(Marshal.SizeOf(fInfo));
         fInfo.hwnd = hWnd;
         fInfo.dwFlags = FLASHW_ALL;
         fInfo.uCount = uint.MaxValue;
@@ -136,16 +135,10 @@ class WindowsComponents : IWindowsComponents
         if(comboBoxType.ItemIndex is not 0)
             buttonFileFormat.IsEnabled = !buttonFileFormat.IsEnabled;
 
-        switch(comboBoxType.ItemIndex)
+        if(comboBoxType.ItemIndex is 3)
         {
-            case 0:
-                buttonMetadata.IsEnabled = !buttonMetadata.IsEnabled;
-            break;
-
-            case 3:
-                buttonMetadata.IsEnabled = !buttonMetadata.IsEnabled;
-                buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
-            break;
+            buttonMetadata.IsEnabled = !buttonMetadata.IsEnabled;
+            buttonOpenFile.IsEnabled = !buttonOpenFile.IsEnabled;
         }
 
         WindowProgressBar(comboBoxType.IsEnabled ? ProgressBarState.Hide : ProgressBarState.Show);

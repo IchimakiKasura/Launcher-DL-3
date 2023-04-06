@@ -27,7 +27,7 @@ internal class EventHandlers
         buttonUpdate.Click              +=      UpdateButton.ButtonClicked;
         buttonOpenFile.Click            +=      FileButton.ButtonClicked;
         buttonMetadata.Click            +=      MetadataButton.ButtonClicked;
-        ButtonOpenFolder.Click			+=		FolderButton.ButtonClicked;
+        ButtonOpenFolder.Click          +=      FolderButton.ButtonClicked;
 
         #endregion
 

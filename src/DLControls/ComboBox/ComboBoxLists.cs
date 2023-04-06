@@ -80,12 +80,12 @@ public static class ComboBoxList
 
     public readonly static ImmutableList<ComboBoxItem> ComboBoxFormatQuality =
         ImmutableList.Create<ComboBoxItem>(
-            new() { Content="Highest"	,	Uid="-crf 0  -preset slow "         },
-            new() { Content="High"		,	Uid="-crf 10 -preset slow "         },
-            new() { Content="Medium"	,	Uid="-crf 17 -preset slow "         },
-            new() { Content="Normal"	,	Uid="-crf 23 -preset medium "       },
-            new() { Content="Low"		,	Uid="-crf 30 -preset fast "         },
-            new() { Content="Lowest"	,	Uid="-crf 45 -preset veryfast "     },
-            new() { Content="Potato"	,	Uid="-crf 50 -preset ultrafast "    }
+            new() { Content="Highest"   ,   Uid="-crf 0  -preset slow "         },
+            new() { Content="High"      ,   Uid="-crf 10 -preset slow "         },
+            new() { Content="Medium"    ,   Uid="-crf 17 -preset slow "         },
+            new() { Content="Normal"    ,   Uid="-crf 23 -preset medium "       },
+            new() { Content="Low"       ,   Uid="-crf 30 -preset fast "         },
+            new() { Content="Lowest"    ,   Uid="-crf 45 -preset veryfast "     },
+            new() { Content="Potato"    ,   Uid="-crf 50 -preset ultrafast "    }
         );
 }

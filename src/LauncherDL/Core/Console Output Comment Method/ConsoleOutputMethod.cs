@@ -82,7 +82,7 @@ internal static class ConsoleOutputMethod
             .Append($"<Gray%10>[] Download Type$tab$: {Obj.Type}$nl$")
             .Append($"<Gray%10>[] Name$tab$$tab$: {Obj.Name}$nl$")
             .Append($"<Gray%10>[] Format$tab$$tab$: {Obj.Format}$nl$")
-            .Append($"<Gray%10>[] Link$tab$$tab$: {Obj.Link}$nl$")
+            .Append($"<Gray%10>[] Link$tab$$tab$: {Obj.Link}")
             .ToString();
 
         console.DLAddConsole(CONSOLE_INFO_STRING,OutputComment);

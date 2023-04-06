@@ -30,14 +30,6 @@ internal partial class ConsoleLive
         }
 
         if(FormatNames.Count is 0) return;
-
-        string NameFormat = 
-            new FormatName(
-                ID      :       FormatNames[ID],
-                FMT     :       FormatNames[FORMAT],
-                RES     :       FormatNames[RESOLUTION],
-                SIZE    :       FormatNames[SIZE]
-            ).Name;
         
         switch(FormatNames[FPS].Length)
         {
@@ -49,7 +41,6 @@ internal partial class ConsoleLive
         };
         
         if(FormatNames[RESOLUTION].Contains("audio only"))
-            // Takes the latest Audio format ID
             switch(FormatNames[FORMAT])
             {
                 case "m4a" : AudioOnlyID_M4A  = FormatNames[ID];                                break;
@@ -73,23 +64,31 @@ internal partial class ConsoleLive
                 _ => null
             };
         }
-    
+
+        string NameFormat =
+            new FormatName(
+                ID: FormatNames[ID],
+                FMT: FormatNames[FORMAT],
+                RES: FormatNames[RESOLUTION],
+                SIZE: FormatNames[SIZE]
+            ).Name;
+
         TemporaryList.Add(new()
         {
-            Name        =       NameFormat,
-            ID          =       FormatNames[ID],
-            FORMAT      =       FormatNames[FORMAT],
-            RESOLUTION  =       FormatNames[RESOLUTION],
-            FPS         =       FormatNames[FPS],
-            SIZE        =       FormatNames[SIZE],
-            BITRATE     =       FormatNames[BITRATE],
-            VID_W_AUD   =       VID_AO
+            Name = NameFormat,
+            ID = FormatNames[ID],
+            FORMAT = FormatNames[FORMAT],
+            RESOLUTION = FormatNames[RESOLUTION],
+            FPS = FormatNames[FPS],
+            SIZE = FormatNames[SIZE],
+            BITRATE = FormatNames[BITRATE],
+            VID_W_AUD = VID_AO
         });
 
-        DL_Dispatch.Invoke(()=>FileFormat_Invoked(StringData));
+        DL_Dispatch.Invoke(()=>FileFormat_Invoked());
     }
 
-    static void FileFormat_Invoked(string StringData)
+    static void FileFormat_Invoked()
     {
         //// [3/27/2023] This code is straight up from v6 :D
         //// [3/31/2023] the code returns
