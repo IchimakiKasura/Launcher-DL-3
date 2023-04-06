@@ -14,20 +14,20 @@ public class FormatList
 
 public class FormatName
 {
-    public FormatName(string ID, string FMT, string RES, string SIZE)
+    public FormatName(string pID, string pFORMAT, string pRESOLUTION, string pSIZE)
     {
-        Id = ID;
-        Fmt = FMT;
-        Res = RES;
-        Size = SIZE;
+        ID = pID;
+        FORMAT = pFORMAT;
+        RESOLUTION = pRESOLUTION;
+        SIZE = pSIZE;
     }
 
-    public string Id { get; }
-    public string Fmt { get; }
-    public string Res { get; }
-    public string Size { get; }
+    public string ID { get; }
+    public string FORMAT { get; }
+    public string RESOLUTION { get; }
+    public string SIZE { get; }
 
-    public string Name => $"[{Id}]   {Fmt}   |   {Res}   |   {Size}";
+    public string Name => $"[{ID}]   {FORMAT}   |   {RESOLUTION}   |   {SIZE}";
 }
 
 public enum TypeList

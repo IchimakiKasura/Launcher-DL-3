@@ -1,8 +1,10 @@
-﻿namespace DLControls;
+﻿using static DLControls.CONSOLEOUTPUTMETHOD_STR;
+namespace DLControls;
 
+// Originally to be released as a library but nah
 public partial class ConsoleControl
 {
-    [GeneratedRegex(@"<(?<color>.*?)(?:%(?:(?<size>.*?)\|(?<weight>.*?))|%(?<sizeOnly>.*?)|)>(?<text>.*?)(?=<|$)", RegexOptions.Compiled)]
+    [GeneratedRegex(REGEX_STRING, RegexOptions.Compiled)]
     private static partial Regex MyRegex();
     readonly private static Regex RTBregex = MyRegex();
 
@@ -65,21 +67,29 @@ public partial class ConsoleControl
 
             range = new(UserRichTextBox.Document.ContentEnd, UserRichTextBox.Document.ContentEnd);
 
-            // yes i'm not normal :D
-            string color = textMatch.Groups["color"].Value.IsEmpty() ? "White" : textMatch.Groups["color"].Value;
-            // bruh
-            string size = textMatch.Groups["size"].Value.IsEmpty() ? textMatch.Groups["sizeOnly"].Value.IsEmpty() ? "19" : textMatch.Groups["sizeOnly"].Value : textMatch.Groups["size"].Value;
-            string weight = textMatch.Groups["weight"].Value.IsEmpty() ? "Normal" : textMatch.Groups["weight"].Value;
-            string text = textMatch.Groups["text"].Value;
+            string color = "", size = "", weight = "", text = "";
+
+            // weird but yeah
+            foreach(Group GroupMatched in textMatch.Groups)
+                switch(GroupMatched.Name)
+                {
+                    case "color":    color   = GroupMatched.Value.IsEmpty() ? "White" : GroupMatched.Value; break;
+                    case "size":     size    = GroupMatched.Value; break;
+                    case "sizeOnly": size    = size.IsEmpty() && !GroupMatched.Value.IsEmpty() ? GroupMatched.Value : "19"; break;
+                    case "weight":   weight  = GroupMatched.Value.IsEmpty() ? "Normal" : GroupMatched.Value; break;
+                    case "text":     text    = GroupMatched.Value; break;
+                }
+            
 
             if (isItalic) _FontStyle = FontStyles.Italic;
 
-            text = text.Replace("$lt$", "<")
-            .Replace("$gt$", ">")
-            .Replace("$perc$", "%")
-            .Replace("$vbar$", "|")
-            .Replace("$tab$", "\t")
-            .Replace("$nl$", "\r");
+            text = text
+            .Replace(LESS_THAN_SIGN     , "<" )
+            .Replace(GREATER_THAN_SIGN  , ">" )
+            .Replace(PERCENTAGE_SIGN    , "%" )
+            .Replace(VERTICAL_BAR       , "|" )
+            .Replace(TAB                , "\t")
+            .Replace(NEW_LINE           , "\r");
 
             try { range.Text = text; } catch { throw new TextPropertyException(); };
             range.ApplyPropertyValue(Control.FontStyleProperty, _FontStyle);

@@ -9,9 +9,9 @@ public partial class Global
 {
     // App version
     #if !DEBUG
-    public const string APP_CURRENT_VERSION = "7.1_DT0.0.0000";
+        public const string APP_CURRENT_VERSION = "7.1_DT0.0.0000";
     #else
-    public const string APP_CURRENT_VERSION = "Development Build";
+        public const string APP_CURRENT_VERSION = "Development Build";
     #endif
 
     /// <summary>MainWindow but in <see langword="static"/></summary>
@@ -94,25 +94,35 @@ public partial class Global
     #endregion
 
     #region HUZUAAH!
-    public const string hidden =
-    "Launcher DL Version 7.1 (7th Generation DL)\n\n"         +
-    "[ Fixes ]\n"                                             +
-    "- Fixed where BackgroundGlow and Image are not setting\n"+
-    "up correctly as it is.\n"                                + 
-    "- Fixed where Textbox needing 2 tab presses\n"           +
-    "before actually typing on it.\n"                         +
-    "- ComboBo'x textbox also need 2 tab presses when its\n"  +
-    "on TextEditable state.\n"                                +
-    "- Fixed where Download on Custom types with fetched\n"   +
-    "Formats other sites other than youtube.\n"               +
-    "- Fixed where Download on Twitter throws random error\n" +
-    "because of api but it doesn't affect\n"                  +
-    "the downloaded file.\n"                                  +
-    "- Fixed where ID is going past the limit on ComboBox\n"  +
-    "now has an \"...\" when it has more than 8 chars\n\n"    +
-    "[ New ]\n"+
-    "- Open file context menu will have disabled buttons\n"   +
-    "if the folder doesn't exist.";
+    public const string hidden = """
+    Launcher DL Version 7.1 (7th Generation DL)
+
+    [ Fixes ]
+    - Fixed where BackgroundGlow and Image are not setting
+        up correctly as it is.
+    - Fixed where Textbox needing 2 tab presses
+        before actually typing on it.
+    - ComboBo'x textbox also need 2 tab presses when its
+        on TextEditable state.
+    - Fixed where Download on Custom types with fetched
+        Formats other sites other than youtube.
+    - Fixed where Download on Twitter throws random error
+        because of api but it doesn't affect the 
+        downloaded file.
+    - Fixed where ID is going past the limit on ComboBox
+        now has an "..." when it has more than 8 chars.
+
+    [ New ]
+    - OpenFile context menu will have disabled buttons
+        if the folder doesn't exist.
+    - Metadata is now available on CustomType!
+    - Added few Animations.
+
+    [ Misc ]
+    - Window is now continuously updating to hit the 60fps
+        target and remove button stuttering animations.
+            (Only when window is focused!)
+    """;
     #endregion
 
 }

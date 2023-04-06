@@ -40,7 +40,6 @@ internal partial class ConsoleLive                                              
                 break                                                                                                                                                   ;
 
                 case 3                                                                                                                                                  :
-                    console.DLAddConsole(CONSOLE_ERROR_STRING,
-                    "Convert failed! If error is consistent please report it to the author")                                                                            ;
+                    console.DLAddConsole(CONSOLE_ERROR_STRING, ERROR_MESSAGE_CONVERT)                                                                                   ;
                     SingleErrorInstance = true                                                                                                                          ;
                 break                                                                                                                                                   ;}}}

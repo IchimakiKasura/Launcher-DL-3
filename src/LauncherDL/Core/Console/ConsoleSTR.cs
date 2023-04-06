@@ -6,6 +6,8 @@ public abstract class ConsoleLive_STR
     public const string ERROR_MESSAGE_HINT =
     "$nl$1. Link is unavailable$nl$2. Link is invalid$nl$3. Check internet connection.$nl$"+
     "4. YT-DLP might be outdated please update it first!";
+    public const string ERROR_MESSAGE_CONVERT =
+    "Convert failed! If error is consistent please report it to the author";
 
     #region FORMAT STR
     public const int
@@ -27,7 +29,13 @@ public abstract class ConsoleLive_STR
     DOWNLOAD_FMT_SIZE       = 1,
     DOWNLOAD_FMT_PROGRESS   = 2;
 
+    public const double
+    DOWNSPEED_KB_LIMIT      = 199.99,
+    DOWNSPEED_MB_LIMIT      = 0.99;
+
     public const string
+    DOWNSPEED_REGEX         = @"~|[a-zA-Z\/]",
+    PROCESSING_REGEX        = @"\[(ExtractAudio|VideoConvertor|Merger)\]",
     PROCESSING_MESSAGE      = "Please wait until its finished processing.",
     DOWNSPEED_COLOR_GB      = "Pink",
     DOWNSPEED_COLOR_MB_HIGH = "#83fa57",

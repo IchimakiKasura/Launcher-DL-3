@@ -12,7 +12,6 @@ public partial class ConsoleControl : UserControl
         get => (double)GetValue(ConsoleHeightProperty);
         set
         {
-            // Heh smooth animations lmao
             DoubleAnimation animation = new(value, TimeSpan.FromMilliseconds(200));
             animation.Completed += (s,e) => manualScrollToEnd();
             BeginAnimation(ConsoleHeightProperty, animation);

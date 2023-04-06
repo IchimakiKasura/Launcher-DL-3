@@ -17,4 +17,16 @@ public abstract class CONSOLEOUTPUTMETHOD_STR
     public const string CONSOLE_METADATA_ALBUM_ARTIST   = "[METADATA] Album Artist:$tab$:  ";
     public const string CONSOLE_METADATA_YEAR           = "[METADATA] Year$tab$$tab$:  ";
     public const string CONSOLE_METADATA_GENRE          = "[METADATA] Genre$tab$$tab$:  ";
+
+    [Browsable(false)]
+    public const string REGEX_STRING                    = @"<(?<color>.*?)(?:%(?:(?<size>.*?)\|(?<weight>.*?))|%(?<sizeOnly>.*?)|)>(?<text>.*?)(?=<|$)";
+    
+    [Browsable(false)]
+    public const string
+    LESS_THAN_SIGN                                      = "$lt$",
+    GREATER_THAN_SIGN                                   = "$gt$",
+    PERCENTAGE_SIGN                                     = "$perc$",
+    VERTICAL_BAR                                        = "$vbar$",
+    TAB                                                 = "$tab$",
+    NEW_LINE                                            = "$nl$";
 }

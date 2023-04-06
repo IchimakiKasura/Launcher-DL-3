@@ -2,34 +2,21 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal partial class ConsoleLive
 {
-    static List<string> FormatNames = new(5);
+    static List<string> FormatNames;
     static string AudioOnlyID_M4A, AudioOnlyID_WEBM;
 
     public static void FileFormatLiveOutputComment(object s, DataReceivedEventArgs e)
     {
         var StringData = e.Data;
-
-        if(StringData.IsEmpty()) return;
-
         FormatNames     = new();
         bool HasAudio   = false;
         string VID_AO   = null;
 
-        foreach(Group match in FileFormatInfo.Match(StringData).Groups)
-        {
-            if(!match.Name.Contains("0") && !match.Value.IsEmpty())
-                FormatNames.Add(match.Value.Trim());
+        if(StringData.IsEmpty())
+            return;
 
-            if(match.Name is "FPS" && match.Value.IsEmpty())
-                FormatNames.Add("1");
-
-            // Avoid video that has no Codec. It can cause weird issue when
-            // merging a codec that is avc0
-            if(match.Name is "Codec" && match.Value.IsEmpty())
-                return;
-        }
-
-        if(FormatNames.Count is 0) return;
+        if(FetchFormats(StringData) is false)
+            return;
         
         switch(FormatNames[FPS].Length)
         {
@@ -65,40 +52,53 @@ internal partial class ConsoleLive
             };
         }
 
-        string NameFormat =
-            new FormatName(
-                ID: FormatNames[ID],
-                FMT: FormatNames[FORMAT],
-                RES: FormatNames[RESOLUTION],
-                SIZE: FormatNames[SIZE]
-            ).Name;
-
         TemporaryList.Add(new()
         {
-            Name = NameFormat,
-            ID = FormatNames[ID],
-            FORMAT = FormatNames[FORMAT],
-            RESOLUTION = FormatNames[RESOLUTION],
-            FPS = FormatNames[FPS],
-            SIZE = FormatNames[SIZE],
-            BITRATE = FormatNames[BITRATE],
-            VID_W_AUD = VID_AO
+            Name        = new FormatName(
+                                pID:            FormatNames[ID],
+                                pFORMAT:        FormatNames[FORMAT],
+                                pRESOLUTION:    FormatNames[RESOLUTION],
+                                pSIZE:          FormatNames[SIZE]
+                        ).Name,
+
+            ID          = FormatNames[ID],
+            FORMAT      = FormatNames[FORMAT],
+            RESOLUTION  = FormatNames[RESOLUTION],
+            FPS         = FormatNames[FPS],
+            SIZE        = FormatNames[SIZE],
+            BITRATE     = FormatNames[BITRATE],
+            VID_W_AUD   = VID_AO
         });
 
         DL_Dispatch.Invoke(()=>FileFormat_Invoked());
     }
 
+    static bool FetchFormats(in string StringData)
+    {
+       List<Group> FileFormatInfoMatches = FileFormatInfo.Match(StringData).Groups.Cast<Group>().Skip(1).ToList();
+
+        foreach(Group match in CollectionsMarshal.AsSpan(FileFormatInfoMatches))
+        {
+            if(!match.Value.IsEmpty())
+                FormatNames.Add(match.Value.Trim());
+
+            if(match.Name is "FPS" && match.Value.IsEmpty())
+                FormatNames.Add("1");
+
+            // Avoid video that has no Codec. It can cause weird issue when
+            // merging a codec that is avc0
+            if(match.Name is "Codec" && match.Value.IsEmpty())
+                return false;
+        }
+
+        return FormatNames.Count is 0 ? false : true;
+    }
+
     static void FileFormat_Invoked()
     {
-        //// [3/27/2023] This code is straight up from v6 :D
-        //// [3/31/2023] the code returns
-        // ProgressBar lmao 
         progressBar.Value += 25;
-
-        if (progressBar.Value >= 90)
-            progressBar.Value += 75;
-        ////
-
+        if (progressBar.Value >= 90) progressBar.Value += 75;
+        
         console.DLAddConsole(CONSOLE_SYSTEM_STRING, $@"<Gray%14>Added: {FormatNames[RESOLUTION]}$tab$$tab$$vbar$ {FormatNames[SIZE]}$tab$$vbar$ {FormatNames[FORMAT]}");
     }
     

@@ -12,10 +12,7 @@ internal class FileFormatButton : IButtonControls
         console.DLAddConsole(CONSOLE_INFO_STRING, "<%14>Loading File Formats...");
 
         YDL YDLInfo = new(
-            new()
-            {
-                Link = textBoxLink.Text
-            }
+            new(_Link: textBoxLink.Text)
         );
         
         YDLInfo.IsFileFormat = true;

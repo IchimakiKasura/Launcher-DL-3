@@ -3,53 +3,26 @@ namespace LauncherDL.Core.ConsoleDL;
 internal partial class ConsoleLive
 {
     static List<string> ProgressInfo;
-    static string NetworkSpeedColor = "";
+    static string NetworkSpeedColor = string.Empty;
+    static Regex DefaultRegex;
 
     public static void DownloadLiveOutputComment(object s, DataReceivedEventArgs e)
     {
         var StringData = e.Data;
-        if(StringData.IsEmpty()) return;
-
-        if(Regex.IsMatch(StringData, @"\[(ExtractAudio|VideoConvertor|Merger)\]"))
-            DL_Dispatch.Invoke(ProcessMessage);
-
         ProgressInfo = new(7);
         NetworkSpeedColor = string.Empty;
-        Regex DefaultRegex = null;
 
-        DL_Dispatch.Invoke(()=> DownloaderRegexChanged(out DefaultRegex));
+        if(StringData.IsEmpty()) return;
 
-        foreach (Group match in DefaultRegex.Match(StringData).Groups)
-            if(!match.Name.Contains("0") && !match.Value.IsEmpty())
-                ProgressInfo.Add(match.Value.Trim());
-            
-        if(ProgressInfo.Count <= 1) return;
+        if(Regex.IsMatch(StringData, PROCESSING_REGEX))
+            DL_Dispatch.Invoke(ProcessMessage);
 
-        #region Change Foreground based on the speed.
-        var DownSpeedSTR = 
-            DefaultRegex == DownloadInfoARIA2C ?
-                ProgressInfo[DOWNLOAD_SPEED] : ProgressInfo[DOWNLOAD_FMT_SPEED];
+        DL_Dispatch.Invoke(DownloaderRegexChanged);
 
-        if(double.TryParse(Regex.Replace(DownSpeedSTR, @"~|[a-zA-Z\/]", ""),out Double SpeedNumber))
-            switch(DownSpeedSTR)
-            {
-                case string str when str.Contains("K"):
-                    if (SpeedNumber > 199.99)
-                        NetworkSpeedColor = DOWNSPEED_COLOR_KB_HIGH;
-                    else NetworkSpeedColor = DOWNSPEED_COLOR_KB_LOW;
-                break;
+        if(FetchMatchedRegex(StringData))
+            return;
 
-                case string str when str.Contains("M"):
-                    if (SpeedNumber > 0.99)
-                        NetworkSpeedColor = DOWNSPEED_COLOR_MB_HIGH;
-                    else NetworkSpeedColor = DOWNSPEED_COLOR_MB_LOW;
-                break;
-
-                case string str when str.Contains("G"):
-                    NetworkSpeedColor = DOWNSPEED_COLOR_GB;
-                break;
-            };
-        #endregion
+        ForegroundSpeedColor();
 
         DL_Dispatch.Invoke(()=>Download_Invoke(DefaultRegex != DownloadInfoARIA2C));
     }
@@ -78,13 +51,51 @@ internal partial class ConsoleLive
         TaskbarProgressBar.ProgressValue = progressBar.Value / 100;
     }
 
+    static bool FetchMatchedRegex(string StringData)
+    {
+        List<Group> RegexMatchedStrings = DefaultRegex.Match(StringData).Groups.Cast<Group>().Skip(1).ToList();
+
+        foreach (Group match in CollectionsMarshal.AsSpan(RegexMatchedStrings))
+            if(!match.Value.IsEmpty())
+                ProgressInfo.Add(match.Value.Trim());
+
+        return ProgressInfo.Count <= 1 ? false : true;
+    }
+
+    static void ForegroundSpeedColor()
+    {
+       var DownSpeedSTR = 
+            DefaultRegex == DownloadInfoARIA2C ?
+                ProgressInfo[DOWNLOAD_SPEED] : ProgressInfo[DOWNLOAD_FMT_SPEED];
+
+        if(double.TryParse(Regex.Replace(DownSpeedSTR, DOWNSPEED_REGEX, string.Empty),out Double SpeedNumber))
+            switch(DownSpeedSTR)
+            {
+                case string str when str.Contains("K"):
+                    NetworkSpeedColor = (SpeedNumber > DOWNSPEED_KB_LIMIT)
+                    ? DOWNSPEED_COLOR_KB_HIGH
+                    : DOWNSPEED_COLOR_KB_LOW;
+                break;
+
+                case string str when str.Contains("M"):
+                    NetworkSpeedColor = (SpeedNumber > DOWNSPEED_MB_LIMIT)
+                    ? DOWNSPEED_COLOR_MB_HIGH
+                    : DOWNSPEED_COLOR_MB_LOW;
+                break;
+
+                case string str when str.Contains("G"):
+                    NetworkSpeedColor = DOWNSPEED_COLOR_GB;
+                break;
+            };
+    }
+
     static void ProcessMessage()
     {
         console.DLAddConsole(CONSOLE_PROCESSING, PROCESSING_MESSAGE);
         progressBar.Value = 99;
     }
 
-    static void DownloaderRegexChanged(out Regex DefaultRegex)
+    static void DownloaderRegexChanged()
     {
         DefaultRegex = DownloadInfoARIA2C;
 

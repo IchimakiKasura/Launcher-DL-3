@@ -68,7 +68,7 @@ public partial class ComboBoxControl : UserControl
     public RoutedEventHandler OnItemChange;
     private TextBox MainText;
     TextBlock Placeholder;
-    public ContentPresenter Contents;
+    public ContentPresenter ContentSite;
     public Grid ComboBoxTemplateGRID;
     
     public ComboBoxControl()
@@ -81,14 +81,14 @@ public partial class ComboBoxControl : UserControl
     {
         SetBorderStoryboard();
 
-        Contents = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
+        ContentSite = GetTemplateResource<ContentPresenter>("ContentSite", UserComboBox);
         ComboBoxTemplateGRID = GetTemplateResource<Grid>("ComboBoxTemplateGRID", UserComboBox);
 
         if (TextEditable)
         {
             ComboBoxTemplateGRID.Add(Placeholder);
             ComboBoxTemplateGRID.Add(MainText); 
-            Contents.Visibility = Visibility.Hidden;
+            ContentSite.Visibility = Visibility.Hidden;
         }
 
         MainText.TextChanged += delegate

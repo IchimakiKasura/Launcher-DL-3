@@ -57,15 +57,15 @@ public partial class ButtonControl : UserControl
     private void ContentLoaded(object s, RoutedEventArgs e) =>
         SetMouseEnterLeave(UserButton,()=>SetStoryboard(true),()=>SetStoryboard(false));
     
-    protected virtual void OnClicked(RoutedEventArgs e)
+    protected virtual void OnClicked(RoutedEventArgs Event)
     {
-        RoutedEventHandler eh = Click;
-        if (eh is not null)
-            if (e is not null) 
-                eh(this, e);
+        RoutedEventHandler eventHandler = Click;
+        if (eventHandler is not null)
+            if (Event is not null) 
+                eventHandler(this, Event);
     }
 
-    private void Clicked(object s, RoutedEventArgs e) =>
-        OnClicked(e);
+    private void Clicked(object s, RoutedEventArgs Event) =>
+        OnClicked(Event);
     
 }

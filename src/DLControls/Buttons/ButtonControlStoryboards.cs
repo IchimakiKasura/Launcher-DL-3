@@ -16,19 +16,19 @@ public partial class ButtonControl
             new(IMAGE_VIEWPORT)     // 7
         );
 
-    private void SetAnimationsValues(bool isEnter, TimeSpan animationDuration)
+    private void SetAnimationsValues(bool IsEnter, TimeSpan animationDuration)
     {
         ControlDA = ImmutableList<Timeline>.Empty;
 
         //  Variable Names      | Boolean |        If its true         |       If its False      |
-        var ButtonOpacity       = isEnter ?                          1 :                        0;
-        var ButtonWidth         = isEnter ?                        260 :                      250;
-        var ButtonHeight        = isEnter ?                       67.5 :                       65;
-        var ButtonText          = isEnter ?                 TextSize+2 :                 TextSize;
-        var ButtonImageOpacity  = isEnter ?                       0.85 :                        0;
-        var buttonMargin        = isEnter ? new Thickness(-5,-1.5,0,0) :         new Thickness(0);
-        var buttonForeground    = isEnter ?               Colors.White :             Colors.Black;
-        var buttonImageViewport = isEnter ?          new Rect(0,0,1,1) : new Rect(-0.3,0,1.5,1.8);
+        var ButtonOpacity       = IsEnter ?                          1 :                        0;
+        var ButtonWidth         = IsEnter ?                        260 :                      250;
+        var ButtonHeight        = IsEnter ?                       67.5 :                       65;
+        var ButtonText          = IsEnter ?                 TextSize+2 :                 TextSize;
+        var ButtonImageOpacity  = IsEnter ?                       0.85 :                        0;
+        var buttonMargin        = IsEnter ? new Thickness(-5,-1.5,0,0) :         new Thickness(0);
+        var buttonForeground    = IsEnter ?               Colors.White :             Colors.Black;
+        var buttonImageViewport = IsEnter ?          new Rect(0,0,1,1) : new Rect(-0.3,0,1.5,1.8);
 
         ControlDA = ImmutableList.Create<Timeline>(
             new DoubleAnimation     (ButtonOpacity       , animationDuration),
@@ -41,7 +41,7 @@ public partial class ButtonControl
             new RectAnimation       (buttonImageViewport , animationDuration)
         );
 
-        ((RectAnimation)ControlDA[7]).EasingFunction = isEnter ?
+        ((RectAnimation)ControlDA[7]).EasingFunction = IsEnter ?
         new PowerEase()
         {
             EasingMode = EasingMode.EaseIn,

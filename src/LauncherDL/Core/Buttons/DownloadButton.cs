@@ -72,12 +72,11 @@ internal class DownloadButton : IButtonControls
         console.Break("Gray");
 
         YDL YDLInfo = new(
-            new()
-            {
-                Link = textBoxLink.Text,
-                Format = _format,
-                Type = _type
-            }
+            new(
+                _Link: textBoxLink.Text,
+                _Format: _format,
+                _Type: _type
+            )
         );
 
         YDLInfo.DownloadMethod();

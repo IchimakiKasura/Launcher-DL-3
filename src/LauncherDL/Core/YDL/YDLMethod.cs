@@ -172,7 +172,7 @@ sealed partial class YDL
     private bool CheckFileExist(string FilePath, TypeOfButton Type)
     {
         if (Type is TypeOfButton.CustomType)
-            foreach(var Extenstion in FileExtensions)
+            foreach(var Extenstion in CollectionsMarshal.AsSpan(FileExtensions.ToList()))
                 if(File.Exists(FilePath.Replace("%(ext)s", Extenstion)))
                     return true;
 

@@ -23,7 +23,7 @@ internal static partial class FFmpegFiles
 
     public static void CheckFiles()
     {
-        foreach(var Files in FileNames)
+        foreach(var Files in CollectionsMarshal.AsSpan(FileNames.ToList()))
             if(File.Exists($"{FFmpegPath}/{Files}"))
             {
                 #if DEBUG

@@ -10,7 +10,7 @@ public partial class ComboBoxControl
     public void AddQualityTypeList()          => AutoAdd(TypeList.QualityType);
     public void AddFormatList(List<FormatList> FormatListArgs)
     {
-        foreach (var CBT in FormatListArgs)
+        foreach (var CBT in CollectionsMarshal.AsSpan(FormatListArgs))
             UserComboBox.Items.Add(CBT);
     }
 
@@ -28,7 +28,7 @@ public partial class ComboBoxControl
             case TypeList.QualityType   : temp = ComboBoxList.ComboBoxFormatQuality;   break;
         }
 
-        foreach (var CBT in temp)
+        foreach (var CBT in CollectionsMarshal.AsSpan(temp.ToList()))
             UserComboBox.Items.Add(CBT);
 
         UserComboBox.SelectedIndex = x switch
@@ -47,13 +47,13 @@ public partial class ComboBoxControl
 
         ComboBoxTemplateGRID.Remove(MainText);
         ComboBoxTemplateGRID.Remove(Placeholder);
-        Contents.Visibility = Visibility.Visible;
+        ContentSite.Visibility = Visibility.Visible;
 
         if (!TextEditable) return;
     
         ComboBoxTemplateGRID.Add(MainText);
         ComboBoxTemplateGRID.Add(Placeholder);
-        Contents.Visibility = Visibility.Hidden;
+        ContentSite.Visibility = Visibility.Hidden;
     }
 
     public void SetFormatListStyle(bool clear) =>
