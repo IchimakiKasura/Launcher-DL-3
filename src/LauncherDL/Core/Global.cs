@@ -40,8 +40,7 @@ public partial class Global
     /// <summary>Languages</summary>
     public static DLLanguages.Pick.Interface.ILanguagePick Language;
     
-    public static readonly ReadOnlyCollection<string> FileExtensions = Array.AsReadOnly(new string[]
-    {
+    public static readonly ImmutableArray<string> FileExtensions = ImmutableArray.Create(
         "mp4",
         "mkv",
         "webm",
@@ -49,7 +48,7 @@ public partial class Global
         "m4a",
         "3gp",
         "flv"
-    });
+    );
 
     /// <summary>ComboBoxFormat Temporary list</summary>
     public static List<FormatList> TemporaryList = new();

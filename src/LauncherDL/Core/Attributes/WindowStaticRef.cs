@@ -5,7 +5,7 @@ public class WindowStaticRefAttribute : Attribute
 {
     public WindowStaticRefAttribute() { }
     
-    public static dynamic InitiateAttribute<TargetType, GlobalType>()
+    public static TargetType InitiateAttribute<TargetType, GlobalType>()
     {
         foreach(FieldInfo GlobalFields in typeof(GlobalType).GetFields())
         {
@@ -13,8 +13,8 @@ public class WindowStaticRefAttribute : Attribute
             
             if(FieldAttribute is not null)
                 if(typeof(TargetType) == GlobalFields.FieldType)
-                    return GlobalFields.GetValue(null);
+                    return (TargetType)GlobalFields.GetValue(null);
         }
-        return null;
+        return default;
     }
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// Interaction logic for ProgressBarControl.xaml
 /// </summary>
-public partial class ProgressBarControl : UserControl
+public partial class ProgressBarControl : UserControl, IDLControls
 {
     readonly static DependencyProperty ValueProperty =
         DependencyProperty.Register("Value", typeof(double), typeof(ProgressBarControl));

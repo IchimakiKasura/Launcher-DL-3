@@ -28,7 +28,7 @@ public partial class ComboBoxControl
             case TypeList.QualityType   : temp = ComboBoxList.ComboBoxFormatQuality;   break;
         }
 
-        foreach (var CBT in CollectionsMarshal.AsSpan(temp.ToList()))
+        foreach (var CBT in temp)
             UserComboBox.Items.Add(CBT);
 
         UserComboBox.SelectedIndex = x switch

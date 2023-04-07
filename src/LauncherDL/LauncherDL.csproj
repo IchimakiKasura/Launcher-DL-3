@@ -130,6 +130,7 @@
     <Using Include="LauncherDL.Core.YTDLP"/>
 
     <Using Include="DLControls" />
+    <Using Include="DLControls.Interface" />
     <Using Include="DLControls.DLStrings" Static="true" />
     <Using Include="DLControls.CONSOLEOUTPUTMETHOD_STR" Static="true" />
   </ItemGroup>

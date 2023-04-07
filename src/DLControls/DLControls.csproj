@@ -35,6 +35,7 @@
     <Using Include="System.Windows.Controls.Primitives" />
 
     <Using Include="DLControls.MainResource" Static="true" />
+    <Using Include="DLControls.Interface"/>
   </ItemGroup>
 
   <ItemGroup>

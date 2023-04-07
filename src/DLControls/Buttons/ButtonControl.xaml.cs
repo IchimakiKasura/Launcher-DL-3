@@ -1,6 +1,6 @@
 namespace DLControls;
 
-public partial class ButtonControl : UserControl
+public partial class ButtonControl : UserControl, IDLControls
 {
     public RoutedEventHandler Click;
     readonly static DependencyProperty ImageProperty =

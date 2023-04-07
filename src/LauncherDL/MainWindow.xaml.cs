@@ -42,4 +42,11 @@ public partial class MainWindow : Window
         FFmpegFiles.CheckFiles();
         OnStartUp.Initialize();
     }
+
+    // Collects shitty objects after start
+    protected override void OnContentRendered(EventArgs e)
+    {
+        base.OnContentRendered(e);
+        GC.Collect();
+    }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DLControls;
 
-public partial class TextBoxControl : UserControl
+public partial class TextBoxControl : UserControl, IDLControls
 {
     readonly static DependencyProperty TextPlaceholderProperty =
         DependencyProperty.Register("TextPlaceholder", typeof(string), typeof(TextBoxControl), new("Placeholder"));
@@ -51,17 +51,16 @@ public partial class TextBoxControl : UserControl
     private void ContentLoaded(object sender, RoutedEventArgs e)
     {
         Grid UserGrid = GetTemplateResource<Grid>("UserTextBoxGRID", UserTextBox);
-        TextBox UserGridChildrenTextBox = UserGrid.Children[0] as TextBox;
     
         var Placeholder = new TextBlock()
         {
-            Foreground = Brushes.DimGray,
-            FontSize = TextPlaceholderFontSize,
+            Foreground          = Brushes.DimGray,
+            FontSize            = TextPlaceholderFontSize,
             HorizontalAlignment = TextPlaceholderAlignment,
-            IsHitTestVisible = false,
-            Margin = TextPlaceholderMargin,
-            Text = TextPlaceholder,
-            VerticalAlignment = VerticalAlignment.Center
+            IsHitTestVisible    = false,
+            Margin              = TextPlaceholderMargin,
+            Text                = TextPlaceholder,
+            VerticalAlignment   = VerticalAlignment.Center
         };
 
         // Prevents collusion with with the instatiated text

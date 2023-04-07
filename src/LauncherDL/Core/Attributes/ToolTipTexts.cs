@@ -10,27 +10,30 @@ public class ToolTipTextsAttribute : Attribute
     // Initialize the Attribute
     public static void InitiateAttribute<WindowType>()
     {
-        IEnumerable<dynamic> _PropertyInfo =
-        typeof(WindowType) == typeof(MainWindow)  ? 
+        IEnumerable<MemberInfo> _PropertyInfo =
+        typeof(WindowType) == typeof(MainWindow)  ?
         typeof(WindowType).GetRuntimeProperties() :
         typeof(WindowType).GetRuntimeFields()     ;
 
-        foreach(var ToolTipField in _PropertyInfo)
+        foreach(MemberInfo ToolTipField in _PropertyInfo)
         {
-            var FieldAttribute = ((MemberInfo)ToolTipField).GetCustomAttribute<ToolTipTextsAttribute>();
+            var FieldAttribute = ToolTipField.GetCustomAttribute<ToolTipTextsAttribute>();
             if(FieldAttribute is not null)
-                FieldAttribute.SetValue<WindowType>(FieldAttribute.Description, ToolTipField);
+                FieldAttribute.SetValue(FieldAttribute.Description, ToolTipField);
         }
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<WindowType>(string PropertyDescription, dynamic PropertyField)
+    private void SetValue(string PropertyDescription, dynamic memberInfo)
     {
-        dynamic PropertyItem = PropertyField.GetValue(WindowStaticRefAttribute.InitiateAttribute<WindowType, Global>());
-        
-        if(PropertyItem.GetType().Namespace is "DLControls")
-            ((UIElement)PropertyItem.UICanvas).MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
-        else ((UIElement)PropertyItem).MouseMove += (s,e) => Follow(s, e, PropertyDescription);
+        dynamic Properties = memberInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<dynamic, Global>());
+
+        // idk if it looks more shit than the last code
+        if(Properties is IDLControls DLControlItems)
+            DLControlItems.UICanvas.MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
+
+        if(Properties is UIElement UIItems)
+            UIItems.MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
     }
 
     public static void Follow(object sender, MouseEventArgs eventargs,in string Content)

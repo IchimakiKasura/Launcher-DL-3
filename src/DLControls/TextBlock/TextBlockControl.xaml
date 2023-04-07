@@ -14,7 +14,7 @@
 
     <Grid>
         <Grid.Resources>
-            <Style x:Key="UserTextBlockMain" TargetType="TextBlock">
+            <Style x:Key="UserTextBlockMainStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Foreground" Value="White"/>
@@ -26,7 +26,7 @@
             </Style>
         </Grid.Resources>
         <Viewbox StretchDirection="Both" Stretch="Uniform" Height="35" Width="{Binding Width, ElementName=root}" HorizontalAlignment="{Binding HorizontalAlignment,ElementName=root}" VerticalAlignment="Center">
-            <TextBlock Style="{StaticResource UserTextBlockMain}" Text="{Binding Text,ElementName=root}"/>
+            <TextBlock x:Name="UserTextBlockMain" Style="{StaticResource UserTextBlockMainStyle}" Text="{Binding Text,ElementName=root}"/>
         </Viewbox>
     </Grid>
 </UserControl>

@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Extensions;
 
-internal static class _Core_Extensions
+internal static class CoreExtensions
 {
     #region Canvas
     /// <summary>

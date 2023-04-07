@@ -1,6 +1,6 @@
 ﻿namespace DLControls;
 
-public partial class ConsoleControl : UserControl
+public partial class ConsoleControl : UserControl, IDLControls
 {
     readonly static DependencyProperty ConsoleHeightProperty =
         DependencyProperty.Register("ConsoleHeight", typeof(double), typeof(ConsoleControl));

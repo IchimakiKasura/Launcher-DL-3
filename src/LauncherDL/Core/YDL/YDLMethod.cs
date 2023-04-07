@@ -1,3 +1,5 @@
+using LauncherDL.Core.TaskProcess;
+
 namespace LauncherDL.Core.YTDLP;
 
 sealed partial class YDL
@@ -10,12 +12,12 @@ sealed partial class YDL
         if (!IsUpdate)
             throw new UpdateMethodException();
 
-        var Args = "-U";
+        var Arguments = "-U";
         
         progressBar.Value = 99;
         ConsoleLive.SelectedError = 9999;
-        await TaskProcess.StartProcess.ProcessTask(Args, ConsoleLive.UpdateLiveOutputComment);
-        TaskProcess.EndProcess.ProcessTaskEnded();
+        await StartProcess.ProcessTask(Arguments, ConsoleLive.UpdateLiveOutputComment);
+        EndProcess.ProcessTaskEnded();
     }
 
 
@@ -41,7 +43,7 @@ sealed partial class YDL
         MetadataWindow.MetadataClear();
 
         ConsoleLive.SelectedError = 0;
-        await TaskProcess.StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.FileFormatLiveOutputComment);
+        await StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.FileFormatLiveOutputComment);
 
         // Always leave a default list :D
         TemporaryList.Add(new()
@@ -55,7 +57,7 @@ sealed partial class YDL
             BITRATE     =       "~"
         });
 
-        TaskProcess.EndProcess.ProcessTaskEnded();
+        EndProcess.ProcessTaskEnded();
     }
 
 
@@ -90,8 +92,8 @@ sealed partial class YDL
         if (!Directory.Exists(directoryPath))
             Directory.CreateDirectory(directoryPath);
 
-        await TaskProcess.StartProcess.ProcessTask(Arguments, ConsoleLive.ConvertLiveOutputComment);
-        TaskProcess.EndProcess.ProcessTaskEnded();
+        await StartProcess.ProcessTask(Arguments, ConsoleLive.ConvertLiveOutputComment);
+        EndProcess.ProcessTaskEnded();
     }
 
 
@@ -149,7 +151,7 @@ sealed partial class YDL
         
         if (config.AllowCookies) Arguments.Append($" --cookies-from-browser {config.BrowserCookie}");
         
-        // Warns the user that there's no FFMPEG in presence
+        // Warns the user that there's no FFMPEG found
         if(FFmpeg.FFmpegFiles.ErrorOccured)
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
@@ -165,14 +167,14 @@ sealed partial class YDL
 
         console.SaveText(ref ConsoleLastDocument);
 
-        await TaskProcess.StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.DownloadLiveOutputComment);
-        TaskProcess.EndProcess.ProcessTaskEnded();
+        await StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.DownloadLiveOutputComment);
+        EndProcess.ProcessTaskEnded();
     }
 
     private bool CheckFileExist(string FilePath, TypeOfButton Type)
     {
         if (Type is TypeOfButton.CustomType)
-            foreach(var Extenstion in CollectionsMarshal.AsSpan(FileExtensions.ToList()))
+            foreach(var Extenstion in FileExtensions)
                 if(File.Exists(FilePath.Replace("%(ext)s", Extenstion)))
                     return true;
 
