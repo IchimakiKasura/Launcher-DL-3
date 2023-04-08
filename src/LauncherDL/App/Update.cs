@@ -7,7 +7,8 @@ class Updater
 
     public Updater()
     {
-        string Data = CheckVersion().Result;
+        StreamReader reader = new(CheckVersion(), Encoding.UTF8);
+        string Data = reader.ReadToEnd();
 
         if (string.IsNullOrEmpty(Data)) return;
 
@@ -25,7 +26,7 @@ class Updater
                                 Process.Start("explorer", Visit);
     }
 
-    private Task<string> CheckVersion()
+    Stream CheckVersion()
     {
         System.Net.Http.HttpResponseMessage resp;
         int status;
@@ -41,9 +42,8 @@ class Updater
                 status = (int)res.StatusCode;
                 resp = res;
             }
-
-            return resp.Content.ReadAsStringAsync();
+            return resp.Content.ReadAsStream();
         }
-        catch { return Task.FromResult(string.Empty); }
+        catch { return default; }
     }
 }

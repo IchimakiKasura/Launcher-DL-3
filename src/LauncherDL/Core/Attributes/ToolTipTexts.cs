@@ -19,32 +19,39 @@ public class ToolTipTextsAttribute : Attribute
         {
             var FieldAttribute = ToolTipField.GetCustomAttribute<ToolTipTextsAttribute>();
             if(FieldAttribute is not null)
-                FieldAttribute.SetValue(FieldAttribute.Description, ToolTipField);
+                FieldAttribute.SetValue<WindowType>(FieldAttribute.Description, ToolTipField);
         }
     }
 
     // Sets the value on selected Attribute
-    private void SetValue(string PropertyDescription, dynamic memberInfo)
+    private void SetValue<T>(string PropertyDescription, MemberInfo memberInfo)
     {
-        dynamic Properties = memberInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<dynamic, Global>());
+        object propertyValue = memberInfo switch
+        {
+            _ when memberInfo is PropertyInfo propInfo =>
+                propInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<T, Global>()),
+            _ when memberInfo is FieldInfo fieldInfo =>
+                fieldInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<T, Global>()),
+            _ => null
+        };
 
-        // idk if it looks more shit than the last code
-        if(Properties is IDLControls DLControlItems)
+        if(propertyValue is IDLControls DLControlItems)
             DLControlItems.UICanvas.MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
 
-        if(Properties is UIElement UIItems)
+        if(propertyValue is UIElement UIItems)
             UIItems.MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
     }
 
     public static void Follow(object sender, MouseEventArgs eventargs,in string Content)
     {
-        FrameworkElement TooltipElement = (FrameworkElement)sender;
+        FrameworkElement TooltipElement = (FrameworkElement) sender;
         
         if (TooltipElement.ToolTip is null)
             TooltipElement.ToolTip = new ToolTip() { Placement = System.Windows.Controls.Primitives.PlacementMode.Relative };
             
-        ToolTip tip = TooltipElement.ToolTip as ToolTip;
+        ToolTip tip = (ToolTip) TooltipElement.ToolTip;
         tip.Content = Content;
+        tip.CacheMode = new BitmapCache();
         tip.HorizontalOffset = eventargs.GetPosition(TooltipElement).X + 10;
         tip.VerticalOffset = eventargs.GetPosition(TooltipElement).Y + 10;
     }

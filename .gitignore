@@ -7,3 +7,4 @@ obj
 Build/DEBUG
 Build/RELEASE
 !src/LauncherDL/Core/Metadata/obj
+LauncherDL.sln.DotSettings.user
