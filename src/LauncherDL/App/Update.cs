@@ -7,7 +7,8 @@ class Updater
 
     public Updater()
     {
-        StreamReader reader = new(CheckVersion(), Encoding.UTF8);
+        using Stream streamData = CheckVersion();
+        using StreamReader reader = new(streamData, Encoding.UTF8);
         string Data = reader.ReadToEnd();
 
         if (string.IsNullOrEmpty(Data)) return;
@@ -36,7 +37,7 @@ class Updater
             using (System.Net.Http.HttpClient req = new())
             {
                 req.Timeout = TimeSpan.FromMilliseconds(800);
-                req.DefaultRequestVersion = new("2.0");
+                req.DefaultRequestVersion = System.Net.HttpVersion.Version30;
                 req.DefaultRequestHeaders.Add("User-Agent", "Launcher DL Update Checker");
                 var res = req.GetAsync("https://api.github.com/repos/ichimakikasura/launcher-dl-3/releases/latest").Result;
                 status = (int)res.StatusCode;
@@ -44,6 +45,6 @@ class Updater
             }
             return resp.Content.ReadAsStream();
         }
-        catch { return default; }
+        catch { return Stream.Null; }
     }
 }

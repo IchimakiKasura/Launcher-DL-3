@@ -4,6 +4,11 @@
 //
 //  Fix naming if possible
 //
+//  Make 2 or 3 branches
+//      - Master/Main
+//      - Development
+//      - Experimental / new features
+//
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation
 //  not single typed focused or idk selective
@@ -41,12 +46,5 @@ public partial class MainWindow : Window
         config = Config.ReadConfigINI();
         FFmpegFiles.CheckFiles();
         OnStartUp.Initialize();
-    }
-
-    // Collects shitty objects after start
-    protected override void OnContentRendered(EventArgs e)
-    {
-        base.OnContentRendered(e);
-        GC.Collect();
     }
 }

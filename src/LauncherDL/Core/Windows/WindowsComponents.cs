@@ -58,8 +58,6 @@ class WindowsComponents : IWindowsComponents
                 WindowAnimation     : new(Colors.Black, TimeSpan.FromMilliseconds(100))
             );
 
-            GC.Collect();
-
             #if DEBUG
                 ConsoleDebug.WindowFocused(false);
             #endif

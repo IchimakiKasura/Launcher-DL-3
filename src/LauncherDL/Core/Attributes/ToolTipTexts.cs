@@ -24,22 +24,21 @@ public class ToolTipTextsAttribute : Attribute
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<T>(string PropertyDescription, MemberInfo memberInfo)
+    private void SetValue<WindowType>(string PropertyDescription, MemberInfo memberInfo)
     {
-        object propertyValue = memberInfo switch
-        {
-            _ when memberInfo is PropertyInfo propInfo =>
-                propInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<T, Global>()),
-            _ when memberInfo is FieldInfo fieldInfo =>
-                fieldInfo.GetValue(WindowStaticRefAttribute.InitiateAttribute<T, Global>()),
-            _ => null
-        };
+        WindowType SelectedWindow = WindowStaticRefAttribute.InitiateAttribute<WindowType, Global>();
 
-        if(propertyValue is IDLControls DLControlItems)
-            DLControlItems.UICanvas.MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
+        object propertyValue = memberInfo is PropertyInfo       ?
+        (memberInfo as PropertyInfo).GetValue(SelectedWindow)   :
+        (memberInfo as FieldInfo).GetValue(SelectedWindow)      ;
 
-        if(propertyValue is UIElement UIItems)
-            UIItems.MouseMove += (s,e) =>Follow(s,e, PropertyDescription);
+        if(propertyValue is IDLControls)
+            (propertyValue as IDLControls).UICanvas.MouseMove += (s,e) =>
+                Follow(s,e, PropertyDescription);
+
+        if(propertyValue is UIElement)
+            (propertyValue as UIElement).MouseMove += (s,e) =>
+                Follow(s,e, PropertyDescription);
     }
 
     public static void Follow(object sender, MouseEventArgs eventargs,in string Content)

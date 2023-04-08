@@ -70,41 +70,40 @@ public class Config
         return DefaultConfiguration;
     }
 
-    // rip
-    private static void CheckError<T>(ref T a, dynamic b, string c)
+    private static void CheckError<T1, T2>(ref T1 pDefaultConfig, T2 pNewConfig, string pConfigName)
     {
         #if DEBUG
-            ConsoleDebug.LoadingConfig(a, b, c);
+            ConsoleDebug.LoadingConfig(pDefaultConfig, pNewConfig, pConfigName);
         #endif
 
-        try
+        switch (pConfigName)
         {
-            switch (c)
-            {
-                case CONFIG_FILE_TYPE:
-                    if (b > 3) throw new Exception("Default File type is above 3!");
-                break;
+            case CONFIG_FILE_TYPE:
+                if (pNewConfig is int nInt && nInt > 3)
+                {
+                    error = true;
+                    ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, "Default File type is above 3!", pConfigName);
+                }
+            break;
 
-                case CONFIG_BACKGROUND_NAME:
-                    var defaultBGPath = $"./Images/{new DefaultConfig().background}";
+            case CONFIG_BACKGROUND_NAME:
+                var defaultBGPath = $"./Images/{new DefaultConfig().background}";
 
-                    if (b != new DefaultConfig().background)
-                        defaultBGPath = b;
+                if (pNewConfig is string nStr && nStr != new DefaultConfig().background)
+                    defaultBGPath = nStr;
 
-                    if (!File.Exists(defaultBGPath))
-                        throw new Exception("Background image not found!");
-                break;
-            }
-
-            if (a.GetType().ToString().Contains(CONFIG_COLOR_CONTAINS))
-                a = ClrConv(b);
-            else a = b;
+                if (!File.Exists(defaultBGPath))
+                {
+                    error = true;
+                    ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, "Background image not found!", pConfigName);
+                }
+            break;
         }
-        catch (Exception e)
-        {
-            error = true;
-            ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, e.Message, c);
-        }
+
+        if(pDefaultConfig is Color)
+            pDefaultConfig = (T1)(Object)ClrConv(pNewConfig as string);
+        else pDefaultConfig = (T1)(Object)pNewConfig;
+
     }
 
 
