@@ -9,7 +9,7 @@
         bruh
     };
 
-    public class LanguagePick : Interface.ILanguagePick
+    public sealed class LanguagePick : Interface.ILanguagePick
     {
         public string? Button_Convert { get; }
         public string? Button_Download { get; }

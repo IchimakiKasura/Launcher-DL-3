@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-internal class ConvertButton : IButtonControls
+internal sealed class ConvertButton : IButtonControls
 {
     #region Error Texts
     public const string

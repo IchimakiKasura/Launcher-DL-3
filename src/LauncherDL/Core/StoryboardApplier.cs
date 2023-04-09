@@ -1,6 +1,6 @@
 ﻿namespace LauncherDL.Core;
 
-public class StoryboardApplier
+public sealed class StoryboardApplier
 {
     public StoryboardApplier(DependencyObject Element,
                              DependencyObject Value,

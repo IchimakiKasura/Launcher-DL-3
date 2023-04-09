@@ -1,13 +1,13 @@
 namespace Update;
 
-class Updater
+sealed class Updater
 {
     readonly public double CurrentVersion = 7.1;
     readonly public double NewVersion;
 
     public Updater()
     {
-        using Stream streamData = CheckVersion();
+        using Stream streamData = CheckVersion().Result;
         using StreamReader reader = new(streamData, Encoding.UTF8);
         string Data = reader.ReadToEnd();
 
@@ -27,7 +27,7 @@ class Updater
                                 Process.Start("explorer", Visit);
     }
 
-    Stream CheckVersion()
+    async Task<Stream> CheckVersion()
     {
         System.Net.Http.HttpResponseMessage resp;
         int status;
@@ -43,7 +43,7 @@ class Updater
                 status = (int)res.StatusCode;
                 resp = res;
             }
-            return resp.Content.ReadAsStream();
+            return await resp.Content.ReadAsStreamAsync();
         }
         catch { return Stream.Null; }
     }

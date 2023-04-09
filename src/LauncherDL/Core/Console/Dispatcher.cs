@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.ConsoleDL;
 
-public class DL_Dispatch
+public sealed class DL_Dispatch
 {
     public static void Invoke(Action Invoked)
     {

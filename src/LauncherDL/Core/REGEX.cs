@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.RegexComponent;
 
-public partial class RegexComponentList
+public sealed partial class RegexComponentList
 {
     // File Format
     [GeneratedRegex(@"(?<id>.*?) .*(?<format>mp4.*?|webm.*?|3gp.*?|m4a.*?|mp3.*?).*(?:(?<Resolution> [0-9]*x[0-9]*|[0-9]*X[0-9]*)|(?<AO>audio only)).*?(?:(?<FPS>\d[0-9]?.*?|))\|.*?(?<Size>.*?)(?<Bitrate>\D[0-9]*k).*?\|.(?<Codec>(?:mp4v.*?|(?:avc1.*?|(?:vp9.*?|(?:vp09.*?|(?:audio only|))))))", RegexOptions.Compiled)]

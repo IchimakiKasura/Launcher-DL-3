@@ -151,7 +151,6 @@ sealed partial class YDL
         
         if (config.AllowCookies) Arguments.Append($" --cookies-from-browser {config.BrowserCookie}");
         
-        // Warns the user that there's no FFMPEG found
         if(FFmpeg.FFmpegFiles.ErrorOccured)
         {
             console.DLAddConsole(CONSOLE_ERROR_SOFT_STRING, "FFMPEG Was not found, Error may occur when processing.");
@@ -160,11 +159,15 @@ sealed partial class YDL
         else 
         {
             Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
+
+            if(MetadataWindowStatic is not null && MetadataWindowStatic.IsTextChanged && Type is TypeOfButton.CustomType && comboBoxFormat.Text.IsEmpty())
+                console.DLAddConsole(CONSOLE_WARNING_STRING, "Metadata will be ignored when the format is on default!");
             
             //Apply Metadata if exist
             MetadataWindow.ApplyMetadataOnFile(ref Arguments);
         }
 
+        ConsoleLastDocument = new();
         console.SaveText(ref ConsoleLastDocument);
 
         await StartProcess.ProcessTask(Arguments.ToString(), ConsoleLive.DownloadLiveOutputComment);

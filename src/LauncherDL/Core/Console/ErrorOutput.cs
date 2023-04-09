@@ -3,7 +3,7 @@ namespace LauncherDL                                                            
           ConsoleDL                                                                                                                                                     ;/*
 
 Yes this is very unforgivable :D                                                                                                                                        */
-internal partial class ConsoleLive                                                                                                                                      {/*
+internal sealed partial class ConsoleLive                                                                                                                               {/*
     
     0 = File format                                                                                                                         
     1 = Download                                                                                                                            

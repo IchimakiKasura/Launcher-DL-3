@@ -3,7 +3,7 @@ namespace LauncherDL.Core.TaskProcess;
 /// <summary>
 /// Where Download or Convert Task ended
 /// </summary>
-abstract class EndProcess
+sealed class EndProcess
 {
     public static async void ProcessTaskEnded()
     {
@@ -64,5 +64,7 @@ abstract class EndProcess
             MetadataWindow.ApplyMetadataOnFile();
         
         console.DLAddConsole(CONSOLE_YEY_STRING, "Downloaded!");
+
+        ConsoleLastDocument.Dispose();
     }
 }

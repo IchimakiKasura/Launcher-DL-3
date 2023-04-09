@@ -1,6 +1,6 @@
 ﻿namespace LauncherDL.Core.Buttons;
 
-internal class TopButtons : ITopBarButtons
+internal sealed class TopButtons : ITopBarButtons
 {
     public static void CloseWindow(object sender, RoutedEventArgs handler)    =>
         MainWindowStatic.Close();

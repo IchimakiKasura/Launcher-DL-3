@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.ConsoleDL;
 
-internal partial class ConsoleLive
+internal sealed partial class ConsoleLive
 {
     static int TotalDuration;
     static double ProgressValue = 0;

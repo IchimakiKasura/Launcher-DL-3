@@ -1,6 +1,6 @@
 namespace LauncherDL;
 
-public partial class App
+public sealed partial class App
 {
     // F̶i̶x̶e̶s̶ ̶t̶h̶e̶ ̶d̶r̶o̶p̶ ̶m̶e̶n̶u̶s̶ ̶g̶o̶i̶n̶g̶ ̶f̶r̶o̶m̶ ̶r̶i̶g̶h̶t̶ ̶t̶o̶ ̶l̶e̶f̶t̶ ̶b̶e̶c̶a̶u̶s̶e̶ ̶i̶ ̶d̶o̶n̶'̶t̶ ̶k̶n̶o̶w̶ ̶w̶h̶a̶t̶ ̶h̶a̶p̶p̶e̶n̶e̶d̶.̶
     // S̶o̶m̶e̶ ̶s̶a̶y̶ ̶i̶t̶s̶ ̶b̶e̶c̶a̶u̶s̶e̶ ̶o̶f̶ ̶t̶h̶e̶ ̶T̶a̶b̶l̶e̶t̶ ̶b̶u̶t̶ ̶I̶ ̶d̶o̶n̶'̶t̶ ̶u̶s̶e̶ ̶T̶a̶b̶l̶e̶t̶ ̶P̶C̶ ̶o̶r̶ ̶e̶v̶e̶n̶ ̶h̶a̶v̶e̶ ̶o̶n̶e̶.

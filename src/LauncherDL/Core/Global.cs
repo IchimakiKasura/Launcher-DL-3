@@ -5,7 +5,7 @@
 /// and also long arrays or list are also here because 
 /// it eats up all the space from the method.
 /// </summary>
-public partial class Global
+public sealed partial class Global
 {
     // App version
     #if !DEBUG
@@ -53,7 +53,7 @@ public partial class Global
     /// <summary>ComboBoxFormat Temporary list</summary>
     public static List<FormatList> TemporaryList = new();
 
-    public static MemoryStream ConsoleLastDocument = new();
+    public static MemoryStream ConsoleLastDocument;
 
     /// <summary>Process Start</summary>
     public static Process ProcessTaskVariable;

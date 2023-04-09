@@ -1,10 +1,11 @@
 namespace LauncherDL.Core.ConsoleDL;
 
-internal partial class ConsoleLive
+internal sealed partial class ConsoleLive
 {
     static List<string> ProgressInfo;
     static string NetworkSpeedColor = string.Empty;
     static Regex DefaultRegex;
+    static bool IsFetchedFormat;
 
     public static void DownloadLiveOutputComment(object s, DataReceivedEventArgs e)
     {
@@ -19,15 +20,15 @@ internal partial class ConsoleLive
 
         DL_Dispatch.Invoke(DownloaderRegexChanged);
 
-        if(FetchMatchedRegex(StringData))
+        if (FetchMatchedRegex(StringData))
             return;
 
         ForegroundSpeedColor();
 
-        DL_Dispatch.Invoke(()=>Download_Invoke(DefaultRegex != DownloadInfoARIA2C));
+        DL_Dispatch.Invoke(Download_Invoke);
     }
 
-    static void Download_Invoke(bool IsFetchedFormat)
+    static void Download_Invoke()
     {
         console.LoadText(ConsoleLastDocument);
 
@@ -51,21 +52,20 @@ internal partial class ConsoleLive
         TaskbarProgressBar.ProgressValue = progressBar.Value / 100;
     }
 
-    static bool FetchMatchedRegex(string StringData)
+    static bool FetchMatchedRegex(in string StringData)
     {
         List<Group> RegexMatchedStrings = DefaultRegex.Match(StringData).Groups.Cast<Group>().Skip(1).ToList();
 
         foreach (Group match in CollectionsMarshal.AsSpan(RegexMatchedStrings))
             if(!match.Value.IsEmpty())
                 ProgressInfo.Add(match.Value.Trim());
-
-        return ProgressInfo.Count <= 1 ? false : true;
+        
+        return ProgressInfo.Count <= 1 ? true : false;
     }
 
     static void ForegroundSpeedColor()
     {
-       var DownSpeedSTR = 
-            DefaultRegex == DownloadInfoARIA2C ?
+        var DownSpeedSTR = !IsFetchedFormat ?
                 ProgressInfo[DOWNLOAD_SPEED] : ProgressInfo[DOWNLOAD_FMT_SPEED];
 
         if(double.TryParse(Regex.Replace(DownSpeedSTR, DOWNSPEED_REGEX, string.Empty),out Double SpeedNumber))
@@ -101,5 +101,7 @@ internal partial class ConsoleLive
 
         if (comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > -1)
             DefaultRegex = DownloadInfoARIA2CFetchedFormat; 
+
+        IsFetchedFormat = DefaultRegex != DownloadInfoARIA2C;
     }
 }
