@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-internal class UpdateButton : IButtonControls
+internal sealed class UpdateButton : IButtonControls
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {

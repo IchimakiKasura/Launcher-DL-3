@@ -1,6 +1,6 @@
 namespace LauncherDL.StartUp;
 
-partial class OnStartUp
+internal sealed partial class OnStartUp
 {
     // Progress bar looking loneley 🥲
     private static void InitiateProgressBar()

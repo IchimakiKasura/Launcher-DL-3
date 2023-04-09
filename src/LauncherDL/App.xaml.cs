@@ -2,12 +2,13 @@
 
 public partial class App : Application
 {
+    static Mutex _mutex = null;
+
     protected override void OnStartup(StartupEventArgs e)
     {
         string appName = Assembly.GetExecutingAssembly().GetName().Name;
-        bool createdNew;
-
-        Mutex _mutex = new(true, appName, out createdNew);
+        
+        _mutex = new(true, appName, out bool createdNew);
 
         if (!createdNew)
             if (MessageBox.Show("Only one instance at a time!", "Warning",

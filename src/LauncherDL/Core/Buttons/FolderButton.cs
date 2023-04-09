@@ -1,6 +1,6 @@
 ﻿namespace LauncherDL.Core.Buttons;
 
-internal class FolderButton : IButtonControls
+internal sealed class FolderButton : IButtonControls
 {
     public static void ButtonClicked(object s, RoutedEventArgs e)
     {

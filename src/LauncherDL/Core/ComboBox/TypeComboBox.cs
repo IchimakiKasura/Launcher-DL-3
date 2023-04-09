@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.ComboBoxDL;
 
-public class TypeComboBox : IComboBoxControl
+public sealed class TypeComboBox : IComboBoxControl
 {
     public static void ItemChanged(object s, RoutedEventArgs e)
     {

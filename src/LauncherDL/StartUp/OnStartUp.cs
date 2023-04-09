@@ -1,5 +1,5 @@
 ﻿namespace LauncherDL.StartUp;
-partial class OnStartUp
+internal sealed partial class OnStartUp
 {
     static readonly string TextMessage = $"Copyright © 2023 Kasura | Build Version: {APP_CURRENT_VERSION}";
     static readonly string TextMessageModified = $"Copyright © 2023 Kasura | Build Version: {APP_CURRENT_VERSION} ";

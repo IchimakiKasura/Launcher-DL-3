@@ -1,7 +1,7 @@
 ﻿using static LauncherDL.Core.Attributes.ToolTipTextsAttribute;
 namespace LauncherDL.Core.Event_Handlers;
 
-internal class EventHandlers
+internal sealed class EventHandlers
 {
     public static void InitializeEventHandlers()
     {

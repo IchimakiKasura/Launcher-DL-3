@@ -1,7 +1,7 @@
 namespace LauncherDL.Core.Attributes;
 
 [AttributeUsage(AttributeTargets.Property|AttributeTargets.Field, Inherited = false)]
-public class ToolTipTextsAttribute : Attribute
+public sealed class ToolTipTextsAttribute : Attribute
 {
     public string Description { get; private set; }
     public ToolTipTextsAttribute(string _Description) =>

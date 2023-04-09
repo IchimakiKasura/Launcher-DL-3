@@ -5,7 +5,7 @@
 /// made it into a class which a single call<br/>
 /// can output multiple comment
 /// </summary>
-internal static class ConsoleOutputMethod
+internal sealed class ConsoleOutputMethod
 {
     public static void StartUpOutputComments()
     {

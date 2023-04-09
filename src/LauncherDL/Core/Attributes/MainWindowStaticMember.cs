@@ -6,7 +6,7 @@ namespace LauncherDL.Core.Attributes;
 // Attribute idk
 [AttributeUsage(AttributeTargets.Property, Inherited = false)]
 // Class
-public class MainWindowStaticMemberAttribute : Attribute
+public sealed class MainWindowStaticMemberAttribute : Attribute
 {
     // Constructor of the class
     public MainWindowStaticMemberAttribute() { }

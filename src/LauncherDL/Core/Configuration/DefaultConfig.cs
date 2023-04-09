@@ -2,7 +2,7 @@ using static LauncherDL.Core.Configuration.CONFIG_STR;
 
 namespace LauncherDL.Core.Configuration;
 
-public class DefaultConfig
+public sealed class DefaultConfig
 {
     public string background                        =   CONFIG_DEFAULT_BACKGROUND;
     public string DefaultOutput                     =   CONFIG_DEFAULT_OUTPUT;

@@ -1,7 +1,7 @@
 namespace LauncherDL.Core.Attributes;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public class FilePathAttribute : Attribute
+public sealed class FilePathAttribute : Attribute
 {
     const string FolderDataName = "LauncherDL_Data";
 

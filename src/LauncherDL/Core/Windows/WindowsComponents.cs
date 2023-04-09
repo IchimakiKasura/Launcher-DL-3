@@ -1,7 +1,7 @@
 ﻿using static DLControls.ProgressBarControl;
 namespace LauncherDL.Core.Windows;
 
-class WindowsComponents : IWindowsComponents
+sealed class WindowsComponents : IWindowsComponents
 {
     // Onload Event
     public static void WindowLoaded(object sender, RoutedEventArgs e) =>
