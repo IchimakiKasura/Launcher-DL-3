@@ -3,8 +3,9 @@
 .vscode
 bin
 obj
-/ydl.cs
-Build/DEBUG
-Build/RELEASE
+./buildIn
+./restore
+./buildAPP.exe
+Build
 !src/LauncherDL/Core/Metadata/obj
 LauncherDL.sln.DotSettings.user
