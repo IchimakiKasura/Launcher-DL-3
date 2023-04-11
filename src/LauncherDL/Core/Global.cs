@@ -9,7 +9,7 @@ public sealed partial class Global
 {
     // App version
     #if !DEBUG
-        public const string APP_CURRENT_VERSION = "7.1_DT0.0.0000";
+        public const string APP_CURRENT_VERSION = "7.1_DT4.12.2023";
     #else
         public const string APP_CURRENT_VERSION = "Development Build";
     #endif
@@ -110,12 +110,17 @@ public sealed partial class Global
         downloaded file.
     - Fixed where ID is going past the limit on ComboBox
         now has an "..." when it has more than 8 chars.
+    - Fixed where the Title is the same as the Name even
+        after putting a custom Name.
 
-    [ New ]
+    [ New | Changes ]
     - OpenFile context menu will have disabled buttons
         if the folder doesn't exist.
     - Metadata is now available on CustomType!
     - Added few Animations.
+    - Errors now outputs some info for more details so you
+        can send and make an ISSUE request on github.
+    - Metadata will be cleared when changing types.
 
     [ Misc ]
     - Window is now continuously updating to hit the 60fps
