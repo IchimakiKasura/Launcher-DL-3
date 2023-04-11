@@ -3,7 +3,7 @@ namespace LauncherDL                                                            
           ConsoleDL                                                                                                                                                     ;/*
 
 Yes this is very unforgivable :D                                                                                                                                        */
-internal partial class ConsoleLive                                                                                                                                      {/*
+internal sealed partial class ConsoleLive                                                                                                                               {/*
     
     0 = File format                                                                                                                         
     1 = Download                                                                                                                            
@@ -19,7 +19,9 @@ internal partial class ConsoleLive                                              
         DL_Dispatch.Invoke(()=>Error_Invoked(e.Data))                                                                                                                   ;
 
     public static void Error_Invoked(string StringData)                                                                                                                 {
-        if (!SingleErrorInstance && !StringData.IsEmpty() && !Regex.IsMatch(StringData,@"\[(twitter|generic)\]"))
+
+        if (!SingleErrorInstance && !StringData.IsEmpty() && !Regex.IsMatch(StringData,@"\[(twitter|generic)\]"))                                                       {
+
             switch(SelectedError)                                                                                                                                       {
                 case 0                                                                                                                                                  :
                     console.DLAddConsole(CONSOLE_ERROR_STRING,
@@ -42,4 +44,7 @@ internal partial class ConsoleLive                                              
                 case 3                                                                                                                                                  :
                     console.DLAddConsole(CONSOLE_ERROR_STRING, ERROR_MESSAGE_CONVERT)                                                                                   ;
                     SingleErrorInstance = true                                                                                                                          ;
-                break                                                                                                                                                   ;}}}
+                break                                                                                                                                                   ;}}
+                
+        if(!StringData.IsEmpty())
+            console.DLAddConsole(CONSOLE_SYSTEM_STRING, $"<Gray%14>INCLUDED MESSAGE:$nl$ <Gray%10>{StringData} $nl$")                                                   ;}}

@@ -1,6 +1,6 @@
 namespace LauncherDL.StartUp;
 
-partial class OnStartUp
+internal sealed partial class OnStartUp
 {
     private static void InitializeTextBoxComponents()
     {

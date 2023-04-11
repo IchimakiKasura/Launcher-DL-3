@@ -1,6 +1,6 @@
 ﻿namespace LauncherDL;
 
-public partial class MainWindow
+public sealed partial class MainWindow
 {
     [MainWindowStaticMember, ToolTipTexts("Minimize Window")]
     public static   Button                          Minimize                { get; set; }

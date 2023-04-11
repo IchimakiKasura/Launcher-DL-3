@@ -1,13 +1,13 @@
 namespace Update;
 
-class Updater
+sealed class Updater
 {
     readonly public double CurrentVersion = 7.1;
     readonly public double NewVersion;
 
     public Updater()
     {
-        using Stream streamData = CheckVersion();
+        using Stream streamData = CheckVersion().Result;
         using StreamReader reader = new(streamData, Encoding.UTF8);
         string Data = reader.ReadToEnd();
 
@@ -27,10 +27,9 @@ class Updater
                                 Process.Start("explorer", Visit);
     }
 
-    Stream CheckVersion()
+    async Task<Stream> CheckVersion()
     {
         System.Net.Http.HttpResponseMessage resp;
-        int status;
 
         try
         {
@@ -40,10 +39,10 @@ class Updater
                 req.DefaultRequestVersion = System.Net.HttpVersion.Version30;
                 req.DefaultRequestHeaders.Add("User-Agent", "Launcher DL Update Checker");
                 var res = req.GetAsync("https://api.github.com/repos/ichimakikasura/launcher-dl-3/releases/latest").Result;
-                status = (int)res.StatusCode;
                 resp = res;
             }
-            return resp.Content.ReadAsStream();
+            
+            return await resp.Content.ReadAsStreamAsync();
         }
         catch { return Stream.Null; }
     }

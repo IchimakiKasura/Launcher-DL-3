@@ -4,11 +4,6 @@
 //
 //  Fix naming if possible
 //
-//  Make 2 or 3 branches
-//      - Master/Main
-//      - Development
-//      - Experimental / new features
-//
 //  ==============================================================================================
 //  Fix the ToolTip attribute and make it usable for every situation
 //  not single typed focused or idk selective
@@ -31,7 +26,7 @@
 //  ╚██████╗██║  ██║██║███████║██║  ██║   ██║   ╚██████╔╝  //
 //   ╚═════╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝   //
 //=========================================================//
-public partial class MainWindow : Window
+public sealed partial class MainWindow : Window
 {
     public MainWindow()
     {

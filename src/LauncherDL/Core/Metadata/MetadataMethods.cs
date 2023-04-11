@@ -44,17 +44,13 @@ public partial class MetadataWindow
     // "best" format won't run "postprocessing-args" hence this method
     // exist just to add metadata on a single option "Video Type: mp4"
     // The Convert type and Audio type still works tho
-    public static void ApplyMetadataOnFile()
+    public static async void ApplyMetadataOnFile()
     {
         // Retrieve input from UI controls
         string
-        directoryOutput     = config.DefaultOutput,
-        directoryType       = comboBoxType.GetItemContent,
-        fileName            = textBoxName.Text,
-        fileExtension       = comboBoxFormat.GetItemContent,
-        filePath            = Path.Combine(directoryOutput, directoryType),
-        fullFilePath        = Path.Combine(filePath, $"{fileName}.{fileExtension}"),
-        temporaryFilePath   = Path.Combine(filePath, $"TEMP_{fileName}.{fileExtension}");
+        filePath            = Path.Combine(config.DefaultOutput, comboBoxType.GetItemContent),
+        fullFilePath        = Path.Combine(filePath, $"{textBoxName.Text}.mp4"),
+        temporaryFilePath   = Path.Combine(filePath, $"TEMP_{textBoxName.Text}.mp4");
         
         // Prepare FFmpeg command
         var metadataArguments = new StringBuilder();
@@ -78,7 +74,8 @@ public partial class MetadataWindow
             }
         };
 
-        ffmpegProcess.StartAsync();
+        await ffmpegProcess.StartAsync();
+        await ffmpegProcess.WaitForExitAsync();
 
         File.Delete(fullFilePath);
         File.Move(temporaryFilePath, fullFilePath);

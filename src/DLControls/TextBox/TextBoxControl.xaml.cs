@@ -64,12 +64,12 @@ public partial class TextBoxControl : UserControl, IDLControls
         };
 
         // Prevents collusion with with the instatiated text
-        if(Text is "" or null)
+        if(Text.IsEmpty())
             UserGrid.Add(Placeholder);
 
         UserTextBox.TextChanged += delegate
         {
-            if (Text is "" && !UserGrid.Contains(Placeholder))
+            if (Text.IsEmpty())
                 UserGrid.Add(Placeholder);
             else UserGrid.Remove(Placeholder);
         };

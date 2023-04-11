@@ -1,12 +1,13 @@
 namespace LauncherDL.Core.ComboBoxDL;
 
-public class TypeComboBox : IComboBoxControl
+public sealed class TypeComboBox : IComboBoxControl
 {
     public static void ItemChanged(object s, RoutedEventArgs e)
     {
         ConsoleOutputMethod.ComboBoxChangedOutputComment(ConsoleOutputMethodSelection.TYPE);
         
         comboBoxFormat.ClearItems();
+        MetadataWindow.MetadataClear();
         buttonMetadata.IsEnabled = true;
 
         if(comboBoxType.ItemIndex is 0)

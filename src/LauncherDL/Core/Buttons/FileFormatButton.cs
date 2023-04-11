@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-internal class FileFormatButton : IButtonControls
+internal sealed class FileFormatButton : IButtonControls
 {
     public static async void ButtonClicked(object s, RoutedEventArgs e)
     {

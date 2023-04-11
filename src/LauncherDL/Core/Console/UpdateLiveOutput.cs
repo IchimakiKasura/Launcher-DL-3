@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.ConsoleDL;
 
-internal partial class ConsoleLive
+internal sealed partial class ConsoleLive
 {
     public static void UpdateLiveOutputComment(object s, DataReceivedEventArgs e) =>
         DL_Dispatch.Invoke(()=>Update_Invoked(e.Data));

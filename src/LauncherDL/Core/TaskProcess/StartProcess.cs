@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.TaskProcess;
 
-abstract class StartProcess
+sealed class StartProcess
 {
     public static async Task ProcessTask(string Args, DataReceivedEventHandler e)
     {

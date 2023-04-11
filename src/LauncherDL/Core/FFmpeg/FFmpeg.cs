@@ -2,7 +2,7 @@ using static LauncherDL.Core.Console_Output_Comment_Method.ConsoleOutputCheck;
 namespace LauncherDL.Core.FFmpeg;
 
 // ahaha
-internal static partial class FFmpegFiles
+internal sealed partial class FFmpegFiles
 {
     readonly static string FFmpegPath = "./LauncherDL_Data";
     static List<string> FileMissingOnly = new List<string>(9);

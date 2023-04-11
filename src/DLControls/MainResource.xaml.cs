@@ -1,8 +1,8 @@
 namespace DLControls;
 
-public partial class MainResource
+public sealed partial class MainResource
 {
-    public static T GetTemplateResource<T>(string Name,dynamic TemplatedParent) =>
+    public static T GetTemplateResource<T>(string Name, Control TemplatedParent) =>
         (T)TemplatedParent.Template.FindName(Name, TemplatedParent);
     
     public static void SetStoryboardAuto(Timeline element, DependencyObject value, PropertyPath path)
@@ -35,10 +35,10 @@ internal static class _Extensions
         storyboard.Children.Add(Element);
 
     // Grid
-    public static void Add(this Grid grid, UIElement Element) =>
-        grid.Children.Add(Element);
-    public static void Remove(this Grid grid, UIElement Element) =>
-        grid.Children.Remove(Element);
+    public static void Add(this Grid grid, UIElement Element)
+    { if(!grid.Contains(Element)) grid.Children.Add(Element); }
+    public static void Remove(this Grid grid, UIElement Element)
+    { if(grid.Contains(Element)) grid.Children.Remove(Element); }
     public static bool Contains(this Grid grid, UIElement Element) =>
         grid.Children.Contains(Element);
 }

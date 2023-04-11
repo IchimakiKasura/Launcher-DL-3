@@ -1,7 +1,7 @@
 namespace LauncherDL.Core.Attributes;
 
 [AttributeUsage(AttributeTargets.Field, Inherited = false)]
-public class WindowStaticRefAttribute : Attribute
+public sealed class WindowStaticRefAttribute : Attribute
 {
     public WindowStaticRefAttribute() { }
     

@@ -8,7 +8,7 @@ namespace LauncherDL.Core.Configuration;
 /// <summary>
 /// Initiate the config by reading the Config.ini
 /// </summary>
-public class Config
+public sealed class Config
 {
     static DefaultConfig DefaultConfiguration   =   new();
     static bool error                           =   false;

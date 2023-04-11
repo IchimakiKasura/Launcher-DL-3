@@ -8,19 +8,15 @@ internal static class CoreExtensions
     /// Automatically cancels if the Canvas already contains the Element.
     /// </summary>
     public static void Add(this Canvas _canvas, UIElement Element)
-    {
-        if(!_canvas.Contains(Element))
-            _canvas.Children.Add(Element);
-    }
+    { if(!_canvas.Contains(Element)) _canvas.Children.Add(Element); }
+    
     /// <summary>
     /// Remove UIElement to the Canvas. <br/>
     /// Automatically cancels if the Canvas already removed.
     /// </summary>
     public static void Remove(this Canvas _canvas, UIElement Element)
-    {
-        if(_canvas.Contains(Element))
-            _canvas.Children.Remove(Element);
-    }
+    { if(_canvas.Contains(Element)) _canvas.Children.Remove(Element); }
+
     public static bool Contains(this Canvas _canvas, UIElement Element) =>
         _canvas.Children.Contains(Element);
     #endregion

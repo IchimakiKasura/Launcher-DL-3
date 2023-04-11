@@ -1,3 +1,4 @@
+using System.ComponentModel;
 namespace LauncherDL.Core.Metadata;
 
 // Bro literally created his own shit without xaml ☠️☠️
@@ -5,31 +6,32 @@ namespace LauncherDL.Core.Metadata;
 public partial class MetadataWindow : IMetadataComponent
 {
     #region Window fields
-    private Border MetadataRoundBorder;
-    private Border MetadataDragBorder;
-    private Canvas MetadataWindowCanvas;
+    internal Border MetadataRoundBorder;
+    internal Border MetadataDragBorder;
+    internal Canvas MetadataWindowCanvas;
     #endregion
 
     #region Window Controls
     [ToolTipTexts("Edit Title")]
-    private TextBoxControl Metadata_Title;
+    internal TextBoxControl Metadata_Title;
     [ToolTipTexts("Edit Album")]
-    private TextBoxControl Metadata_Album;
+    internal TextBoxControl Metadata_Album;
     [ToolTipTexts("Edit Artist")]
-    private TextBoxControl Metadata_Album_Artist;
+    internal TextBoxControl Metadata_Album_Artist;
     [ToolTipTexts("Set the Year")]
-    private TextBoxControl Metadata_Year;
+    internal TextBoxControl Metadata_Year;
     [ToolTipTexts("Edit Genre")]
-    private TextBoxControl Metadata_Genre;
+    internal TextBoxControl Metadata_Genre;
     [ToolTipTexts("Set the Metadata")]
-    private Button Button_Set;
+    internal Button Button_Set;
     [ToolTipTexts("Cancel Metadata")]
-    private Button Button_Cancel;
+    internal Button Button_Cancel;
     [ToolTipTexts("Close Window")]
-    private Button Button_Exit;
+    internal Button Button_Exit;
     #endregion
 
-    private readonly ImmutableList<TextBlock> LABEL_LIST =
+    [Browsable(false)]
+    internal readonly ImmutableList<TextBlock> LABEL_LIST =
         ImmutableList.Create<TextBlock>(
             new() { Text = LABEL_TITLE          },
             new() { Text = LABEL_ALBUM          },
@@ -39,9 +41,10 @@ public partial class MetadataWindow : IMetadataComponent
             new() { Text = LABEL_CREATOR        }
         );
     
-    private List<TextBoxControl> TEXTBOX_LIST = new(4);
+    [Browsable(false)]
+    internal List<TextBoxControl> TEXTBOX_LIST = new(4);
     
-    private bool _contentLoad;
+    internal bool _contentLoad;
     public void InitializeComponent()
     {
         if(_contentLoad)
@@ -88,7 +91,7 @@ public partial class MetadataWindow : IMetadataComponent
         ToolTipTextsAttribute.InitiateAttribute<MetadataWindow>();
     }
 
-    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
     public void SetupControls()
     {
         // TextBox background
@@ -143,7 +146,7 @@ public partial class MetadataWindow : IMetadataComponent
             AddToCanvas(Controls);
     }
 
-    private void SetCanvasPlacement()
+    internal void SetCanvasPlacement()
     {
         #region Label Placements
             SetCanvas(LABEL_LIST[METADATA_TITLE       ] ,  42, 16);
@@ -168,7 +171,7 @@ public partial class MetadataWindow : IMetadataComponent
         #endregion
     }
     
-    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
     public void EventHandlers()
     {
         Button_Set.Click                += MetadataSet;
@@ -181,6 +184,6 @@ public partial class MetadataWindow : IMetadataComponent
         };
     }
     
-    protected override void OnClosing(System.ComponentModel.CancelEventArgs e) =>
+    protected override void OnClosing(CancelEventArgs e) =>
         IsWindowOpen = false;
 }

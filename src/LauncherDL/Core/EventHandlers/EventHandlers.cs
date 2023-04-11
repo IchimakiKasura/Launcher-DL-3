@@ -1,7 +1,7 @@
 ﻿using static LauncherDL.Core.Attributes.ToolTipTextsAttribute;
 namespace LauncherDL.Core.Event_Handlers;
 
-internal class EventHandlers
+internal sealed class EventHandlers
 {
     public static void InitializeEventHandlers()
     {
@@ -39,20 +39,21 @@ internal class EventHandlers
         #pragma warning disable CS8848
 
         #region ComboBox Tooltip List (CTL)
+        
         void AttachToolTip(ComboBoxItem CTL, string text) =>
             CTL.MouseMove += (s,e) => Follow(s,e, CTL.Content as string + text);
 
-        foreach(var CTL in ComboBoxList.ComboBoxTypes)
-            AttachToolTip(CTL, CTL.Content as string + " Type?");
-                                                                                    
-        foreach(var CTL in ComboBoxList.ComboBoxVideoFormats)
-            AttachToolTip(CTL, CTL.Content as string + " Format");
+        Dictionary<ImmutableList<ComboBoxItem>, string> CTL_ToolTip = new()
+        {
+            {ComboBoxList.ComboBoxTypes, " Type?"},
+            {ComboBoxList.ComboBoxVideoFormats, " Format"},
+            {ComboBoxList.ComboBoxAudioFormats, " Format"},
+            {ComboBoxList.ComboBoxFormatQuality, " Quality"}
+        };
 
-        foreach(var CTL in ComboBoxList.ComboBoxAudioFormats)
-            AttachToolTip(CTL, CTL.Content as string + " Format");
-
-        foreach(var CTL in ComboBoxList.ComboBoxFormatQuality)
-            AttachToolTip(CTL, CTL.Content as string + " Quality");
+        foreach(var Dictionary_CTL in CTL_ToolTip)
+            foreach(var CTL in Dictionary_CTL.Key)
+                AttachToolTip(CTL, Dictionary_CTL.Value);
         #endregion
 
         #pragma warning restore CS8848

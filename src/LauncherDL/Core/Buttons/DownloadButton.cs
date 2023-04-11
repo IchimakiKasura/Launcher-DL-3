@@ -1,6 +1,6 @@
 namespace LauncherDL.Core.Buttons;
 
-internal class DownloadButton : IButtonControls
+internal sealed class DownloadButton : IButtonControls
 {
     public static async void ButtonClicked(object s, RoutedEventArgs e)
     {
@@ -34,11 +34,13 @@ internal class DownloadButton : IButtonControls
         {
             // Checks if has file format fetched
             case string when comboBoxType.ItemIndex is 0 && comboBoxFormat.HasItems && comboBoxFormat.ItemIndex > -1:
-                _format = TemporaryList[comboBoxFormat.ItemIndex].VID_W_AUD ?? TemporaryList[comboBoxFormat.ItemIndex].ID;
-                _FormatOutputComment = TemporaryList[comboBoxFormat.ItemIndex].Name;
+
+                var SelectedFormat = TemporaryList[comboBoxFormat.ItemIndex];
+                _format = SelectedFormat.VID_W_AUD ?? SelectedFormat.ID;
+                _FormatOutputComment = SelectedFormat.Name;
 
                 // Checks if format text is changed by the user manually
-                if(comboBoxFormat.Text != TemporaryList[comboBoxFormat.ItemIndex].Name)
+                if(comboBoxFormat.Text != SelectedFormat.Name)
                     _FormatOutputComment =
                     _format = comboBoxFormat.Text;
             break;
@@ -63,7 +65,7 @@ internal class DownloadButton : IButtonControls
         console.Break("Gray");
         ConsoleOutputMethod.DownloadInfoOutputComment(new()
         {
-            Title = textBoxName.Text ?? "N/A",
+            Title = BodyButton.ValidationActualTitle ?? "N/A",
             Type = comboBoxType.GetItemContent ?? "N/A",
             Name = textBoxName.Text ?? "N/A",
             Format = _FormatOutputComment.Replace("|", "$vbar$") ?? "N/A",

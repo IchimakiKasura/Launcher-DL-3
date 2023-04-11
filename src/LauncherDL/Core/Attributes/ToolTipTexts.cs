@@ -1,7 +1,7 @@
 namespace LauncherDL.Core.Attributes;
 
 [AttributeUsage(AttributeTargets.Property|AttributeTargets.Field, Inherited = false)]
-public class ToolTipTextsAttribute : Attribute
+public sealed class ToolTipTextsAttribute : Attribute
 {
     public string Description { get; private set; }
     public ToolTipTextsAttribute(string _Description) =>
@@ -50,7 +50,6 @@ public class ToolTipTextsAttribute : Attribute
             
         ToolTip tip = (ToolTip) TooltipElement.ToolTip;
         tip.Content = Content;
-        tip.CacheMode = new BitmapCache();
         tip.HorizontalOffset = eventargs.GetPosition(TooltipElement).X + 10;
         tip.VerticalOffset = eventargs.GetPosition(TooltipElement).Y + 10;
     }
