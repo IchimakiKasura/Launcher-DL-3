@@ -107,7 +107,7 @@ sealed class WindowsComponents : IWindowsComponents
     /// Keeps delaying until the passed bool turns to true
     /// </summary>
     public static async Task WindowAwaitLoad(bool a) =>
-        await Task.Run(()=>{ MainWindowStatic.Dispatcher.Invoke(async()=>{ while(!a) await Task.Delay(100); }); });
+        await Task.Run(()=>{ MainWindowStatic.Dispatcher.Invoke(async()=>{ while(!a) await Task.Delay(1); }); });
   
     // Is it bad to just call it without parameters to know if its freezed or not?
     // nah its my code and I know when to call the method but yeah it does look bad practice

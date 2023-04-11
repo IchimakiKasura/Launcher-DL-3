@@ -30,7 +30,6 @@ sealed class Updater
     async Task<Stream> CheckVersion()
     {
         System.Net.Http.HttpResponseMessage resp;
-        int status;
 
         try
         {
@@ -40,9 +39,9 @@ sealed class Updater
                 req.DefaultRequestVersion = System.Net.HttpVersion.Version30;
                 req.DefaultRequestHeaders.Add("User-Agent", "Launcher DL Update Checker");
                 var res = req.GetAsync("https://api.github.com/repos/ichimakikasura/launcher-dl-3/releases/latest").Result;
-                status = (int)res.StatusCode;
                 resp = res;
             }
+            
             return await resp.Content.ReadAsStreamAsync();
         }
         catch { return Stream.Null; }

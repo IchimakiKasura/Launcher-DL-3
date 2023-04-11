@@ -36,9 +36,9 @@ internal static class _Extensions
 
     // Grid
     public static void Add(this Grid grid, UIElement Element) =>
-        grid.Children.Add(Element);
+        grid.Children.Add(!grid.Contains(Element) ? Element : null);
     public static void Remove(this Grid grid, UIElement Element) =>
-        grid.Children.Remove(Element);
+        grid.Children.Remove(grid.Contains(Element) ? Element : null);
     public static bool Contains(this Grid grid, UIElement Element) =>
         grid.Children.Contains(Element);
 }

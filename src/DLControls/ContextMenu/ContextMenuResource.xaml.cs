@@ -1,10 +1,9 @@
 namespace DLControls;
 
-public partial class ContextMenuResource
+public sealed partial class ContextMenuResource
 {
-    public static TextBoxControl Link;
+    public static TextBoxControl Link, Name;
     public static ComboBoxControl Format;
-    public static TextBoxControl Name;
     public static string CONTEXTMENU_configDefaultDirectory;
 
     void OpenFolderProcess(object s, RoutedEventArgs e)

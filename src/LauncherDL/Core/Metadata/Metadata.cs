@@ -2,7 +2,6 @@ namespace LauncherDL.Core.Metadata;
 
 public partial class MetadataWindow : Window
 {
-    MetadataClicked DefaultClicked = MetadataClicked.Cancel;
     public static bool IsWindowOpen = false;
     public bool IsTextChanged = false;
     
@@ -13,12 +12,9 @@ public partial class MetadataWindow : Window
         MetadataGet();
     }
 
-    public MetadataClicked OpenDialog()
-    {
-        ShowDialog();
-        return DefaultClicked;
-    }
-
+    public MetadataClicked OpenDialog() =>
+        ShowDialog().Value ? MetadataClicked.Set : MetadataClicked.Cancel;
+    
     private void MetadataSet(object s, RoutedEventArgs e)
     {
         SetOldText(ref Old_Title, Metadata_Title);
@@ -27,7 +23,7 @@ public partial class MetadataWindow : Window
         SetOldText(ref Old_Year, Metadata_Year);
         SetOldText(ref Old_Genre, Metadata_Genre);
 
-        DefaultClicked = MetadataClicked.Set;
+        this.DialogResult = true;
         Close();
     }
 

@@ -50,7 +50,6 @@ public sealed class ToolTipTextsAttribute : Attribute
             
         ToolTip tip = (ToolTip) TooltipElement.ToolTip;
         tip.Content = Content;
-        tip.CacheMode = new BitmapCache();
         tip.HorizontalOffset = eventargs.GetPosition(TooltipElement).X + 10;
         tip.VerticalOffset = eventargs.GetPosition(TooltipElement).Y + 10;
     }

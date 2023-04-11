@@ -39,7 +39,7 @@ public enum TypeList
     QualityType
 }
 
-public static class ComboBoxList
+public sealed class ComboBoxList
 {
     // I did ImmutableList instead of ComboBoxItem[] cuz ImmutableList said its thread safe
     // idk wtf am i doing.

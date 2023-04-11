@@ -14,14 +14,10 @@ public sealed partial class App
     {
         var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
         
-        void setAlignmentValue()
+        SystemParameters.StaticPropertyChanged += (sender, e) =>
         {
-            if (SystemParameters.MenuDropAlignment && menuDropAlignmentField != null) menuDropAlignmentField.SetValue(null, false);
-        }
-        
-        setAlignmentValue();
-
-        SystemParameters.StaticPropertyChanged += (sender, e) => setAlignmentValue();
+            if (SystemParameters.MenuDropAlignment && menuDropAlignmentField is not null) menuDropAlignmentField.SetValue(null, false);
+        };
     }
 
     private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -30,15 +26,15 @@ public sealed partial class App
         var CustomMessage = e.Exception.InnerException != null ? e.Exception.InnerException.Message : string.Empty;
         var StackTrace = e.Exception.StackTrace.Replace(@"C:\Users\Administrator\Desktop\Coding\c# projects\", null); // Removes the dir
         var Message = $"===MESSAGE===\n{e.Exception.Message}\n\n\n===STACK TRACE===\n{StackTrace}";
-        if(!string.IsNullOrEmpty(CustomMessage)) Message += $"\n\n\n===Custom Message===\n{CustomMessage}";
+        var errorMessage = $"It Appears the the application encounters an Error!\n\n{e.Exception.Message}";
+
+        if(!CustomMessage.IsEmpty())
+        {
+            Message += $"\n\n\n===Custom Message===\n{CustomMessage}";
+            errorMessage = $"It Appears the the application encounters an Error!\n\n{CustomMessage}";
+        }
 
         File.WriteAllText($"ErrorDumpTrace_{CurrentDate}.txt", Message );
-
-        string errorMessage = $"It Appears the the application encounters an Error!\n\n{e.Exception.Message}";
-
-        // Checks if the Unhandled exception has a custom message.
-        if (CustomMessage != string.Empty)
-            errorMessage = $"It Appears the the application encounters an Error!\n\n{CustomMessage}";
 
         if (MessageBox.Show(MainWindow, errorMessage, "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Error) is MessageBoxResult.OK)
             Application.Current.Shutdown();
@@ -54,7 +50,7 @@ public sealed partial class App
             var CustomMessage = e.Exception.InnerException != null ? e.Exception.InnerException.Message : string.Empty;
             var StackTrace = e.Exception.StackTrace.Replace(@"C:\Users\Administrator\Desktop\Coding\c# projects\", null);
             var Message = $"===MESSAGE===\n{e.Exception.Message}\n\n\n===STACK TRACE===\n{StackTrace}";
-            if(!string.IsNullOrEmpty(CustomMessage)) Message += $"\n\n\n===CUSTOM MESSAGE===\n{CustomMessage}";
+            if(!CustomMessage.IsEmpty()) Message += $"\n\n\n===CUSTOM MESSAGE===\n{CustomMessage}";
 
             File.WriteAllText($"DEBUG_ErrorDumpTrace_{CurrentDate}.txt", Message );
 

@@ -110,9 +110,7 @@ public partial class ComboBoxControl : UserControl
 
                     if(TextEditable)
                     {
-                        if(!ComboBoxTemplateGRID.Contains(MainText))
-                            ComboBoxTemplateGRID.Add(MainText);
-
+                        ComboBoxTemplateGRID.Add(MainText);
                         Placeholder.Text = PlaceholderText;
                     }
                     break;
@@ -150,10 +148,10 @@ public partial class ComboBoxControl : UserControl
             Foreground = Brushes.White,
             BorderThickness = new(0),
             Focusable = true,
-            SelectionBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C"),
-            CaretBrush = (Brush)new BrushConverter().ConvertFromString("#FFFF9C9C"),
+            SelectionBrush = (Brush) new BrushConverter().ConvertFromString("#FFFF9C9C"),
+            CaretBrush = (Brush) new BrushConverter().ConvertFromString("#FFFF9C9C"),
             Width = root.Width,
-            ContextMenu = (ContextMenu)root.FindResource("TextBoxMenu"),
+            ContextMenu = (ContextMenu) root.FindResource("TextBoxMenu"),
         };
 
         MainText.HorizontalScrollBarVisibility = 
