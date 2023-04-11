@@ -1,4 +1,4 @@
-# Launcher DL version 7.0
+# Launcher DL DEVELOPMENT BRANCH
 This project is just a GUI for the Youtube-DL or "ydlp" (I use ydlp since the ydl is no longer updating)
 
 Download link: [Launcher DL v7](https://github.com/IchimakiKasura/Launcher-DL-3/releases)
