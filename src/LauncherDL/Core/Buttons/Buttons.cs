@@ -3,6 +3,7 @@ namespace LauncherDL.Core.Buttons;
 internal abstract class BodyButton
 {
     private static bool IsFailed;
+    public static string ValidationActualTitle;
 
     public static async Task<bool> CheckLinkValidation()
     {
@@ -43,6 +44,7 @@ internal abstract class BodyButton
         {
             console.DLAddConsole(CONSOLE_INFO_STRING, $"Fetching Link..$nl$<Gray%10>{textBoxLink.Text}");
             var ValidateLink = await new LauncherDL.Core.TaskProcess.LinkValidate(textBoxLink.Text).Validate();
+            ValidationActualTitle = ValidateLink.Title;
 
             if(!ValidateLink.IsValid)
                 IsFailed = true;

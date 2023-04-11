@@ -160,17 +160,18 @@ sealed partial class YDL
         {
             Arguments.Append($" --ffmpeg-location \"{FFMPEG_Path}\" --downloader \"{ARIA2C_Path}\" --no-part");
 
-            bool[] ConditionsMet =
+            if(MetadataWindowStatic is not null)
             {
-               MetadataWindowStatic is not null,
-               MetadataWindowStatic.IsTextChanged,
-               Type is TypeOfButton.CustomType,
-               comboBoxFormat.Text.IsEmpty()
-            };
+                bool[] ConditionsMet =
+                {
+                    MetadataWindowStatic.IsTextChanged,
+                    Type is TypeOfButton.CustomType,
+                    comboBoxFormat.Text.IsEmpty()
+                };
 
-            if(ConditionsMet.All(x => x))
-                console.DLAddConsole(CONSOLE_WARNING_STRING, "Metadata will be ignored when the format is on default!");
-            
+                if(ConditionsMet.All(x => x))
+                    console.DLAddConsole(CONSOLE_WARNING_STRING, "Metadata will be ignored when the format is on default!");
+            }
             //Apply Metadata if exist
             MetadataWindow.ApplyMetadataOnFile(ref Arguments);
         }

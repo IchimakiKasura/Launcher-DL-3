@@ -54,18 +54,20 @@ sealed class EndProcess
             console.LoadText(ConsoleLastDocument);
         else return;
 
-        bool[] ConditionMet = {
-            MetadataWindowStatic is not null,
-            MetadataWindowStatic.IsTextChanged,
-            !FFmpegFiles.ErrorOccured,
-            comboBoxType.GetItemContent is "Video",
-            comboBoxFormat.GetItemContent is "mp4"
-        };
+        if(MetadataWindowStatic is not null)
+        {
+            bool[] ConditionMet = {
+                MetadataWindowStatic.IsTextChanged,
+                !FFmpegFiles.ErrorOccured,
+                comboBoxType.GetItemContent is "Video",
+                comboBoxFormat.GetItemContent is "mp4"
+            };
 
-        // Sets the metadata
-        // **read the comment on MetadataMethod.cs LN:41 for explanation idk**
-        if(ConditionMet.All(x => x))
-            MetadataWindow.ApplyMetadataOnFile();
+            // Sets the metadata
+            // **read the comment on MetadataMethod.cs LN:41 for explanation idk**
+            if(ConditionMet.All(x => x))
+                MetadataWindow.ApplyMetadataOnFile();
+        }
         
         console.DLAddConsole(CONSOLE_YEY_STRING, "Downloaded!");
 

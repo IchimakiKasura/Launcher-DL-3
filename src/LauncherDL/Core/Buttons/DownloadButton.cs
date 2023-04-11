@@ -65,7 +65,7 @@ internal sealed class DownloadButton : IButtonControls
         console.Break("Gray");
         ConsoleOutputMethod.DownloadInfoOutputComment(new()
         {
-            Title = textBoxName.Text ?? "N/A",
+            Title = BodyButton.ValidationActualTitle ?? "N/A",
             Type = comboBoxType.GetItemContent ?? "N/A",
             Name = textBoxName.Text ?? "N/A",
             Format = _FormatOutputComment.Replace("|", "$vbar$") ?? "N/A",

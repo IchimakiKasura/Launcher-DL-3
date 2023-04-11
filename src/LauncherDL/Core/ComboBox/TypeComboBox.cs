@@ -7,6 +7,7 @@ public sealed class TypeComboBox : IComboBoxControl
         ConsoleOutputMethod.ComboBoxChangedOutputComment(ConsoleOutputMethodSelection.TYPE);
         
         comboBoxFormat.ClearItems();
+        MetadataWindow.MetadataClear();
         buttonMetadata.IsEnabled = true;
 
         if(comboBoxType.ItemIndex is 0)

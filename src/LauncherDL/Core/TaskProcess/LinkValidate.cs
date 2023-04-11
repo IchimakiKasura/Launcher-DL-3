@@ -4,6 +4,7 @@ namespace LauncherDL.Core.TaskProcess;
 sealed class LinkValidate
 {
     public bool IsValid;
+    public string Title;
     bool IsError = false;
     string url;
 
@@ -26,6 +27,7 @@ sealed class LinkValidate
             return new()
             {
                 IsValid = !IsError,
+                Title = Title
             };
         }
         catch
@@ -63,10 +65,10 @@ sealed class LinkValidate
         LinkValidationProcess.OutputDataReceived += (s,e) =>
             DL_Dispatch.Invoke(()=>{
                 if(e.Data.IsEmpty()) return;
-                var FetchedTitle = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();
-                console.AddFormattedText($"<Lime%14>[SUCCESS] <%14>{FetchedTitle}");
+                Title = e.Data.Remove(e.Data.Length - 1,1).Remove(0, 1).Trim();
+                console.AddFormattedText($"<Lime%14>[SUCCESS] <%14>{Title}");
                 if(textBoxName.Text.IsEmpty())
-                    textBoxName.Text = FetchedTitle;
+                    textBoxName.Text = Title;
             });
         
         LinkValidationProcess.ErrorDataReceived += (s, e) =>
@@ -79,8 +81,10 @@ sealed class LinkValidate
 
                     IsError = true;
                 }
+                Console.WriteLine(e.Data);
                 if(e.Data.Contains("ERROR:"))
-                    ConsoleLive.Error_Invoked("error");
+                    ConsoleLive.Error_Invoked(e.Data.Replace("<", "$lt$").Replace("[twitter]", ""));
+
             });
 
         await LinkValidationProcess.StartAsync();
