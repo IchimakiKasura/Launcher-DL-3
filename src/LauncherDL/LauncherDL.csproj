@@ -78,9 +78,11 @@
   <ItemGroup>
     <Using Include="System" />
     <Using Include="System.IO" />
+    <Using Include="System.Net" />
     <Using Include="System.Linq" />
     <Using Include="System.Text" />
     <Using Include="System.Windows" />
+    <Using Include="System.Net.Http" />
     <Using Include="Microsoft.Win32" />
     <Using Include="System.Threading" />
     <Using Include="System.Reflection" />

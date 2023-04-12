@@ -18,14 +18,14 @@ public sealed class Config
     /// </summary>
     public static DefaultConfig ReadConfigINI()
     {
-        string  ConfigString    =   File.ReadAllText(CONFIG_NAME);
-        IniDataParser ParserSTR =   new();
-        IniData Data            =   new();
+        var ConfigString    =   File.ReadAllText(CONFIG_NAME);
+        var ParserSTR       =   new IniDataParser();
+        var Data            =   new IniData();
 
         ParserSTR.Scheme.CommentString = "#";
         Data = ParserSTR.Parse(ConfigString);
         
-        string  LanguageCheck   =   Data[CONFIG_SECTION_APP][CONFIG_LANGUAGE];
+        var LanguageCheck   =   Data[CONFIG_SECTION_APP][CONFIG_LANGUAGE];
 
         switch(LanguageCheck.ToLower())
         {
@@ -70,7 +70,7 @@ public sealed class Config
         return DefaultConfiguration;
     }
 
-    private static void CheckError<T1, T2>(ref T1 pDefaultConfig, T2 pNewConfig, string pConfigName)
+    static void CheckError<T1, T2>(ref T1 pDefaultConfig, T2 pNewConfig, string pConfigName)
     {
         #if DEBUG
             ConsoleDebug.LoadingConfig(pDefaultConfig, pNewConfig, pConfigName);
@@ -79,11 +79,9 @@ public sealed class Config
         switch (pConfigName)
         {
             case CONFIG_FILE_TYPE:
-                if (pNewConfig is int nInt && nInt > 3)
-                {
-                    error = true;
-                    ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, "Default File type is above 3!", pConfigName);
-                }
+                if (pNewConfig is int nInt && nInt < 3) return;
+                ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, "Default File type is above 3!", pConfigName);
+                error = true;
             break;
 
             case CONFIG_BACKGROUND_NAME:
@@ -92,11 +90,9 @@ public sealed class Config
                 if (pNewConfig is string nStr && nStr != new DefaultConfig().background)
                     defaultBGPath = nStr;
 
-                if (!File.Exists(defaultBGPath))
-                {
-                    error = true;
-                    ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, "Background image not found!", pConfigName);
-                }
+                if (File.Exists(defaultBGPath)) return;
+                ConsoleOutputMethod.ConfigOutputComment(FAILED_MESSAGE, "Background image not found!", pConfigName);
+                error = true;
             break;
         }
 
@@ -107,7 +103,7 @@ public sealed class Config
     }
 
 
-    private static void ApplyConfig()
+    static void ApplyConfig()
     {
         var DefaultBG = $"pack://siteoforigin:,,,/Images/{DefaultConfiguration.background}";
         

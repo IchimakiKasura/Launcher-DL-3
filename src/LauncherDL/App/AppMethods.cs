@@ -13,11 +13,9 @@ public sealed partial class App
     private static void ContextMenuAdjust()
     {
         var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
-        
+
         SystemParameters.StaticPropertyChanged += (sender, e) =>
-        {
-            if (SystemParameters.MenuDropAlignment && menuDropAlignmentField is not null) menuDropAlignmentField.SetValue(null, false);
-        };
+            menuDropAlignmentField.SetValue(null, SystemParameters.MenuDropAlignment && menuDropAlignmentField is not null ? false : null);
     }
 
     private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
