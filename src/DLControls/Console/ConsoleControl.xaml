@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="DLControls.ConsoleControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="root">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/guicomp;component/MainResource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Canvas CacheMode="BitmapCache">
+        <Canvas.Resources>
+
+            <Style TargetType="RichTextBox" x:Key="UserRichTextBoxMain">
+                
+                <Style.Resources>
+                    <Style x:Key="{x:Type FlowDocument}" TargetType="{x:Type FlowDocument}">
+                        <Setter Property="OverridesDefaultStyle" Value="true"/>
+                        <Setter Property="Cursor" Value="Arrow"/>
+                        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
+                        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+                    </Style>
+                </Style.Resources>
+
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+                <Setter Property="Height" Value="{Binding ConsoleHeight,ElementName=root}"/>
+                <Setter Property="Width" Value="{Binding ConsoleWidth,ElementName=root}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RichTextBox">
+                            
+                            <Grid>
+                                
+                                <Rectangle Name="Bd"
+                                        Fill="#74000000"
+                                        StrokeThickness="2"
+                                        RadiusX="4"
+                                        RadiusY="4"
+                                        Effect="{StaticResource CB_RTB_BM_Effect}">
+                                    <Rectangle.Stroke>
+                                        <SolidColorBrush x:Name="Stroker" Color="{StaticResource DefaultColor}" />
+                                    </Rectangle.Stroke>
+                                </Rectangle>
+                                
+                                <Grid Name="SubContentGrid" Margin="0,1,0,1">
+                                    <ScrollViewer CanContentScroll="true" x:Name="PART_ContentHost" Margin="4,5,4,6"/>
+                                </Grid>
+                                
+                            </Grid>
+                            
+                            <ControlTemplate.Triggers>
+                                
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Stroker" Storyboard.TargetProperty="Color" To="Blue" Duration="0:0:.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Stroker" Storyboard.TargetProperty="Color" To="{StaticResource DefaultColor}" Duration="0:0:.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Fill" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                                
+                            </ControlTemplate.Triggers>
+                            
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+        </Canvas.Resources>
+
+
+        <RichTextBox x:Name="UserRichTextBox" Style="{StaticResource UserRichTextBoxMain}" TextChanged="ScrollEndEvent"/>
+        
+    </Canvas>
+</UserControl>

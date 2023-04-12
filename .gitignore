@@ -1,0 +1,11 @@
+.ionide
+.vs
+.vscode
+bin
+obj
+buildIn
+restore
+buildAPP.exe
+Build
+!src/LauncherDL/Core/Metadata/obj
+LauncherDL.sln.DotSettings.user
