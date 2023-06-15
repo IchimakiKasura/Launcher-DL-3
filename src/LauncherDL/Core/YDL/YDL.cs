@@ -16,4 +16,3 @@ sealed partial class YDL
         Type = args.Type;
     }
 }
-

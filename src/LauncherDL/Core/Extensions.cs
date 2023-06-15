@@ -36,7 +36,7 @@ internal static class CoreExtensions
     {
         var Message = new StringBuilder()
             .Append(TypeString)
-            .Append(" ")
+            .Append(' ')
             .Append(FormattedText)
             .ToString();
 

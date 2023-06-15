@@ -58,7 +58,7 @@ public partial class ButtonControl : UserControl, IDLControls
         SetMouseEnterLeave(UserButton,()=>SetStoryboard(true),()=>SetStoryboard(false));
     
     protected virtual void OnClicked(RoutedEventArgs Event) =>
-		Click?.Invoke(this, Event);
+        Click?.Invoke(this, Event);
 
     private void Clicked(object s, RoutedEventArgs Event) =>
         OnClicked(Event);

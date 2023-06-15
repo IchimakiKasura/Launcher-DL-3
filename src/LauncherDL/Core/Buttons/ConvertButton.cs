@@ -32,8 +32,8 @@ internal sealed class ConvertButton : IButtonControls
         console.DLAddConsole(CONSOLE_PROCESSING, "<%14>Please wait until the conversion is finished.");
 
         YDL YDLInfo = new(
-            new(_Link: textBoxLink.Text,
-                _Format: comboBoxFormat.GetItemContent)
+            new(Link: textBoxLink.Text,
+                Format: comboBoxFormat.GetItemContent)
         );
 
         YDLInfo.ConvertMethod();

@@ -1,7 +1,7 @@
 namespace LauncherDL.Core.TaskProcess;
 
 // Literally ported from v6 to v5
-sealed class LinkValidate
+sealed partial class LinkValidate
 {
     public bool IsValid;
     public string Title;
@@ -74,7 +74,7 @@ sealed class LinkValidate
         LinkValidationProcess.ErrorDataReceived += (s, e) =>
             DL_Dispatch.Invoke(()=>{
                 if(e.Data.IsEmpty()) return;
-                if (Regex.IsMatch(e.Data, @"(ERROR|Traceback)"))
+                if (LinkValidationRegex().IsMatch(e.Data))
                 {
                     if (e.Data.Contains("cookies"))
                         console.AddFormattedText($"<Yellow%14>[INFO] <%14>If the link from facebook or other social media that is not public or needed an account, Please set the \"AllowCookies\" on the \"Config\". This method might be risky so I'm not liable if your account is blocked or locked");
@@ -93,4 +93,6 @@ sealed class LinkValidate
         await LinkValidationProcess.WaitForExitAsync();
     }
 
+    [GeneratedRegex("(ERROR|Traceback)")]
+    private static partial Regex LinkValidationRegex();
 }

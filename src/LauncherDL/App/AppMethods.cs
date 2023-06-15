@@ -13,9 +13,7 @@ public sealed partial class App
     private static void ContextMenuAdjust()
     {
         var menuDropAlignmentField = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
-
-        SystemParameters.StaticPropertyChanged += (sender, e) =>
-            menuDropAlignmentField.SetValue(null, SystemParameters.MenuDropAlignment && menuDropAlignmentField is not null ? false : null);
+        menuDropAlignmentField.SetValue(null, !SystemParameters.MenuDropAlignment || menuDropAlignmentField is null);
     }
 
     private void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -35,7 +33,7 @@ public sealed partial class App
         File.WriteAllText($"ErrorDumpTrace_{CurrentDate}.txt", Message );
 
         if (MessageBox.Show(MainWindow, errorMessage, "Launcher DL", MessageBoxButton.OK, MessageBoxImage.Error) is MessageBoxResult.OK)
-            Application.Current.Shutdown();
+            Current.Shutdown();
 
         e.Handled = true;
     }
@@ -53,7 +51,7 @@ public sealed partial class App
             File.WriteAllText($"DEBUG_ErrorDumpTrace_{CurrentDate}.txt", Message );
 
             if (MessageBox.Show(MainWindow, "Encountered some Error on debug,\nPlease check the DEBUG_ErrorDumpTrace", "Oops", MessageBoxButton.OK, MessageBoxImage.Error) is MessageBoxResult.OK)
-                Application.Current.Shutdown();
+                Current.Shutdown();
 
             e.Handled = true;
         }

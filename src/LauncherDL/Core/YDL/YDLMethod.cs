@@ -81,8 +81,8 @@ sealed partial class YDL
         .Append(Link)
         .Append("\" ")
         .Append(comboBoxQuality.GetItemUID)
-        .Append(" ")
-        .Append(FFMPEG_STRINGS.ToString())
+        .Append(' ')
+        .Append(FFMPEG_STRINGS)
         .Append(" \"")
         .Append(Path.Combine(config.DefaultOutput, "Convert", $"{textBoxName.Text}.{Format}\""))
         .ToString();
@@ -183,13 +183,13 @@ sealed partial class YDL
         EndProcess.ProcessTaskEnded();
     }
 
-    private bool CheckFileExist(string FilePath, TypeOfButton Type)
+    private static bool CheckFileExist(string FilePath, TypeOfButton Type)
     {
         if (Type is TypeOfButton.CustomType)
             foreach(var Extenstion in FileExtensions)
                 if(File.Exists(FilePath.Replace("%(ext)s", Extenstion)))
                     return true;
 
-        return File.Exists(FilePath) ? true : false;
+        return File.Exists(FilePath);
     }
 }

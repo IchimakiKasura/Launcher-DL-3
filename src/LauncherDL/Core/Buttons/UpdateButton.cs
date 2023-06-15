@@ -8,8 +8,10 @@ internal sealed class UpdateButton : IButtonControls
 
         console.DLAddConsole(CONSOLE_INFO_STRING, "Updating...");
 
-        var YDLInfo = new YDL(new());
-        YDLInfo.IsUpdate = true;
+        var YDLInfo = new YDL(new())
+        {
+            IsUpdate = true
+        };
 
         YDLInfo.UpdateMethod();
 

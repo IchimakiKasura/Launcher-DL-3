@@ -20,8 +20,8 @@ internal partial class ConsoleLive
 
         switch(FormatNames[FPS].Length)
         {
-            case 1: if(FormatNames[FPS].Contains("2")) FormatNames[FPS] = "Stereo";
-                    else if(FormatNames[FPS].Contains("1")) FormatNames[FPS] = "N/A";           break;
+            case 1: if(FormatNames[FPS].Contains('2')) FormatNames[FPS] = "Stereo";
+                    if(FormatNames[FPS].Contains('1')) FormatNames[FPS] = "N/A";                break;
             case 2: FormatNames[FPS] += " fps";                                                 break;
             case 4: FormatNames[FPS] = FormatNames[FPS].Replace("1","  fps");                   break;
             case 5: FormatNames[FPS] = FormatNames[FPS].Replace(" 2","fps"); HasAudio = true;   break;
