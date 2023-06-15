@@ -2,7 +2,7 @@
 
 public partial class App : Application
 {
-    static Mutex _mutex = null;
+    static Mutex _mutex;
 
     protected override void OnStartup(StartupEventArgs e)
     {

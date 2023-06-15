@@ -10,8 +10,8 @@ namespace LauncherDL.Core.Configuration;
 /// </summary>
 public sealed class Config
 {
-    static DefaultConfig DefaultConfiguration   =   new();
-    static bool error                           =   false;
+    readonly static DefaultConfig DefaultConfiguration      =   new();
+    static bool error                                       =   false;
     
     /// <summary>
     /// Reads the Config.ini at the current directory

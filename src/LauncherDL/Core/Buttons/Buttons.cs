@@ -50,6 +50,6 @@ internal abstract class BodyButton
                 IsFailed = true;
         }
         
-        return !IsFailed ? true : false;
+        return !IsFailed;
     }
 };

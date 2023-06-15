@@ -70,7 +70,7 @@ public partial class ConsoleControl
             string color = "", size = "", weight = "", text = "";
 
             // weird but yeah
-            foreach(Group GroupMatched in textMatch.Groups)
+            foreach(var GroupMatched in textMatch.Groups.Cast<Group>())
                 switch(GroupMatched.Name)
                 {
                     case "color":    color   = GroupMatched.Value.IsEmpty() ? "White" : GroupMatched.Value; break;

@@ -2,6 +2,9 @@ namespace LauncherDL.Core.ConsoleDL;
 
 internal sealed partial class ConsoleLive
 {
+    
+    [GeneratedRegex("\\[(ExtractAudio|VideoConvertor|Merger)\\]")]
+    private static partial Regex DLRegex();
     static List<string> ProgressInfo;
     static string NetworkSpeedColor = string.Empty;
     static Regex DefaultRegex;
@@ -15,7 +18,7 @@ internal sealed partial class ConsoleLive
 
         if(StringData.IsEmpty()) return;
 
-        if(Regex.IsMatch(StringData, PROCESSING_REGEX))
+        if(DLRegex().IsMatch(StringData))
             DL_Dispatch.Invoke(ProcessMessage);
 
         DL_Dispatch.Invoke(DownloaderRegexChanged);
@@ -60,7 +63,7 @@ internal sealed partial class ConsoleLive
             if(!match.Value.IsEmpty())
                 ProgressInfo.Add(match.Value.Trim());
         
-        return ProgressInfo.Count <= 1 ? true : false;
+        return ProgressInfo.Count <= 1;
     }
 
     static void ForegroundSpeedColor()

@@ -28,7 +28,7 @@ sealed class Updater
                                 Process.Start("explorer", Visit);
     }
 
-    async Task<Stream> CheckVersion()
+    static async Task<Stream> CheckVersion()
     {
         HttpResponseMessage resp;
 

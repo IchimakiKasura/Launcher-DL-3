@@ -51,15 +51,14 @@ internal sealed class DownloadButton : IButtonControls
                 _format = comboBoxFormat.GetItemContent;
             break;
         };
-
-        TypeOfButton _type;
-
-        switch(comboBoxType.ItemIndex)
+        
+        var _type = comboBoxType.ItemIndex switch
         {
-            default: _type=TypeOfButton.CustomType; break;
-            case 1:  _type=TypeOfButton.VideoType;  break;
-            case 2:  _type=TypeOfButton.AudioType;  break;
-        }
+            1 => TypeOfButton.VideoType,
+            2 => TypeOfButton.AudioType,
+            _ => TypeOfButton.CustomType,
+        };
+
         #endregion
         // yeah i don't know either that I put N/A on some that is "un-unassignable" ☠️
         console.Break("Gray");
@@ -75,9 +74,9 @@ internal sealed class DownloadButton : IButtonControls
 
         YDL YDLInfo = new(
             new(
-                _Link: textBoxLink.Text,
-                _Format: _format,
-                _Type: _type
+                Link: textBoxLink.Text,
+                Format: _format,
+                Type: _type
             )
         );
 

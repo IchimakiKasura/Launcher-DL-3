@@ -19,12 +19,12 @@ public sealed class ToolTipTextsAttribute : Attribute
         {
             var FieldAttribute = ToolTipField.GetCustomAttribute<ToolTipTextsAttribute>();
             if(FieldAttribute is not null)
-                FieldAttribute.SetValue<WindowType>(FieldAttribute.Description, ToolTipField);
+                SetValue<WindowType>(FieldAttribute.Description, ToolTipField);
         }
     }
 
     // Sets the value on selected Attribute
-    private void SetValue<WindowType>(string PropertyDescription, MemberInfo memberInfo)
+    static void SetValue<WindowType>(string PropertyDescription, MemberInfo memberInfo)
     {
         WindowType SelectedWindow = WindowStaticRefAttribute.InitiateAttribute<WindowType, Global>();
 
@@ -45,8 +45,7 @@ public sealed class ToolTipTextsAttribute : Attribute
     {
         FrameworkElement TooltipElement = (FrameworkElement) sender;
         
-        if (TooltipElement.ToolTip is null)
-            TooltipElement.ToolTip = new ToolTip() { Placement = System.Windows.Controls.Primitives.PlacementMode.Relative };
+        TooltipElement.ToolTip ??= new ToolTip() { Placement = System.Windows.Controls.Primitives.PlacementMode.Relative };
             
         ToolTip tip = (ToolTip) TooltipElement.ToolTip;
         tip.Content = Content;

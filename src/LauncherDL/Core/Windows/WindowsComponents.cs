@@ -24,7 +24,7 @@ sealed class WindowsComponents : IWindowsComponents
     // Window Focus or unfocused
     public static void WindowFocusAnimation()
     {
-        void Focus(ColorAnimation WindowAnimation, DoubleAnimation WindowOpacity)
+        static void Focus(ColorAnimation WindowAnimation, DoubleAnimation WindowOpacity)
         {
             new StoryboardApplier(WindowOpacity     ,   MainWindowStatic    ,   new(             "(Window.Effect).Opacity"        ) );
             new StoryboardApplier(WindowAnimation   ,   windowInnerBG       ,   new("(Control.Background).(SolidColorBrush.Color)") );
